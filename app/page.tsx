@@ -51,7 +51,13 @@ export default function Home() {
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="text-2xl font-bold text-[#0056B3]">DEP</div>
+      <Image
+  src="/logo.png"
+  alt="DEP Home Repair Logo"
+  width={60}
+  height={60}
+  className="rounded-lg"
+/>
             <div>
               <div className="font-bold text-xl">Home Repair</div>
               <div className="text-xs text-[#424242]">Home-Smart Solutions</div>
@@ -66,14 +72,6 @@ export default function Home() {
       {/* Hero */}
       <section className="bg-gradient-to-br from-[#0056B3] to-[#1A1A1A] text-white py-24">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">Your Home.<br />Fixed Right. Fast.</h1>
-          <Image 
-  src="/logo.png" 
-  alt="DEP Home Repair Logo"
-  width={180}
-  height={180}
-  className="my-8 drop-shadow-lg"
-/>
           <p className="text-xl mb-10">Solo Chandler expert in drywall, electrical & plumbing.<br />Instant quotes • Same-day booking • Guaranteed work.</p>
           <a href="#quote" className="inline-block bg-[#FFAB00] hover:bg-amber-500 text-[#1A1A1A] px-10 py-4 rounded-full text-xl font-bold">
             Get Your Instant Quote Now →
