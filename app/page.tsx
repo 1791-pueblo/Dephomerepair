@@ -128,66 +128,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Instant Quote */}
-      <section id="quote" className="py-20 bg-[#F8FAFC]">
-        <div className="max-w-3xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-3">Instant Quote in Seconds</h2>
-          <p className="text-center text-[#424242] mb-12">Tell us what you need — get a fair price instantly</p>
+{/* Quote & Booking Form */}
+<section id="quote" className="py-20 bg-[#F8FAFC]">
+  <div className="max-w-4xl mx-auto px-6 text-center">
+    <h2 className="text-4xl font-bold text-[#1A1A1A] mb-4">Get Your Quote or Book a Job</h2>
+    <p className="text-[#424242] mb-12 max-w-2xl mx-auto">
+      Fill out the form below with job details and photos. Jason will review it quickly and get back to you with a fair quote and available time.
+    </p>
 
-          <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12">
-            <textarea
-              className="w-full h-32 border border-gray-300 rounded-2xl p-6 text-lg"
-              placeholder="Example: 4x6 drywall patch in bedroom ceiling + replace 3 outlets with smart ones"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
+    <button
+      onClick={() => window.open('https://tally.so/r/QKYRWA', '_blank')}
+      className="bg-[#0056B3] hover:bg-blue-700 text-white px-12 py-6 rounded-2xl font-bold text-xl inline-flex items-center gap-3 transition-all"
+    >
+      Open Quote & Booking Form →
+    </button>
 
-            <div className="mt-8">
-              <p className="font-medium mb-4 text-[#1A1A1A]">Or pick services:</p>
-              <div className="grid grid-cols-2 gap-3">
-                {services.map(s => (
-                  <label key={s} className="flex items-center gap-2 text-sm cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={selectedServices.includes(s)}
-                      onChange={() => {
-                        if (selectedServices.includes(s)) {
-                          setSelectedServices(selectedServices.filter(x => x !== s));
-                        } else {
-                          setSelectedServices([...selectedServices, s]);
-                        }
-                      }}
-                      className="w-5 h-5 accent-[#FFAB00]"
-                    />
-                    {s}
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            <button
-              onClick={calculateQuote}
-              className="mt-10 w-full bg-[#0056B3] hover:bg-blue-700 text-white py-5 rounded-2xl font-bold text-xl"
-            >
-              Get My Instant Quote →
-            </button>
-
-            {quote && (
-              <div className="mt-10 p-8 bg-[#F8FAFC] rounded-2xl border border-[#FFAB00]">
-                <div className="text-5xl font-bold text-[#1A1A1A]">${quote.total}</div>
-                <div className="text-[#FFAB00] font-medium mt-1">Estimated total • Chandler area</div>
-                <div className="mt-6 space-y-2 text-sm">
-                  {quote.breakdown.map((line: string, i: number) => (
-                    <div key={i}>{line}</div>
-                  ))}
-                </div>
-                <div className="mt-8 pt-6 border-t text-xs text-[#424242]">{quote.message}</div>
-                <button className="mt-6 w-full bg-[#FFAB00] py-4 rounded-2xl font-bold">Book This Job Now</button>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
+    <p className="text-sm text-[#424242] mt-8">
+      Or call/text directly: <strong>602-598-1988</strong>
+    </p>
+  </div>
+</section>
+           
+          
+        
+  
 
       {/* Footer */}
       <footer className="bg-[#1A1A1A] text-white py-12">
