@@ -128,7 +128,7 @@ export default function Home() {
         </div>
       </section>
 
-{/* Quote & Booking Form */}
+{/* Quote & Booking Form with Tally Popup */}
 <section id="quote" className="py-20 bg-[#F8FAFC]">
   <div className="max-w-4xl mx-auto px-6 text-center">
     <h2 className="text-4xl font-bold text-[#1A1A1A] mb-4">Get Your Quote or Book a Job</h2>
@@ -137,7 +137,9 @@ export default function Home() {
     </p>
 
     <button
-      onClick={() => window.open('https://tally.so/r/QKYRWA', '_blank')}
+      data-tally-open="QKYRWA"
+      data-tally-emoji-text="🔨"
+      data-tally-emoji-animation="wave"
       className="bg-[#0056B3] hover:bg-blue-700 text-white px-12 py-6 rounded-2xl font-bold text-xl inline-flex items-center gap-3 transition-all"
     >
       Open Quote & Booking Form →
@@ -148,6 +150,7 @@ export default function Home() {
     </p>
   </div>
 </section>
+
            
           
         
