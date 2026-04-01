@@ -15,7 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-  <script async src="https://tally.so/widgets/embed.js"></script>  <html lang="en">
+    <html lang="en">
+      <head>
+        <script async src="https://tally.so/widgets/embed.js"></script>
+      </head>
       <body className="antialiased">{children}</body>
     </html>
   );
