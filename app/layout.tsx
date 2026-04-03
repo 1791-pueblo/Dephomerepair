@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en"><script async src="https://tally.so/widgets/embed.js"></script>
       <head>{/* Quote & Booking Form with Tally Popup */}
 <section id="quote" className="py-20 bg-[#F8FAFC]">
   <div className="max-w-4xl mx-auto px-6 text-center">
