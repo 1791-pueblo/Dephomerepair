@@ -125,33 +125,13 @@ export default function Home() {
               <div>🔥 While We’re There — One small 5-minute task FREE with any booked service</div>
             </div>
           </div>
-        </div>
-      </section>{/* Google Calendar Availability */}
-<section className="py-16 bg-white border-b">
+        </div>{/* Quote Form + Calendar */}
+<section id="quote" className="py-20 bg- ">
   <div className="max-w-4xl mx-auto px-6">
-    <h2 className="text-3xl font-bold text-center text-[#1A1A1A] mb-8">
-      Check My Availability
-    </h2>
-    <div className="bg-gray-50 rounded-3xl p-4 shadow-sm">
-      <iframe
-        src="https://calendar.google.com/calendar/embed?src=c_a8375dca9ebd4f5f83dbcefb7c23198879868d6811e2eecd0f5ed8696dd88c5b%40group.calendar.google.com&ctz=America/Phoenix"
-        style={{ border: 0, width: "100%", height: "600px" }}
-        frameBorder="0"
-        scrolling="no"
-      ></iframe>
-    </div>
-    <p className="text-center text-sm text-[#424242] mt-6">
-      Green = Available • Click a time slot to request it in the form below
-    </p>
-  </div>
-</section>
-{/* Quote Form + Calendar */}
-<section id="quote" className="py-20 bg-[#F8FAFC]">
-  <div className="max-w-4xl mx-auto px-6">
-    
+
     {/* Tally Form Button */}
     <div className="text-center mb-16">
-      <h2 className="text-4xl font-bold text-[#1A1A1A] mb-4">Get Your Quote or Book a Job</h2>
+      <h2 className="text-4xl font-bold text- mb-4">Get Your Quote or Book a Job</h2>
       <p className="text-[#424242] mb-10 max-w-2xl mx-auto">
         Fill out the form with job details and photos. Jason will review it quickly and get back to you with a fair quote and available time.
       </p>
@@ -160,10 +140,39 @@ export default function Home() {
         data-tally-open="QKYRWA"
         data-tally-emoji-text="🔨"
         data-tally-emoji-animation="wave"
-        className="bg-[#0056B3] hover:bg-blue-700 text-white px-12 py-6 rounded-2xl font-bold text-xl inline-flex items-center gap-3 transition-all"
+        className="bg- hover:bg-blue-700 text-white px-12 py-6 rounded-2xl font-bold text-xl inline-flex items-center gap-3 transition-all"
       >
         Open Quote & Booking Form →
       </button>
+
+      <p className="text-sm text-[#424242] mt-8">
+        Or call/text directly: <strong>602-598-1988</strong>
+      </p>
+    </div>
+
+    {/* Google Calendar - Below the button */}
+    <div>
+      <h3 className="text-3xl font-bold text-center text- mb-8">Check My Availability</h3>
+      <div className="bg-white rounded-3xl p-6 shadow-sm border">
+        <iframe
+          src="https://calendar.google.com/calendar/embed?src=c_a8375dca9ebd4f5f83dbcefb7c23198879868d6811e2eecd0f5ed8696dd88c5b%40group.calendar.google.com&ctz=America/Phoenix"
+          style={{ border: 0, width: "100%", height: "620px" }}
+          frameBorder="0"
+          scrolling="no"
+        ></iframe>
+      </div>
+      <p className="text-center text-sm text-[#424242] mt-6">
+        Green = Available • Click an open slot and then use the form above to request it
+      </p>
+    </div>
+
+  </div>
+</section>
+
+    
+    
+
+      
 
       <p className="text-sm text-[#424242] mt-8">
         Or call/text directly: <strong>602-598-1988</strong>
