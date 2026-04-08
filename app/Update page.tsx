@@ -145,29 +145,7 @@ export default function Home() {
         Open Quote & Booking Form →
       </button>
 
-      <p className="text-sm text-[#424242] mt-8">
-        Or call/text directly: <strong>602-598-1988</strong>
-      </p>
-    </div>
 
-    {/* Google Calendar - Below the button */}
-    <div>
-      <h3 className="text-3xl font-bold text-center text- mb-8">Check My Availability</h3>
-      <div className="bg-white rounded-3xl p-6 shadow-sm border">
-        <iframe
-          src="https://calendar.google.com/calendar/embed?src=c_a8375dca9ebd4f5f83dbcefb7c23198879868d6811e2eecd0f5ed8696dd88c5b%40group.calendar.google.com&ctz=America/Phoenix"
-          style={{ border: 0, width: "100%", height: "620px" }}
-          frameBorder="0"
-          scrolling="no"
-        ></iframe>
-      </div>
-      <p className="text-center text-sm text-[#424242] mt-6">
-        Green = Available • Click an open slot and then use the form above to request it
-      </p>
-    </div>
-
-  </div>
-</section>
 
     
     
