@@ -126,7 +126,25 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section>{/* Google Calendar Availability */}
+<section className="py-16 bg-white border-b">
+  <div className="max-w-4xl mx-auto px-6">
+    <h2 className="text-3xl font-bold text-center text-[#1A1A1A] mb-8">
+      Check My Availability
+    </h2>
+    <div className="bg-gray-50 rounded-3xl p-4 shadow-sm">
+      <iframe
+        src="https://calendar.google.com/calendar/embed?src=c_a8375dca9ebd4f5f83dbcefb7c23198879868d6811e2eecd0f5ed8696dd88c5b%40group.calendar.google.com&ctz=America/Phoenix"
+        style={{ border: 0, width: "100%", height: "600px" }}
+        frameBorder="0"
+        scrolling="no"
+      ></iframe>
+    </div>
+    <p className="text-center text-sm text-[#424242] mt-6">
+      Green = Available • Click a time slot to request it in the form below
+    </p>
+  </div>
+</section>
 
 {/* Quote & Booking Form with Tally Popup */}
 <section id="quote" className="py-20 bg-[#F8FAFC]">
