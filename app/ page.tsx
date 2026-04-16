@@ -150,7 +150,7 @@ c_a8375dca9ebd4f5f83dbcefb7c23198879868d6811e2eecd0f5ed8696dd88c5b@group.calenda
         Or call/text directly: <strong>602-598-1988</strong>
       </p>
     </div>
-
+  </section>
     {/* Google Calendar Below the button */}
     <div>
       <h3 className="text-3xl font-bold text-center text-[#1A1A1A] mb-8">Check My Availability</h3>
