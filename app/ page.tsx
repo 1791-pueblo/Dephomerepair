@@ -125,7 +125,8 @@ export default function Home() {
               <div>🔥 While We’re There — One small 5-minute task FREE with any booked service</div>
             </div>
           </div>
-        </div>{/* Quote Form + Calendar */}
+        </div>
+        {/* Quote Form + Calendar */}
 <section id="quote" className="py-20 bg-[#F8FAFC]">
   <div className="max-w-4xl mx-auto px-6">
 
