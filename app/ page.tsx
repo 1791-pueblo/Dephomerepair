@@ -51,13 +51,13 @@ export default function Home() {
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-      <Image
-  src="/logo.png"
-  alt="DEP Home Repair Logo"
-  width={60}
-  height={60}
-  className="rounded-lg"
-          </div>
+            <Image
+              src="/logo.png"
+              alt="DEP Home Repair Logo"
+              width={180}
+              height={60}
+              className="rounded-lg"
+            />
             <div>
               <div className="font-bold text-xl">Home Repair</div>
               <div className="text-xs text-[#424242]">Home-Smart Solutions</div>
@@ -72,6 +72,7 @@ export default function Home() {
       {/* Hero */}
       <section className="bg-gradient-to-br from-[#0056B3] to-[#1A1A1A] text-white py-24">
         <div className="max-w-4xl mx-auto px-6 text-center">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">Your Home.<br />Fixed Right. Fast.</h1>
           <p className="text-xl mb-10">Solo Chandler expert in drywall, electrical & plumbing.<br />Instant quotes • Same-day booking • Guaranteed work.</p>
           <a href="#quote" className="inline-block bg-[#FFAB00] hover:bg-amber-500 text-[#1A1A1A] px-10 py-4 rounded-full text-xl font-bold">
             Get Your Instant Quote Now →
@@ -126,58 +127,51 @@ export default function Home() {
             </div>
           </div>
         </div>
-        {/* Quote Form + Calendar */}
-<section id="quote" className="py-20 bg-[#F8FAFC]">
-  <div className="max-w-4xl mx-auto px-6">
-c_a8375dca9ebd4f5f83dbcefb7c23198879868d6811e2eecd0f5ed8696dd88c5b@group.calendar.google.com
-    {/* Tally Form Button */}
-    <div className="text-center mb-16">
-      <h2 className="text-4xl font-bold text-[#1A1A1A] mb-4">Get Your Quote or Book a Job</h2>
-      <p className="text-[#424242] mb-10 max-w-2xl mx-auto">
-        Fill out the form with job details and photos. Jason will review it quickly and get back to you with a fair quote and available time.
-      </p>
+      </section>
 
-      <button
-        data-tally-open="QKYRWA"
-        data-tally-emoji-text="🔨"
-        data-tally-emoji-animation="wave"
-        className="bg-[#0056B3] hover:bg-blue-700 text-white px-12 py-6 rounded-2xl font-bold text-xl inline-flex items-center gap-3 transition-all"
-      >
-        Open Quote & Booking Form →
-      </button>
+      {/* Quote Form + Calendar */}
+      <section id="quote" className="py-20 bg-[#F8FAFC]">
+        <div className="max-w-4xl mx-auto px-6">
 
-      <p className="text-sm text-[#424242] mt-8">
-        Or call/text directly: <strong>602-598-1988</strong>
-      </p>
-    </div>
-  </section>
-    {/* Google Calendar Below the button */}
-    <div>
-      <h3 className="text-3xl font-bold text-center text-[#1A1A1A] mb-8">Check My Availability</h3>
-      <div className="bg-white rounded-3xl p-6 shadow-sm border">
-        <iframe
-          src="https://calendar.google.com/calendar/embed?src=c_a8375dca9ebd4f5f83dbcefb7c23198879868d6811e2eecd0f5ed8696dd88c5b%40group.calendar.google.com&ctz=America/Phoenix"
-          style={{ border: 0, width: "100%", height: "620px" }}
-          frameBorder="0"
-          scrolling="no"
-        ></iframe>
-      </div>
-      <p className="text-center text-sm text-[#424242] mt-6">
-        Green = Available • Click an open slot and then use the form above to request it
-      </p>
-    </div>
+          {/* Tally Form Button */}
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-[#1A1A1A] mb-4">Get Your Quote or Book a Job</h2>
+            <p className="text-[#424242] mb-10 max-w-2xl mx-auto">
+              Fill out the form with job details and photos. Jason will review it quickly and get back to you with a fair quote and available time.
+            </p>
 
-  </div>
-</section>
+            <button
+              data-tally-open="QKYRWA"
+              data-tally-emoji-text="🔨"
+              data-tally-emoji-animation="wave"
+              className="bg-[#0056B3] hover:bg-blue-700 text-white px-12 py-6 rounded-2xl font-bold text-xl inline-flex items-center gap-3 transition-all"
+            >
+              Open Quote & Booking Form →
+            </button>
 
+            <p className="text-sm text-[#424242] mt-8">
+              Or call/text directly: <strong>602-598-1988</strong>
+            </p>
+          </div>
 
+          {/* Google Calendar Below the button */}
+          <div>
+            <h3 className="text-3xl font-bold text-center text-[#1A1A1A] mb-8">Check My Availability</h3>
+            <div className="bg-white rounded-3xl p-6 shadow-sm border">
+              <iframe
+                src="https://calendar.google.com/calendar/embed?src=c_a8375dca9ebd4f5f83dbcefb7c23198879868d6811e2eecd0f5ed8696dd88c5b%40group.calendar.google.com&ctz=America/Phoenix"
+                style={{ border: 0, width: "100%", height: "620px" }}
+                frameBorder="0"
+                scrolling="no"
+              ></iframe>
+            </div>
+            <p className="text-center text-sm text-[#424242] mt-6">
+              Green = Available • Click an open slot and then use the form above to request it
+            </p>
+          </div>
 
-    
-    
-
-      
-
-      
+        </div>
+      </section>
 
       {/* Footer */}
       <footer className="bg-[#1A1A1A] text-white py-12">
