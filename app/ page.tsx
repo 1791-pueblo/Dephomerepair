@@ -57,7 +57,7 @@ export default function Home() {
   width={60}
   height={60}
   className="rounded-lg"
-/>
+          </div>
             <div>
               <div className="font-bold text-xl">Home Repair</div>
               <div className="text-xs text-[#424242]">Home-Smart Solutions</div>
