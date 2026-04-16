@@ -57,8 +57,7 @@ export default function Home() {
   width={60}
   height={60}
   className="rounded-lg"
-/>
-            <div>
+        </div>
               <div className="font-bold text-xl">Home Repair</div>
               <div className="text-xs text-[#424242]">Home-Smart Solutions</div>
             </div>
@@ -125,7 +124,7 @@ export default function Home() {
               <div>🔥 While We’re There — One small 5-minute task FREE with any booked service</div>
             </div>
           </div>
-        </div>{/* Quote Form + Calendar */}
+        {/* Quote Form + Calendar */}
 <section id="quote" className="py-20 bg-[#F8FAFC]">
   <div className="max-w-4xl mx-auto px-6">
 
