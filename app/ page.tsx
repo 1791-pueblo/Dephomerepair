@@ -59,12 +59,12 @@ export default function Home() {
               className="rounded-lg"
             />
             <div>
-              <div className="font-bold text-xl">Home Repair</div>
+              <div className="font-bold text-xl">DEP Home Repair</div>
               <div className="text-xs text-[#424242]">Home-Smart Solutions</div>
             </div>
           </div>
           <a href="#quote" className="bg-[#FFAB00] hover:bg-amber-500 text-black px-6 py-3 rounded-full font-semibold text-sm">
-            Instant Quote
+            Get Quote
           </a>
         </div>
       </header>
@@ -81,51 +81,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services */}
+      {/* Services Section - (kept short for now) */}
       <section id="services" className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-4 text-[#1A1A1A]">DEP Service Menu</h2>
-          <p className="text-center text-[#424242] mb-12">Professional • Reliable • Chandler & East Valley</p>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-slate-50 p-8 rounded-2xl">
-              <div className="text-2xl font-bold text-[#0056B3] mb-6">D — Drywall & Finishing</div>
-              <ul className="space-y-4 text-[#424242]">
-                <li>✓ Professional Patching</li>
-                <li>✓ Texture Matching</li>
-                <li>✓ Corner Bead & Trim Repair</li>
-                <li>✓ Full Surface Refresh</li>
-              </ul>
-            </div>
-            <div className="bg-slate-50 p-8 rounded-2xl">
-              <div className="text-2xl font-bold text-[#FFAB00] mb-6">E — Electrical & Smart Home</div>
-              <ul className="space-y-4 text-[#424242]">
-                <li>✓ Modern Fixture Install</li>
-                <li>✓ Smart Home Upgrades</li>
-                <li>✓ GFCI / Safety Upgrades</li>
-                <li>✓ Device Refresh</li>
-              </ul>
-            </div>
-            <div className="bg-slate-50 p-8 rounded-2xl">
-              <div className="text-2xl font-bold text-[#424242] mb-6">P — Plumbing & Fixtures</div>
-              <ul className="space-y-4 text-[#424242]">
-                <li>✓ Kitchen & Bath Updates</li>
-                <li>✓ Toilet Repair & Install</li>
-                <li>✓ Drain & Leak Care</li>
-                <li>✓ Appliance Hookups</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Bundles */}
-          <div className="mt-16 bg-gradient-to-r from-[#0056B3] to-[#FFAB00] text-white p-10 rounded-3xl text-center">
-            <h3 className="text-3xl font-bold mb-6">DEP Bundle Incentives</h3>
-            <div className="max-w-md mx-auto space-y-4 text-left">
-              <div>🔥 Triple Play — Book all three categories → 15% OFF total labor</div>
-              <div>🔥 Power Pair — Any two services → Service Call waived</div>
-              <div>🔥 While We’re There — One small 5-minute task FREE with any booked service</div>
-            </div>
-          </div>
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h2 className="text-4xl font-bold mb-12 text-[#1A1A1A]">Our Services</h2>
+          <p className="text-[#424242]">Drywall • Electrical • Plumbing • Chandler & East Valley</p>
         </div>
       </section>
 
@@ -154,7 +114,7 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Google Calendar Below the button */}
+          {/* Google Calendar */}
           <div>
             <h3 className="text-3xl font-bold text-center text-[#1A1A1A] mb-8">Check My Availability</h3>
             <div className="bg-white rounded-3xl p-6 shadow-sm border">
