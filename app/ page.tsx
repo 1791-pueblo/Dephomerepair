@@ -44,7 +44,7 @@ export default function Home() {
       message: description ? `Based on: "${description}"` : 'Instant estimate ready!'
     });
   };
-
+  
   return (
     <>
       {/* Header */}
