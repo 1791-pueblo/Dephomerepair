@@ -10,6 +10,14 @@ export default function Home() {
           </h1>
           <p className="text-2xl text-gray-600">Drywall • Electrical • Plumbing</p>
           <p className="text-xl text-gray-500 mt-2">Chandler, Arizona</p>
+          
+          {/* Hero CTA */}
+          <a 
+            href="#quote" 
+            className="mt-8 inline-block bg-blue-600 text-white px-10 py-4 rounded-2xl font-semibold text-lg hover:bg-blue-700 transition"
+          >
+            Get Instant Quote Now
+          </a>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
