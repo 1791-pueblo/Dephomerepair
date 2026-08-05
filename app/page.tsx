@@ -2,6 +2,40 @@
 
 import { useState } from 'react';
 
+// SVG Logo Component
+function DEPLogo() {
+  return (
+    <svg width="120" height="140" viewBox="0 0 120 140" className="w-12 h-14">
+      {/* Rooftop outline - pitched roof */}
+      <polygon points="30,35 60,15 90,35" fill="none" stroke="#424242" strokeWidth="2" />
+      
+      {/* Small rectangle (chimney) on roof before P */}
+      <rect x="75" y="28" width="6" height="12" fill="#424242" />
+      
+      {/* Windows - 4 small squares above E center */}
+      <rect x="50" y="22" width="4" height="4" fill="#0056B3" />
+      <rect x="58" y="22" width="4" height="4" fill="#0056B3" />
+      <rect x="50" y="30" width="4" height="4" fill="#0056B3" />
+      <rect x="58" y="30" width="4" height="4" fill="#0056B3" />
+      
+      {/* Letter D - Atlantic Blue */}
+      <text x="20" y="85" fontSize="48" fontWeight="bold" fill="#0056B3" fontFamily="Arial, sans-serif">D</text>
+      
+      {/* Letter E - Amber Orange with electricity bolts */}
+      <text x="50" y="85" fontSize="48" fontWeight="bold" fill="#FFAB00" fontFamily="Arial, sans-serif">E</text>
+      {/* Electricity bolts from E center */}
+      <polyline points="62,65 68,72 64,75 72,85" fill="none" stroke="#FFAB00" strokeWidth="2" strokeLinecap="round" />
+      <polyline points="62,65 56,72 60,75 52,85" fill="none" stroke="#FFAB00" strokeWidth="2" strokeLinecap="round" />
+      
+      {/* Letter P - Charcoal Grey */}
+      <text x="78" y="85" fontSize="48" fontWeight="bold" fill="#424242" fontFamily="Arial, sans-serif">P</text>
+      
+      {/* Tagline */}
+      <text x="60" y="110" fontSize="10" fontWeight="500" fill="#424242" fontFamily="Arial, sans-serif" textAnchor="middle">Home-Smart Solutions</text>
+    </svg>
+  );
+}
+
 export default function Home() {
   const [quote, setQuote] = useState<any>(null);
   const [description, setDescription] = useState('');
@@ -63,15 +97,17 @@ export default function Home() {
     );
 
     if (hasDrywall && hasElectrical && hasPlumbing) {
-      base = Math.round(base * 0.85);
-      breakdown.push('🎉 Triple Play 15% OFF applied');
+      // Triple Play: waive service call fee
+      base -= 100;
+      breakdown.push('🎉 Triple Play — Service Call waived!');
     } else if (
       (hasDrywall && hasElectrical) ||
       (hasDrywall && hasPlumbing) ||
       (hasElectrical && hasPlumbing)
     ) {
-      base -= 100;
-      breakdown.push('Power Pair — Service Call waived');
+      // Power Pair: 10% OFF
+      base = Math.round(base * 0.9);
+      breakdown.push('⚡ Power Pair — 10% OFF applied');
     }
 
     setQuote({
@@ -106,11 +142,7 @@ export default function Home() {
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="text-2xl font-bold text-[#0056B3]">DEP</div>
-            <div>
-              <div className="font-bold text-xl">Home Repair</div>
-              <div className="text-xs text-[#424242]">Home-Smart Solutions</div>
-            </div>
+            <DEPLogo />
           </div>
           <a
             href="#quote"
@@ -124,6 +156,11 @@ export default function Home() {
       {/* Hero */}
       <section className="bg-gradient-to-br from-[#0056B3] to-[#1A1A1A] text-white py-24">
         <div className="max-w-4xl mx-auto px-6 text-center">
+          <div className="mb-8 flex justify-center">
+            <div className="scale-150">
+              <DEPLogo />
+            </div>
+          </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
             Your Home.
             <br />
@@ -205,10 +242,10 @@ export default function Home() {
             <h3 className="text-3xl font-bold mb-6">DEP Bundle Incentives</h3>
             <div className="max-w-md mx-auto space-y-4 text-left">
               <div>
-                🔥 Triple Play — Book all three categories → 15% OFF total labor
+                🔥 Triple Play — Book all three categories → Service Call Waived!
               </div>
               <div>
-                🔥 Power Pair — Any two services → Service Call waived
+                ⚡ Power Pair — Any two services → 10% OFF total
               </div>
               <div>
                 🔥 While We're There — One small 5-minute task FREE with any
@@ -358,7 +395,9 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-[#1A1A1A] text-white py-12">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <div className="text-2xl font-bold mb-2">DEP Home Repair</div>
+          <div className="mb-4">
+            <DEPLogo />
+          </div>
           <div>
             Home-Smart Solutions • Drywall • Electric • Plumbing
           </div>
