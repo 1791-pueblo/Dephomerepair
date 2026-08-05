@@ -1,78 +1,287 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
+
+interface ServiceOption {
+  name: string;
+  price: number;
+  category?: string;
+  subcategories?: {
+    [key: string]: ServiceSubOption[];
+  };
+}
+
+interface ServiceSubOption {
+  name: string;
+  price: number;
+  addons?: {
+    [key: string]: number;
+  };
+}
 
 export default function Home() {
   const [quote, setQuote] = useState<any>(null);
   const [description, setDescription] = useState('');
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [selectedServices, setSelectedServices] = useState<
+    { service: string; selections: Record<string, string>; price: number }[]
+  >([]);
 
-  const services = {
-    drywall: [
-      { name: 'Small Patch (up to hand-sized)', price: 200 },
-      { name: 'Medium Patch', price: 350 },
-      { name: 'Large Patch / Section Repair', price: 675 },
-    ],
-    electrical: [
-      { name: 'Outlet Replacement', price: 135 },
-      { name: 'Switch Replacement', price: 135 },
-      { name: 'GFCI Replacement', price: 175 },
-      { name: 'Dimmer Install', price: 175 },
-      { name: 'Light Fixture Replacement', price: 225 },
-      { name: 'Ceiling Fan Installation', price: 325 },
-    ],
-    plumbing: [
-      { name: 'Faucet Replacement', price: 262 },
-      { name: 'Toilet Repair', price: 187 },
-      { name: 'Toilet Replacement', price: 375 },
-      { name: 'Supply Line Replacement', price: 175 },
-      { name: 'Shutoff Valve Replacement', price: 262 },
-      { name: 'Garbage Disposal Replacement', price: 337 },
-      { name: 'Drain Clearing / Snaking', price: 187 },
-      { name: 'Dead Outlet / Switch Troubleshooting', price: 175 },
-    ],
-  };
-
-  const allServices = [
-    ...services.drywall,
-    ...services.electrical,
-    ...services.plumbing,
+  const services: ServiceOption[] = [
+    {
+      name: 'Modern Fixture Install',
+      price: 0,
+      subcategories: {
+        'Ceiling Fan': [
+          { name: 'New Installation', price: 400 },
+          { name: 'Replacement', price: 275 },
+          { name: 'New with Wall Switch Control', price: 550 },
+        ],
+        'Recessed LED Lights': [
+          {
+            name: 'New Installation (1 light)',
+            price: 250,
+            addons: { 'Additional Light': 85 },
+          },
+        ],
+        'Low Voltage Lighting': [
+          { name: 'New Installation', price: 400 },
+        ],
+      },
+    },
+    {
+      name: 'Smart Doorbell',
+      price: 350,
+    },
+    {
+      name: 'Drywall & Finishing',
+      price: 0,
+      subcategories: {
+        'Repair': [
+          { name: 'Small Patch', price: 200 },
+          { name: 'Medium Patch', price: 350 },
+          { name: 'Large Patch', price: 675 },
+        ],
+        'New Installation': [
+          {
+            name: 'Small',
+            price: 200,
+            addons: {
+              'Skip Trowel': 25,
+              'Knockdown': 25,
+              'Orange Peel': 25,
+            },
+          },
+          {
+            name: 'Medium',
+            price: 350,
+            addons: {
+              'Skip Trowel': 50,
+              'Knockdown': 50,
+              'Orange Peel': 50,
+            },
+          },
+          {
+            name: 'Large',
+            price: 675,
+            addons: {
+              'Skip Trowel': 100,
+              'Knockdown': 75,
+              'Orange Peel': 75,
+            },
+          },
+        ],
+      },
+    },
   ];
 
-  const calculateQuote = () => {
-    let base = 100; // Service call/diagnostic midpoint
-    let breakdown: string[] = ['Service Call / Diagnostic: $100'];
+  const drywall = {
+    'Professional Patching': 200,
+    'Texture Matching': 150,
+    'Corner Bead & Trim Repair': 175,
+    'Full Surface Refresh': 400,
+  };
 
-    selectedServices.forEach((serviceName) => {
-      const service = allServices.find((s) => s.name === serviceName);
-      if (service) {
-        base += service.price;
-        breakdown.push(`${service.name}: $${service.price}`);
+  const electrical = {
+    'Modern Fixture Install': 225,
+    'Smart Home Upgrades': 300,
+    'GFCI / Safety Upgrades': 175,
+    'Device Refresh': 125,
+  };
+
+  const plumbing = {
+    'Kitchen & Bath Updates': 275,
+    'Toilet Repair & Install': 187,
+    'Drain & Leak Care': 187,
+    'Appliance Hookups': 225,
+  };
+
+  const displayServices = [
+    {
+      title: 'D — Drywall & Finishing',
+      items: Object.entries(drywall).map(([name, price]) => ({
+        name,
+        price,
+      })),
+    },
+    {
+      title: 'E — Electrical & Smart Home',
+      items: Object.entries(electrical).map(([name, price]) => ({
+        name,
+        price,
+      })),
+    },
+    {
+      title: 'P — Plumbing & Fixtures',
+      items: Object.entries(plumbing).map(([name, price]) => ({
+        name,
+        price,
+      })),
+    },
+  ];
+
+  const handleServiceSelect = (serviceName: string) => {
+    const service = services.find((s) => s.name === serviceName);
+
+    if (!service) return;
+
+    // Check if this service is already selected
+    const existingIndex = selectedServices.findIndex(
+      (s) => s.service === serviceName
+    );
+
+    if (existingIndex > -1) {
+      // Remove if already selected
+      const newServices = selectedServices.filter((_, i) => i !== existingIndex);
+      setSelectedServices(newServices);
+    } else {
+      // Add new service
+      const newService = {
+        service: serviceName,
+        selections: {} as Record<string, string>,
+        price: service.price,
+      };
+      setSelectedServices([...selectedServices, newService]);
+    }
+  };
+
+  const handleSubcategorySelect = (
+    serviceName: string,
+    subcategoryKey: string,
+    subcategoryValue: string
+  ) => {
+    const updatedServices = selectedServices.map((s) => {
+      if (s.service === serviceName) {
+        return {
+          ...s,
+          selections: {
+            ...s.selections,
+            [subcategoryKey]: subcategoryValue,
+          },
+        };
+      }
+      return s;
+    });
+    setSelectedServices(updatedServices);
+  };
+
+  const handleAddonSelect = (
+    serviceName: string,
+    addonKey: string,
+    addonValue: string
+  ) => {
+    const updatedServices = selectedServices.map((s) => {
+      if (s.service === serviceName) {
+        return {
+          ...s,
+          selections: {
+            ...s.selections,
+            [addonKey]: addonValue,
+          },
+        };
+      }
+      return s;
+    });
+    setSelectedServices(updatedServices);
+  };
+
+  const calculateServicePrice = (
+    serviceName: string,
+    selections: Record<string, string>
+  ): number => {
+    const service = services.find((s) => s.name === serviceName);
+    if (!service) return 0;
+
+    if (!service.subcategories) {
+      return service.price;
+    }
+
+    let basePrice = 0;
+    let totalPrice = 0;
+
+    // Navigate through subcategories
+    const firstKey = Object.keys(service.subcategories)[0];
+    const subcategory = selections[firstKey];
+
+    if (subcategory && service.subcategories[firstKey]) {
+      const option = service.subcategories[firstKey].find(
+        (o) => o.name === subcategory
+      );
+      if (option) {
+        basePrice = option.price;
+        totalPrice = option.price;
+
+        // Check for addons
+        if (option.addons) {
+          Object.entries(option.addons).forEach(([addonKey, addonPrice]) => {
+            if (selections[addonKey]) {
+              totalPrice += addonPrice * parseInt(selections[addonKey]);
+            }
+          });
+        }
+      }
+    }
+
+    return totalPrice;
+  };
+
+  const calculateQuote = () => {
+    let base = 95; // New service call fee
+    let breakdown: string[] = ['Service Call / Diagnostic: $95'];
+
+    selectedServices.forEach((s) => {
+      const servicePrice = calculateServicePrice(s.service, s.selections);
+      if (servicePrice > 0) {
+        base += servicePrice;
+        let serviceDesc = s.service;
+        const selections = Object.entries(s.selections)
+          .map(([key, val]) => `${val}`)
+          .join(' - ');
+        if (selections) {
+          serviceDesc += ` (${selections})`;
+        }
+        breakdown.push(`${serviceDesc}: $${servicePrice}`);
       }
     });
 
     // Bundle discounts
     const hasDrywall = selectedServices.some((s) =>
-      services.drywall.map((d) => d.name).includes(s)
+      s.service.includes('Drywall')
     );
-    const hasElectrical = selectedServices.some((s) =>
-      services.electrical.map((e) => e.name).includes(s)
+    const hasElectrical = selectedServices.some(
+      (s) => s.service.includes('Electrical') || s.service.includes('Modern Fixture') || s.service.includes('Smart Doorbell')
     );
     const hasPlumbing = selectedServices.some((s) =>
-      services.plumbing.map((p) => p.name).includes(s)
+      s.service.includes('Plumbing')
     );
 
     if (hasDrywall && hasElectrical && hasPlumbing) {
-      // Triple Play: waive service call fee
-      base -= 100;
+      base -= 95;
       breakdown.push('🎉 Triple Play — Service Call waived!');
     } else if (
       (hasDrywall && hasElectrical) ||
       (hasDrywall && hasPlumbing) ||
       (hasElectrical && hasPlumbing)
     ) {
-      // Power Pair: 10% OFF
       base = Math.round(base * 0.9);
       breakdown.push('⚡ Power Pair — 10% OFF applied');
     }
@@ -87,14 +296,14 @@ export default function Home() {
   };
 
   const handleTallySubmit = () => {
-    // Prepare quote data for Tally
     const quoteData = {
-      services: selectedServices.join(', '),
+      services: selectedServices
+        .map((s) => `${s.service}: $${calculateServicePrice(s.service, s.selections)}`)
+        .join(', '),
       description: description,
       estimatedPrice: quote?.total || 0,
     };
 
-    // Open Tally form in new window
     const tallyUrl = new URL('https://tally.so/r/QKYRWA');
     tallyUrl.searchParams.append('services', quoteData.services);
     tallyUrl.searchParams.append('description', quoteData.description);
@@ -109,9 +318,9 @@ export default function Home() {
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img 
-              src="/logo.png" 
-              alt="DEP Home Repair" 
+            <img
+              src="/dep-logo.png"
+              alt="DEP Home Repair"
               className="h-16 w-auto"
             />
           </div>
@@ -128,9 +337,9 @@ export default function Home() {
       <section className="bg-gradient-to-br from-[#005683] to-[#1A1A1A] text-white py-24">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="mb-8 flex justify-center">
-            <img 
-              src="/logo.png" 
-              alt="DEP Home Repair" 
+            <img
+              src="/dep-logo.png"
+              alt="DEP Home Repair"
               className="h-32 w-auto"
             />
           </div>
@@ -167,47 +376,23 @@ export default function Home() {
           </p>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Drywall */}
-            <div className="bg-slate-50 p-8 rounded-2xl">
-              <div className="text-2xl font-bold text-[#005683] mb-6">
-                D — Drywall & Finishing
+            {displayServices.map((category) => (
+              <div key={category.title} className="bg-slate-50 p-8 rounded-2xl">
+                <div className="text-2xl font-bold text-[#005683] mb-6">
+                  {category.title}
+                </div>
+                <ul className="space-y-4 text-[#424242]">
+                  {category.items.map((item) => (
+                    <li key={item.name}>
+                      ✓ {item.name}{' '}
+                      <span className="text-sm text-gray-500">
+                        ${item.price}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul className="space-y-4 text-[#424242]">
-                {services.drywall.map((s) => (
-                  <li key={s.name}>
-                    ✓ {s.name} <span className="text-sm text-gray-500">${s.price}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Electrical */}
-            <div className="bg-slate-50 p-8 rounded-2xl">
-              <div className="text-2xl font-bold text-[#FFAB00] mb-6">
-                E — Electrical & Smart Home
-              </div>
-              <ul className="space-y-4 text-[#424242]">
-                {services.electrical.map((s) => (
-                  <li key={s.name}>
-                    ✓ {s.name} <span className="text-sm text-gray-500">${s.price}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Plumbing */}
-            <div className="bg-slate-50 p-8 rounded-2xl">
-              <div className="text-2xl font-bold text-[#424242] mb-6">
-                P — Plumbing & Fixtures
-              </div>
-              <ul className="space-y-4 text-[#424242]">
-                {services.plumbing.map((s) => (
-                  <li key={s.name}>
-                    ✓ {s.name} <span className="text-sm text-gray-500">${s.price}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            ))}
           </div>
 
           {/* Bundles */}
@@ -215,7 +400,7 @@ export default function Home() {
             <h3 className="text-3xl font-bold mb-6">DEP Bundle Incentives</h3>
             <div className="max-w-md mx-auto space-y-4 text-left">
               <div>
-                🔥 Triple Play — Book all three categories → Service Call Waived!
+                🎉 Triple Play — Book all three categories → Service Call Waived!
               </div>
               <div>
                 ⚡ Power Pair — Any two services → 10% OFF total
@@ -251,81 +436,109 @@ export default function Home() {
               <p className="font-medium mb-4 text-[#1A1A1A]">
                 Or pick services:
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {services.drywall.map((s) => (
-                  <label
-                    key={s.name}
-                    className="flex items-center gap-2 text-sm cursor-pointer"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={selectedServices.includes(s.name)}
-                      onChange={() => {
-                        if (selectedServices.includes(s.name)) {
-                          setSelectedServices(
-                            selectedServices.filter((x) => x !== s.name)
-                          );
-                        } else {
-                          setSelectedServices([
-                            ...selectedServices,
-                            s.name,
-                          ]);
-                        }
-                      }}
-                      className="w-5 h-5 accent-[#FFAB00]"
-                    />
-                    {s.name}
-                  </label>
-                ))}
-                {services.electrical.map((s) => (
-                  <label
-                    key={s.name}
-                    className="flex items-center gap-2 text-sm cursor-pointer"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={selectedServices.includes(s.name)}
-                      onChange={() => {
-                        if (selectedServices.includes(s.name)) {
-                          setSelectedServices(
-                            selectedServices.filter((x) => x !== s.name)
-                          );
-                        } else {
-                          setSelectedServices([
-                            ...selectedServices,
-                            s.name,
-                          ]);
-                        }
-                      }}
-                      className="w-5 h-5 accent-[#FFAB00]"
-                    />
-                    {s.name}
-                  </label>
-                ))}
-                {services.plumbing.map((s) => (
-                  <label
-                    key={s.name}
-                    className="flex items-center gap-2 text-sm cursor-pointer"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={selectedServices.includes(s.name)}
-                      onChange={() => {
-                        if (selectedServices.includes(s.name)) {
-                          setSelectedServices(
-                            selectedServices.filter((x) => x !== s.name)
-                          );
-                        } else {
-                          setSelectedServices([
-                            ...selectedServices,
-                            s.name,
-                          ]);
-                        }
-                      }}
-                      className="w-5 h-5 accent-[#FFAB00]"
-                    />
-                    {s.name}
-                  </label>
+              <div className="space-y-6">
+                {services.map((service) => (
+                  <div key={service.name} className="border rounded-lg p-4">
+                    <label className="flex items-center gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={selectedServices.some(
+                          (s) => s.service === service.name
+                        )}
+                        onChange={() => handleServiceSelect(service.name)}
+                        className="w-5 h-5 accent-[#FFAB00]"
+                      />
+                      <span className="font-semibold text-[#1A1A1A]">
+                        {service.name}
+                      </span>
+                    </label>
+
+                    {/* Subcategories */}
+                    {service.subcategories &&
+                      selectedServices.some((s) => s.service === service.name) && (
+                        <div className="mt-4 ml-8 space-y-4">
+                          {Object.entries(service.subcategories).map(
+                            ([subcatKey, subcatOptions]) => (
+                              <div key={subcatKey}>
+                                <label className="block text-sm font-medium text-[#424242] mb-2">
+                                  {subcatKey}
+                                </label>
+                                <select
+                                  value={
+                                    selectedServices.find(
+                                      (s) => s.service === service.name
+                                    )?.selections[subcatKey] || ''
+                                  }
+                                  onChange={(e) =>
+                                    handleSubcategorySelect(
+                                      service.name,
+                                      subcatKey,
+                                      e.target.value
+                                    )
+                                  }
+                                  className="w-full border border-gray-300 rounded-lg p-2 text-sm"
+                                >
+                                  <option value="">Select {subcatKey}</option>
+                                  {subcatOptions.map((option) => (
+                                    <option key={option.name} value={option.name}>
+                                      {option.name} - ${option.price}
+                                    </option>
+                                  ))}
+                                </select>
+
+                                {/* Addons */}
+                                {selectedServices
+                                  .find((s) => s.service === service.name)
+                                  ?.selections[subcatKey] &&
+                                  subcatOptions.find(
+                                    (o) =>
+                                      o.name ===
+                                      selectedServices.find(
+                                        (s) => s.service === service.name
+                                      )?.selections[subcatKey]
+                                  )?.addons && (
+                                    <div className="mt-3 space-y-2">
+                                      {Object.entries(
+                                        subcatOptions.find(
+                                          (o) =>
+                                            o.name ===
+                                            selectedServices.find(
+                                              (s) => s.service === service.name
+                                            )?.selections[subcatKey]
+                                        )?.addons || {}
+                                      ).map(([addonKey, addonPrice]) => (
+                                        <div key={addonKey}>
+                                          <label className="text-xs text-[#424242]">
+                                            {addonKey} (${addonPrice} each)
+                                          </label>
+                                          <input
+                                            type="number"
+                                            min="0"
+                                            value={
+                                              selectedServices.find(
+                                                (s) => s.service === service.name
+                                              )?.selections[addonKey] || ''
+                                            }
+                                            onChange={(e) =>
+                                              handleAddonSelect(
+                                                service.name,
+                                                addonKey,
+                                                e.target.value
+                                              )
+                                            }
+                                            className="w-full border border-gray-300 rounded-lg p-2 text-sm"
+                                            placeholder="0"
+                                          />
+                                        </div>
+                                      ))}
+                                    </div>
+                                  )}
+                              </div>
+                            )
+                          )}
+                        </div>
+                      )}
+                  </div>
                 ))}
               </div>
             </div>
@@ -369,9 +582,9 @@ export default function Home() {
       <footer className="bg-[#1A1A1A] text-white py-12">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <div className="mb-4 flex justify-center">
-            <img 
-              src="/logo.png" 
-              alt="DEP Home Repair" 
+            <img
+              src="/dep-logo.png"
+              alt="DEP Home Repair"
               className="h-20 w-auto"
             />
           </div>
