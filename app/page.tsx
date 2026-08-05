@@ -1,40 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-
-// SVG Logo Component
-function DEPLogo() {
-  return (
-    <svg width="120" height="140" viewBox="0 0 120 140" className="w-12 h-14">
-      {/* Rooftop outline - pitched roof */}
-      <polygon points="30,35 60,15 90,35" fill="none" stroke="#424242" strokeWidth="2" />
-      
-      {/* Small rectangle (chimney) on roof before P */}
-      <rect x="75" y="28" width="6" height="12" fill="#424242" />
-      
-      {/* Windows - 4 small squares above E center */}
-      <rect x="50" y="22" width="4" height="4" fill="#0056B3" />
-      <rect x="58" y="22" width="4" height="4" fill="#0056B3" />
-      <rect x="50" y="30" width="4" height="4" fill="#0056B3" />
-      <rect x="58" y="30" width="4" height="4" fill="#0056B3" />
-      
-      {/* Letter D - Atlantic Blue */}
-      <text x="20" y="85" fontSize="48" fontWeight="bold" fill="#0056B3" fontFamily="Arial, sans-serif">D</text>
-      
-      {/* Letter E - Amber Orange with electricity bolts */}
-      <text x="50" y="85" fontSize="48" fontWeight="bold" fill="#FFAB00" fontFamily="Arial, sans-serif">E</text>
-      {/* Electricity bolts from E center */}
-      <polyline points="62,65 68,72 64,75 72,85" fill="none" stroke="#FFAB00" strokeWidth="2" strokeLinecap="round" />
-      <polyline points="62,65 56,72 60,75 52,85" fill="none" stroke="#FFAB00" strokeWidth="2" strokeLinecap="round" />
-      
-      {/* Letter P - Charcoal Grey */}
-      <text x="78" y="85" fontSize="48" fontWeight="bold" fill="#424242" fontFamily="Arial, sans-serif">P</text>
-      
-      {/* Tagline */}
-      <text x="60" y="110" fontSize="10" fontWeight="500" fill="#424242" fontFamily="Arial, sans-serif" textAnchor="middle">Home-Smart Solutions</text>
-    </svg>
-  );
-}
+import Image from 'next/image';
 
 export default function Home() {
   const [quote, setQuote] = useState<any>(null);
@@ -142,7 +109,11 @@ export default function Home() {
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <DEPLogo />
+            <img 
+              src="/logo.png" 
+              alt="DEP Home Repair" 
+              className="h-16 w-auto"
+            />
           </div>
           <a
             href="#quote"
@@ -154,12 +125,14 @@ export default function Home() {
       </header>
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-[#0056B3] to-[#1A1A1A] text-white py-24">
+      <section className="bg-gradient-to-br from-[#005683] to-[#1A1A1A] text-white py-24">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="mb-8 flex justify-center">
-            <div className="scale-150">
-              <DEPLogo />
-            </div>
+            <img 
+              src="/logo.png" 
+              alt="DEP Home Repair" 
+              className="h-32 w-auto"
+            />
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
             Your Home.
@@ -196,7 +169,7 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
             {/* Drywall */}
             <div className="bg-slate-50 p-8 rounded-2xl">
-              <div className="text-2xl font-bold text-[#0056B3] mb-6">
+              <div className="text-2xl font-bold text-[#005683] mb-6">
                 D — Drywall & Finishing
               </div>
               <ul className="space-y-4 text-[#424242]">
@@ -238,7 +211,7 @@ export default function Home() {
           </div>
 
           {/* Bundles */}
-          <div className="mt-16 bg-gradient-to-r from-[#0056B3] to-[#FFAB00] text-white p-10 rounded-3xl text-center">
+          <div className="mt-16 bg-gradient-to-r from-[#005683] to-[#FFAB00] text-white p-10 rounded-3xl text-center">
             <h3 className="text-3xl font-bold mb-6">DEP Bundle Incentives</h3>
             <div className="max-w-md mx-auto space-y-4 text-left">
               <div>
@@ -359,7 +332,7 @@ export default function Home() {
 
             <button
               onClick={calculateQuote}
-              className="mt-10 w-full bg-[#0056B3] hover:bg-blue-700 text-white py-5 rounded-2xl font-bold text-xl transition"
+              className="mt-10 w-full bg-[#005683] hover:bg-blue-900 text-white py-5 rounded-2xl font-bold text-xl transition"
             >
               Get My Instant Quote →
             </button>
@@ -395,8 +368,12 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-[#1A1A1A] text-white py-12">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <div className="mb-4">
-            <DEPLogo />
+          <div className="mb-4 flex justify-center">
+            <img 
+              src="/logo.png" 
+              alt="DEP Home Repair" 
+              className="h-20 w-auto"
+            />
           </div>
           <div>
             Home-Smart Solutions • Drywall • Electric • Plumbing
