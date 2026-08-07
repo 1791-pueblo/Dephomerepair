@@ -361,6 +361,12 @@ export default function Home() {
               Contact
             </a>
             <a
+              href="/lead-qualifier"
+              className="hover:text-[#005683] transition"
+            >
+              Lead Qualifier
+            </a>
+            <a
               href="#quote"
               className="bg-[#FFAB00] hover:bg-amber-500 text-black px-5 py-2.5 rounded-full font-semibold text-sm transition shadow-sm"
             >
