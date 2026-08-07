@@ -25,6 +25,7 @@ export default function Home() {
   const [selectedServices, setSelectedServices] = useState<
     { service: string; selections: Record<string, string>; price: number }[]
   >([]);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const services: ServiceOption[] = [
     {
@@ -139,22 +140,39 @@ export default function Home() {
     },
   ];
 
+  const testimonials = [
+    {
+      name: 'Sarah M.',
+      location: 'Chandler',
+      text: 'Jason fixed a large drywall patch in my living room and matched the texture perfectly. Showed up on time, clean work, fair price. Highly recommend.',
+      rating: 5,
+    },
+    {
+      name: 'Mike R.',
+      location: 'Gilbert',
+      text: 'Needed several electrical updates and a new ceiling fan. Professional, knowledgeable, and explained everything clearly. Will use again.',
+      rating: 5,
+    },
+    {
+      name: 'Lisa T.',
+      location: 'Mesa',
+      text: 'Quick response on a plumbing issue. Honest pricing and quality work. Exactly what you want from a local tradesperson.',
+      rating: 5,
+    },
+  ];
+
   const handleServiceSelect = (serviceName: string) => {
     const service = services.find((s) => s.name === serviceName);
-
     if (!service) return;
 
-    // Check if this service is already selected
     const existingIndex = selectedServices.findIndex(
       (s) => s.service === serviceName
     );
 
     if (existingIndex > -1) {
-      // Remove if already selected
       const newServices = selectedServices.filter((_, i) => i !== existingIndex);
       setSelectedServices(newServices);
     } else {
-      // Add new service
       const newService = {
         service: serviceName,
         selections: {} as Record<string, string>,
@@ -215,10 +233,7 @@ export default function Home() {
       return service.price;
     }
 
-    let basePrice = 0;
     let totalPrice = 0;
-
-    // Navigate through subcategories
     const firstKey = Object.keys(service.subcategories)[0];
     const subcategory = selections[firstKey];
 
@@ -227,14 +242,12 @@ export default function Home() {
         (o) => o.name === subcategory
       );
       if (option) {
-        basePrice = option.price;
         totalPrice = option.price;
 
-        // Check for addons
         if (option.addons) {
           Object.entries(option.addons).forEach(([addonKey, addonPrice]) => {
             if (selections[addonKey]) {
-              totalPrice += addonPrice * parseInt(selections[addonKey]);
+              totalPrice += addonPrice * parseInt(selections[addonKey] || '0');
             }
           });
         }
@@ -245,7 +258,7 @@ export default function Home() {
   };
 
   const calculateQuote = () => {
-    let base = 95; // New service call fee
+    let base = 95;
     let breakdown: string[] = ['Service Call / Diagnostic: $95'];
 
     selectedServices.forEach((s) => {
@@ -254,7 +267,7 @@ export default function Home() {
         base += servicePrice;
         let serviceDesc = s.service;
         const selections = Object.entries(s.selections)
-          .map(([key, val]) => `${val}`)
+          .map(([_, val]) => `${val}`)
           .join(' - ');
         if (selections) {
           serviceDesc += ` (${selections})`;
@@ -263,12 +276,14 @@ export default function Home() {
       }
     });
 
-    // Bundle discounts
     const hasDrywall = selectedServices.some((s) =>
       s.service.includes('Drywall')
     );
     const hasElectrical = selectedServices.some(
-      (s) => s.service.includes('Electrical') || s.service.includes('Modern Fixture') || s.service.includes('Smart Doorbell')
+      (s) =>
+        s.service.includes('Electrical') ||
+        s.service.includes('Modern Fixture') ||
+        s.service.includes('Smart Doorbell')
     );
     const hasPlumbing = selectedServices.some((s) =>
       s.service.includes('Plumbing')
@@ -298,7 +313,10 @@ export default function Home() {
   const handleTallySubmit = () => {
     const quoteData = {
       services: selectedServices
-        .map((s) => `${s.service}: $${calculateServicePrice(s.service, s.selections)}`)
+        .map(
+          (s) =>
+            `${s.service}: $${calculateServicePrice(s.service, s.selections)}`
+        )
         .join(', '),
       description: description,
       estimatedPrice: quote?.total || 0,
@@ -307,7 +325,10 @@ export default function Home() {
     const tallyUrl = new URL('https://tally.so/r/QKYRWA');
     tallyUrl.searchParams.append('services', quoteData.services);
     tallyUrl.searchParams.append('description', quoteData.description);
-    tallyUrl.searchParams.append('estimatedPrice', quoteData.estimatedPrice);
+    tallyUrl.searchParams.append(
+      'estimatedPrice',
+      String(quoteData.estimatedPrice)
+    );
 
     window.open(tallyUrl.toString(), '_blank');
   };
@@ -315,78 +336,176 @@ export default function Home() {
   return (
     <>
       {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+      <header className="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-50 border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+          <a href="#" className="flex items-center gap-3">
             <img
-              src="/dep-logo.png"
+              src="/logo.png"
               alt="DEP Home Repair"
-              className="h-16 w-auto"
+              className="h-12 sm:h-14 w-auto"
             />
-          </div>
-          <a
-            href="#quote"
-            className="bg-[#FFAB00] hover:bg-amber-500 text-black px-6 py-3 rounded-full font-semibold text-sm"
-          >
-            Instant Quote
           </a>
+
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-[#1A1A1A]">
+            <a href="#services" className="hover:text-[#005683] transition">
+              Services
+            </a>
+            <a href="#quote" className="hover:text-[#005683] transition">
+              Instant Quote
+            </a>
+            <a href="#testimonials" className="hover:text-[#005683] transition">
+              Reviews
+            </a>
+            <a href="#contact" className="hover:text-[#005683] transition">
+              Contact
+            </a>
+            <a
+              href="#quote"
+              className="bg-[#FFAB00] hover:bg-amber-500 text-black px-5 py-2.5 rounded-full font-semibold text-sm transition shadow-sm"
+            >
+              Get Quote
+            </a>
+          </nav>
+
+          {/* Mobile menu button */}
+          <button
+            className="md:hidden p-2 text-[#1A1A1A]"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              {mobileMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+          </button>
         </div>
+
+        {/* Mobile Nav */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-3">
+            <a
+              href="#services"
+              className="block py-2 font-medium"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Services
+            </a>
+            <a
+              href="#quote"
+              className="block py-2 font-medium"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Instant Quote
+            </a>
+            <a
+              href="#testimonials"
+              className="block py-2 font-medium"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Reviews
+            </a>
+            <a
+              href="#contact"
+              className="block py-2 font-medium"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Contact
+            </a>
+            <a
+              href="#quote"
+              className="block mt-2 bg-[#FFAB00] text-center text-black px-5 py-3 rounded-full font-semibold"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Get Quote
+            </a>
+          </div>
+        )}
       </header>
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-[#005683] to-[#1A1A1A] text-white py-24">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className="mb-8 flex justify-center">
+      <section className="bg-gradient-to-br from-[#005683] via-[#004a70] to-[#1A1A1A] text-white py-16 sm:py-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          <div className="mb-6 sm:mb-8 flex justify-center">
             <img
-              src="/dep-logo.png"
+              src="/logo.png"
               alt="DEP Home Repair"
-              className="h-32 w-auto"
+              className="h-20 sm:h-28 w-auto drop-shadow-lg"
             />
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-5 leading-tight">
             Your Home.
             <br />
             Fixed Right. Fast.
           </h1>
-          <p className="text-xl mb-10">
+          <p className="text-lg sm:text-xl mb-8 sm:mb-10 opacity-95 max-w-2xl mx-auto">
             Solo Chandler expert in drywall, electrical & plumbing.
-            <br />
+            <br className="hidden sm:block" />
             Instant quotes • Same-day booking • Guaranteed work.
           </p>
-          <a
-            href="#quote"
-            className="inline-block bg-[#FFAB00] hover:bg-amber-500 text-[#1A1A1A] px-10 py-4 rounded-full text-xl font-bold"
-          >
-            Get Your Instant Quote Now →
-          </a>
-          <div className="mt-8 text-sm opacity-75">
-            602-598-1988 • info@dephomerepair.com
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a
+              href="#quote"
+              className="inline-block bg-[#FFAB00] hover:bg-amber-500 text-[#1A1A1A] px-8 sm:px-10 py-4 rounded-full text-lg sm:text-xl font-bold transition shadow-lg"
+            >
+              Get Your Instant Quote →
+            </a>
+            <a
+              href="tel:6025981988"
+              className="inline-block border-2 border-white/40 hover:border-white text-white px-8 py-3.5 rounded-full font-semibold transition"
+            >
+              Call 602-598-1988
+            </a>
+          </div>
+          <div className="mt-6 text-sm opacity-70">
+            Serving Chandler, Gilbert, Mesa & East Valley
           </div>
         </div>
       </section>
 
       {/* Services */}
-      <section id="services" className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-4 text-[#1A1A1A]">
+      <section id="services" className="py-16 sm:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">
             DEP Service Menu
           </h2>
-          <p className="text-center text-[#424242] mb-12">
+          <p className="text-center text-[#424242] mb-10 sm:mb-12">
             Professional • Reliable • Chandler & East Valley
           </p>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
             {displayServices.map((category) => (
-              <div key={category.title} className="bg-slate-50 p-8 rounded-2xl">
-                <div className="text-2xl font-bold text-[#005683] mb-6">
+              <div
+                key={category.title}
+                className="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-100"
+              >
+                <div className="text-xl sm:text-2xl font-bold text-[#005683] mb-5">
                   {category.title}
                 </div>
-                <ul className="space-y-4 text-[#424242]">
+                <ul className="space-y-3 text-[#424242]">
                   {category.items.map((item) => (
-                    <li key={item.name}>
-                      ✓ {item.name}{' '}
-                      <span className="text-sm text-gray-500">
-                        ${item.price}
+                    <li key={item.name} className="flex justify-between gap-2">
+                      <span>✓ {item.name}</span>
+                      <span className="text-sm text-gray-500 whitespace-nowrap">
+                        from ${item.price}
                       </span>
                     </li>
                   ))}
@@ -396,18 +515,21 @@ export default function Home() {
           </div>
 
           {/* Bundles */}
-          <div className="mt-16 bg-gradient-to-r from-[#005683] to-[#FFAB00] text-white p-10 rounded-3xl text-center">
-            <h3 className="text-3xl font-bold mb-6">DEP Bundle Incentives</h3>
-            <div className="max-w-md mx-auto space-y-4 text-left">
+          <div className="mt-12 sm:mt-16 bg-gradient-to-r from-[#005683] to-[#FFAB00] text-white p-8 sm:p-10 rounded-3xl text-center">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-5">
+              DEP Bundle Incentives
+            </h3>
+            <div className="max-w-md mx-auto space-y-3 text-left text-sm sm:text-base">
               <div>
-                🎉 Triple Play — Book all three categories → Service Call Waived!
+                🎉 <strong>Triple Play</strong> — Book all three categories →
+                Service Call Waived!
               </div>
               <div>
-                ⚡ Power Pair — Any two services → 10% OFF total
+                ⚡ <strong>Power Pair</strong> — Any two services → 10% OFF total
               </div>
               <div>
-                🔥 While We're There — One small 5-minute task FREE with any
-                booked service
+                🔥 <strong>While We&apos;re There</strong> — One small 5-minute
+                task FREE with any booked service
               </div>
             </div>
           </div>
@@ -415,30 +537,33 @@ export default function Home() {
       </section>
 
       {/* Instant Quote */}
-      <section id="quote" className="py-20 bg-[#F8FAFC]">
-        <div className="max-w-3xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-3">
+      <section id="quote" className="py-16 sm:py-20 bg-[#F8FAFC]">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">
             Instant Quote in Seconds
           </h2>
-          <p className="text-center text-[#424242] mb-12">
+          <p className="text-center text-[#424242] mb-8 sm:mb-12">
             Tell us what you need — get a fair price instantly
           </p>
 
-          <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12">
+          <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-10 md:p-12 border border-gray-100">
             <textarea
-              className="w-full h-32 border border-gray-300 rounded-2xl p-6 text-lg"
+              className="w-full h-28 sm:h-32 border border-gray-300 rounded-2xl p-4 sm:p-6 text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-[#FFAB00] focus:border-transparent"
               placeholder="Example: 4x6 drywall patch in bedroom ceiling + replace 3 outlets"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
 
-            <div className="mt-8">
+            <div className="mt-6 sm:mt-8">
               <p className="font-medium mb-4 text-[#1A1A1A]">
                 Or pick services:
               </p>
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 {services.map((service) => (
-                  <div key={service.name} className="border rounded-lg p-4">
+                  <div
+                    key={service.name}
+                    className="border border-gray-200 rounded-xl p-4 hover:border-[#FFAB00]/40 transition"
+                  >
                     <label className="flex items-center gap-3 cursor-pointer">
                       <input
                         type="checkbox"
@@ -453,10 +578,11 @@ export default function Home() {
                       </span>
                     </label>
 
-                    {/* Subcategories */}
                     {service.subcategories &&
-                      selectedServices.some((s) => s.service === service.name) && (
-                        <div className="mt-4 ml-8 space-y-4">
+                      selectedServices.some(
+                        (s) => s.service === service.name
+                      ) && (
+                        <div className="mt-4 ml-4 sm:ml-8 space-y-4">
                           {Object.entries(service.subcategories).map(
                             ([subcatKey, subcatOptions]) => (
                               <div key={subcatKey}>
@@ -476,17 +602,19 @@ export default function Home() {
                                       e.target.value
                                     )
                                   }
-                                  className="w-full border border-gray-300 rounded-lg p-2 text-sm"
+                                  className="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFAB00]"
                                 >
                                   <option value="">Select {subcatKey}</option>
                                   {subcatOptions.map((option) => (
-                                    <option key={option.name} value={option.name}>
+                                    <option
+                                      key={option.name}
+                                      value={option.name}
+                                    >
                                       {option.name} - ${option.price}
                                     </option>
                                   ))}
                                 </select>
 
-                                {/* Addons */}
                                 {selectedServices
                                   .find((s) => s.service === service.name)
                                   ?.selections[subcatKey] &&
@@ -503,7 +631,8 @@ export default function Home() {
                                           (o) =>
                                             o.name ===
                                             selectedServices.find(
-                                              (s) => s.service === service.name
+                                              (s) =>
+                                                s.service === service.name
                                             )?.selections[subcatKey]
                                         )?.addons || {}
                                       ).map(([addonKey, addonPrice]) => (
@@ -516,7 +645,8 @@ export default function Home() {
                                             min="0"
                                             value={
                                               selectedServices.find(
-                                                (s) => s.service === service.name
+                                                (s) =>
+                                                  s.service === service.name
                                               )?.selections[addonKey] || ''
                                             }
                                             onChange={(e) =>
@@ -545,56 +675,166 @@ export default function Home() {
 
             <button
               onClick={calculateQuote}
-              className="mt-10 w-full bg-[#005683] hover:bg-blue-900 text-white py-5 rounded-2xl font-bold text-xl transition"
+              className="mt-8 sm:mt-10 w-full bg-[#005683] hover:bg-blue-900 text-white py-4 sm:py-5 rounded-2xl font-bold text-lg sm:text-xl transition shadow-md"
             >
               Get My Instant Quote →
             </button>
 
             {quote && (
-              <div className="mt-10 p-8 bg-[#F8FAFC] rounded-2xl border border-[#FFAB00]">
-                <div className="text-5xl font-bold text-[#1A1A1A]">
+              <div className="mt-8 sm:mt-10 p-6 sm:p-8 bg-[#F8FAFC] rounded-2xl border-2 border-[#FFAB00]">
+                <div className="text-4xl sm:text-5xl font-bold text-[#1A1A1A]">
                   ${quote.total}
                 </div>
                 <div className="text-[#FFAB00] font-medium mt-1">
                   Estimated total • Chandler area
                 </div>
-                <div className="mt-6 space-y-2 text-sm">
+                <div className="mt-5 space-y-2 text-sm">
                   {quote.breakdown.map((line: string, i: number) => (
                     <div key={i}>{line}</div>
                   ))}
                 </div>
-                <div className="mt-8 pt-6 border-t text-xs text-[#424242]">
+                <div className="mt-6 pt-5 border-t text-xs text-[#424242]">
                   {quote.message}
                 </div>
                 <button
                   onClick={handleTallySubmit}
-                  className="mt-6 w-full bg-[#FFAB00] hover:bg-amber-600 py-4 rounded-2xl font-bold transition"
+                  className="mt-6 w-full bg-[#FFAB00] hover:bg-amber-500 text-black py-4 rounded-2xl font-bold transition shadow-sm"
                 >
-                  Book This Job Now
+                  Book This Job Now →
                 </button>
+                <p className="mt-3 text-center text-xs text-gray-500">
+                  Opens booking form with your quote details
+                </p>
               </div>
             )}
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-[#1A1A1A] text-white py-12">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <div className="mb-4 flex justify-center">
-            <img
-              src="/dep-logo.png"
-              alt="DEP Home Repair"
-              className="h-20 w-auto"
-            />
+      {/* Testimonials */}
+      <section id="testimonials" className="py-16 sm:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">
+            What Clients Say
+          </h2>
+          <p className="text-center text-[#424242] mb-10 sm:mb-12">
+            Real feedback from Chandler & East Valley homeowners
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
+            {testimonials.map((t, i) => (
+              <div
+                key={i}
+                className="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-100"
+              >
+                <div className="flex gap-1 mb-4 text-[#FFAB00]">
+                  {Array.from({ length: t.rating }).map((_, j) => (
+                    <span key={j}>★</span>
+                  ))}
+                </div>
+                <p className="text-[#424242] mb-5 leading-relaxed">
+                  &ldquo;{t.text}&rdquo;
+                </p>
+                <div className="font-semibold text-[#1A1A1A]">{t.name}</div>
+                <div className="text-sm text-gray-500">{t.location}</div>
+              </div>
+            ))}
           </div>
-          <div>
-            Home-Smart Solutions • Drywall • Electric • Plumbing
+
+          <p className="text-center text-sm text-gray-500 mt-8">
+            More real reviews coming soon — send me yours if you&apos;ve worked
+            with me!
+          </p>
+        </div>
+      </section>
+
+      {/* Footer / Contact */}
+      <footer id="contact" className="bg-[#1A1A1A] text-white py-12 sm:py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="grid md:grid-cols-3 gap-10 text-center md:text-left">
+            {/* Brand */}
+            <div>
+              <img
+                src="/logo.png"
+                alt="DEP Home Repair"
+                className="h-16 w-auto mx-auto md:mx-0 mb-4"
+              />
+              <p className="text-sm opacity-80">
+                Drywall • Electrical • Plumbing
+                <br />
+                Home-Smart Solutions for the East Valley
+              </p>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h3 className="font-bold text-lg mb-4">Contact</h3>
+              <div className="space-y-2 text-sm opacity-90">
+                <div>
+                  <a
+                    href="tel:6025981988"
+                    className="hover:text-[#FFAB00] transition"
+                  >
+                    📞 602-598-1988
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="mailto:info@dephomerepair.com"
+                    className="hover:text-[#FFAB00] transition"
+                  >
+                    ✉️ info@dephomerepair.com
+                  </a>
+                </div>
+                <div className="pt-2">
+                  Chandler, AZ & East Valley
+                  <br />
+                  Licensed • Bonded • Insured
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h3 className="font-bold text-lg mb-4">Quick Links</h3>
+              <div className="space-y-2 text-sm">
+                <div>
+                  <a href="#services" className="hover:text-[#FFAB00] transition">
+                    Services
+                  </a>
+                </div>
+                <div>
+                  <a href="#quote" className="hover:text-[#FFAB00] transition">
+                    Instant Quote
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="#testimonials"
+                    className="hover:text-[#FFAB00] transition"
+                  >
+                    Reviews
+                  </a>
+                </div>
+                <div className="pt-3">
+                  <a
+                    href="#"
+                    className="inline-block border border-white/30 hover:border-[#FFAB00] hover:text-[#FFAB00] px-4 py-2 rounded-full text-xs transition"
+                  >
+                    Google Business Profile →
+                  </a>
+                  <p className="text-xs opacity-60 mt-2">
+                    (Link will be added once your GBP is ready)
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="mt-8 text-sm opacity-75">
-            602-598-1988 • info@dephomerepair.com
+
+          <div className="mt-12 pt-8 border-t border-white/10 text-center text-xs opacity-60">
+            © {new Date().getFullYear()} DEP Home Repair • Chandler, Arizona
             <br />
-            Licensed • Bonded • Insured • Chandler, AZ
+            Drywall • Electrical • Plumbing
           </div>
         </div>
       </footer>

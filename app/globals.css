@@ -3,25 +3,28 @@
 @tailwind utilities;
 
 :root {
-  --primary-blue: #0056B3;     /* Your Deep Atlantic Blue */
-  --accent-amber: #FFAB00;     /* Your Electric Amber */
-  --charcoal: #424242;         /* Your Slate Charcoal */
-  --jet-black: #1A1A1A;        /* Your Jet Black text */
+  --primary-blue: #005683;
+  --accent-amber: #FFAB00;
+  --charcoal: #424242;
+  --jet-black: #1A1A1A;
 }
 
 body {
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    sans-serif;
   color: var(--jet-black);
 }
 
-h1, h2, h3 {
-  color: var(--primary-blue);
+html {
+  scroll-behavior: smooth;
 }
 
-button {
-  transition: all 0.2s;
-}
-
-button:hover {
-  transform: translateY(-1px);
+/* Better focus states for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #FFAB00;
+  outline-offset: 2px;
 }
