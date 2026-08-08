@@ -26,6 +26,7 @@ export default function Home() {
     { service: string; selections: Record<string, string>; price: number }[]
   >([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [lightbox, setLightbox] = useState<{ src: string; caption: string } | null>(null);
 
   const services: ServiceOption[] = [
     {
@@ -158,6 +159,37 @@ export default function Home() {
       location: 'Mesa',
       text: 'Quick response on a plumbing issue. Honest pricing and quality work. Exactly what you want from a local tradesperson.',
       rating: 5,
+    },
+  ];
+
+  const portfolioProjects = [
+    {
+      title: 'Bathroom Renovation',
+      tag: 'Drywall + Plumbing',
+      photos: [
+        {
+          src: 'https://github.com/user-attachments/assets/450a22cd-9193-4af4-a8a5-e056e4459848',
+          caption: 'Framing, R-TECH insulation & plumbing rough-in',
+        },
+        {
+          src: 'https://github.com/user-attachments/assets/6f7576a1-174e-47f0-a4d3-316da4ffc6c5',
+          caption: 'R-TECH foam + Henry waterproofing membrane',
+        },
+        {
+          src: 'https://github.com/user-attachments/assets/43a17179-21fa-4ec0-9ea5-8697ac113b95',
+          caption: 'Shower wall insulation & moisture barrier close-up',
+        },
+        {
+          src: 'https://github.com/user-attachments/assets/0253e8ac-69d8-44c3-8375-0c791fc83dd1',
+          caption: 'Greenboard drywall installed, tub set in place',
+        },
+        {
+          src: 'https://github.com/user-attachments/assets/0150125d-6151-4e68-b44f-6e2401144d86',
+          caption: 'Completed — double vanity, quartz countertops & travertine tile',
+        },
+      ],
+      description:
+        'Full bathroom renovation including drywall, moisture-resistant framing, R-TECH rigid foam insulation, Henry waterproofing membrane, plumbing rough-in, and electrical rough-in.',
     },
   ];
 
@@ -357,6 +389,9 @@ export default function Home() {
             <a href="#testimonials" className="hover:text-[#005683] transition">
               Reviews
             </a>
+            <a href="#portfolio" className="hover:text-[#005683] transition">
+              Portfolio
+            </a>
             <a href="#contact" className="hover:text-[#005683] transition">
               Contact
             </a>
@@ -428,6 +463,13 @@ export default function Home() {
               onClick={() => setMobileMenuOpen(false)}
             >
               Reviews
+            </a>
+            <a
+              href="#portfolio"
+              className="block py-2 font-medium"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Portfolio
             </a>
             <a
               href="#contact"
@@ -716,6 +758,103 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Portfolio */}
+      <section id="portfolio" className="py-16 sm:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">
+            Our Work
+          </h2>
+          <p className="text-center text-[#424242] mb-10 sm:mb-12">
+            Real projects — before, during &amp; after
+          </p>
+
+          {portfolioProjects.map((project, pi) => (
+            <div key={pi} className="mb-14 last:mb-0">
+              <div className="flex flex-wrap items-center gap-3 mb-5">
+                <h3 className="text-xl sm:text-2xl font-bold text-[#1A1A1A]">
+                  {project.title}
+                </h3>
+                <span className="text-xs font-semibold bg-[#005683]/10 text-[#005683] px-3 py-1 rounded-full">
+                  {project.tag}
+                </span>
+              </div>
+              <p className="text-[#424242] text-sm mb-6 max-w-2xl">
+                {project.description}
+              </p>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
+                {project.photos.map((photo, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setLightbox(photo)}
+                    className="group relative aspect-square overflow-hidden rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition focus:outline-none focus:ring-2 focus:ring-[#FFAB00]"
+                    aria-label={`View photo: ${photo.caption}`}
+                  >
+                    <img
+                      src={photo.src}
+                      alt={photo.caption}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 rounded-2xl flex items-end">
+                      <span className="w-full px-2 py-2 text-white text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/60 to-transparent rounded-b-2xl line-clamp-2">
+                        {photo.caption}
+                      </span>
+                    </div>
+                    {idx === project.photos.length - 1 && (
+                      <span className="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">
+                        ✓ Completed
+                      </span>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          <div className="mt-10 text-center">
+            <p className="text-sm text-gray-500 mb-4">
+              More project photos coming soon — ask Jason to see additional work samples!
+            </p>
+            <a
+              href="#quote"
+              className="inline-block bg-[#FFAB00] hover:bg-amber-500 text-black px-8 py-3.5 rounded-full font-semibold transition shadow-sm"
+            >
+              Start Your Project →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Lightbox */}
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+          onClick={() => setLightbox(null)}
+        >
+          <div
+            className="relative max-w-3xl w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setLightbox(null)}
+              className="absolute -top-10 right-0 text-white text-3xl font-bold hover:text-[#FFAB00] transition"
+              aria-label="Close"
+            >
+              ×
+            </button>
+            <img
+              src={lightbox.src}
+              alt={lightbox.caption}
+              className="w-full rounded-2xl shadow-2xl"
+            />
+            <p className="mt-3 text-center text-white text-sm opacity-80">
+              {lightbox.caption}
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Testimonials */}
       <section id="testimonials" className="py-16 sm:py-20 bg-white">
