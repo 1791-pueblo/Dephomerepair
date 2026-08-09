@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://dephomerepair.com'),
   title: 'DEP Home Repair | Chandler AZ Drywall, Electrical & Plumbing',
   description:
     'Expert drywall, electrical & plumbing repairs in Chandler and the East Valley. Instant online quotes • Same-day service • Fair pricing. Call Jason at 602-598-1988.',
