@@ -279,7 +279,7 @@ export default function Home() {
         if (option.addons) {
           Object.entries(option.addons).forEach(([addonKey, addonPrice]) => {
             if (selections[addonKey]) {
-              totalPrice += addonPrice * parseInt(selections[addonKey] || '0');
+              totalPrice += addonPrice * parseInt(selections[addonKey] || '0', 10);
             }
           });
         }
@@ -322,15 +322,21 @@ export default function Home() {
     );
 
     if (hasDrywall && hasElectrical && hasPlumbing) {
-      base -= 95;
-      breakdown.push('🎉 Triple Play — Service Call waived!');
+      const tripleDiscount = Math.min(95, base);
+      if (tripleDiscount > 0) {
+        base -= tripleDiscount;
+        breakdown.push('🎉 Triple Play — Service Call waived!');
+      }
     } else if (
       (hasDrywall && hasElectrical) ||
       (hasDrywall && hasPlumbing) ||
       (hasElectrical && hasPlumbing)
     ) {
-      base = Math.round(base * 0.9);
-      breakdown.push('⚡ Power Pair — 10% OFF applied');
+      const pairDiscount = Math.round(base * 0.1);
+      if (pairDiscount > 0) {
+        base = base - pairDiscount;
+        breakdown.push('⚡ Power Pair — 10% OFF applied');
+      }
     }
 
     setQuote({
@@ -604,7 +610,8 @@ export default function Home() {
 
             <div className="mt-6 sm:mt-8">
               <p className="font-medium mb-4 text-[#1A1A1A]">
-                Or pick services:
+                Or pick services — click a category to expand its options,
+                checkboxes, unit counts, and pricing:
               </p>
               <div className="space-y-4 sm:space-y-6">
                 {services.map((service) => (
@@ -634,10 +641,14 @@ export default function Home() {
                           {Object.entries(service.subcategories).map(
                             ([subcatKey, subcatOptions]) => (
                               <div key={subcatKey}>
-                                <label className="block text-sm font-medium text-[#424242] mb-2">
+                                <label
+                                  className="block text-sm font-medium text-[#424242] mb-2"
+                                  htmlFor={`subcategory-${service.name}-${subcatKey}`}
+                                >
                                   {subcatKey}
                                 </label>
                                 <select
+                                  id={`subcategory-${service.name}-${subcatKey}`}
                                   value={
                                     selectedServices.find(
                                       (s) => s.service === service.name
@@ -685,10 +696,14 @@ export default function Home() {
                                         )?.addons || {}
                                       ).map(([addonKey, addonPrice]) => (
                                         <div key={addonKey}>
-                                          <label className="text-xs text-[#424242]">
+                                          <label
+                                            className="text-xs text-[#424242]"
+                                            htmlFor={`addon-${service.name}-${subcatKey}-${addonKey}`}
+                                          >
                                             {addonKey} (${addonPrice} each)
                                           </label>
                                           <input
+                                            id={`addon-${service.name}-${subcatKey}-${addonKey}`}
                                             type="number"
                                             min="0"
                                             value={
