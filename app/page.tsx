@@ -29,24 +29,94 @@ export default function Home() {
   const [lightbox, setLightbox] = useState<{ src: string; caption: string } | null>(null);
 
   const services: ServiceOption[] = [
+    // ── D — Drywall & Finishing ─────────────────────────────────────────────
     {
-      name: 'Modern Fixture Install',
+      name: 'Drywall & Finishing',
       price: 0,
       subcategories: {
-        'Ceiling Fan': [
+        'Repair': [
+          { name: 'Small Patch (up to 4")', price: 200 },
+          { name: 'Medium Patch (4"–12")', price: 350 },
+          { name: 'Large Patch (12"+)', price: 675 },
+        ],
+        'New Installation': [
+          {
+            name: 'Small (1 sheet or less)',
+            price: 200,
+            addons: {
+              'Skip Trowel Texture': 25,
+              'Knockdown Texture': 25,
+              'Orange Peel Texture': 25,
+            },
+          },
+          {
+            name: 'Medium (2–4 sheets)',
+            price: 350,
+            addons: {
+              'Skip Trowel Texture': 50,
+              'Knockdown Texture': 50,
+              'Orange Peel Texture': 50,
+            },
+          },
+          {
+            name: 'Large (5+ sheets)',
+            price: 675,
+            addons: {
+              'Skip Trowel Texture': 100,
+              'Knockdown Texture': 75,
+              'Orange Peel Texture': 75,
+            },
+          },
+        ],
+        'Texture Matching': [
+          { name: 'Small area', price: 150 },
+          { name: 'Medium area', price: 225 },
+          { name: 'Large area', price: 350 },
+        ],
+        'Corner Bead & Trim Repair': [
+          { name: 'Single corner / run', price: 175 },
+          { name: 'Multiple corners / runs', price: 300 },
+        ],
+        'Full Surface Refresh': [
+          { name: 'One room', price: 400 },
+          { name: 'Two rooms', price: 700 },
+        ],
+      },
+    },
+
+    // ── E — Electrical & Smart Home ────────────────────────────────────────
+    {
+      name: 'Ceiling Fan',
+      price: 0,
+      subcategories: {
+        'Install Type': [
           { name: 'New Installation', price: 400 },
-          { name: 'Replacement', price: 275 },
+          { name: 'Replacement (existing wiring)', price: 275 },
           { name: 'New with Wall Switch Control', price: 550 },
         ],
-        'Recessed LED Lights': [
+      },
+    },
+    {
+      name: 'Recessed LED Lights',
+      price: 0,
+      subcategories: {
+        'Install': [
           {
             name: 'New Installation (1 light)',
             price: 250,
-            addons: { 'Additional Light': 85 },
+            addons: { 'Additional Light (each)': 85 },
           },
+          { name: 'Replacement / Retrofit (1 light)', price: 125 },
         ],
-        'Low Voltage Lighting': [
-          { name: 'New Installation', price: 400 },
+      },
+    },
+    {
+      name: 'Low Voltage Lighting',
+      price: 0,
+      subcategories: {
+        'Install': [
+          { name: 'New Installation (up to 4 fixtures)', price: 400 },
+          { name: 'Expansion / Additional Fixtures', price: 225 },
         ],
       },
     },
@@ -55,89 +125,149 @@ export default function Home() {
       price: 350,
     },
     {
-      name: 'Drywall & Finishing',
+      name: 'Smart Home Upgrades',
       price: 0,
       subcategories: {
-        'Repair': [
-          { name: 'Small Patch', price: 200 },
-          { name: 'Medium Patch', price: 350 },
-          { name: 'Large Patch', price: 675 },
+        'Device Type': [
+          { name: 'Smart Thermostat Install', price: 175 },
+          { name: 'Smart Switch / Dimmer (each)', price: 125 },
+          { name: 'Smart Lock Install', price: 200 },
+          { name: 'Smart Smoke / CO Detector (each)', price: 125 },
         ],
-        'New Installation': [
-          {
-            name: 'Small',
-            price: 200,
-            addons: {
-              'Skip Trowel': 25,
-              'Knockdown': 25,
-              'Orange Peel': 25,
-            },
-          },
-          {
-            name: 'Medium',
-            price: 350,
-            addons: {
-              'Skip Trowel': 50,
-              'Knockdown': 50,
-              'Orange Peel': 50,
-            },
-          },
-          {
-            name: 'Large',
-            price: 675,
-            addons: {
-              'Skip Trowel': 100,
-              'Knockdown': 75,
-              'Orange Peel': 75,
-            },
-          },
+      },
+    },
+    {
+      name: 'GFCI / Safety Upgrades',
+      price: 0,
+      subcategories: {
+        'Scope': [
+          { name: 'Single GFCI Outlet', price: 125 },
+          { name: 'Up to 3 GFCI Outlets', price: 175 },
+          { name: 'Whole-Kitchen or Bath Circuit', price: 275 },
+          { name: 'AFCI Breaker (each)', price: 200 },
+        ],
+      },
+    },
+    {
+      name: 'Device Refresh',
+      price: 0,
+      subcategories: {
+        'Device': [
+          { name: 'Outlet Replacement (each)', price: 65 },
+          { name: 'Switch Replacement (each)', price: 65 },
+          { name: 'Up to 5 Outlets / Switches', price: 125 },
+          { name: 'Full Room (outlets + switches)', price: 225 },
+        ],
+      },
+    },
+
+    // ── P — Plumbing & Fixtures ────────────────────────────────────────────
+    {
+      name: 'Faucet & Fixture Install',
+      price: 0,
+      subcategories: {
+        'Location': [
+          { name: 'Kitchen Faucet Replacement', price: 175 },
+          { name: 'Bathroom Faucet Replacement', price: 150 },
+          { name: 'Shower / Tub Valve Replacement', price: 275 },
+          { name: 'Exterior Hose Bib Replacement', price: 150 },
+        ],
+      },
+    },
+    {
+      name: 'Toilet Repair & Install',
+      price: 0,
+      subcategories: {
+        'Service': [
+          { name: 'Flapper / Fill Valve Repair', price: 100 },
+          { name: 'Complete Toilet Rebuild', price: 187 },
+          { name: 'Toilet Replacement (labor only)', price: 250 },
+          { name: 'Bidet Seat Install', price: 150 },
+        ],
+      },
+    },
+    {
+      name: 'Drain & Leak Care',
+      price: 0,
+      subcategories: {
+        'Issue': [
+          { name: 'Drain Cleaning (single fixture)', price: 125 },
+          { name: 'P-Trap Replacement', price: 100 },
+          { name: 'Minor Supply Line Leak Repair', price: 100 },
+          { name: 'Shut-Off Valve Replacement', price: 150 },
+          { name: 'Drain & Leak Diagnostic', price: 187 },
+        ],
+      },
+    },
+    {
+      name: 'Appliance Hookups',
+      price: 0,
+      subcategories: {
+        'Appliance': [
+          { name: 'Dishwasher Install / Reconnect', price: 175 },
+          { name: 'Garbage Disposal Install', price: 175 },
+          { name: 'Refrigerator Ice Maker Line', price: 125 },
+          { name: 'Washing Machine Hookup', price: 150 },
+          { name: 'Water Heater Reconnect', price: 225 },
         ],
       },
     },
   ];
 
-  const drywall = {
-    'Professional Patching': 200,
-    'Texture Matching': 150,
-    'Corner Bead & Trim Repair': 175,
-    'Full Surface Refresh': 400,
+  const drywall: Record<string, string | number> = {
+    'Patch — Small (up to 4")': 200,
+    'Patch — Medium (4"–12")': 350,
+    'Patch — Large (12"+)': 675,
+    'Texture Matching': '150–350',
+    'Corner Bead & Trim Repair': '175–300',
+    'New Drywall — Small': 200,
+    'New Drywall — Medium': 350,
+    'New Drywall — Large': 675,
+    'Full Surface Refresh (per room)': '400+',
   };
 
-  const electrical = {
-    'Modern Fixture Install': 225,
-    'Smart Home Upgrades': 300,
-    'GFCI / Safety Upgrades': 175,
-    'Device Refresh': 125,
+  const electrical: Record<string, string | number> = {
+    'Ceiling Fan — Replacement': 275,
+    'Ceiling Fan — New Install': 400,
+    'Recessed LED (1 light)': 250,
+    'Additional Recessed Light': 85,
+    'Low Voltage Lighting': '225–400',
+    'Smart Doorbell': 350,
+    'Smart Thermostat': 175,
+    'Smart Switch / Dimmer': 125,
+    'Smart Lock Install': 200,
+    'GFCI Outlet (single)': 125,
+    'AFCI Breaker (each)': 200,
+    'Outlet / Switch Replacement': '65–225',
   };
 
-  const plumbing = {
-    'Kitchen & Bath Updates': 275,
-    'Toilet Repair & Install': 187,
-    'Drain & Leak Care': 187,
-    'Appliance Hookups': 225,
+  const plumbing: Record<string, string | number> = {
+    'Kitchen Faucet Replacement': 175,
+    'Bathroom Faucet Replacement': 150,
+    'Shower / Tub Valve Replacement': 275,
+    'Toilet Repair (flapper/fill valve)': 100,
+    'Complete Toilet Rebuild': 187,
+    'Toilet Replacement (labor)': 250,
+    'Drain Cleaning (single fixture)': 125,
+    'P-Trap Replacement': 100,
+    'Shut-Off Valve Replacement': 150,
+    'Dishwasher / Disposal Install': 175,
+    'Refrigerator Ice Maker Line': 125,
+    'Water Heater Reconnect': 225,
   };
 
   const displayServices = [
     {
       title: 'D — Drywall & Finishing',
-      items: Object.entries(drywall).map(([name, price]) => ({
-        name,
-        price,
-      })),
+      items: Object.entries(drywall).map(([name, price]) => ({ name, price })),
     },
     {
       title: 'E — Electrical & Smart Home',
-      items: Object.entries(electrical).map(([name, price]) => ({
-        name,
-        price,
-      })),
+      items: Object.entries(electrical).map(([name, price]) => ({ name, price })),
     },
     {
       title: 'P — Plumbing & Fixtures',
-      items: Object.entries(plumbing).map(([name, price]) => ({
-        name,
-        price,
-      })),
+      items: Object.entries(plumbing).map(([name, price]) => ({ name, price })),
     },
   ];
 
@@ -315,10 +445,21 @@ export default function Home() {
       (s) =>
         s.service.includes('Electrical') ||
         s.service.includes('Modern Fixture') ||
-        s.service.includes('Smart Doorbell')
+        s.service.includes('Smart Doorbell') ||
+        s.service.includes('Smart Home') ||
+        s.service.includes('GFCI') ||
+        s.service.includes('Device Refresh') ||
+        s.service.includes('Ceiling Fan') ||
+        s.service.includes('Recessed LED') ||
+        s.service.includes('Low Voltage')
     );
-    const hasPlumbing = selectedServices.some((s) =>
-      s.service.includes('Plumbing')
+    const hasPlumbing = selectedServices.some(
+      (s) =>
+        s.service.includes('Plumbing') ||
+        s.service.includes('Faucet') ||
+        s.service.includes('Toilet') ||
+        s.service.includes('Drain') ||
+        s.service.includes('Appliance Hookup')
     );
 
     if (hasDrywall && hasElectrical && hasPlumbing) {
