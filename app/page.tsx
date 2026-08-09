@@ -26,12 +26,14 @@ export default function Home() {
     { service: string; selections: Record<string, string>; price: number }[]
   >([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [selectedMenuItem, setSelectedMenuItem] = useState<string | null>(null);
   const [lightbox, setLightbox] = useState<{ src: string; caption: string } | null>(null);
 
   const services: ServiceOption[] = [
     {
       name: 'Modern Fixture Install',
       price: 0,
+      category: 'Electrical',
       subcategories: {
         'Ceiling Fan': [
           { name: 'New Installation', price: 400 },
@@ -53,10 +55,12 @@ export default function Home() {
     {
       name: 'Smart Doorbell',
       price: 350,
+      category: 'Electrical',
     },
     {
       name: 'Drywall & Finishing',
       price: 0,
+      category: 'Drywall',
       subcategories: {
         'Repair': [
           { name: 'Small Patch', price: 200 },
@@ -93,6 +97,51 @@ export default function Home() {
           },
         ],
       },
+    },
+    {
+      name: 'Plumbing & Fixtures',
+      price: 0,
+      category: 'Plumbing',
+      subcategories: {
+        'Service Type': [
+          { name: 'Kitchen & Bath Updates', price: 275 },
+          { name: 'Toilet Repair & Install', price: 187 },
+          { name: 'Drain & Leak Care', price: 187 },
+          { name: 'Appliance Hookups', price: 225 },
+        ],
+      },
+    },
+  ];
+
+  const generalServices = [
+    {
+      title: 'D | Drywall Repair & Finishing',
+      items: [
+        'Patching for holes, cracks, and water-damaged areas',
+        'Texture matching (orange peel, knockdown, smooth finish)',
+        'Corner bead and drywall trim repair',
+        'Skim coating and full-surface refinishing',
+      ],
+    },
+    {
+      title: 'E | Electrical & Smart Home',
+      items: [
+        'Modern fixture installs: ceiling fans, chandeliers, recessed lighting',
+        'Smart home upgrades: doorbells, thermostats, smart switches',
+        'Safety upgrades: GFCI protection and smoke/CO detector replacement/testing',
+        'Device refresh: replacing outdated switches/outlets with modern white devices',
+        'Lighting and control improvements for kitchens, living spaces, and entries',
+      ],
+    },
+    {
+      title: 'P | Plumbing & Fixtures',
+      items: [
+        'Kitchen and bath fixture updates (faucets, showerheads, trim)',
+        'Toilet repair/rebuild and new toilet installation',
+        'Appliance hookups (dishwasher, disposal, ice maker lines)',
+        'Leak and drain service for common residential issues',
+        'Water flow and fixture reliability upgrades',
+      ],
     },
   ];
 
@@ -266,37 +315,37 @@ export default function Home() {
     }
 
     let totalPrice = 0;
-    const firstKey = Object.keys(service.subcategories)[0];
-    const subcategory = selections[firstKey];
 
-    if (subcategory && service.subcategories[firstKey]) {
-      const option = service.subcategories[firstKey].find(
-        (o) => o.name === subcategory
-      );
-      if (option) {
-        totalPrice = option.price;
+    Object.entries(service.subcategories).forEach(([subcategoryKey, options]) => {
+      const selectedOption = selections[subcategoryKey];
+      if (!selectedOption) return;
 
-        if (option.addons) {
-          Object.entries(option.addons).forEach(([addonKey, addonPrice]) => {
-            if (selections[addonKey]) {
-              totalPrice += addonPrice * parseInt(selections[addonKey] || '0');
-            }
-          });
-        }
+      const option = options.find((o) => o.name === selectedOption);
+      if (!option) return;
+
+      totalPrice += option.price;
+
+      if (option.addons) {
+        Object.entries(option.addons).forEach(([addonKey, addonPrice]) => {
+          if (selections[addonKey]) {
+            totalPrice += addonPrice * parseInt(selections[addonKey] || '0');
+          }
+        });
       }
-    }
+    });
 
     return totalPrice;
   };
 
   const calculateQuote = () => {
-    let base = 95;
+    const serviceFee = 95;
+    let laborTotal = 0;
     let breakdown: string[] = ['Service Call / Diagnostic: $95'];
 
     selectedServices.forEach((s) => {
       const servicePrice = calculateServicePrice(s.service, s.selections);
       if (servicePrice > 0) {
-        base += servicePrice;
+        laborTotal += servicePrice;
         let serviceDesc = s.service;
         const selections = Object.entries(s.selections)
           .map(([_, val]) => `${val}`)
@@ -308,33 +357,33 @@ export default function Home() {
       }
     });
 
-    const hasDrywall = selectedServices.some((s) =>
-      s.service.includes('Drywall')
-    );
-    const hasElectrical = selectedServices.some(
-      (s) =>
-        s.service.includes('Electrical') ||
-        s.service.includes('Modern Fixture') ||
-        s.service.includes('Smart Doorbell')
-    );
-    const hasPlumbing = selectedServices.some((s) =>
-      s.service.includes('Plumbing')
+    const selectedCategories = new Set(
+      selectedServices
+        .map(
+          (selectedService) =>
+            services.find((service) => service.name === selectedService.service)
+              ?.category
+        )
+        .filter(Boolean)
     );
 
-    if (hasDrywall && hasElectrical && hasPlumbing) {
-      base -= 95;
-      breakdown.push('🎉 Triple Play — Service Call waived!');
-    } else if (
-      (hasDrywall && hasElectrical) ||
-      (hasDrywall && hasPlumbing) ||
-      (hasElectrical && hasPlumbing)
-    ) {
-      base = Math.round(base * 0.9);
-      breakdown.push('⚡ Power Pair — 10% OFF applied');
+    const discountEligibleLabor = laborTotal > serviceFee ? laborTotal : 0;
+    let discountAmount = 0;
+
+    if (selectedCategories.size === 3) {
+      discountAmount = Math.round(discountEligibleLabor * 0.15);
+      breakdown.push(
+        `🎉 DEP Triple Play — -$${discountAmount} labor discount applied (service fee excluded)`
+      );
+    } else if (selectedCategories.size === 2) {
+      discountAmount = Math.round(discountEligibleLabor * 0.1);
+      breakdown.push(
+        `⚡ Power Pair — -$${discountAmount} labor discount applied (service fee excluded)`
+      );
     }
 
     setQuote({
-      total: base,
+      total: serviceFee + laborTotal - discountAmount,
       breakdown,
       message: description
         ? `Based on: "${description}"`
@@ -363,6 +412,13 @@ export default function Home() {
     );
 
     window.open(tallyUrl.toString(), '_blank');
+  };
+
+  const getSelectedServicePrice = (serviceName: string) => {
+    const selectedService = selectedServices.find((s) => s.service === serviceName);
+    if (!selectedService) return 0;
+
+    return calculateServicePrice(serviceName, selectedService.selections);
   };
 
   return (
@@ -529,18 +585,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services */}
+      {/* General Services */}
       <section id="services" className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">
-            DEP Service Menu
+            General Services
           </h2>
           <p className="text-center text-[#424242] mb-10 sm:mb-12">
             Professional • Reliable • Chandler & East Valley
           </p>
 
           <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
-            {displayServices.map((category) => (
+            {generalServices.map((category) => (
               <div
                 key={category.title}
                 className="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-100"
@@ -550,11 +606,9 @@ export default function Home() {
                 </div>
                 <ul className="space-y-3 text-[#424242]">
                   {category.items.map((item) => (
-                    <li key={item.name} className="flex justify-between gap-2">
-                      <span>✓ {item.name}</span>
-                      <span className="text-sm text-gray-500 whitespace-nowrap">
-                        from ${item.price}
-                      </span>
+                    <li key={item} className="flex gap-2">
+                      <span className="text-[#005683] font-bold flex-shrink-0">✓</span>
+                      <span>{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -562,36 +616,95 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Bundles */}
+          {/* Bundle Incentives */}
           <div className="mt-12 sm:mt-16 bg-gradient-to-r from-[#005683] to-[#FFAB00] text-white p-8 sm:p-10 rounded-3xl text-center">
             <h3 className="text-2xl sm:text-3xl font-bold mb-5">
               DEP Bundle Incentives
             </h3>
-            <div className="max-w-md mx-auto space-y-3 text-left text-sm sm:text-base">
+            <div className="max-w-lg mx-auto space-y-3 text-left text-sm sm:text-base">
               <div>
-                🎉 <strong>Triple Play</strong> — Book all three categories →
-                Service Call Waived!
+                🎉 <strong>DEP Triple Play</strong> — Book Drywall + Electrical
+                + Plumbing in the same visit and receive 15% off labor only.
+                The $95 service call / diagnostic fee is excluded.
               </div>
               <div>
-                ⚡ <strong>Power Pair</strong> — Any two services → 10% OFF total
+                ⚡ <strong>Power Pair</strong> — Book any two service categories
+                together and receive 10% off labor only. The $95 service call /
+                diagnostic fee is excluded.
               </div>
               <div>
-                🔥 <strong>While We&apos;re There</strong> — One small 5-minute
-                task FREE with any booked service
+                🔥 <strong>While We&apos;re There Special</strong> — One small
+                add-on task included at no labor charge with any booked service
+                (examples: tighten cabinet handle, minor caulk touch-up)
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Service Menu / Pricing */}
+      <section className="py-16 sm:py-20 bg-[#F8FAFC]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">
+            Service Menu / Pricing
+          </h2>
+          <p className="text-center text-[#424242] mb-10 sm:mb-12">
+            Select a menu item to reveal pricing • Final quote based on scope
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
+            {displayServices.map((category) => (
+              <div
+                key={category.title}
+                className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 shadow-sm"
+              >
+                <div className="text-xl sm:text-2xl font-bold text-[#005683] mb-5">
+                  {category.title}
+                </div>
+                <ul className="space-y-3 text-[#424242]">
+                  {category.items.map((item) => {
+                    const isSelected = selectedMenuItem === item.name;
+
+                    return (
+                      <li key={item.name}>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setSelectedMenuItem(isSelected ? null : item.name)
+                          }
+                          aria-pressed={isSelected}
+                          className="w-full text-left rounded-lg transition hover:text-[#005683]"
+                        >
+                          <span className="flex items-start gap-2">
+                            <span className="text-[#005683] font-bold">✓</span>
+                            <span>{item.name}</span>
+                          </span>
+                        </button>
+                        {isSelected && (
+                          <div className="mt-2 ml-6 text-sm text-[#005683] font-semibold">
+                            Starting labor from ${item.price} • $95 service call
+                            / diagnostic fee separate
+                          </div>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Instant Quote */}
-      <section id="quote" className="py-16 sm:py-20 bg-[#F8FAFC]">
+      <section id="quote" className="py-16 sm:py-20 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">
             Instant Quote in Seconds
           </h2>
           <p className="text-center text-[#424242] mb-8 sm:mb-12">
-            Tell us what you need — get a fair price instantly
+            Tell us what you need — or select from the DEP service menu to
+            reveal pricing instantly
           </p>
 
           <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-10 md:p-12 border border-gray-100">
@@ -604,7 +717,7 @@ export default function Home() {
 
             <div className="mt-6 sm:mt-8">
               <p className="font-medium mb-4 text-[#1A1A1A]">
-                Or pick services:
+                Select services to view labor pricing:
               </p>
               <div className="space-y-4 sm:space-y-6">
                 {services.map((service) => (
@@ -625,6 +738,17 @@ export default function Home() {
                         {service.name}
                       </span>
                     </label>
+
+                    {selectedServices.some((s) => s.service === service.name) && (
+                      <p className="mt-3 ml-8 text-sm text-[#005683] font-medium">
+                        {service.subcategories &&
+                        getSelectedServicePrice(service.name) === 0
+                          ? 'Select an option below to reveal labor pricing.'
+                          : `Current labor total: $${getSelectedServicePrice(
+                              service.name
+                            )}`}
+                      </p>
+                    )}
 
                     {service.subcategories &&
                       selectedServices.some(
@@ -905,9 +1029,13 @@ export default function Home() {
                 className="h-16 w-auto mx-auto md:mx-0 mb-4"
               />
               <p className="text-sm opacity-80">
-                Drywall • Electrical • Plumbing
+                DEP Home Repair – Home-Smart Solutions
                 <br />
-                Home-Smart Solutions for the East Valley
+                Drywall • Electrical • Plumbing
+              </p>
+              <p className="text-xs opacity-60 mt-3">
+                All portfolio photos/videos shown are from completed past
+                projects.
               </p>
             </div>
 
