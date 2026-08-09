@@ -26,7 +26,6 @@ export default function Home() {
     { service: string; selections: Record<string, string>; price: number }[]
   >([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [selectedMenuItem, setSelectedMenuItem] = useState<string | null>(null);
   const [lightbox, setLightbox] = useState<{ src: string; caption: string } | null>(null);
 
   const services: ServiceOption[] = [
@@ -161,54 +160,6 @@ export default function Home() {
         'Leak and drain service for common residential issues',
         'Water flow and fixture reliability upgrades',
       ],
-    },
-  ];
-
-  const drywall = {
-    'Professional Patching': 200,
-    'Texture Matching': 150,
-    'Corner Bead & Trim Repair': 175,
-    'Full Surface Refresh': 400,
-  };
-
-  const electrical = {
-    'Modern Fixture Install': 225,
-    'Smart Home Upgrades': 300,
-    'GFCI / Safety Upgrades': 175,
-    'Device Refresh': 125,
-  };
-
-  const plumbing = {
-    'Kitchen & Bath Updates': 275,
-    'Toilet Repair & Install': 187,
-    'Drain & Leak Care': 187,
-    'Appliance Hookups': 225,
-  };
-
-  const displayServices = [
-    {
-      id: 'drywall',
-      title: `${serviceCategoryTitles.drywall.badge} — ${serviceCategoryTitles.drywall.menu}`,
-      items: Object.entries(drywall).map(([name, price]) => ({
-        name,
-        price,
-      })),
-    },
-    {
-      id: 'electrical',
-      title: `${serviceCategoryTitles.electrical.badge} — ${serviceCategoryTitles.electrical.menu}`,
-      items: Object.entries(electrical).map(([name, price]) => ({
-        name,
-        price,
-      })),
-    },
-    {
-      id: 'plumbing',
-      title: `${serviceCategoryTitles.plumbing.badge} — ${serviceCategoryTitles.plumbing.menu}`,
-      items: Object.entries(plumbing).map(([name, price]) => ({
-        name,
-        price,
-      })),
     },
   ];
 
@@ -661,53 +612,131 @@ export default function Home() {
             Service Menu / Pricing
           </h2>
           <p className="text-center text-[#424242] mb-10 sm:mb-12">
-            Select a menu item to reveal pricing • Final quote based on scope
+            Select a category to reveal matching options, unit counts, and
+            pricing
           </p>
 
-          <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
-            {displayServices.map((category) => (
-              <div
-                key={category.title}
-                className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 shadow-sm"
-              >
-                <div className="text-xl sm:text-2xl font-bold text-[#005683] mb-5">
-                  {category.title}
-                </div>
-                <ul className="space-y-3 text-[#424242]">
-                  {category.items.map((item) => {
-                    const selectionKey = `${category.id}::${item.name}`;
-                    const isSelected = selectedMenuItem === selectionKey;
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+            {services.map((service) => {
+              const isSelected = selectedServices.some(
+                (s) => s.service === service.name
+              );
+              const currentServicePrice = calculateServicePrice(
+                service.name,
+                selectedServices.find((s) => s.service === service.name)
+                  ?.selections || {}
+              );
 
-                    return (
-                      <li key={item.name}>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setSelectedMenuItem(
-                              isSelected ? null : selectionKey
-                            )
-                          }
-                          aria-pressed={isSelected}
-                          className="w-full text-left rounded-lg transition hover:text-[#005683]"
-                        >
-                          <span className="flex items-start gap-2">
-                            <span className="text-[#005683] font-bold">✓</span>
-                            <span>{item.name}</span>
-                          </span>
-                        </button>
-                        {isSelected && (
-                          <div className="mt-2 ml-6 text-sm text-[#005683] font-semibold">
-                            {item.price > 0
-                              ? `Starting labor from $${item.price} • $95 service call / diagnostic fee separate`
-                              : 'Contact for pricing'}
+              return (
+                <div
+                  key={service.name}
+                  className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 sm:p-8"
+                >
+                  <label className="flex items-center gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={isSelected}
+                      onChange={() => handleServiceSelect(service.name)}
+                      className="w-5 h-5 accent-[#FFAB00]"
+                    />
+                    <span className="text-xl sm:text-2xl font-bold text-[#005683]">
+                      {service.name}
+                    </span>
+                  </label>
+
+                  {isSelected && (
+                    <p className="mt-3 ml-8 text-sm text-[#005683] font-medium">
+                      {service.subcategories && currentServicePrice === 0
+                        ? 'Choose from the dropdown below to reveal pricing.'
+                        : `Current labor total: $${currentServicePrice}`}
+                    </p>
+                  )}
+
+                  {service.subcategories && isSelected && (
+                    <div className="mt-4 ml-4 sm:ml-8 space-y-4">
+                      {Object.entries(service.subcategories).map(
+                        ([subcatKey, subcatOptions]) => (
+                          <div key={subcatKey}>
+                            <label className="block text-sm font-medium text-[#424242] mb-2">
+                              {subcatKey}
+                            </label>
+                            <select
+                              value={
+                                selectedServices.find(
+                                  (s) => s.service === service.name
+                                )?.selections[subcatKey] || ''
+                              }
+                              onChange={(e) =>
+                                handleSubcategorySelect(
+                                  service.name,
+                                  subcatKey,
+                                  e.target.value
+                                )
+                              }
+                              className="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFAB00]"
+                            >
+                              <option value="">Select {subcatKey}</option>
+                              {subcatOptions.map((option) => (
+                                <option key={option.name} value={option.name}>
+                                  {option.name} - ${option.price}
+                                </option>
+                              ))}
+                            </select>
+
+                            {selectedServices
+                              .find((s) => s.service === service.name)
+                              ?.selections[subcatKey] &&
+                              subcatOptions.find(
+                                (o) =>
+                                  o.name ===
+                                  selectedServices.find(
+                                    (s) => s.service === service.name
+                                  )?.selections[subcatKey]
+                              )?.addons && (
+                                <div className="mt-3 space-y-2">
+                                  {Object.entries(
+                                    subcatOptions.find(
+                                      (o) =>
+                                        o.name ===
+                                        selectedServices.find(
+                                          (s) => s.service === service.name
+                                        )?.selections[subcatKey]
+                                    )?.addons || {}
+                                  ).map(([addonKey, addonPrice]) => (
+                                    <div key={addonKey}>
+                                      <label className="text-xs text-[#424242]">
+                                        {addonKey} (${addonPrice} each)
+                                      </label>
+                                      <input
+                                        type="number"
+                                        min="0"
+                                        value={
+                                          selectedServices.find(
+                                            (s) => s.service === service.name
+                                          )?.selections[addonKey] || ''
+                                        }
+                                        onChange={(e) =>
+                                          handleAddonSelect(
+                                            service.name,
+                                            addonKey,
+                                            e.target.value
+                                          )
+                                        }
+                                        className="w-full border border-gray-300 rounded-lg p-2 text-sm"
+                                        placeholder="0"
+                                      />
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
                           </div>
-                        )}
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            ))}
+                        )
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -732,138 +761,54 @@ export default function Home() {
 
             <div className="mt-6 sm:mt-8">
               <p className="font-medium mb-4 text-[#1A1A1A]">
-                Select services to view labor pricing:
+                Selected service menu items:
               </p>
-              <div className="space-y-4 sm:space-y-6">
-                {services.map((service) => {
-                  const isSelected = selectedServices.some(
-                    (s) => s.service === service.name
-                  );
-                  const currentServicePrice = calculateServicePrice(
-                    service.name,
-                    selectedServices.find((s) => s.service === service.name)
-                      ?.selections || {}
-                  );
+              {selectedServices.length > 0 ? (
+                <div className="space-y-3">
+                  {selectedServices.map((selectedService) => {
+                    const currentServicePrice = calculateServicePrice(
+                      selectedService.service,
+                      selectedService.selections
+                    );
+                    const selectedOptions = Object.values(
+                      selectedService.selections
+                    ).filter(Boolean);
+                    const needsMoreSelections =
+                      servicesByName.get(selectedService.service)?.subcategories &&
+                      currentServicePrice === 0;
 
-                  return (
-                    <div
-                      key={service.name}
-                      className="border border-gray-200 rounded-xl p-4 hover:border-[#FFAB00]/40 transition"
-                    >
-                      <label className="flex items-center gap-3 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={isSelected}
-                          onChange={() => handleServiceSelect(service.name)}
-                          className="w-5 h-5 accent-[#FFAB00]"
-                        />
-                        <span className="font-semibold text-[#1A1A1A]">
-                          {service.name}
-                        </span>
-                      </label>
-
-                      {isSelected && (
-                        <p className="mt-3 ml-8 text-sm text-[#005683] font-medium">
-                          {service.subcategories && currentServicePrice === 0
-                            ? 'Select an option below to reveal labor pricing.'
-                            : `Current labor total: $${currentServicePrice}`}
-                        </p>
-                      )}
-
-                      {service.subcategories &&
-                        selectedServices.some(
-                          (s) => s.service === service.name
-                        ) && (
-                        <div className="mt-4 ml-4 sm:ml-8 space-y-4">
-                          {Object.entries(service.subcategories).map(
-                            ([subcatKey, subcatOptions]) => (
-                              <div key={subcatKey}>
-                                <label className="block text-sm font-medium text-[#424242] mb-2">
-                                  {subcatKey}
-                                </label>
-                                <select
-                                  value={
-                                    selectedServices.find(
-                                      (s) => s.service === service.name
-                                    )?.selections[subcatKey] || ''
-                                  }
-                                  onChange={(e) =>
-                                    handleSubcategorySelect(
-                                      service.name,
-                                      subcatKey,
-                                      e.target.value
-                                    )
-                                  }
-                                  className="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFAB00]"
-                                >
-                                  <option value="">Select {subcatKey}</option>
-                                  {subcatOptions.map((option) => (
-                                    <option
-                                      key={option.name}
-                                      value={option.name}
-                                    >
-                                      {option.name} - ${option.price}
-                                    </option>
-                                  ))}
-                                </select>
-
-                                {selectedServices
-                                  .find((s) => s.service === service.name)
-                                  ?.selections[subcatKey] &&
-                                  subcatOptions.find(
-                                    (o) =>
-                                      o.name ===
-                                      selectedServices.find(
-                                        (s) => s.service === service.name
-                                      )?.selections[subcatKey]
-                                  )?.addons && (
-                                    <div className="mt-3 space-y-2">
-                                      {Object.entries(
-                                        subcatOptions.find(
-                                          (o) =>
-                                            o.name ===
-                                            selectedServices.find(
-                                              (s) =>
-                                                s.service === service.name
-                                            )?.selections[subcatKey]
-                                        )?.addons || {}
-                                      ).map(([addonKey, addonPrice]) => (
-                                        <div key={addonKey}>
-                                          <label className="text-xs text-[#424242]">
-                                            {addonKey} (${addonPrice} each)
-                                          </label>
-                                          <input
-                                            type="number"
-                                            min="0"
-                                            value={
-                                              selectedServices.find(
-                                                (s) =>
-                                                  s.service === service.name
-                                              )?.selections[addonKey] || ''
-                                            }
-                                            onChange={(e) =>
-                                              handleAddonSelect(
-                                                service.name,
-                                                addonKey,
-                                                e.target.value
-                                              )
-                                            }
-                                            className="w-full border border-gray-300 rounded-lg p-2 text-sm"
-                                            placeholder="0"
-                                          />
-                                        </div>
-                                      ))}
-                                    </div>
-                                  )}
+                    return (
+                      <div
+                        key={selectedService.service}
+                        className="border border-gray-200 rounded-xl p-4"
+                      >
+                        <div className="flex items-center justify-between gap-4">
+                          <div>
+                            <div className="font-semibold text-[#1A1A1A]">
+                              {selectedService.service}
+                            </div>
+                            {selectedOptions.length > 0 && (
+                              <div className="text-xs text-gray-500 mt-1">
+                                {selectedOptions.join(' • ')}
                               </div>
-                            )
-                          )}
+                            )}
+                          </div>
+                          <div className="text-sm font-medium text-[#005683] whitespace-nowrap">
+                            {needsMoreSelections
+                              ? 'Finish selections above'
+                              : `$${currentServicePrice}`}
+                          </div>
                         </div>
-                        )}
-                    </div>
-                  );
-                })}
-              </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="rounded-2xl border border-dashed border-gray-300 p-4 text-sm text-[#424242]">
+                  Choose services in the Service Menu / Pricing section above to
+                  include them in your quote.
+                </div>
+              )}
             </div>
 
             <button
