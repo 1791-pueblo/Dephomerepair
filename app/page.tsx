@@ -493,16 +493,18 @@ export default function Home() {
       <section className="bg-gradient-to-br from-[#005683] via-[#004a70] to-[#1A1A1A] text-white py-16 sm:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <div className="mb-6 sm:mb-8 flex justify-center">
-            <img
-              src="/logo.png"
-              alt="DEP Home Repair"
-              className="h-20 sm:h-28 w-auto drop-shadow-lg"
-            />
+            <div className="bg-white/95 rounded-2xl px-5 py-3 sm:px-6 sm:py-4 shadow-lg">
+              <img
+                src="/logo.png"
+                alt="DEP Home Repair"
+                className="h-20 sm:h-28 w-auto"
+              />
+            </div>
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-5 leading-tight">
-            Your Home.
+            Seamless, Smart
             <br />
-            Fixed Right. Fast.
+            Repairs &amp; Upgrades
           </h1>
           <p className="text-lg sm:text-xl mb-8 sm:mb-10 opacity-95 max-w-2xl mx-auto">
             Solo Chandler expert in drywall, electrical & plumbing.
