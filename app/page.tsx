@@ -326,7 +326,7 @@ export default function Home() {
           <p className="text-center text-[#424242] mb-10 sm:mb-12">
             Prices unlock in Instant Quote after you select • Texture included on drywall repairs
           </p>
-          <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
             {menuCategories.map((cat) => (
               <button
                 key={cat.key}
@@ -335,7 +335,7 @@ export default function Home() {
                   setActiveCategory(cat.key);
                   document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="text-left bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-100 hover:border-[#005683]/40 hover:shadow-md transition"
+                className="text-left bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-100 hover:border-[#005683]/40 hover:shadow-md transition h-full w-full flex flex-col"
               >
                 <div className="text-xl sm:text-2xl font-bold text-[#005683] mb-5">{cat.label}</div>
                 <ul className="space-y-4 text-[#424242] text-sm">
@@ -356,7 +356,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-5 text-sm font-semibold text-[#005683]">Get pricing →</div>
+                <div className="mt-auto pt-5 text-sm font-semibold text-[#005683]">Get pricing →</div>
               </button>
             ))}
           </div>
@@ -502,7 +502,6 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Live estimate bar */}
             <div className="mt-6 p-4 rounded-2xl bg-slate-50 border border-slate-100 flex flex-wrap items-center justify-between gap-3">
               <div>
                 <div className="text-xs text-gray-500 uppercase tracking-wide">Live estimate</div>
@@ -614,9 +613,9 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">What Clients Say</h2>
           <p className="text-center text-[#424242] mb-10 sm:mb-12">Real feedback from Chandler & East Valley homeowners</p>
-          <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {testimonials.map((t, i) => (
-              <div key={i} className="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-100">
+              <div key={i} className="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-100 h-full">
                 <div className="flex gap-1 mb-4 text-[#FFAB00]">
                   {Array.from({ length: t.rating }).map((_, j) => (
                     <span key={j}>★</span>
@@ -633,7 +632,7 @@ export default function Home() {
 
       <footer id="contact" className="bg-[#1A1A1A] text-white py-12 sm:py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="grid md:grid-cols-3 gap-10 text-center md:text-left">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
             <div>
               <img src="/logo.png" alt="DEP Home Repair" className="h-16 w-auto mx-auto md:mx-0 mb-4" />
               <p className="text-sm opacity-80">
