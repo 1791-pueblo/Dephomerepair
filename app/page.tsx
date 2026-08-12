@@ -236,7 +236,7 @@ export default function Home() {
           caption: 'Greenboard drywall installed, tub set in place',
         },
         {
-          src: 'https://drive.google.com/uc?export=view&id=1eEVyAfyDIjSAfLsaTnTr506g5uaBan_g',
+          src: 'https://drive.google.com/uc?export=view&id=17MQ0qO7yn2SdALjyowmqQU0JjIg6PCqX',
           caption: 'Completed — double vanity, quartz countertops & travertine tile',
         },
       ],
