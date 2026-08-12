@@ -21,6 +21,8 @@ export interface FlatPrice {
   category: 'drywall' | 'electrical' | 'plumbing' | 'other';
   subcategory: string;
   notes?: string;
+  /** Typical device cost to DEP (before markup). When set, UI can offer supply option. */
+  deviceCost?: number;
 }
 
 export interface VolumePrice {
@@ -32,6 +34,7 @@ export interface VolumePrice {
   category: 'drywall' | 'electrical' | 'plumbing' | 'other';
   subcategory: string;
   notes?: string;
+  deviceCost?: number;
 }
 
 export interface RangePrice {
@@ -45,9 +48,14 @@ export interface RangePrice {
   category: 'drywall' | 'electrical' | 'plumbing' | 'other';
   subcategory: string;
   notes?: string;
+  deviceCost?: number;
 }
 
 export type ServicePrice = FlatPrice | VolumePrice | RangePrice;
+
+export function deviceSellPrice(deviceCost: number): number {
+  return Math.round(deviceCost * (1 + DEVICE_MARKUP));
+}
 
 export const electrical: ServicePrice[] = [
   // Troubleshooting
@@ -64,8 +72,8 @@ export const electrical: ServicePrice[] = [
   { id: 'e-switch', name: 'Standard switch', kind: 'volume', first: 150, additional: 70, category: 'electrical', subcategory: 'Outlets & Switches' },
   { id: 'e-gfci', name: 'GFCI outlet', kind: 'volume', first: 150, additional: 80, category: 'electrical', subcategory: 'Outlets & Switches' },
   { id: 'e-dimmer', name: 'Dimmer switch', kind: 'volume', first: 175, additional: 90, category: 'electrical', subcategory: 'Outlets & Switches' },
-  { id: 'e-usb-outlet', name: 'USB / USB-C outlet', kind: 'volume', first: 150, additional: 80, category: 'electrical', subcategory: 'Outlets & Switches' },
-  { id: 'e-smoke-co', name: 'Smoke / CO detector', kind: 'flat', price: 150, category: 'electrical', subcategory: 'Outlets & Switches' },
+  { id: 'e-usb-outlet', name: 'USB / USB-C outlet', kind: 'volume', first: 150, additional: 80, category: 'electrical', subcategory: 'Outlets & Switches', deviceCost: 25 },
+  { id: 'e-smoke-co', name: 'Smoke / CO detector', kind: 'flat', price: 150, category: 'electrical', subcategory: 'Outlets & Switches', deviceCost: 40 },
 
   // Fixtures & lighting
   { id: 'e-fan', name: 'Ceiling fan (existing fan-rated box)', kind: 'flat', price: 200, category: 'electrical', subcategory: 'Fixtures & Lighting' },
@@ -77,13 +85,13 @@ export const electrical: ServicePrice[] = [
   { id: 'e-undercabinet', name: 'Under-cabinet lighting', kind: 'flat', price: 225, category: 'electrical', subcategory: 'Fixtures & Lighting', notes: 'Base; scale by run length' },
 
   // Smart home
-  { id: 'e-thermostat', name: 'Smart thermostat (existing C-wire)', kind: 'flat', price: 175, category: 'electrical', subcategory: 'Smart Home' },
-  { id: 'e-thermostat-c', name: 'Smart thermostat + C-wire / PEK', kind: 'flat', price: 225, category: 'electrical', subcategory: 'Smart Home' },
-  { id: 'e-doorbell', name: 'Video doorbell (existing wiring)', kind: 'flat', price: 150, category: 'electrical', subcategory: 'Smart Home' },
-  { id: 'e-doorbell-new', name: 'Video doorbell (new wire / transformer)', kind: 'flat', price: 275, category: 'electrical', subcategory: 'Smart Home' },
-  { id: 'e-smart-switch', name: 'Smart switch', kind: 'volume', first: 175, additional: 90, category: 'electrical', subcategory: 'Smart Home' },
-  { id: 'e-smart-dimmer', name: 'Smart dimmer', kind: 'volume', first: 185, additional: 95, category: 'electrical', subcategory: 'Smart Home' },
-  { id: 'e-smart-plug', name: 'Smart plug / module setup', kind: 'volume', first: 75, additional: 40, category: 'electrical', subcategory: 'Smart Home' },
+  { id: 'e-thermostat', name: 'Smart thermostat (existing C-wire)', kind: 'flat', price: 175, category: 'electrical', subcategory: 'Smart Home', deviceCost: 230 },
+  { id: 'e-thermostat-c', name: 'Smart thermostat + C-wire / PEK', kind: 'flat', price: 225, category: 'electrical', subcategory: 'Smart Home', deviceCost: 230 },
+  { id: 'e-doorbell', name: 'Video doorbell (existing wiring)', kind: 'flat', price: 150, category: 'electrical', subcategory: 'Smart Home', deviceCost: 100 },
+  { id: 'e-doorbell-new', name: 'Video doorbell (new wire / transformer)', kind: 'flat', price: 275, category: 'electrical', subcategory: 'Smart Home', deviceCost: 100 },
+  { id: 'e-smart-switch', name: 'Smart switch', kind: 'volume', first: 175, additional: 90, category: 'electrical', subcategory: 'Smart Home', deviceCost: 35 },
+  { id: 'e-smart-dimmer', name: 'Smart dimmer', kind: 'volume', first: 185, additional: 95, category: 'electrical', subcategory: 'Smart Home', deviceCost: 40 },
+  { id: 'e-smart-plug', name: 'Smart plug / module setup', kind: 'volume', first: 75, additional: 40, category: 'electrical', subcategory: 'Smart Home', deviceCost: 20 },
 
   // TV
   { id: 'e-tv-std', name: 'TV mount (standard, up to ~65–70")', kind: 'flat', price: 175, category: 'electrical', subcategory: 'TV Mounting' },
@@ -109,7 +117,6 @@ export const plumbing: ServicePrice[] = [
 ];
 
 export const drywall: ServicePrice[] = [
-  // Texture included on all repairs
   { id: 'd-nail-pop', name: 'Nail / screw pop', kind: 'flat', price: 175, category: 'drywall', subcategory: 'Repairs', notes: 'Texture included' },
   { id: 'd-small-hole', name: 'Small hole / hand-size / anchor', kind: 'flat', price: 200, category: 'drywall', subcategory: 'Repairs', notes: 'Texture included' },
   { id: 'd-dent', name: 'Dent / minor impact', kind: 'flat', price: 200, category: 'drywall', subcategory: 'Repairs', notes: 'Texture included' },
@@ -135,13 +142,9 @@ export function volumeTotal(first: number, additional: number, qty: number): num
 export function lineTotal(service: ServicePrice, qty = 1): number {
   if (service.kind === 'flat') return service.price * Math.max(1, qty);
   if (service.kind === 'volume') return volumeTotal(service.first, service.additional, qty);
-  return service.estimate; // range → midpoint estimate
+  return service.estimate;
 }
 
-/**
- * Service call is charged only when no billable repair/install is selected.
- * Diagnosis-only visits still pay SERVICE_CALL.
- */
 export function serviceCallAmount(hasBookedWork: boolean): number {
   return hasBookedWork ? 0 : SERVICE_CALL;
 }
