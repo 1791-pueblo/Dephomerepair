@@ -3,7 +3,7 @@
  * Locked Aug 2026. Single source of truth for Instant Quote + service menu.
  * Texture is included in drywall repair prices.
  * Service call waived when any repair/install is booked same visit.
- * Bundles apply to labor only.
+ * Bundles: discount applies only to labor above the first $200.
  */
 
 export const SERVICE_CALL = 95;
@@ -154,13 +154,24 @@ export function applyBundleDiscount(
   categoriesPresent: Set<'drywall' | 'electrical' | 'plumbing'>
 ): { total: number; label: string | null; discount: number } {
   const n = categoriesPresent.size;
+  const threshold = 200;
   if (n >= 3) {
-    const discount = Math.round(laborSubtotal * 0.15);
-    return { total: laborSubtotal - discount, label: 'Triple Play — 15% off labor', discount };
+    const excess = Math.max(0, laborSubtotal - threshold);
+    const discount = Math.round(excess * 0.15);
+    return {
+      total: laborSubtotal - discount,
+      label: 'Triple Play — 15% off labor over $200',
+      discount,
+    };
   }
   if (n === 2) {
-    const discount = Math.round(laborSubtotal * 0.1);
-    return { total: laborSubtotal - discount, label: 'Power Pair — 10% off labor', discount };
+    const excess = Math.max(0, laborSubtotal - threshold);
+    const discount = Math.round(excess * 0.1);
+    return {
+      total: laborSubtotal - discount,
+      label: 'Power Pair — 10% off labor over $200',
+      discount,
+    };
   }
   return { total: laborSubtotal, label: null, discount: 0 };
 }
