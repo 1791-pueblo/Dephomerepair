@@ -16,6 +16,11 @@ import {
 } from '../lib/pricing';
 
 type CartItem = { id: string; qty: number; supplyDevice: boolean };
+type QuickIntake = { service: string; city: string; urgency: string };
+type BookingLead = { name: string; phone: string; email: string };
+
+const QUICK_SERVICE_OPTIONS = ['Drywall', 'Electrical', 'Plumbing', 'Multiple Services', 'Not sure yet'];
+const QUICK_URGENCY_OPTIONS = ['Today', 'This week', '1–2 weeks', 'Flexible'];
 
 const CATEGORY_META = [
   { 
@@ -72,13 +77,39 @@ function itemDevice(svc: ServicePrice, qty: number, supply: boolean) {
   return deviceSellPrice(svc.deviceCost) * Math.max(1, qty);
 }
 
+function startingAtPrice(svc: ServicePrice): number {
+  if (svc.kind === 'flat') return svc.price;
+  if (svc.kind === 'volume') return svc.first;
+  return svc.low;
+}
+
+function trackEvent(name: string, data: Record<string, string | number | boolean> = {}) {
+  if (typeof window === 'undefined') return;
+  const existing = (window as Window & { dataLayer?: Array<Record<string, unknown>> }).dataLayer ?? [];
+  existing.push({ event: name, ...data });
+  (window as Window & { dataLayer?: Array<Record<string, unknown>> }).dataLayer = existing;
+}
+
 export default function Home() {
   const [description, setDescription] = useState('');
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [quoteStarted, setQuoteStarted] = useState(false);
+  const [quickIntake, setQuickIntake] = useState<QuickIntake>({
+    service: '',
+    city: '',
+    urgency: '',
+  });
+  const [bookingLead, setBookingLead] = useState<BookingLead>({
+    name: '',
+    phone: '',
+    email: '',
+  });
   const [activeCategory, setActiveCategory] = useState<
     'drywall' | 'electrical' | 'plumbing'
   >('electrical');
   const [showQuote, setShowQuote] = useState(false);
+  const [bookingModalOpen, setBookingModalOpen] = useState(false);
+  const [bookingEmbedUrl, setBookingEmbedUrl] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [lightbox, setLightbox] = useState<{ src: string; caption: string } | null>(
     null
@@ -191,7 +222,41 @@ export default function Home() {
     setShowQuote(false);
   };
 
-  const handleTallySubmit = () => {
+  const servicesSummary = useMemo(
+    () =>
+      cart
+        .map(({ id, qty, supplyDevice }) => {
+          const svc = allServices.find((s) => s.id === id);
+          if (!svc) return '';
+          const labor = itemLabor(svc, qty);
+          const device = itemDevice(svc, qty, supplyDevice);
+          return `${svc.name}${qty > 1 ? ` ×${qty}` : ''}: $${labor}${device ? ` + device $${device}` : ''}`;
+        })
+        .filter(Boolean)
+        .join(', '),
+    [cart]
+  );
+
+  const handleQuoteStart = () => {
+    setQuoteStarted(true);
+    trackEvent('quote_started', {
+      service: quickIntake.service || 'unspecified',
+      city: quickIntake.city || 'unspecified',
+      urgency: quickIntake.urgency || 'unspecified',
+    });
+    setTimeout(() => {
+      document.getElementById('quote-builder')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
+  };
+
+  const handleOpenBooking = () => {
+    setBookingEmbedUrl('');
+    setBookingModalOpen(true);
+    trackEvent('booking_modal_opened', { has_selected_work: cart.length > 0 });
+  };
+
+  const handleBookingEmbed = (e: React.FormEvent) => {
+    e.preventDefault();
     const servicesStr = cart
       .map(({ id, qty, supplyDevice }) => {
         const svc = allServices.find((s) => s.id === id);
@@ -207,13 +272,30 @@ export default function Home() {
     tallyUrl.searchParams.append('services', servicesStr);
     tallyUrl.searchParams.append('description', description);
     tallyUrl.searchParams.append('estimatedPrice', String(liveQuote.total));
-    window.open(tallyUrl.toString(), '_blank');
+    tallyUrl.searchParams.append('quickService', quickIntake.service);
+    tallyUrl.searchParams.append('quickCity', quickIntake.city);
+    tallyUrl.searchParams.append('quickUrgency', quickIntake.urgency);
+    tallyUrl.searchParams.append('name', bookingLead.name);
+    tallyUrl.searchParams.append('phone', bookingLead.phone);
+    tallyUrl.searchParams.append('email', bookingLead.email);
+    setBookingEmbedUrl(tallyUrl.toString());
+    trackEvent('booking_form_embed_loaded', {
+      has_selected_work: cart.length > 0,
+      selected_services_count: cart.length,
+      estimated_total: liveQuote.total,
+    });
   };
 
   const menuCategories = CATEGORY_META.map((cat) => ({
     ...cat,
     groups: groupBySubcategory(servicesForCategory(cat.key)),
   }));
+
+  const startingAnchors = [
+    allServices.find((s) => s.id === 'd-small-hole'),
+    allServices.find((s) => s.id === 'e-outlet'),
+    allServices.find((s) => s.id === 'p-shower-head'),
+  ].filter(Boolean) as ServicePrice[];
 
   const activeList = servicesForCategory(activeCategory);
   const activeGroups = groupBySubcategory(activeList);
@@ -380,8 +462,7 @@ export default function Home() {
             <a href="#testimonials" className="hover:text-[#005683] transition">Reviews</a>
             <a href="#portfolio" className="hover:text-[#005683] transition">Portfolio</a>
             <a href="#contact" className="hover:text-[#005683] transition">Contact</a>
-            <a href="/lead-qualifier" className="hover:text-[#005683] transition">Lead Qualifier</a>
-            <a href="#quote" className="bg-[#FFAB00] hover:bg-amber-500 text-black px-5 py-2.5 rounded-full font-semibold text-sm transition shadow-sm">
+            <a href="#quote" onClick={() => trackEvent('hero_nav_quote_clicked')} className="bg-[#FFAB00] hover:bg-amber-500 text-black px-5 py-2.5 rounded-full font-semibold text-sm transition shadow-sm">
               Get Quote
             </a>
           </nav>
@@ -431,10 +512,10 @@ export default function Home() {
             Instant quotes • Same-day booking • Guaranteed work.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href="#quote" className="inline-block bg-[#FFAB00] hover:bg-amber-500 text-[#1A1A1A] px-8 sm:px-10 py-4 rounded-full text-lg sm:text-xl font-bold transition shadow-lg">
-              Get Your Instant Quote →
+            <a href="#quote" onClick={() => trackEvent('hero_primary_cta_clicked')} className="inline-block bg-[#FFAB00] hover:bg-amber-500 text-[#1A1A1A] px-8 sm:px-10 py-4 rounded-full text-lg sm:text-xl font-bold transition shadow-lg">
+              Get Fast Quote + Same-Day Availability →
             </a>
-            <a href="tel:6025981988" className="inline-block border-2 border-white/40 hover:border-white text-white px-8 py-3.5 rounded-full font-semibold transition">
+            <a href="tel:6025981988" onClick={() => trackEvent('hero_call_clicked')} className="inline-block border-2 border-white/40 hover:border-white text-white px-8 py-3.5 rounded-full font-semibold transition">
               Call 602-598-1988
             </a>
           </div>
@@ -448,6 +529,25 @@ export default function Home() {
           <p className="text-center text-[#424242] mb-10 sm:mb-12">
             Prices unlock in Instant Quote after you select • Texture included on drywall repairs
           </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 sm:mb-10">
+            {startingAnchors.map((svc) => (
+              <button
+                key={svc.id}
+                type="button"
+                onClick={() => {
+                  setQuoteStarted(true);
+                  setActiveCategory(svc.category);
+                  document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' });
+                  trackEvent('starting_price_anchor_clicked', { service_id: svc.id, category: svc.category });
+                }}
+                className="text-left bg-slate-50 border border-slate-200 rounded-2xl p-4 hover:border-[#FFAB00]/60 transition"
+              >
+                <div className="text-xs uppercase tracking-wide text-gray-500 mb-1">Starting at</div>
+                <div className="text-2xl font-bold text-[#1A1A1A]">${startingAtPrice(svc)}</div>
+                <div className="text-sm font-semibold text-[#005683] mt-1">{svc.name}</div>
+              </button>
+            ))}
+          </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
             {menuCategories.map((cat) => (
               <button
@@ -500,193 +600,334 @@ export default function Home() {
 
       <section id="quote" className="py-16 sm:py-20 bg-[#F8FAFC]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">Instant Quote in Seconds</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">Instant Quote in 2 Steps</h2>
           <p className="text-center text-[#424242] mb-8 sm:mb-12">
-            Select services — prices appear after selection. Live estimate updates as you go.
+            Step 1: quick job details • Step 2: exact services and pricing.
           </p>
 
-          <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-10 md:p-12 border border-gray-100">
-            <textarea
-              className="w-full h-24 sm:h-28 border border-gray-300 rounded-2xl p-4 sm:p-5 text-base focus:outline-none focus:ring-2 focus:ring-[#FFAB00] focus:border-transparent"
-              placeholder="Optional notes: e.g. 4 outlets in garage + small drywall patch in hallway"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-
-            <div className="mt-6 flex flex-wrap items-center gap-2">
-              {CATEGORY_META.map((cat) => {
-                const count = countsByCategory[cat.key];
-                return (
-                  <button
-                    key={cat.key}
-                    type="button"
-                    onClick={() => setActiveCategory(cat.key)}
-                    className={`px-4 py-2 rounded-full text-sm font-semibold transition flex items-center gap-2 ${
-                      activeCategory === cat.key
-                        ? 'bg-[#005683] text-white'
-                        : 'bg-slate-100 text-[#424242] hover:bg-slate-200'
-                    }`}
+          {!quoteStarted && (
+            <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-10 border border-gray-100">
+              <div className="text-sm font-semibold text-[#005683] mb-4">Step 1 of 2 · Quick Intake</div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Service type</label>
+                  <select
+                    value={quickIntake.service}
+                    onChange={(e) => setQuickIntake((prev) => ({ ...prev, service: e.target.value }))}
+                    className="w-full border border-gray-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFAB00] focus:border-transparent"
                   >
-                    {cat.short}
-                    {count > 0 && (
-                      <span
-                        className={`text-xs font-bold px-1.5 py-0.5 rounded-full ${
-                          activeCategory === cat.key ? 'bg-white/20' : 'bg-[#FFAB00] text-black'
-                        }`}
-                      >
-                        {count}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-              {cart.length > 0 && (
+                    <option value="">Choose service…</option>
+                    {QUICK_SERVICE_OPTIONS.map((option) => (
+                      <option key={option} value={option}>{option}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">City</label>
+                  <input
+                    value={quickIntake.city}
+                    onChange={(e) => setQuickIntake((prev) => ({ ...prev, city: e.target.value }))}
+                    placeholder="Chandler, Mesa…"
+                    className="w-full border border-gray-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFAB00] focus:border-transparent"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Urgency</label>
+                  <select
+                    value={quickIntake.urgency}
+                    onChange={(e) => setQuickIntake((prev) => ({ ...prev, urgency: e.target.value }))}
+                    className="w-full border border-gray-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFAB00] focus:border-transparent"
+                  >
+                    <option value="">Choose urgency…</option>
+                    {QUICK_URGENCY_OPTIONS.map((option) => (
+                      <option key={option} value={option}>{option}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={handleQuoteStart}
+                className="mt-6 w-full bg-[#005683] hover:bg-blue-900 text-white py-4 rounded-2xl font-bold text-lg transition shadow-md"
+              >
+                Continue to Exact Quote →
+              </button>
+              <p className="mt-3 text-center text-xs text-gray-500">Takes under 60 seconds • no commitment</p>
+            </div>
+          )}
+
+          {quoteStarted && (
+            <div id="quote-builder" className="bg-white rounded-3xl shadow-xl p-6 sm:p-10 md:p-12 border border-gray-100">
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
+                <div className="text-sm font-semibold text-[#005683]">Step 2 of 2 · Build Your Exact Quote</div>
                 <button
                   type="button"
-                  onClick={clearCart}
-                  className="ml-auto text-xs text-gray-500 hover:text-red-600 underline"
+                  onClick={() => setQuoteStarted(false)}
+                  className="text-xs text-gray-500 hover:text-[#005683] underline"
                 >
-                  Clear all
+                  Edit step 1
                 </button>
-              )}
-            </div>
+              </div>
 
-            <div className="mt-6 space-y-6 max-h-[28rem] overflow-y-auto pr-1">
-              {activeGroups.map(([sub, items]) => (
-                <div key={sub}>
-                  <div className="text-sm font-semibold text-[#005683] mb-2">{sub}</div>
-                  <div className="space-y-2">
-                    {items.map((svc) => {
-                      const item = cartMap.get(svc.id);
-                      const selected = !!item;
-                      const qty = item?.qty || 1;
-                      const supply = item?.supplyDevice || false;
-                      const labor = selected ? itemLabor(svc, qty) : 0;
-                      const device = selected ? itemDevice(svc, qty, supply) : 0;
-                      return (
-                        <div
-                          key={svc.id}
-                          className={`border rounded-xl p-3 transition ${
-                            selected ? 'border-[#FFAB00] bg-amber-50/40' : 'border-gray-200 hover:border-[#FFAB00]/40'
+              <textarea
+                className="w-full h-24 sm:h-28 border border-gray-300 rounded-2xl p-4 sm:p-5 text-base focus:outline-none focus:ring-2 focus:ring-[#FFAB00] focus:border-transparent"
+                placeholder="Optional notes: e.g. 4 outlets in garage + small drywall patch in hallway"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+
+              <div className="mt-6 flex flex-wrap items-center gap-2">
+                {CATEGORY_META.map((cat) => {
+                  const count = countsByCategory[cat.key];
+                  return (
+                    <button
+                      key={cat.key}
+                      type="button"
+                      onClick={() => setActiveCategory(cat.key)}
+                      className={`px-4 py-2 rounded-full text-sm font-semibold transition flex items-center gap-2 ${
+                        activeCategory === cat.key
+                          ? 'bg-[#005683] text-white'
+                          : 'bg-slate-100 text-[#424242] hover:bg-slate-200'
+                      }`}
+                    >
+                      {cat.short}
+                      {count > 0 && (
+                        <span
+                          className={`text-xs font-bold px-1.5 py-0.5 rounded-full ${
+                            activeCategory === cat.key ? 'bg-white/20' : 'bg-[#FFAB00] text-black'
                           }`}
                         >
-                          <label className="flex items-start gap-3 cursor-pointer">
-                            <input
-                              type="checkbox"
-                              checked={selected}
-                              onChange={() => toggleService(svc.id)}
-                              className="mt-1 w-5 h-5 accent-[#FFAB00]"
-                            />
-                            <span className="flex-1">
-                              <span className="font-medium text-[#1A1A1A]">{svc.name}</span>
-                              {svc.notes && (
-                                <span className="block text-xs text-gray-500 mt-0.5">{svc.notes}</span>
-                              )}
-                              {selected && (
-                                <span className="block text-sm text-[#005683] mt-1 font-semibold">
-                                  Labor ${labor}
-                                  {device > 0 ? ` + device $${device}` : ''}
-                                  {svc.kind === 'volume' && qty > 1 ? ` (${qty} units)` : ''}
-                                  {svc.kind === 'range' ? ` (est. $${svc.low}–$${svc.high})` : ''}
-                                </span>
-                              )}
-                            </span>
-                          </label>
-                          {selected && svc.kind === 'volume' && (
-                            <div className="mt-2 ml-8 flex items-center gap-2">
-                              <label className="text-xs text-[#424242]">Qty</label>
-                              <input
-                                type="number"
-                                min={1}
-                                max={99}
-                                value={qty}
-                                onChange={(e) => setQty(svc.id, parseInt(e.target.value, 10))}
-                                className="w-16 border border-gray-300 rounded-lg px-2 py-1 text-sm"
-                              />
-                            </div>
-                          )}
-                          {selected && svc.deviceCost != null && (
-                            <div className="mt-2 ml-8">
-                              <label className="flex items-center gap-2 text-xs text-[#424242] cursor-pointer">
-                                <input
-                                  type="checkbox"
-                                  checked={supply}
-                                  onChange={(e) => setSupply(svc.id, e.target.checked)}
-                                  className="accent-[#FFAB00]"
-                                />
-                                DEP supplies device (+~${deviceSellPrice(svc.deviceCost)}
-                                {svc.kind === 'volume' && qty > 1 ? ` × ${qty}` : ''}, 25% markup)
-                              </label>
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
-            </div>
+                          {count}
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+                {cart.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={clearCart}
+                    className="ml-auto text-xs text-gray-500 hover:text-red-600 underline"
+                  >
+                    Clear all
+                  </button>
+                )}
+              </div>
 
-            <div className="mt-6 p-4 rounded-2xl bg-slate-50 border border-slate-100 flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <div className="text-xs text-gray-500 uppercase tracking-wide">Live estimate</div>
-                <div className="text-2xl font-bold text-[#1A1A1A]">
-                  ${liveQuote.total}
-                  {cart.length === 0 && (
-                    <span className="text-sm font-normal text-gray-500 ml-2">
-                      (service call only until you select work)
-                    </span>
+              <div className="mt-6 space-y-6 max-h-[28rem] overflow-y-auto pr-1">
+                {activeGroups.map(([sub, items]) => (
+                  <div key={sub}>
+                    <div className="text-sm font-semibold text-[#005683] mb-2">{sub}</div>
+                    <div className="space-y-2">
+                      {items.map((svc) => {
+                        const item = cartMap.get(svc.id);
+                        const selected = !!item;
+                        const qty = item?.qty || 1;
+                        const supply = item?.supplyDevice || false;
+                        const labor = selected ? itemLabor(svc, qty) : 0;
+                        const device = selected ? itemDevice(svc, qty, supply) : 0;
+                        return (
+                          <div
+                            key={svc.id}
+                            className={`border rounded-xl p-3 transition ${
+                              selected ? 'border-[#FFAB00] bg-amber-50/40' : 'border-gray-200 hover:border-[#FFAB00]/40'
+                            }`}
+                          >
+                            <label className="flex items-start gap-3 cursor-pointer">
+                              <input
+                                type="checkbox"
+                                checked={selected}
+                                onChange={() => toggleService(svc.id)}
+                                className="mt-1 w-5 h-5 accent-[#FFAB00]"
+                              />
+                              <span className="flex-1">
+                                <span className="font-medium text-[#1A1A1A]">{svc.name}</span>
+                                {svc.notes && (
+                                  <span className="block text-xs text-gray-500 mt-0.5">{svc.notes}</span>
+                                )}
+                                {selected && (
+                                  <span className="block text-sm text-[#005683] mt-1 font-semibold">
+                                    Labor ${labor}
+                                    {device > 0 ? ` + device $${device}` : ''}
+                                    {svc.kind === 'volume' && qty > 1 ? ` (${qty} units)` : ''}
+                                    {svc.kind === 'range' ? ` (est. $${svc.low}–$${svc.high})` : ''}
+                                  </span>
+                                )}
+                              </span>
+                            </label>
+                            {selected && svc.kind === 'volume' && (
+                              <div className="mt-2 ml-8 flex items-center gap-2">
+                                <label className="text-xs text-[#424242]">Qty</label>
+                                <input
+                                  type="number"
+                                  min={1}
+                                  max={99}
+                                  value={qty}
+                                  onChange={(e) => setQty(svc.id, parseInt(e.target.value, 10))}
+                                  className="w-16 border border-gray-300 rounded-lg px-2 py-1 text-sm"
+                                />
+                              </div>
+                            )}
+                            {selected && svc.deviceCost != null && (
+                              <div className="mt-2 ml-8">
+                                <label className="flex items-center gap-2 text-xs text-[#424242] cursor-pointer">
+                                  <input
+                                    type="checkbox"
+                                    checked={supply}
+                                    onChange={(e) => setSupply(svc.id, e.target.checked)}
+                                    className="accent-[#FFAB00]"
+                                  />
+                                  DEP supplies device (+~${deviceSellPrice(svc.deviceCost)}
+                                  {svc.kind === 'volume' && qty > 1 ? ` × ${qty}` : ''}, 25% markup)
+                                </label>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6 p-4 rounded-2xl bg-slate-50 border border-slate-100 flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <div className="text-xs text-gray-500 uppercase tracking-wide">Live estimate</div>
+                  <div className="text-2xl font-bold text-[#1A1A1A]">
+                    ${liveQuote.total}
+                    {cart.length === 0 && (
+                      <span className="text-sm font-normal text-gray-500 ml-2">
+                        (service call only until you select work)
+                      </span>
+                    )}
+                  </div>
+                  {liveQuote.hasWork && liveQuote.call === 0 && (
+                    <div className="text-xs text-green-700 mt-0.5">Service call waived</div>
                   )}
                 </div>
-                {liveQuote.hasWork && liveQuote.call === 0 && (
-                  <div className="text-xs text-green-700 mt-0.5">Service call waived</div>
-                )}
+                <div className="text-xs text-gray-500 text-right">
+                  {cart.length} selected
+                  {liveQuote.categories.size >= 2 && (
+                    <div className="text-[#005683] font-semibold">
+                      {liveQuote.categories.size >= 3 ? 'Triple Play active' : 'Power Pair active'}
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="text-xs text-gray-500 text-right">
-                {cart.length} selected
-                {liveQuote.categories.size >= 2 && (
-                  <div className="text-[#005683] font-semibold">
-                    {liveQuote.categories.size >= 3 ? 'Triple Play active' : 'Power Pair active'}
+
+              <button
+                onClick={() => {
+                  setShowQuote(true);
+                  trackEvent('quote_review_opened', {
+                    selected_services_count: cart.length,
+                    estimated_total: liveQuote.total,
+                  });
+                }}
+                className="mt-6 w-full bg-[#005683] hover:bg-blue-900 text-white py-4 sm:py-5 rounded-2xl font-bold text-lg sm:text-xl transition shadow-md"
+              >
+                Review Full Quote →
+              </button>
+
+              {showQuote && (
+                <div className="mt-8 p-6 sm:p-8 bg-[#F8FAFC] rounded-2xl border-2 border-[#FFAB00]">
+                  <div className="text-4xl sm:text-5xl font-bold text-[#1A1A1A]">${liveQuote.total}</div>
+                  <div className="text-[#FFAB00] font-medium mt-1">Estimated total • Chandler / East Valley</div>
+                  <div className="mt-5 space-y-2 text-sm text-[#424242]">
+                    {liveQuote.breakdown.map((line, i) => (
+                      <div key={i}>{line}</div>
+                    ))}
                   </div>
-                )}
-              </div>
+                  <div className="mt-5 bg-white rounded-xl border border-slate-200 p-4">
+                    <div className="text-xs uppercase tracking-wide text-gray-500 mb-1">Trust proof</div>
+                    <div className="text-sm text-[#1A1A1A] font-medium">
+                      Licensed • Bonded • Insured • Typical response under 10 minutes
+                    </div>
+                    <div className="text-xs text-gray-600 mt-1">
+                      ★★★★★ Rated by East Valley homeowners
+                    </div>
+                  </div>
+                  <div className="mt-4 bg-[#FFF8E7] border border-[#FFAB00]/40 rounded-xl p-4 text-sm text-[#1A1A1A]">
+                    “Showed up on time, clean work, fair price.” — Sarah M., Chandler
+                  </div>
+                  <div className="mt-6 pt-5 border-t text-xs text-[#424242]">
+                    {description
+                      ? `Notes: "${description}"`
+                      : liveQuote.hasWork
+                        ? 'Estimate only • Final price confirmed on-site • Devices are approximate until model is confirmed'
+                        : 'Select services above or call 602-598-1988'}
+                  </div>
+                  <button
+                    onClick={handleOpenBooking}
+                    disabled={!liveQuote.hasWork}
+                    className={`mt-6 w-full py-4 rounded-2xl font-bold transition shadow-sm ${
+                      liveQuote.hasWork
+                        ? 'bg-[#FFAB00] hover:bg-amber-500 text-black'
+                        : 'bg-slate-200 text-slate-500 cursor-not-allowed'
+                    }`}
+                  >
+                    {liveQuote.hasWork ? 'Book This Job In-Page →' : 'Select a Service to Book'}
+                  </button>
+                  <p className="mt-3 text-center text-xs text-gray-500">Secure booking opens below without leaving this page</p>
+                </div>
+              )}
             </div>
+          )}
+        </div>
+      </section>
 
-            <button
-              onClick={() => setShowQuote(true)}
-              className="mt-6 w-full bg-[#005683] hover:bg-blue-900 text-white py-4 sm:py-5 rounded-2xl font-bold text-lg sm:text-xl transition shadow-md"
-            >
-              Review Full Quote →
-            </button>
-
-            {showQuote && (
-              <div className="mt-8 p-6 sm:p-8 bg-[#F8FAFC] rounded-2xl border-2 border-[#FFAB00]">
-                <div className="text-4xl sm:text-5xl font-bold text-[#1A1A1A]">${liveQuote.total}</div>
-                <div className="text-[#FFAB00] font-medium mt-1">Estimated total • Chandler / East Valley</div>
-                <div className="mt-5 space-y-2 text-sm text-[#424242]">
-                  {liveQuote.breakdown.map((line, i) => (
-                    <div key={i}>{line}</div>
-                  ))}
+      {bookingModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/70 p-3 sm:p-6 flex items-center justify-center" onClick={() => setBookingModalOpen(false)}>
+          <div className="w-full max-w-4xl bg-white rounded-3xl p-5 sm:p-8 max-h-[92vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between gap-3 mb-4">
+              <h3 className="text-xl sm:text-2xl font-bold text-[#1A1A1A]">Complete Your Booking</h3>
+              <button type="button" onClick={() => setBookingModalOpen(false)} className="text-2xl text-gray-500 hover:text-[#005683]">×</button>
+            </div>
+            <p className="text-sm text-[#424242] mb-5">
+              We prefill your quote details so booking takes less than a minute.
+            </p>
+            {!bookingEmbedUrl && (
+              <form onSubmit={handleBookingEmbed} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <input
+                    required
+                    value={bookingLead.name}
+                    onChange={(e) => setBookingLead((prev) => ({ ...prev, name: e.target.value }))}
+                    placeholder="Your name"
+                    className="border border-gray-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFAB00] focus:border-transparent"
+                  />
+                  <input
+                    required
+                    value={bookingLead.phone}
+                    onChange={(e) => setBookingLead((prev) => ({ ...prev, phone: e.target.value }))}
+                    placeholder="Phone number"
+                    className="border border-gray-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFAB00] focus:border-transparent"
+                  />
                 </div>
-                <div className="mt-6 pt-5 border-t text-xs text-[#424242]">
-                  {description
-                    ? `Notes: "${description}"`
-                    : liveQuote.hasWork
-                      ? 'Estimate only • Final price confirmed on-site • Devices are approximate until model is confirmed'
-                      : 'Select services above or call 602-598-1988'}
+                <input
+                  type="email"
+                  value={bookingLead.email}
+                  onChange={(e) => setBookingLead((prev) => ({ ...prev, email: e.target.value }))}
+                  placeholder="Email (optional)"
+                  className="w-full border border-gray-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFAB00] focus:border-transparent"
+                />
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-gray-600">
+                  {servicesSummary || 'No services selected yet.'}
                 </div>
-                <button
-                  onClick={handleTallySubmit}
-                  className="mt-6 w-full bg-[#FFAB00] hover:bg-amber-500 text-black py-4 rounded-2xl font-bold transition shadow-sm"
-                >
-                  Book This Job Now →
+                <button type="submit" className="w-full bg-[#005683] hover:bg-blue-900 text-white py-3.5 rounded-2xl font-bold transition">
+                  Continue to Secure Booking Form →
                 </button>
-                <p className="mt-3 text-center text-xs text-gray-500">Opens booking form with your quote details</p>
-              </div>
+              </form>
+            )}
+            {bookingEmbedUrl && (
+              <iframe
+                title="DEP Booking Form"
+                src={bookingEmbedUrl}
+                className="w-full h-[72vh] rounded-2xl border border-slate-200"
+              />
             )}
           </div>
         </div>
-      </section>
+      )}
 
       <section id="portfolio" className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -784,6 +1025,33 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <div className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-slate-200 shadow-[0_-4px_18px_rgba(0,0,0,0.08)]">
+        <div className="grid grid-cols-3 gap-2 p-2">
+          <a
+            href="tel:6025981988"
+            onClick={() => trackEvent('mobile_sticky_call_clicked')}
+            className="text-center bg-[#005683] text-white rounded-xl py-2.5 text-xs font-semibold"
+          >
+            Call
+          </a>
+          <a
+            href="sms:6025981988"
+            onClick={() => trackEvent('mobile_sticky_text_clicked')}
+            className="text-center bg-slate-100 text-[#1A1A1A] rounded-xl py-2.5 text-xs font-semibold"
+          >
+            Text
+          </a>
+          <a
+            href="#quote"
+            onClick={() => trackEvent('mobile_sticky_quote_clicked')}
+            className="text-center bg-[#FFAB00] text-black rounded-xl py-2.5 text-xs font-semibold"
+          >
+            Get Quote
+          </a>
+        </div>
+      </div>
+      <div className="h-16 md:hidden" />
 
       <footer id="contact" className="bg-[#1A1A1A] text-white py-12 sm:py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
