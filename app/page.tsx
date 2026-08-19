@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   allServices,
   applyBundleDiscount,
@@ -17,7 +17,6 @@ import {
 
 type CartItem = { id: string; qty: number; supplyDevice: boolean };
 type QuickIntake = { service: string; city: string; urgency: string };
-type BookingLead = { name: string; phone: string; email: string };
 
 const QUICK_SERVICE_OPTIONS = ['Drywall', 'Electrical', 'Plumbing', 'Multiple Services', 'Not sure yet'];
 const QUICK_URGENCY_OPTIONS = ['Today', 'This week', '1–2 weeks', 'Flexible'];
@@ -85,9 +84,8 @@ function startingAtPrice(svc: ServicePrice): number {
 
 function trackEvent(name: string, data: Record<string, string | number | boolean> = {}) {
   if (typeof window === 'undefined') return;
-  const existing = (window as Window & { dataLayer?: Array<Record<string, unknown>> }).dataLayer ?? [];
-  existing.push({ event: name, ...data });
-  (window as Window & { dataLayer?: Array<Record<string, unknown>> }).dataLayer = existing;
+  const win = window as Window & { dataLayer?: Array<Record<string, unknown>> };
+  (win.dataLayer = win.dataLayer || []).push({ event: name, ...data });
 }
 
 export default function Home() {
@@ -98,11 +96,6 @@ export default function Home() {
     service: '',
     city: '',
     urgency: '',
-  });
-  const [bookingLead, setBookingLead] = useState<BookingLead>({
-    name: '',
-    phone: '',
-    email: '',
   });
   const [activeCategory, setActiveCategory] = useState<
     'drywall' | 'electrical' | 'plumbing'
@@ -250,35 +243,15 @@ export default function Home() {
   };
 
   const handleOpenBooking = () => {
-    setBookingEmbedUrl('');
-    setBookingModalOpen(true);
-    trackEvent('booking_modal_opened', { has_selected_work: cart.length > 0 });
-  };
-
-  const handleBookingEmbed = (e: React.FormEvent) => {
-    e.preventDefault();
-    const servicesStr = cart
-      .map(({ id, qty, supplyDevice }) => {
-        const svc = allServices.find((s) => s.id === id);
-        if (!svc) return '';
-        const labor = itemLabor(svc, qty);
-        const device = itemDevice(svc, qty, supplyDevice);
-        return `${svc.name}${qty > 1 ? ` ×${qty}` : ''}: $${labor}${device ? ` + device $${device}` : ''}`;
-      })
-      .filter(Boolean)
-      .join(', ');
-
     const tallyUrl = new URL('https://tally.so/r/QKYRWA');
-    tallyUrl.searchParams.append('services', servicesStr);
+    tallyUrl.searchParams.append('services', servicesSummary);
     tallyUrl.searchParams.append('description', description);
     tallyUrl.searchParams.append('estimatedPrice', String(liveQuote.total));
     tallyUrl.searchParams.append('quickService', quickIntake.service);
     tallyUrl.searchParams.append('quickCity', quickIntake.city);
     tallyUrl.searchParams.append('quickUrgency', quickIntake.urgency);
-    tallyUrl.searchParams.append('name', bookingLead.name);
-    tallyUrl.searchParams.append('phone', bookingLead.phone);
-    tallyUrl.searchParams.append('email', bookingLead.email);
     setBookingEmbedUrl(tallyUrl.toString());
+    setBookingModalOpen(true);
     trackEvent('booking_form_embed_loaded', {
       has_selected_work: cart.length > 0,
       selected_services_count: cart.length,
@@ -291,11 +264,24 @@ export default function Home() {
     groups: groupBySubcategory(servicesForCategory(cat.key)),
   }));
 
-  const startingAnchors = [
-    allServices.find((s) => s.id === 'd-small-hole'),
-    allServices.find((s) => s.id === 'e-outlet'),
-    allServices.find((s) => s.id === 'p-shower-head'),
-  ].filter(Boolean) as ServicePrice[];
+  const startingAnchors = useMemo(
+    () =>
+      [
+        allServices.find((s) => s.id === 'd-small-hole'),
+        allServices.find((s) => s.id === 'e-outlet'),
+        allServices.find((s) => s.id === 'p-shower-head'),
+      ].filter(Boolean) as ServicePrice[],
+    [allServices]
+  );
+
+  useEffect(() => {
+    if (!bookingModalOpen) return;
+    const onEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setBookingModalOpen(false);
+    };
+    window.addEventListener('keydown', onEscape);
+    return () => window.removeEventListener('keydown', onEscape);
+  }, [bookingModalOpen]);
 
   const activeList = servicesForCategory(activeCategory);
   const activeGroups = groupBySubcategory(activeList);
@@ -536,7 +522,13 @@ export default function Home() {
                 type="button"
                 onClick={() => {
                   setQuoteStarted(true);
-                  setActiveCategory(svc.category);
+                  if (
+                    svc.category === 'drywall' ||
+                    svc.category === 'electrical' ||
+                    svc.category === 'plumbing'
+                  ) {
+                    setActiveCategory(svc.category);
+                  }
                   document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' });
                   trackEvent('starting_price_anchor_clicked', { service_id: svc.id, category: svc.category });
                 }}
@@ -877,51 +869,28 @@ export default function Home() {
 
       {bookingModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/70 p-3 sm:p-6 flex items-center justify-center" onClick={() => setBookingModalOpen(false)}>
-          <div className="w-full max-w-4xl bg-white rounded-3xl p-5 sm:p-8 max-h-[92vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Booking form dialog"
+            className="w-full max-w-4xl bg-white rounded-3xl p-5 sm:p-8 max-h-[92vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="flex items-center justify-between gap-3 mb-4">
               <h3 className="text-xl sm:text-2xl font-bold text-[#1A1A1A]">Complete Your Booking</h3>
               <button type="button" onClick={() => setBookingModalOpen(false)} className="text-2xl text-gray-500 hover:text-[#005683]">×</button>
             </div>
             <p className="text-sm text-[#424242] mb-5">
-              We prefill your quote details so booking takes less than a minute.
+              Your quote details are prefilled below so booking takes less than a minute.
             </p>
-            {!bookingEmbedUrl && (
-              <form onSubmit={handleBookingEmbed} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <input
-                    required
-                    value={bookingLead.name}
-                    onChange={(e) => setBookingLead((prev) => ({ ...prev, name: e.target.value }))}
-                    placeholder="Your name"
-                    className="border border-gray-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFAB00] focus:border-transparent"
-                  />
-                  <input
-                    required
-                    value={bookingLead.phone}
-                    onChange={(e) => setBookingLead((prev) => ({ ...prev, phone: e.target.value }))}
-                    placeholder="Phone number"
-                    className="border border-gray-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFAB00] focus:border-transparent"
-                  />
-                </div>
-                <input
-                  type="email"
-                  value={bookingLead.email}
-                  onChange={(e) => setBookingLead((prev) => ({ ...prev, email: e.target.value }))}
-                  placeholder="Email (optional)"
-                  className="w-full border border-gray-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFAB00] focus:border-transparent"
-                />
-                <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-gray-600">
-                  {servicesSummary || 'No services selected yet.'}
-                </div>
-                <button type="submit" className="w-full bg-[#005683] hover:bg-blue-900 text-white py-3.5 rounded-2xl font-bold transition">
-                  Continue to Secure Booking Form →
-                </button>
-              </form>
-            )}
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-gray-600 mb-4">
+              {servicesSummary || 'No services selected yet.'}
+            </div>
             {bookingEmbedUrl && (
               <iframe
                 title="DEP Booking Form"
                 src={bookingEmbedUrl}
+                sandbox="allow-scripts allow-forms allow-same-origin allow-popups"
                 className="w-full h-[72vh] rounded-2xl border border-slate-200"
               />
             )}
