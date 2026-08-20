@@ -271,7 +271,7 @@ export default function Home() {
         allServices.find((s) => s.id === 'e-outlet'),
         allServices.find((s) => s.id === 'p-shower-head'),
       ].filter(Boolean) as ServicePrice[],
-    [allServices]
+    []
   );
 
   useEffect(() => {
@@ -493,19 +493,19 @@ export default function Home() {
             Repairs &amp; Upgrades
           </h1>
           <p className="text-lg sm:text-xl mb-8 sm:mb-10 opacity-95 max-w-2xl mx-auto">
-            Solo Chandler expert in drywall, electrical & plumbing.
+            Solo Chandler expert in drywall, electrical &amp; plumbing.
             <br className="hidden sm:block" />
-            Instant quotes • Same-day booking • Guaranteed work.
+            Fair pricing • Clean work • Done right the first time.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a href="#quote" onClick={() => trackEvent('hero_primary_cta_clicked')} className="inline-block bg-[#FFAB00] hover:bg-amber-500 text-[#1A1A1A] px-8 sm:px-10 py-4 rounded-full text-lg sm:text-xl font-bold transition shadow-lg">
-              Get Fast Quote + Same-Day Availability →
+              Get a Clear Quote →
             </a>
             <a href="tel:6025981988" onClick={() => trackEvent('hero_call_clicked')} className="inline-block border-2 border-white/40 hover:border-white text-white px-8 py-3.5 rounded-full font-semibold transition">
               Call 602-598-1988
             </a>
           </div>
-          <div className="mt-6 text-sm opacity-70">Serving Chandler, Gilbert, Mesa & East Valley</div>
+          <div className="mt-6 text-sm opacity-70">Serving Chandler, Gilbert, Mesa &amp; East Valley</div>
         </div>
       </section>
 
@@ -534,7 +534,7 @@ export default function Home() {
                 }}
                 className="text-left bg-slate-50 border border-slate-200 rounded-2xl p-4 hover:border-[#FFAB00]/60 transition"
               >
-                <div className="text-xs uppercase tracking-wide text-gray-500 mb-1">Starting at</div>
+                <div className="text-xs uppercase tracking-wide text-gray-500 mb-1">Typical starting price</div>
                 <div className="text-2xl font-bold text-[#1A1A1A]">${startingAtPrice(svc)}</div>
                 <div className="text-sm font-semibold text-[#005683] mt-1">{svc.name}</div>
               </button>
@@ -592,14 +592,14 @@ export default function Home() {
 
       <section id="quote" className="py-16 sm:py-20 bg-[#F8FAFC]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">Instant Quote in 2 Steps</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">Get a Clear Quote</h2>
           <p className="text-center text-[#424242] mb-8 sm:mb-12">
-            Step 1: quick job details • Step 2: exact services and pricing.
+            Step 1: a few quick details • Step 2: exact services and fair pricing.
           </p>
 
           {!quoteStarted && (
             <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-10 border border-gray-100">
-              <div className="text-sm font-semibold text-[#005683] mb-4">Step 1 of 2 · Quick Intake</div>
+              <div className="text-sm font-semibold text-[#005683] mb-4">Step 1 of 2 · Quick details</div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Service type</label>
@@ -624,13 +624,13 @@ export default function Home() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Urgency</label>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Timing</label>
                   <select
                     value={quickIntake.urgency}
                     onChange={(e) => setQuickIntake((prev) => ({ ...prev, urgency: e.target.value }))}
                     className="w-full border border-gray-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFAB00] focus:border-transparent"
                   >
-                    <option value="">Choose urgency…</option>
+                    <option value="">When works best…</option>
                     {QUICK_URGENCY_OPTIONS.map((option) => (
                       <option key={option} value={option}>{option}</option>
                     ))}
@@ -644,14 +644,14 @@ export default function Home() {
               >
                 Continue to Exact Quote →
               </button>
-              <p className="mt-3 text-center text-xs text-gray-500">Takes under 60 seconds • no commitment</p>
+              <p className="mt-3 text-center text-xs text-gray-500">No pressure. You’ll see clear pricing next.</p>
             </div>
           )}
 
           {quoteStarted && (
             <div id="quote-builder" className="bg-white rounded-3xl shadow-xl p-6 sm:p-10 md:p-12 border border-gray-100">
               <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
-                <div className="text-sm font-semibold text-[#005683]">Step 2 of 2 · Build Your Exact Quote</div>
+                <div className="text-sm font-semibold text-[#005683]">Step 2 of 2 · Build your quote</div>
                 <button
                   type="button"
                   onClick={() => setQuoteStarted(false)}
@@ -749,15 +749,26 @@ export default function Home() {
                             </label>
                             {selected && svc.kind === 'volume' && (
                               <div className="mt-2 ml-8 flex items-center gap-2">
-                                <label className="text-xs text-[#424242]">Qty</label>
-                                <input
-                                  type="number"
-                                  min={1}
-                                  max={99}
-                                  value={qty}
-                                  onChange={(e) => setQty(svc.id, parseInt(e.target.value, 10))}
-                                  className="w-16 border border-gray-300 rounded-lg px-2 py-1 text-sm"
-                                />
+                                <span className="text-xs text-[#424242]">Qty</span>
+                                <div className="inline-flex items-center border border-gray-300 rounded-lg overflow-hidden">
+                                  <button
+                                    type="button"
+                                    onClick={() => setQty(svc.id, qty - 1)}
+                                    className="w-8 h-8 flex items-center justify-center text-lg font-medium text-[#1A1A1A] hover:bg-slate-100 transition"
+                                    aria-label="Decrease quantity"
+                                  >
+                                    −
+                                  </button>
+                                  <span className="w-10 text-center text-sm font-semibold tabular-nums">{qty}</span>
+                                  <button
+                                    type="button"
+                                    onClick={() => setQty(svc.id, qty + 1)}
+                                    className="w-8 h-8 flex items-center justify-center text-lg font-medium text-[#1A1A1A] hover:bg-slate-100 transition"
+                                    aria-label="Increase quantity"
+                                  >
+                                    +
+                                  </button>
+                                </div>
                               </div>
                             )}
                             {selected && svc.deviceCost != null && (
@@ -830,12 +841,12 @@ export default function Home() {
                     ))}
                   </div>
                   <div className="mt-5 bg-white rounded-xl border border-slate-200 p-4">
-                    <div className="text-xs uppercase tracking-wide text-gray-500 mb-1">Trust proof</div>
+                    <div className="text-xs uppercase tracking-wide text-gray-500 mb-1">Why homeowners choose DEP</div>
                     <div className="text-sm text-[#1A1A1A] font-medium">
-                      Licensed • Bonded • Insured • Typical response under 10 minutes
+                      Licensed • Bonded • Insured
                     </div>
                     <div className="text-xs text-gray-600 mt-1">
-                      ★★★★★ Rated by East Valley homeowners
+                      Solo tradesman — you talk to the person who does the work. Fair pricing, no pressure.
                     </div>
                   </div>
                   <div className="mt-4 bg-[#FFF8E7] border border-[#FFAB00]/40 rounded-xl p-4 text-sm text-[#1A1A1A]">
@@ -857,9 +868,9 @@ export default function Home() {
                         : 'bg-slate-200 text-slate-500 cursor-not-allowed'
                     }`}
                   >
-                    {liveQuote.hasWork ? 'Book This Job In-Page →' : 'Select a Service to Book'}
+                    {liveQuote.hasWork ? 'Book This Job →' : 'Select a Service to Book'}
                   </button>
-                  <p className="mt-3 text-center text-xs text-gray-500">Secure booking opens below without leaving this page</p>
+                  <p className="mt-3 text-center text-xs text-gray-500">Booking stays on this page — quote details are already filled in</p>
                 </div>
               )}
             </div>
@@ -881,7 +892,7 @@ export default function Home() {
               <button type="button" onClick={() => setBookingModalOpen(false)} className="text-2xl text-gray-500 hover:text-[#005683]">×</button>
             </div>
             <p className="text-sm text-[#424242] mb-5">
-              Your quote details are prefilled below so booking takes less than a minute.
+              Your quote details are already filled in. Just add the remaining contact info when you’re ready.
             </p>
             <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-gray-600 mb-4">
               {servicesSummary || 'No services selected yet.'}
@@ -977,7 +988,7 @@ export default function Home() {
       <section id="testimonials" className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">What Clients Say</h2>
-          <p className="text-center text-[#424242] mb-10 sm:mb-12">Real feedback from Chandler & East Valley homeowners</p>
+          <p className="text-center text-[#424242] mb-10 sm:mb-12">Real feedback from Chandler &amp; East Valley homeowners</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {testimonials.map((t, i) => (
               <div key={i} className="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-100 h-full">
@@ -1009,7 +1020,7 @@ export default function Home() {
             onClick={() => trackEvent('mobile_sticky_text_clicked')}
             className="text-center bg-slate-100 text-[#1A1A1A] rounded-xl py-2.5 text-xs font-semibold"
           >
-            Text
+            Text Jason
           </a>
           <a
             href="#quote"
@@ -1038,7 +1049,7 @@ export default function Home() {
               <div className="space-y-2 text-sm opacity-90">
                 <div><a href="tel:6025981988" className="hover:text-[#FFAB00] transition">📞 602-598-1988</a></div>
                 <div><a href="mailto:info@dephomerepair.com" className="hover:text-[#FFAB00] transition">✉️ info@dephomerepair.com</a></div>
-                <div className="pt-2">Chandler, AZ & East Valley<br />Licensed • Bonded • Insured</div>
+                <div className="pt-2">Chandler, AZ &amp; East Valley<br />Licensed • Bonded • Insured</div>
               </div>
             </div>
             <div>
