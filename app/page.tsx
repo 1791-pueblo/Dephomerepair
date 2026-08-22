@@ -26,7 +26,7 @@ const CATEGORY_META = [
     label: 'D — Drywall', 
     short: 'Drywall',
     letter: 'D',
-    letterColor: '#005683', // Atlantic blue
+    letterColor: '#005683',
     cardBg: 'bg-[#E8F1F6]',
     borderClass: 'border-[#005683]/20 hover:border-[#005683]/50',
   },
@@ -35,7 +35,7 @@ const CATEGORY_META = [
     label: 'E — Electrical', 
     short: 'Electrical',
     letter: 'E',
-    letterColor: '#FFAB00', // Brand amber
+    letterColor: '#FFAB00',
     cardBg: 'bg-[#FFF8E7]',
     borderClass: 'border-[#FFAB00]/25 hover:border-[#FFAB00]/60',
   },
@@ -44,7 +44,7 @@ const CATEGORY_META = [
     label: 'P — Plumbing', 
     short: 'Plumbing',
     letter: 'P',
-    letterColor: '#0077B6', // Plumbing blue
+    letterColor: '#0077B6',
     cardBg: 'bg-[#E6F4FA]',
     borderClass: 'border-[#0077B6]/20 hover:border-[#0077B6]/50',
   },
@@ -103,9 +103,7 @@ export default function Home() {
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [bookingEmbedUrl, setBookingEmbedUrl] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [lightbox, setLightbox] = useState<{ src: string; caption: string } | null>(
-    null
-  );
+  const [lightbox, setLightbox] = useState<{ src: string; caption: string } | null>(null);
 
   const cartMap = useMemo(() => {
     const m = new Map<string, CartItem>();
@@ -122,11 +120,7 @@ export default function Home() {
     cart.forEach(({ id, qty, supplyDevice }) => {
       const svc = allServices.find((s) => s.id === id);
       if (!svc) return;
-      if (
-        svc.category === 'drywall' ||
-        svc.category === 'electrical' ||
-        svc.category === 'plumbing'
-      ) {
+      if (svc.category === 'drywall' || svc.category === 'electrical' || svc.category === 'plumbing') {
         categories.add(svc.category);
       }
       const laborLine = itemLabor(svc, qty);
@@ -135,18 +129,14 @@ export default function Home() {
       devices += deviceLine;
 
       if (svc.kind === 'volume' && qty > 1) {
-        breakdown.push(
-          `${svc.name} × ${qty}: $${laborLine} (1st $${svc.first} + ${qty - 1} × $${svc.additional})`
-        );
+        breakdown.push(`${svc.name} × ${qty}: $${laborLine} (1st $${svc.first} + ${qty - 1} × $${svc.additional})`);
       } else if (svc.kind === 'range') {
         breakdown.push(`${svc.name}: ~$${laborLine} (est. $${svc.low}–$${svc.high})`);
       } else {
         breakdown.push(`${svc.name}${qty > 1 ? ` × ${qty}` : ''}: $${laborLine}`);
       }
       if (deviceLine > 0) {
-        breakdown.push(
-          `  + Device (DEP supply, ~25% markup): $${deviceLine}`
-        );
+        breakdown.push(`  + Device (DEP supply, ~25% markup): $${deviceLine}`);
       }
     });
 
@@ -165,15 +155,7 @@ export default function Home() {
 
     const total = bundled.total + devices + call;
 
-    return {
-      total,
-      labor: bundled.total,
-      devices,
-      call,
-      breakdown,
-      categories,
-      hasWork,
-    };
+    return { total, labor: bundled.total, devices, call, breakdown, categories, hasWork };
   }, [cart]);
 
   const countsByCategory = useMemo(() => {
@@ -204,9 +186,7 @@ export default function Home() {
 
   const setSupply = (id: string, supplyDevice: boolean) => {
     setShowQuote(false);
-    setCart((prev) =>
-      prev.map((c) => (c.id === id ? { ...c, supplyDevice } : c))
-    );
+    setCart((prev) => prev.map((c) => (c.id === id ? { ...c, supplyDevice } : c)));
   };
 
   const clearCart = () => {
@@ -341,53 +321,25 @@ export default function Home() {
       tag: 'Drywall + Carpentry',
       type: 'sequence',
       photos: [
-        {
-          src: '/gallery/closet-01-demolition.jpg',
-          caption: 'Before: Original closet demolished — clean slate for better storage',
-        },
-        {
-          src: '/gallery/closet-02-framing.jpg',
-          caption: 'Framing and wall build-out in progress',
-        },
-        {
-          src: '/gallery/closet-03-progress.jpg',
-          caption: 'Drywall and rough-in complete',
-        },
-        {
-          src: '/gallery/closet-04-near-finished.jpg',
-          caption: 'Finishing touches underway',
-        },
-        {
-          src: '/gallery/closet-05-barn-doors-final.jpg',
-          caption: 'Completed: Custom barn-door closet conversion. Want one like this? Get a quote.',
-        },
+        { src: '/gallery/closet-01-demolition.jpg', caption: 'Before: Original closet demolished — clean slate for better storage' },
+        { src: '/gallery/closet-02-framing.jpg', caption: 'Framing and wall build-out in progress' },
+        { src: '/gallery/closet-03-progress.jpg', caption: 'Drywall and rough-in complete' },
+        { src: '/gallery/closet-04-near-finished.jpg', caption: 'Finishing touches underway' },
+        { src: '/gallery/closet-05-barn-doors-final.jpg', caption: 'Completed: Custom barn-door closet conversion. Want one like this? Get a quote.' },
       ],
-      description:
-        'Complete closet conversion from demolition through custom barn doors. Better storage, cleaner look, and zero wasted space.',
+      description: 'Complete closet conversion from demolition through custom barn doors. Better storage, cleaner look, and zero wasted space.',
     },
     {
       title: 'Rangehood Install + Protected Power',
       tag: 'Electrical',
       type: 'before-after',
       photos: [
-        {
-          src: '/gallery/rangehood-01-rough-opening.jpg',
-          caption: 'Before: Ceiling opened and rough opening prepared for new rangehood',
-        },
-        {
-          src: '/gallery/rangehood-02-finished.jpg',
-          caption: 'After: Professional Ancona rangehood + matching recessed lighting. Clean lines, quiet power.',
-        },
+        { src: '/gallery/rangehood-01-rough-opening.jpg', caption: 'Before: Ceiling opened and rough opening prepared for new rangehood' },
+        { src: '/gallery/rangehood-02-finished.jpg', caption: 'After: Professional Ancona rangehood + matching recessed lighting. Clean lines, quiet power.' },
       ],
       supportPhotos: [
-        {
-          src: '/gallery/electrical-romex-wall.jpg',
-          caption: '12-gauge Romex run from exterior 20A GFCI load terminals — power protected and up to code',
-        },
-        {
-          src: '/gallery/rangehood-soffit-wire.jpg',
-          caption: 'Wire routed into the soffit. Receptacle left accessible through the LED cut-out so the rangehood stays plugged in (hardwiring voids the manufacturer warranty).',
-        },
+        { src: '/gallery/electrical-romex-wall.jpg', caption: '12-gauge Romex run from exterior 20A GFCI load terminals — power protected and up to code' },
+        { src: '/gallery/rangehood-soffit-wire.jpg', caption: 'Wire routed into the soffit. Receptacle left accessible through the LED cut-out so the rangehood stays plugged in (hardwiring voids the manufacturer warranty).' },
       ],
       description:
         'Kitchen rangehood replacement with new recessed lighting. Power was carefully run from a GFCI-protected circuit and left on a receptacle (accessible through the LED cut-out) so the unit stays under full manufacturer warranty. Hardwiring would have voided it.',
@@ -397,24 +349,12 @@ export default function Home() {
       tag: 'Plumbing',
       type: 'before-after',
       photos: [
-        {
-          src: '/gallery/hosebib-01-before.jpg',
-          caption: 'Before: Heavily corroded, failing outdoor hose bib',
-        },
-        {
-          src: '/gallery/hosebib-02-after.jpg',
-          caption: 'After: New brass hose bib with green handle — clean, reliable, and ready for years of use',
-        },
+        { src: '/gallery/hosebib-01-before.jpg', caption: 'Before: Heavily corroded, failing outdoor hose bib' },
+        { src: '/gallery/hosebib-02-after.jpg', caption: 'After: New brass hose bib with green handle — clean, reliable, and ready for years of use' },
       ],
       supportPhotos: [
-        {
-          src: '/gallery/plumbing-ceiling-stain.jpg',
-          caption: 'Indoor water staining on the ceiling above the toilet — related leak damage',
-        },
-        {
-          src: '/gallery/plumbing-access-hole.jpg',
-          caption: 'Access opening cut to locate and repair the source of the leak',
-        },
+        { src: '/gallery/plumbing-ceiling-stain.jpg', caption: 'Indoor water staining on the ceiling above the toilet — related leak damage' },
+        { src: '/gallery/plumbing-access-hole.jpg', caption: 'Access opening cut to locate and repair the source of the leak' },
       ],
       description:
         'Outdoor hose bib was heavily corroded and failing. Replaced with a new brass unit while also addressing the related indoor water damage and access needs. One clean plumbing solution.',
@@ -424,13 +364,9 @@ export default function Home() {
       tag: 'Electrical',
       type: 'single',
       photos: [
-        {
-          src: '/gallery/led-under-cabinet-lighting.jpg',
-          caption: 'Custom low-voltage LED under-cabinet lighting — soft, even light exactly where you need it. Easy upgrade, big difference.',
-        },
+        { src: '/gallery/led-under-cabinet-lighting.jpg', caption: 'Custom low-voltage LED under-cabinet lighting — soft, even light exactly where you need it. Easy upgrade, big difference.' },
       ],
-      description:
-        'Low-voltage LED strip install under cabinets for task lighting and ambiance. Simple electrical upgrade that transforms the kitchen.',
+      description: 'Low-voltage LED strip install under cabinets for task lighting and ambiance. Simple electrical upgrade that transforms the kitchen.',
     },
   ];
 
@@ -491,10 +427,13 @@ export default function Home() {
             <br />
             Repairs & Upgrades
           </h1>
-          <p className="text-lg sm:text-xl mb-8 sm:mb-10 opacity-95 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl mb-6 sm:mb-8 opacity-95 max-w-2xl mx-auto">
             Solo Chandler expert in drywall, electrical & plumbing.
             <br className="hidden sm:block" />
             Fair pricing • Clean work • Done right the first time.
+          </p>
+          <p className="text-sm sm:text-base opacity-80 max-w-xl mx-auto mb-8">
+            You deal directly with the person who does the work — clear communication, reliable scheduling, and no runaround.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a href="#quote" onClick={() => trackEvent('hero_primary_cta_clicked')} className="inline-block bg-[#FFAB00] hover:bg-amber-500 text-[#1A1A1A] px-8 sm:px-10 py-4 rounded-full text-lg sm:text-xl font-bold transition shadow-lg">
@@ -521,11 +460,7 @@ export default function Home() {
                 type="button"
                 onClick={() => {
                   setQuoteStarted(true);
-                  if (
-                    svc.category === 'drywall' ||
-                    svc.category === 'electrical' ||
-                    svc.category === 'plumbing'
-                  ) {
+                  if (svc.category === 'drywall' || svc.category === 'electrical' || svc.category === 'plumbing') {
                     setActiveCategory(svc.category);
                   }
                   document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' });
@@ -651,11 +586,7 @@ export default function Home() {
             <div id="quote-builder" className="bg-white rounded-3xl shadow-xl p-6 sm:p-10 md:p-12 border border-gray-100">
               <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
                 <div className="text-sm font-semibold text-[#005683]">Step 2 of 2 · Build your quote</div>
-                <button
-                  type="button"
-                  onClick={() => setQuoteStarted(false)}
-                  className="text-xs text-gray-500 hover:text-[#005683] underline"
-                >
+                <button type="button" onClick={() => setQuoteStarted(false)} className="text-xs text-gray-500 hover:text-[#005683] underline">
                   Edit step 1
                 </button>
               </div>
@@ -676,18 +607,14 @@ export default function Home() {
                       type="button"
                       onClick={() => setActiveCategory(cat.key)}
                       className={`px-4 py-2 rounded-full text-sm font-semibold transition flex items-center gap-2 ${
-                        activeCategory === cat.key
-                          ? 'bg-[#005683] text-white'
-                          : 'bg-slate-100 text-[#424242] hover:bg-slate-200'
+                        activeCategory === cat.key ? 'bg-[#005683] text-white' : 'bg-slate-100 text-[#424242] hover:bg-slate-200'
                       }`}
                     >
                       {cat.short}
                       {count > 0 && (
-                        <span
-                          className={`text-xs font-bold px-1.5 py-0.5 rounded-full ${
-                            activeCategory === cat.key ? 'bg-white/20' : 'bg-[#FFAB00] text-black'
-                          }`}
-                        >
+                        <span className={`text-xs font-bold px-1.5 py-0.5 rounded-full ${
+                          activeCategory === cat.key ? 'bg-white/20' : 'bg-[#FFAB00] text-black'
+                        }`}>
                           {count}
                         </span>
                       )}
@@ -695,11 +622,7 @@ export default function Home() {
                   );
                 })}
                 {cart.length > 0 && (
-                  <button
-                    type="button"
-                    onClick={clearCart}
-                    className="ml-auto text-xs text-gray-500 hover:text-red-600 underline"
-                  >
+                  <button type="button" onClick={clearCart} className="ml-auto text-xs text-gray-500 hover:text-red-600 underline">
                     Clear all
                   </button>
                 )}
@@ -725,17 +648,10 @@ export default function Home() {
                             }`}
                           >
                             <label className="flex items-start gap-3 cursor-pointer">
-                              <input
-                                type="checkbox"
-                                checked={selected}
-                                onChange={() => toggleService(svc.id)}
-                                className="mt-1 w-5 h-5 accent-[#FFAB00]"
-                              />
+                              <input type="checkbox" checked={selected} onChange={() => toggleService(svc.id)} className="mt-1 w-5 h-5 accent-[#FFAB00]" />
                               <span className="flex-1">
                                 <span className="font-medium text-[#1A1A1A]">{svc.name}</span>
-                                {svc.notes && (
-                                  <span className="block text-xs text-gray-500 mt-0.5">{svc.notes}</span>
-                                )}
+                                {svc.notes && <span className="block text-xs text-gray-500 mt-0.5">{svc.notes}</span>}
                                 {selected && (
                                   <span className="block text-sm text-[#005683] mt-1 font-semibold">
                                     Labor ${labor}
@@ -750,37 +666,17 @@ export default function Home() {
                               <div className="mt-2 ml-8 flex items-center gap-2">
                                 <span className="text-xs text-[#424242]">Qty</span>
                                 <div className="inline-flex items-center border border-gray-300 rounded-lg overflow-hidden">
-                                  <button
-                                    type="button"
-                                    onClick={() => setQty(svc.id, qty - 1)}
-                                    className="w-8 h-8 flex items-center justify-center text-lg font-medium text-[#1A1A1A] hover:bg-slate-100 transition"
-                                    aria-label="Decrease quantity"
-                                  >
-                                    −
-                                  </button>
+                                  <button type="button" onClick={() => setQty(svc.id, qty - 1)} className="w-8 h-8 flex items-center justify-center text-lg font-medium text-[#1A1A1A] hover:bg-slate-100 transition" aria-label="Decrease quantity">−</button>
                                   <span className="w-10 text-center text-sm font-semibold tabular-nums">{qty}</span>
-                                  <button
-                                    type="button"
-                                    onClick={() => setQty(svc.id, qty + 1)}
-                                    className="w-8 h-8 flex items-center justify-center text-lg font-medium text-[#1A1A1A] hover:bg-slate-100 transition"
-                                    aria-label="Increase quantity"
-                                  >
-                                    +
-                                  </button>
+                                  <button type="button" onClick={() => setQty(svc.id, qty + 1)} className="w-8 h-8 flex items-center justify-center text-lg font-medium text-[#1A1A1A] hover:bg-slate-100 transition" aria-label="Increase quantity">+</button>
                                 </div>
                               </div>
                             )}
                             {selected && svc.deviceCost != null && (
                               <div className="mt-2 ml-8">
                                 <label className="flex items-center gap-2 text-xs text-[#424242] cursor-pointer">
-                                  <input
-                                    type="checkbox"
-                                    checked={supply}
-                                    onChange={(e) => setSupply(svc.id, e.target.checked)}
-                                    className="accent-[#FFAB00]"
-                                  />
-                                  DEP supplies device (+~${deviceSellPrice(svc.deviceCost)}
-                                  {svc.kind === 'volume' && qty > 1 ? ` × ${qty}` : ''}, 25% markup)
+                                  <input type="checkbox" checked={supply} onChange={(e) => setSupply(svc.id, e.target.checked)} className="accent-[#FFAB00]" />
+                                  DEP supplies device (+~${deviceSellPrice(svc.deviceCost)}{svc.kind === 'volume' && qty > 1 ? ` × ${qty}` : ''}, 25% markup)
                                 </label>
                               </div>
                             )}
@@ -797,15 +693,9 @@ export default function Home() {
                   <div className="text-xs text-gray-500 uppercase tracking-wide">Live estimate</div>
                   <div className="text-2xl font-bold text-[#1A1A1A]">
                     ${liveQuote.total}
-                    {cart.length === 0 && (
-                      <span className="text-sm font-normal text-gray-500 ml-2">
-                        (service call only until you select work)
-                      </span>
-                    )}
+                    {cart.length === 0 && <span className="text-sm font-normal text-gray-500 ml-2">(service call only until you select work)</span>}
                   </div>
-                  {liveQuote.hasWork && liveQuote.call === 0 && (
-                    <div className="text-xs text-green-700 mt-0.5">Service call waived</div>
-                  )}
+                  {liveQuote.hasWork && liveQuote.call === 0 && <div className="text-xs text-green-700 mt-0.5">Service call waived</div>}
                 </div>
                 <div className="text-xs text-gray-500 text-right">
                   {cart.length} selected
@@ -820,10 +710,7 @@ export default function Home() {
               <button
                 onClick={() => {
                   setShowQuote(true);
-                  trackEvent('quote_review_opened', {
-                    selected_services_count: cart.length,
-                    estimated_total: liveQuote.total,
-                  });
+                  trackEvent('quote_review_opened', { selected_services_count: cart.length, estimated_total: liveQuote.total });
                 }}
                 className="mt-6 w-full bg-[#005683] hover:bg-blue-900 text-white py-4 sm:py-5 rounded-2xl font-bold text-lg sm:text-xl transition shadow-md"
               >
@@ -841,11 +728,9 @@ export default function Home() {
                   </div>
                   <div className="mt-5 bg-white rounded-xl border border-slate-200 p-4">
                     <div className="text-xs uppercase tracking-wide text-gray-500 mb-1">Why homeowners choose DEP</div>
-                    <div className="text-sm text-[#1A1A1A] font-medium">
-                      Licensed • Bonded • Insured
-                    </div>
+                    <div className="text-sm text-[#1A1A1A] font-medium">Licensed • Bonded • Insured</div>
                     <div className="text-xs text-gray-600 mt-1">
-                      Solo tradesman — you talk directly to the person who does the work. Fair pricing, clean results, no pressure.
+                      Solo tradesman — you talk directly to the person who does the work. Clear communication, fair pricing, and clean results with no pressure.
                     </div>
                   </div>
                   <div className="mt-4 bg-[#FFF8E7] border border-[#FFAB00]/40 rounded-xl p-4 text-sm text-[#1A1A1A]">
@@ -862,9 +747,7 @@ export default function Home() {
                     onClick={handleOpenBooking}
                     disabled={!liveQuote.hasWork}
                     className={`mt-6 w-full py-4 rounded-2xl font-bold transition shadow-sm ${
-                      liveQuote.hasWork
-                        ? 'bg-[#FFAB00] hover:bg-amber-500 text-black'
-                        : 'bg-slate-200 text-slate-500 cursor-not-allowed'
+                      liveQuote.hasWork ? 'bg-[#FFAB00] hover:bg-amber-500 text-black' : 'bg-slate-200 text-slate-500 cursor-not-allowed'
                     }`}
                   >
                     {liveQuote.hasWork ? 'Book This Job →' : 'Select a Service to Book'}
@@ -881,13 +764,7 @@ export default function Home() {
 
       {bookingModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/70 p-3 sm:p-6 flex items-center justify-center" onClick={() => setBookingModalOpen(false)}>
-          <div
-            role="dialog"
-            aria-modal="true"
-            aria-label="Booking form dialog"
-            className="w-full max-w-4xl bg-white rounded-3xl p-5 sm:p-8 max-h-[92vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div role="dialog" aria-modal="true" aria-label="Booking form dialog" className="w-full max-w-4xl bg-white rounded-3xl p-5 sm:p-8 max-h-[92vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between gap-3 mb-4">
               <h3 className="text-xl sm:text-2xl font-bold text-[#1A1A1A]">Complete Your Booking</h3>
               <button type="button" onClick={() => setBookingModalOpen(false)} className="text-2xl text-gray-500 hover:text-[#005683]">×</button>
@@ -899,12 +776,7 @@ export default function Home() {
               {servicesSummary || 'No services selected yet.'}
             </div>
             {bookingEmbedUrl && (
-              <iframe
-                title="DEP Booking Form"
-                src={bookingEmbedUrl}
-                sandbox="allow-scripts allow-forms allow-same-origin allow-popups"
-                className="w-full h-[72vh] rounded-2xl border border-slate-200"
-              />
+              <iframe title="DEP Booking Form" src={bookingEmbedUrl} sandbox="allow-scripts allow-forms allow-same-origin allow-popups" className="w-full h-[72vh] rounded-2xl border border-slate-200" />
             )}
           </div>
         </div>
@@ -913,7 +785,9 @@ export default function Home() {
       <section id="portfolio" className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">Our Work</h2>
-          <p className="text-center text-[#424242] mb-10 sm:mb-12">Real projects — before, during & after</p>
+          <p className="text-center text-[#424242] mb-10 sm:mb-12">
+            Real projects from local homes — before, during & after. This is the kind of careful, clean work you can expect.
+          </p>
           {portfolioProjects.map((project, pi) => (
             <div key={pi} className="mb-14 last:mb-0">
               <div className="flex flex-wrap items-center gap-3 mb-5">
@@ -934,18 +808,10 @@ export default function Home() {
                     aria-label={`View photo: ${photo.caption}`}
                   >
                     <img src={photo.src} alt={photo.caption} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
-                    {project.type === 'before-after' && idx === 0 && (
-                      <span className="absolute top-2 left-2 bg-slate-700/90 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">Before</span>
-                    )}
-                    {project.type === 'before-after' && idx === 1 && (
-                      <span className="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">After</span>
-                    )}
-                    {project.type !== 'before-after' && idx === project.photos.length - 1 && (
-                      <span className="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">✓ Completed</span>
-                    )}
-                    {project.type === 'sequence' && idx === 0 && (
-                      <span className="absolute top-2 left-2 bg-slate-700/90 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">Start</span>
-                    )}
+                    {project.type === 'before-after' && idx === 0 && <span className="absolute top-2 left-2 bg-slate-700/90 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">Before</span>}
+                    {project.type === 'before-after' && idx === 1 && <span className="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">After</span>}
+                    {project.type !== 'before-after' && idx === project.photos.length - 1 && <span className="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">✓ Completed</span>}
+                    {project.type === 'sequence' && idx === 0 && <span className="absolute top-2 left-2 bg-slate-700/90 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">Start</span>}
                   </button>
                 ))}
               </div>
@@ -954,12 +820,7 @@ export default function Home() {
                   <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Supporting details</p>
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                     {project.supportPhotos.map((photo, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => setLightbox(photo)}
-                        className="group relative aspect-square overflow-hidden rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition"
-                        aria-label={`View photo: ${photo.caption}`}
-                      >
+                      <button key={idx} onClick={() => setLightbox(photo)} className="group relative aspect-square overflow-hidden rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition" aria-label={`View photo: ${photo.caption}`}>
                         <img src={photo.src} alt={photo.caption} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
                       </button>
                     ))}
@@ -989,7 +850,9 @@ export default function Home() {
       <section id="testimonials" className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">What Clients Say</h2>
-          <p className="text-center text-[#424242] mb-10 sm:mb-12">Real feedback from Chandler & East Valley homeowners</p>
+          <p className="text-center text-[#424242] mb-10 sm:mb-12">
+            Real feedback from Chandler & East Valley homeowners who worked directly with Jason.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {testimonials.map((t, i) => (
               <div key={i} className="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-100 h-full">
@@ -1009,27 +872,9 @@ export default function Home() {
 
       <div className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-slate-200 shadow-[0_-4px_18px_rgba(0,0,0,0.08)]">
         <div className="grid grid-cols-3 gap-2 p-2">
-          <a
-            href="tel:6025981988"
-            onClick={() => trackEvent('mobile_sticky_call_clicked')}
-            className="text-center bg-[#005683] text-white rounded-xl py-2.5 text-xs font-semibold"
-          >
-            Call
-          </a>
-          <a
-            href="sms:6025981988"
-            onClick={() => trackEvent('mobile_sticky_text_clicked')}
-            className="text-center bg-slate-100 text-[#1A1A1A] rounded-xl py-2.5 text-xs font-semibold"
-          >
-            Text Jason
-          </a>
-          <a
-            href="#quote"
-            onClick={() => trackEvent('mobile_sticky_quote_clicked')}
-            className="text-center bg-[#FFAB00] text-black rounded-xl py-2.5 text-xs font-semibold"
-          >
-            Get Quote
-          </a>
+          <a href="tel:6025981988" onClick={() => trackEvent('mobile_sticky_call_clicked')} className="text-center bg-[#005683] text-white rounded-xl py-2.5 text-xs font-semibold">Call</a>
+          <a href="sms:6025981988" onClick={() => trackEvent('mobile_sticky_text_clicked')} className="text-center bg-slate-100 text-[#1A1A1A] rounded-xl py-2.5 text-xs font-semibold">Text Jason</a>
+          <a href="#quote" onClick={() => trackEvent('mobile_sticky_quote_clicked')} className="text-center bg-[#FFAB00] text-black rounded-xl py-2.5 text-xs font-semibold">Get Quote</a>
         </div>
       </div>
       <div className="h-16 md:hidden" />
