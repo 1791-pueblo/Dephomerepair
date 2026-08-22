@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
@@ -490,10 +489,10 @@ export default function Home() {
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-5 leading-tight">
             Seamless, Smart
             <br />
-            Repairs &amp; Upgrades
+            Repairs & Upgrades
           </h1>
           <p className="text-lg sm:text-xl mb-8 sm:mb-10 opacity-95 max-w-2xl mx-auto">
-            Solo Chandler expert in drywall, electrical &amp; plumbing.
+            Solo Chandler expert in drywall, electrical & plumbing.
             <br className="hidden sm:block" />
             Fair pricing • Clean work • Done right the first time.
           </p>
@@ -505,7 +504,7 @@ export default function Home() {
               Call 602-598-1988
             </a>
           </div>
-          <div className="mt-6 text-sm opacity-70">Serving Chandler, Gilbert, Mesa &amp; East Valley</div>
+          <div className="mt-6 text-sm opacity-70">Serving Chandler, Gilbert, Mesa & East Valley</div>
         </div>
       </section>
 
@@ -584,7 +583,7 @@ export default function Home() {
               <div>🎉 <strong>Triple Play</strong> — All three categories → 15% off labor</div>
               <div>⚡ <strong>Power Pair</strong> — Any two categories → 10% off labor</div>
               <div>✓ <strong>Service call waived</strong> when any repair or install is booked</div>
-              <div>🔥 <strong>While We&apos;re There</strong> — One small 5-minute task FREE with any booked service</div>
+              <div>🔥 <strong>While We're There</strong> — One small 5-minute task FREE with any booked service</div>
             </div>
           </div>
         </div>
@@ -846,7 +845,7 @@ export default function Home() {
                       Licensed • Bonded • Insured
                     </div>
                     <div className="text-xs text-gray-600 mt-1">
-                      Solo tradesman — you talk to the person who does the work. Fair pricing, no pressure.
+                      Solo tradesman — you talk directly to the person who does the work. Fair pricing, clean results, no pressure.
                     </div>
                   </div>
                   <div className="mt-4 bg-[#FFF8E7] border border-[#FFAB00]/40 rounded-xl p-4 text-sm text-[#1A1A1A]">
@@ -870,7 +869,9 @@ export default function Home() {
                   >
                     {liveQuote.hasWork ? 'Book This Job →' : 'Select a Service to Book'}
                   </button>
-                  <p className="mt-3 text-center text-xs text-gray-500">Booking stays on this page — quote details are already filled in</p>
+                  <p className="mt-3 text-center text-xs text-gray-500">
+                    Your selections and estimate are ready. Just add contact details to book — stays on this page.
+                  </p>
                 </div>
               )}
             </div>
@@ -912,7 +913,7 @@ export default function Home() {
       <section id="portfolio" className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">Our Work</h2>
-          <p className="text-center text-[#424242] mb-10 sm:mb-12">Real projects — before, during &amp; after</p>
+          <p className="text-center text-[#424242] mb-10 sm:mb-12">Real projects — before, during & after</p>
           {portfolioProjects.map((project, pi) => (
             <div key={pi} className="mb-14 last:mb-0">
               <div className="flex flex-wrap items-center gap-3 mb-5">
@@ -988,7 +989,7 @@ export default function Home() {
       <section id="testimonials" className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">What Clients Say</h2>
-          <p className="text-center text-[#424242] mb-10 sm:mb-12">Real feedback from Chandler &amp; East Valley homeowners</p>
+          <p className="text-center text-[#424242] mb-10 sm:mb-12">Real feedback from Chandler & East Valley homeowners</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {testimonials.map((t, i) => (
               <div key={i} className="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-100 h-full">
@@ -1049,7 +1050,7 @@ export default function Home() {
               <div className="space-y-2 text-sm opacity-90">
                 <div><a href="tel:6025981988" className="hover:text-[#FFAB00] transition">📞 602-598-1988</a></div>
                 <div><a href="mailto:info@dephomerepair.com" className="hover:text-[#FFAB00] transition">✉️ info@dephomerepair.com</a></div>
-                <div className="pt-2">Chandler, AZ &amp; East Valley<br />Licensed • Bonded • Insured</div>
+                <div className="pt-2">Chandler, AZ & East Valley<br />Licensed • Bonded • Insured</div>
               </div>
             </div>
             <div>
