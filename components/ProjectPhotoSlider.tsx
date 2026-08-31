@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 
 type Photo = { src: string; caption: string };
@@ -15,6 +15,8 @@ export function ProjectPhotoSlider({
   onOpen: (photo: Photo) => void;
 }) {
   const [index, setIndex] = useState(0);
+  const startX = useRef<number | null>(null);
+  const swiped = useRef(false);
   const total = photos.length;
 
   if (total === 0) return null;
@@ -37,12 +39,33 @@ export function ProjectPhotoSlider({
   const go = (dir: -1 | 1) => setIndex((i) => (i + dir + total) % total);
   const photo = photos[index];
 
+  const onTouchStart = (e: React.TouchEvent) => {
+    startX.current = e.touches[0].clientX;
+    swiped.current = false;
+  };
+
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (startX.current == null) return;
+    const delta = e.changedTouches[0].clientX - startX.current;
+    startX.current = null;
+    if (Math.abs(delta) < 40) return;
+    swiped.current = true;
+    go(delta < 0 ? 1 : -1);
+  };
+
   return (
     <div className="relative max-w-3xl">
-      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-slate-100 shadow-sm bg-slate-50">
+      <div
+        className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-slate-100 shadow-sm bg-slate-50"
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
         <button
           type="button"
-          onClick={() => onOpen(photo)}
+          onClick={() => {
+            if (swiped.current) return;
+            onOpen(photo);
+          }}
           className="absolute inset-0 z-0 focus:outline-none focus:ring-2 focus:ring-[#FFAB00] rounded-2xl"
           aria-label={`View photo: ${photo.caption}`}
         >
@@ -51,7 +74,7 @@ export function ProjectPhotoSlider({
             alt={photo.caption}
             fill
             sizes="(max-width: 768px) 100vw, 48rem"
-            className="object-cover transition-opacity duration-300"
+            className="object-cover"
             loading="lazy"
           />
         </button>
@@ -88,6 +111,7 @@ export function ProjectPhotoSlider({
       </div>
 
       <p className="mt-3 text-sm text-[#424242] text-center min-h-[1.25rem]">{photo.caption}</p>
+      <p className="text-center text-xs text-gray-400 mt-1">{index + 1} / {total}</p>
 
       <div className="mt-3 flex justify-center gap-2">
         {photos.map((_, i) => (
