@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   allServices,
   applyBundleDiscount,
@@ -83,6 +83,9 @@ export default function Home() {
   const [lightbox, setLightbox] = useState<{ src: string; caption: string } | null>(
     null
   );
+  const lightboxRef = useRef<HTMLDivElement | null>(null);
+  const lightboxCloseButtonRef = useRef<HTMLButtonElement | null>(null);
+  const previousFocusedRef = useRef<HTMLElement | null>(null);
 
   const cartMap = useMemo(() => {
     const m = new Map<string, CartItem>();
@@ -163,6 +166,51 @@ export default function Home() {
     });
     return c;
   }, [cart]);
+
+  useEffect(() => {
+    if (!lightbox) return;
+    previousFocusedRef.current = document.activeElement as HTMLElement | null;
+    lightboxCloseButtonRef.current?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setLightbox(null);
+        return;
+      }
+
+      if (event.key !== 'Tab') return;
+      const container = lightboxRef.current;
+      if (!container) return;
+
+      const focusableElements = container.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+
+      if (focusableElements.length === 0) {
+        event.preventDefault();
+        return;
+      }
+
+      const first = focusableElements[0];
+      const last = focusableElements[focusableElements.length - 1];
+      const current = document.activeElement as HTMLElement | null;
+
+      if (event.shiftKey && current === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && current === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      previousFocusedRef.current?.focus();
+    };
+  }, [lightbox]);
 
   const toggleService = (id: string) => {
     setShowQuote(false);
@@ -756,8 +804,22 @@ export default function Home() {
 
       {lightbox && (
         <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" onClick={() => setLightbox(null)}>
-          <div className="relative max-w-3xl w-full" onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setLightbox(null)} className="absolute -top-10 right-0 text-white text-3xl font-bold hover:text-[#FFAB00] transition" aria-label="Close">×</button>
+          <div
+            ref={lightboxRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label={lightbox.caption}
+            className="relative max-w-3xl w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              ref={lightboxCloseButtonRef}
+              onClick={() => setLightbox(null)}
+              className="absolute -top-10 right-0 text-white text-3xl font-bold hover:text-[#FFAB00] transition"
+              aria-label="Close"
+            >
+              ×
+            </button>
             <img src={lightbox.src} alt={lightbox.caption} className="w-full rounded-2xl shadow-2xl" />
             <p className="mt-3 text-center text-white text-sm opacity-80">{lightbox.caption}</p>
           </div>
