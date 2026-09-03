@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
+import { ProjectPhotoSlider } from '../components/ProjectPhotoSlider';
 import {
   allServices,
   applyBundleDiscount,
@@ -601,29 +602,11 @@ export default function Home() {
                 <span className="text-xs font-semibold bg-[#005683]/10 text-[#005683] px-3 py-1 rounded-full">{project.tag}</span>
               </div>
               <p className="text-[#424242] text-sm mb-6 max-w-2xl">{project.description}</p>
-              <div className={`grid gap-3 sm:gap-4 ${project.type === 'before-after' ? 'grid-cols-1 sm:grid-cols-2 max-w-4xl' : project.type === 'single' ? 'grid-cols-1 max-w-md' : 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4'}`}>
-                {project.photos.map((photo, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setLightbox(photo)}
-                    className="group relative aspect-square overflow-hidden rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition focus:outline-none focus:ring-2 focus:ring-[#FFAB00]"
-                    aria-label={`View photo: ${photo.caption}`}
-                  >
-                    <Image
-                      src={photo.src}
-                      alt={photo.caption}
-                      fill
-                      sizes={project.type === 'before-after' ? '(max-width: 640px) 100vw, 50vw' : project.type === 'single' ? '(max-width: 640px) 100vw, 28rem' : '(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw'}
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                    {project.type === 'before-after' && idx === 0 && <span className="absolute top-2 left-2 bg-slate-700/90 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">Before</span>}
-                    {project.type === 'before-after' && idx === 1 && <span className="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">After</span>}
-                    {project.type !== 'before-after' && idx === project.photos.length - 1 && <span className="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">✓ Completed</span>}
-                    {project.type === 'sequence' && idx === 0 && <span className="absolute top-2 left-2 bg-slate-700/90 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">Start</span>}
-                  </button>
-                ))}
-              </div>
+              <ProjectPhotoSlider
+                photos={project.photos}
+                projectType={project.type}
+                onOpen={setLightbox}
+              />
               {project.supportPhotos && project.supportPhotos.length > 0 && (
                 <div className="mt-4">
                   <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Supporting details</p>
