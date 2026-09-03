@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
         hostname: 'github.com',
         pathname: '/user-attachments/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com',
+        pathname: '/1791-pueblo/Dephomerepair/**',
+      },
     ],
   },
 };
