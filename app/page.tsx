@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { ProjectPhotoSlider } from '../components/ProjectPhotoSlider';
+import { portfolioProjects, type Bundle, type PortfolioProject, type Trade } from '../lib/portfolio';
 import {
   allServices,
   applyBundleDiscount,
@@ -27,6 +28,31 @@ const CATEGORY_META = [
   { key: 'electrical' as const, label: 'E — Electrical', short: 'Electrical', letter: 'E', letterColor: '#FFAB00', cardBg: 'bg-[#FFF8E7]', borderClass: 'border-[#FFAB00]/25 hover:border-[#FFAB00]/60' },
   { key: 'plumbing' as const, label: 'P — Plumbing', short: 'Plumbing', letter: 'P', letterColor: '#0077B6', cardBg: 'bg-[#E6F4FA]', borderClass: 'border-[#0077B6]/20 hover:border-[#0077B6]/50' },
 ];
+
+const NAV_LINKS = [
+  { href: '#services', label: 'Services' },
+  { href: '#quote', label: 'Instant Quote' },
+  { href: '#portfolio', label: 'Portfolio' },
+  { href: '#testimonials', label: 'Reviews' },
+  { href: '#contact', label: 'Contact' },
+];
+
+const TRADE_LABELS: Record<Trade, string> = {
+  drywall: 'Drywall',
+  electrical: 'Electrical',
+  plumbing: 'Plumbing',
+};
+
+const BUNDLE_META: Record<Exclude<Bundle, 'single'>, { label: string; className: string }> = {
+  'power-pair': {
+    label: 'Power Pair',
+    className: 'bg-[#FFAB00]/15 text-[#1A1A1A]',
+  },
+  'triple-play': {
+    label: 'Triple Play',
+    className: 'bg-[#005683]/10 text-[#005683]',
+  },
+};
 
 function groupBySubcategory(list: ServicePrice[]) {
   const map = new Map<string, ServicePrice[]>();
@@ -63,6 +89,10 @@ function trackEvent(name: string, data: Record<string, string | number | boolean
   if (typeof window === 'undefined') return;
   const win = window as Window & { dataLayer?: Array<Record<string, unknown>> };
   (win.dataLayer = win.dataLayer || []).push({ event: name, ...data });
+}
+
+function formatProjectTrades(trades: Trade[]) {
+  return trades.map((trade) => TRADE_LABELS[trade]).join(' + ');
 }
 
 export default function Home() {
@@ -234,71 +264,19 @@ export default function Home() {
     { name: 'Lisa T.', location: 'Mesa', text: 'Quick response on a plumbing issue. Honest pricing and quality work. Exactly what you want from a local tradesperson.', rating: 5 },
   ];
 
-  const portfolioProjects = [
-    {
-      title: 'Bathroom Renovation — Pony Wall Vanity',
-      tag: 'Drywall + Plumbing',
-      type: 'sequence' as const,
-      photos: [
-        { src: 'https://github.com/user-attachments/assets/450a22cd-9193-4af4-a8a5-e056e4459848', caption: 'Job site starts: framing, R-TECH insulation & plumbing rough-in' },
-        { src: 'https://github.com/user-attachments/assets/6f7576a1-174e-47f0-a4d3-316da4ffc6c5', caption: 'R-TECH foam + Henry waterproofing membrane for long-term protection' },
-        { src: 'https://github.com/user-attachments/assets/43a17179-21fa-4ec0-9ea5-8697ac113b95', caption: 'Shower wall insulation & moisture barrier detail' },
-        { src: 'https://github.com/user-attachments/assets/0253e8ac-69d8-44c3-8375-0c791fc83dd1', caption: 'Greenboard drywall installed, tub set — ready for finish' },
-        { src: '/gallery/bathroom-pony-wall-vanity-finished.jpg', caption: 'Completed: Custom double vanity with pony wall, quartz-look top & integrated storage. Ready for yours?' },
-      ],
-      description: 'Full bathroom renovation including moisture-resistant framing, R-TECH rigid foam, Henry waterproofing, plumbing & electrical rough-in, and a custom pony-wall double vanity. Clean, modern, and built to last.',
-    },
-    {
-      title: 'Closet Conversion with Barn Doors',
-      tag: 'Drywall + Carpentry',
-      type: 'sequence' as const,
-      photos: [
-        { src: '/gallery/closet-01-demolition.jpg', caption: 'Before: Original closet demolished — clean slate for better storage' },
-        { src: '/gallery/closet-02-framing.jpg', caption: 'Framing and wall build-out in progress' },
-        { src: '/gallery/closet-03-progress.jpg', caption: 'Drywall and rough-in complete' },
-        { src: '/gallery/closet-04-near-finished.jpg', caption: 'Finishing touches underway' },
-        { src: '/gallery/closet-05-barn-doors-final.jpg', caption: 'Completed: Custom barn-door closet conversion. Want one like this? Get a quote.' },
-      ],
-      description: 'Complete closet conversion from demolition through custom barn doors. Better storage, cleaner look, and zero wasted space.',
-    },
-    {
-      title: 'Rangehood Install + Protected Power',
-      tag: 'Electrical',
-      type: 'before-after' as const,
-      photos: [
-        { src: '/gallery/rangehood-01-rough-opening.jpg', caption: 'Before: Ceiling opened and rough opening prepared for new rangehood' },
-        { src: '/gallery/rangehood-02-finished.jpg', caption: 'After: Professional Ancona rangehood + matching recessed lighting. Clean lines, quiet power.' },
-      ],
-      supportPhotos: [
-        { src: '/gallery/electrical-romex-wall.jpg', caption: '12-gauge Romex run from exterior 20A GFCI load terminals — power protected and up to code' },
-        { src: '/gallery/rangehood-soffit-wire.jpg', caption: 'Wire routed into the soffit. Receptacle left accessible through the LED cut-out so the rangehood stays plugged in (hardwiring voids the manufacturer warranty).' },
-      ],
-      description: 'Kitchen rangehood replacement with new recessed lighting. Power was carefully run from a GFCI-protected circuit and left on a receptacle (accessible through the LED cut-out) so the unit stays under full manufacturer warranty. Hardwiring would have voided it.',
-    },
-    {
-      title: 'Hose Bib Replacement & Leak Repair',
-      tag: 'Plumbing',
-      type: 'before-after' as const,
-      photos: [
-        { src: '/gallery/hosebib-01-before.jpg', caption: 'Before: Heavily corroded, failing outdoor hose bib' },
-        { src: '/gallery/hosebib-02-after.jpg', caption: 'After: New brass hose bib with green handle — clean, reliable, and ready for years of use' },
-      ],
-      supportPhotos: [
-        { src: '/gallery/plumbing-ceiling-stain.jpg', caption: 'Indoor water staining on the ceiling above the toilet — related leak damage' },
-        { src: '/gallery/plumbing-access-hole.jpg', caption: 'Access opening cut to locate and repair the source of the leak' },
-      ],
-      description: 'Outdoor hose bib was heavily corroded and failing. Replaced with a new brass unit while also addressing the related indoor water damage and access needs. One clean plumbing solution.',
-    },
-    {
-      title: 'Under-Cabinet LED Lighting',
-      tag: 'Electrical',
-      type: 'single' as const,
-      photos: [
-        { src: '/gallery/led-under-cabinet-lighting.jpg', caption: 'Custom low-voltage LED under-cabinet lighting — soft, even light exactly where you need it. Easy upgrade, big difference.' },
-      ],
-      description: 'Low-voltage LED strip install under cabinets for task lighting and ambiance. Simple electrical upgrade that transforms the kitchen.',
-    },
-  ];
+  const openQuoteForProject = (project: PortfolioProject) => {
+    setQuoteStarted(true);
+    setActiveCategory(project.trades[0]);
+    if (!description && project.quoteHint) setDescription(project.quoteHint);
+    trackEvent('portfolio_quote_clicked', {
+      project_title: project.title,
+      bundle: project.bundle,
+      trade_count: project.trades.length,
+    });
+    setTimeout(() => {
+      document.getElementById('quote-builder')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
+  };
 
   return (
     <>
@@ -308,11 +286,9 @@ export default function Home() {
             <Image src="/logo.png" alt="DEP Home Repair" width={140} height={56} className="h-12 sm:h-14 w-auto" priority />
           </a>
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-[#1A1A1A]">
-            <a href="#services" className="hover:text-[#005683] transition">Services</a>
-            <a href="#quote" className="hover:text-[#005683] transition">Instant Quote</a>
-            <a href="#testimonials" className="hover:text-[#005683] transition">Reviews</a>
-            <a href="#portfolio" className="hover:text-[#005683] transition">Portfolio</a>
-            <a href="#contact" className="hover:text-[#005683] transition">Contact</a>
+            {NAV_LINKS.map((link) => (
+              <a key={link.href} href={link.href} className="hover:text-[#005683] transition">{link.label}</a>
+            ))}
             <a href="#quote" onClick={() => trackEvent('hero_nav_quote_clicked')} className="bg-[#FFAB00] hover:bg-amber-500 text-black px-5 py-2.5 rounded-full font-semibold text-sm transition shadow-sm">Get Quote</a>
           </nav>
           <button className="md:hidden p-2 text-[#1A1A1A]" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle menu">
@@ -327,8 +303,8 @@ export default function Home() {
         </div>
         {mobileMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-3">
-            {['#services', '#quote', '#testimonials', '#portfolio', '#contact'].map((href) => (
-              <a key={href} href={href} className="block py-2 font-medium capitalize" onClick={() => setMobileMenuOpen(false)}>{href.slice(1)}</a>
+            {NAV_LINKS.map((link) => (
+              <a key={link.href} href={link.href} className="block py-2 font-medium" onClick={() => setMobileMenuOpen(false)}>{link.label}</a>
             ))}
             <a href="#quote" className="block mt-2 bg-[#FFAB00] text-center text-black px-5 py-3 rounded-full font-semibold" onClick={() => setMobileMenuOpen(false)}>Get Quote</a>
           </div>
@@ -599,7 +575,10 @@ export default function Home() {
             <div key={pi} className="mb-14 last:mb-0">
               <div className="flex flex-wrap items-center gap-3 mb-5">
                 <h3 className="text-xl sm:text-2xl font-bold text-[#1A1A1A]">{project.title}</h3>
-                <span className="text-xs font-semibold bg-[#005683]/10 text-[#005683] px-3 py-1 rounded-full">{project.tag}</span>
+                <span className="text-xs font-semibold bg-[#005683]/10 text-[#005683] px-3 py-1 rounded-full">{formatProjectTrades(project.trades)}</span>
+                {project.bundle !== 'single' && (
+                  <span className={`text-xs font-semibold px-3 py-1 rounded-full ${BUNDLE_META[project.bundle].className}`}>{BUNDLE_META[project.bundle].label}</span>
+                )}
               </div>
               <p className="text-[#424242] text-sm mb-6 max-w-2xl">{project.description}</p>
               <ProjectPhotoSlider
@@ -619,6 +598,10 @@ export default function Home() {
                   </div>
                 </div>
               )}
+              <div className="mt-5">
+                {project.quoteHint && <p className="text-sm text-[#424242] mb-3">{project.quoteHint}</p>}
+                <button type="button" onClick={() => openQuoteForProject(project)} className="inline-block bg-[#FFAB00] hover:bg-amber-500 text-black px-6 py-3 rounded-full font-semibold transition shadow-sm">Start a bundled quote →</button>
+              </div>
             </div>
           ))}
           <div className="mt-10 text-center">
@@ -685,6 +668,7 @@ export default function Home() {
               <div className="space-y-2 text-sm">
                 <div><a href="#services" className="hover:text-[#FFAB00] transition">Services</a></div>
                 <div><a href="#quote" className="hover:text-[#FFAB00] transition">Instant Quote</a></div>
+                <div><a href="#portfolio" className="hover:text-[#FFAB00] transition">Portfolio</a></div>
                 <div><a href="#testimonials" className="hover:text-[#FFAB00] transition">Reviews</a></div>
               </div>
             </div>

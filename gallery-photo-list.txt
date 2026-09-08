@@ -1,54 +1,52 @@
-DEP Home Repair – Website Gallery Photo Set
-Organized: August 12, 2026
+DEP Home Repair – Live Gallery Photo List
+Updated: September 8, 2026
 
-FEATURE ORDER
-1. Closet Conversion (full process)
-2. Rangehood Install (before/after)
-3. Low-Voltage LED Lighting
-4. Bathroom Vanity
+1. BATHROOM RENOVATION — PONY WALL VANITY
+bathroom-05-finished-vanity.jpg
+Caption: Finished pony-wall double vanity with the plumbing, electrical, and drywall wrapped into one project. Triple Play is 15% off labor when all three trades are booked together.
 
-----------------------------------------
-1. CLOSET CONVERSION
-----------------------------------------
+2. CLOSET CONVERSION WITH BARN DOORS
 closet-01-demolition.jpg
-Caption: Before: Original closet demolition
+Caption: Before: the original closet was opened up so the new layout could start from a clean slate.
 
 closet-02-framing.jpg
-Caption: Framing and wall build-out in progress
+Caption: New framing set the opening and backing so the drywall could finish straight and solid.
 
 closet-03-progress.jpg
-Caption: Drywall and rough-in complete
+Caption: Drywall in progress with the new opening taking shape for a cleaner storage setup.
 
 closet-04-near-finished.jpg
-Caption: Finishing touches underway
+Caption: Finish work underway so the edges, joints, and opening all land clean before final hardware.
 
 closet-05-barn-doors-final.jpg
-Caption: Completed: Custom barn-door closet conversion
+Caption: Completed barn-door closet conversion with a cleaner look and better use of the space.
 
-----------------------------------------
-2. RANGEHOOD INSTALL
-----------------------------------------
+3. RANGEHOOD INSTALL + PROTECTED POWER
 rangehood-01-rough-opening.jpg
-Caption: Before: Ceiling cut and rough opening for new rangehood
+Caption: Before: the opening was cut and the ceiling was prepped for the new rangehood install.
 
 rangehood-02-finished.jpg
-Caption: After: Professional rangehood and recessed lighting install
+Caption: After: the new rangehood and matching recessed lights finished the kitchen with protected power and clean lines.
 
-----------------------------------------
-3. LOW-VOLTAGE LED LIGHTING
-----------------------------------------
+electrical-romex-wall.jpg
+Caption: 12-gauge Romex ran from a GFCI-protected circuit so the new kitchen power stayed protected and code-conscious.
+
+rangehood-soffit-wire.jpg
+Caption: The receptacle stayed accessible through the LED cutout so the rangehood could stay plugged in and keep its warranty intact.
+
+4. HOSE BIB REPLACEMENT & LEAK REPAIR
+hosebib-01-before.jpg
+Caption: Before: the old hose bib was corroded and failing, which is how small outdoor leaks turn into bigger problems.
+
+hosebib-02-after.jpg
+Caption: After: the new brass hose bib closed up clean and gave the homeowner a reliable connection again.
+
+plumbing-ceiling-stain.jpg
+Caption: This ceiling stain showed why the leak needed to be traced properly instead of just treating the symptom.
+
+plumbing-access-hole.jpg
+Caption: The access opening made the repair possible, and the drywall patch can be handled in the same visit while we are there.
+
+5. UNDER-CABINET LED LIGHTING
 led-under-cabinet-lighting.jpg
-Caption: Custom low-voltage LED under-cabinet lighting
-
-----------------------------------------
-4. BATHROOM VANITY
-----------------------------------------
-bathroom-pony-wall-vanity-finished.jpg
-Caption: Custom double vanity with pony wall, quartz-look top, and integrated storage
-
-----------------------------------------
-NOTES
-- Lead with the Closet sequence (best process story)
-- Follow with Rangehood before/after pair
-- LED lighting as supporting electrical project
-- Vanity can be added now or held for a wider bathroom shot later
+Caption: Under-cabinet LED lighting puts the light on the counter where it helps most without adding more ceiling fixtures.

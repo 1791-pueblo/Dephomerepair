@@ -5,15 +5,6 @@ import Image from 'next/image';
 
 type Photo = { src: string; caption: string };
 
-const SRC_FIXES: Record<string, string> = {
-  '/gallery/bathroom-pony-wall-vanity-finished.jpg':
-    'https://raw.githubusercontent.com/1791-pueblo/Dephomerepair/main/bathroom-pony-wall-vanity-finished.jpg',
-};
-
-function resolveSrc(src: string) {
-  return SRC_FIXES[src] ?? src;
-}
-
 export function ProjectPhotoSlider({
   photos,
   projectType,
@@ -32,15 +23,14 @@ export function ProjectPhotoSlider({
 
   if (total === 1) {
     const photo = photos[0];
-    const src = resolveSrc(photo.src);
     return (
       <button
         type="button"
-        onClick={() => onOpen({ ...photo, src })}
+        onClick={() => onOpen(photo)}
         className="group relative aspect-[4/3] max-w-md overflow-hidden rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition focus:outline-none focus:ring-2 focus:ring-[#FFAB00]"
         aria-label={`View photo: ${photo.caption}`}
       >
-        <Image src={src} alt={photo.caption} fill sizes="(max-width: 640px) 100vw, 28rem" className="object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+        <Image src={photo.src} alt={photo.caption} fill sizes="(max-width: 640px) 100vw, 28rem" className="object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
         <span className="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">✓ Completed</span>
       </button>
     );
@@ -48,7 +38,6 @@ export function ProjectPhotoSlider({
 
   const go = (dir: -1 | 1) => setIndex((i) => (i + dir + total) % total);
   const photo = photos[index];
-  const src = resolveSrc(photo.src);
 
   const onTouchStart = (e: React.TouchEvent) => {
     startX.current = e.touches[0].clientX;
@@ -75,13 +64,13 @@ export function ProjectPhotoSlider({
           type="button"
           onClick={() => {
             if (swiped.current) return;
-            onOpen({ ...photo, src });
+            onOpen(photo);
           }}
           className="absolute inset-0 z-0 focus:outline-none focus:ring-2 focus:ring-[#FFAB00] rounded-2xl"
           aria-label={`View photo: ${photo.caption}`}
         >
           <Image
-            src={src}
+            src={photo.src}
             alt={photo.caption}
             fill
             sizes="(max-width: 768px) 100vw, 48rem"
