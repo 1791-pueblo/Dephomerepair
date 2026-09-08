@@ -43,7 +43,7 @@ Caption: Custom low-voltage LED under-cabinet lighting
 ----------------------------------------
 4. BATHROOM VANITY
 ----------------------------------------
-Canonical live file: public/gallery/bathroom-pony-wall-vanity-finished.jpg
+Repo file location (served at /gallery/bathroom-pony-wall-vanity-finished.jpg): public/gallery/bathroom-pony-wall-vanity-finished.jpg
 
 bathroom-pony-wall-vanity-finished.jpg
 Caption: Custom double vanity with pony wall, quartz-look top, and integrated storage
