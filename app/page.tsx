@@ -343,7 +343,7 @@ export default function Home() {
             </div>
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-5 leading-tight">
-            Seamless, Smart<br />Repairs & Upgrades
+            Seamless Repairs<br />& Smart Upgrades
           </h1>
           <p className="text-lg sm:text-xl mb-6 sm:mb-8 opacity-95 max-w-2xl mx-auto">
             Solo Chandler expert in drywall, electrical & plumbing.<br className="hidden sm:block" />
