@@ -1,54 +1,66 @@
 DEP Home Repair – Website Gallery Photo Set
-Organized: August 12, 2026
+Updated: September 8, 2026
 
-FEATURE ORDER
-1. Closet Conversion (full process)
-2. Rangehood Install (before/after)
-3. Low-Voltage LED Lighting
-4. Bathroom Vanity
+NUMBERING RULES (Jason)
+- Keep existing photos in their numbered slots.
+- Tech-foam / R-TECH photo is locked as bathroom slot 2 once a preconstruction frame is added as slot 1.
+- Extra / unmatched job photos belong in Drive folder 99-new-jobs, not in the live slider.
 
 ----------------------------------------
-1. CLOSET CONVERSION
+1. BATHROOM — PONY WALL VANITY  (Triple Play: D+E+P)
+----------------------------------------
+Slot 1  github 450a22cd  (live start frame)
+Caption: Rough-in underway — pony-wall framed, R-TECH foam in the wet wall, supply lines stubbed.
+
+Slot 2  github 6f7576a1  (LOCKED slot — do not bump this number)
+Caption: Tech-foam wall check — outlet box set in the insulated assembly.
+
+Slot 3  github 43a17179
+Caption: Vanity alcove opened; tub protected; plumbing stubs and drywall in the same trip.
+
+Slot 4  github 0253e8ac
+Caption: Greenboard patches and valve stubs set — ready for cabinet and top.
+
+Slot 5  /gallery/bathroom-pony-wall-vanity-finished.jpg
+Caption: Finished pony-wall double vanity.
+
+When a preconstruction / before photo lands in Drive 01-bathroom-pony-wall:
+- It becomes Slot 1.
+- Current Slot 1 (R-TECH foam wall) moves into Slot 2 only if Jason confirms.
+- Slots 3–5 do not move.
+
+----------------------------------------
+2. CLOSET CONVERSION
 ----------------------------------------
 closet-01-demolition.jpg
-Caption: Before: Original closet demolition
-
 closet-02-framing.jpg
-Caption: Framing and wall build-out in progress
-
 closet-03-progress.jpg
-Caption: Drywall and rough-in complete
-
 closet-04-near-finished.jpg
-Caption: Finishing touches underway
-
 closet-05-barn-doors-final.jpg
-Caption: Completed: Custom barn-door closet conversion
 
 ----------------------------------------
-2. RANGEHOOD INSTALL
+3. RANGEHOOD
 ----------------------------------------
 rangehood-01-rough-opening.jpg
-Caption: Before: Ceiling cut and rough opening for new rangehood
-
 rangehood-02-finished.jpg
-Caption: After: Professional rangehood and recessed lighting install
+electrical-romex-wall.jpg          (support)
+rangehood-soffit-wire.jpg          (support)
 
 ----------------------------------------
-3. LOW-VOLTAGE LED LIGHTING
+4. HOSE BIB
+----------------------------------------
+hosebib-01-before.jpg
+hosebib-02-after.jpg
+plumbing-ceiling-stain.jpg         (support)
+plumbing-access-hole.jpg           (support)
+
+----------------------------------------
+5. LED LIGHTING
 ----------------------------------------
 led-under-cabinet-lighting.jpg
-Caption: Custom low-voltage LED under-cabinet lighting
 
 ----------------------------------------
-4. BATHROOM VANITY
+99. NEW JOBS (Drive only until a story is ready)
 ----------------------------------------
-bathroom-pony-wall-vanity-finished.jpg
-Caption: Custom double vanity with pony wall, quartz-look top, and integrated storage
-
-----------------------------------------
-NOTES
-- Lead with the Closet sequence (best process story)
-- Follow with Rangehood before/after pair
-- LED lighting as supporting electrical project
-- Vanity can be added now or held for a wider bathroom shot later
+Folder: DEP Home Repair - Website Photos / 99-new-jobs
+Place extras here. Do not add them to the homepage slider until they have a before → after or process story.
