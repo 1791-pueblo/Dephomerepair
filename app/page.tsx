@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { ProjectPhotoSlider } from '../components/ProjectPhotoSlider';
+import { portfolioProjects, tradeCardProjects } from '../lib/portfolio';
 import {
   allServices,
   applyBundleDiscount,
@@ -201,6 +202,12 @@ export default function Home() {
     });
   };
 
+  const handleServiceCardClick = (category: 'drywall' | 'electrical' | 'plumbing') => {
+    setActiveCategory(category);
+    document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' });
+    trackEvent('service_card_clicked', { category });
+  };
+
   const menuCategories = CATEGORY_META.map((cat) => ({
     ...cat,
     groups: groupBySubcategory(servicesForCategory(cat.key)),
@@ -232,72 +239,6 @@ export default function Home() {
     { name: 'Sarah M.', location: 'Chandler', text: 'Jason fixed a large drywall patch in my living room and matched the texture perfectly. Showed up on time, clean work, fair price. Highly recommend.', rating: 5 },
     { name: 'Mike R.', location: 'Gilbert', text: 'Needed several electrical updates and a new ceiling fan. Professional, knowledgeable, and explained everything clearly. Will use again.', rating: 5 },
     { name: 'Lisa T.', location: 'Mesa', text: 'Quick response on a plumbing issue. Honest pricing and quality work. Exactly what you want from a local tradesperson.', rating: 5 },
-  ];
-
-  const portfolioProjects = [
-    {
-      title: 'Bathroom Renovation — Pony Wall Vanity',
-      tag: 'Drywall + Plumbing',
-      type: 'sequence' as const,
-      photos: [
-        { src: 'https://github.com/user-attachments/assets/450a22cd-9193-4af4-a8a5-e056e4459848', caption: 'Job site starts: framing, R-TECH insulation & plumbing rough-in' },
-        { src: 'https://github.com/user-attachments/assets/6f7576a1-174e-47f0-a4d3-316da4ffc6c5', caption: 'R-TECH foam + Henry waterproofing membrane for long-term protection' },
-        { src: 'https://github.com/user-attachments/assets/43a17179-21fa-4ec0-9ea5-8697ac113b95', caption: 'Shower wall insulation & moisture barrier detail' },
-        { src: 'https://github.com/user-attachments/assets/0253e8ac-69d8-44c3-8375-0c791fc83dd1', caption: 'Greenboard drywall installed, tub set — ready for finish' },
-        { src: '/gallery/bathroom-pony-wall-vanity-finished.jpg', caption: 'Completed: Custom double vanity with pony wall, quartz-look top & integrated storage. Ready for yours?' },
-      ],
-      description: 'Full bathroom renovation including moisture-resistant framing, R-TECH rigid foam, Henry waterproofing, plumbing & electrical rough-in, and a custom pony-wall double vanity. Clean, modern, and built to last.',
-    },
-    {
-      title: 'Closet Conversion with Barn Doors',
-      tag: 'Drywall + Carpentry',
-      type: 'sequence' as const,
-      photos: [
-        { src: '/gallery/closet-01-demolition.jpg', caption: 'Before: Original closet demolished — clean slate for better storage' },
-        { src: '/gallery/closet-02-framing.jpg', caption: 'Framing and wall build-out in progress' },
-        { src: '/gallery/closet-03-progress.jpg', caption: 'Drywall and rough-in complete' },
-        { src: '/gallery/closet-04-near-finished.jpg', caption: 'Finishing touches underway' },
-        { src: '/gallery/closet-05-barn-doors-final.jpg', caption: 'Completed: Custom barn-door closet conversion. Want one like this? Get a quote.' },
-      ],
-      description: 'Complete closet conversion from demolition through custom barn doors. Better storage, cleaner look, and zero wasted space.',
-    },
-    {
-      title: 'Rangehood Install + Protected Power',
-      tag: 'Electrical',
-      type: 'before-after' as const,
-      photos: [
-        { src: '/gallery/rangehood-01-rough-opening.jpg', caption: 'Before: Ceiling opened and rough opening prepared for new rangehood' },
-        { src: '/gallery/rangehood-02-finished.jpg', caption: 'After: Professional Ancona rangehood + matching recessed lighting. Clean lines, quiet power.' },
-      ],
-      supportPhotos: [
-        { src: '/gallery/electrical-romex-wall.jpg', caption: '12-gauge Romex run from exterior 20A GFCI load terminals — power protected and up to code' },
-        { src: '/gallery/rangehood-soffit-wire.jpg', caption: 'Wire routed into the soffit. Receptacle left accessible through the LED cut-out so the rangehood stays plugged in (hardwiring voids the manufacturer warranty).' },
-      ],
-      description: 'Kitchen rangehood replacement with new recessed lighting. Power was carefully run from a GFCI-protected circuit and left on a receptacle (accessible through the LED cut-out) so the unit stays under full manufacturer warranty. Hardwiring would have voided it.',
-    },
-    {
-      title: 'Hose Bib Replacement & Leak Repair',
-      tag: 'Plumbing',
-      type: 'before-after' as const,
-      photos: [
-        { src: '/gallery/hosebib-01-before.jpg', caption: 'Before: Heavily corroded, failing outdoor hose bib' },
-        { src: '/gallery/hosebib-02-after.jpg', caption: 'After: New brass hose bib with green handle — clean, reliable, and ready for years of use' },
-      ],
-      supportPhotos: [
-        { src: '/gallery/plumbing-ceiling-stain.jpg', caption: 'Indoor water staining on the ceiling above the toilet — related leak damage' },
-        { src: '/gallery/plumbing-access-hole.jpg', caption: 'Access opening cut to locate and repair the source of the leak' },
-      ],
-      description: 'Outdoor hose bib was heavily corroded and failing. Replaced with a new brass unit while also addressing the related indoor water damage and access needs. One clean plumbing solution.',
-    },
-    {
-      title: 'Under-Cabinet LED Lighting',
-      tag: 'Electrical',
-      type: 'single' as const,
-      photos: [
-        { src: '/gallery/led-under-cabinet-lighting.jpg', caption: 'Custom low-voltage LED under-cabinet lighting — soft, even light exactly where you need it. Easy upgrade, big difference.' },
-      ],
-      description: 'Low-voltage LED strip install under cabinets for task lighting and ambiance. Simple electrical upgrade that transforms the kitchen.',
-    },
   ];
 
   return (
@@ -385,18 +326,31 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
             {menuCategories.map((cat) => (
-              <button
+              <div
                 key={cat.key}
-                type="button"
                 onClick={() => {
-                  setActiveCategory(cat.key);
-                  document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' });
+                  handleServiceCardClick(cat.key);
                 }}
-                className={`text-left ${cat.cardBg} p-6 sm:p-8 rounded-2xl border ${cat.borderClass} hover:shadow-md transition h-full w-full flex flex-col`}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    handleServiceCardClick(cat.key);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                className={`text-left ${cat.cardBg} p-6 sm:p-8 rounded-2xl border ${cat.borderClass} hover:shadow-md transition h-full w-full flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#FFAB00]`}
               >
                 <div className="flex items-baseline gap-2 mb-5">
                   <span className="text-3xl sm:text-4xl font-black" style={{ color: cat.letterColor }}>{cat.letter}</span>
                   <span className="text-xl sm:text-2xl font-bold text-[#1A1A1A]">{cat.short}</span>
+                </div>
+                <div className="mb-5">
+                  <ProjectPhotoSlider
+                    photos={tradeCardProjects[cat.key].photos}
+                    projectType={tradeCardProjects[cat.key].type}
+                    onOpen={setLightbox}
+                  />
                 </div>
                 <ul className="space-y-4 text-[#424242] text-sm">
                   {cat.groups.map(([sub, items]) => (
@@ -411,8 +365,18 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-auto pt-5 text-sm font-semibold" style={{ color: cat.letterColor }}>Get pricing →</div>
-              </button>
+                <button
+                  type="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    handleServiceCardClick(cat.key);
+                  }}
+                  className="mt-auto pt-5 text-sm font-semibold text-left"
+                  style={{ color: cat.letterColor }}
+                >
+                  Get pricing →
+                </button>
+              </div>
             ))}
           </div>
 
