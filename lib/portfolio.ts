@@ -19,37 +19,48 @@ export type PortfolioProject = {
   supportPhotos?: ProjectPhoto[];
 };
 
-/** Bathroom order locked to Jason's numbering. Slots 2-5 stay put. Slot 1 is the current start frame until a preconstruction photo is added. */
 export const portfolioProjects: PortfolioProject[] = [
   {
-    title: 'Bathroom Renovation \u2014 Pony Wall Vanity',
+    title: 'Bathroom Renovation — Pony Wall Vanity',
     tag: 'Drywall + Electrical + Plumbing',
     trades: ['drywall', 'electrical', 'plumbing'],
     bundle: 'triple-play',
     type: 'sequence',
-    quoteHint: 'Bathroom remodel / vanity \u2014 Triple Play',
+    quoteHint: 'Bathroom remodel / vanity — Triple Play',
     description:
-      'One visit covered the wet-wall rebuild and the vanity: R-TECH foam and Henry waterproofing, plumbing and electrical rough-in, moisture-resistant drywall, then a pony-wall double vanity. That is a Triple Play \u2014 15% off labor when all three trades are booked together.',
+      'Before, during, and after on a bathroom rebuild where drywall, electrical, and plumbing all had to line up cleanly. One licensed tradesperson handled the wet-wall rebuild, outlet work, access patching, and vanity finish in sequence, which is exactly what Triple Play is for.',
     photos: [
       {
-        src: 'https://github.com/user-attachments/assets/450a22cd-9193-4af4-a8a5-e056e4459848',
-        caption: 'Rough-in underway: pony-wall framed, R-TECH foam in the wet wall, and supply lines stubbed for the new double vanity.',
+        src: 'https://lh3.googleusercontent.com/d/1HxZMIpEU5uW9epRSZk4Fz1NJVKDfK8w1',
+        caption: 'Before: preconstruction layout at the vanity wall so the plumbing, electrical, and drywall plan starts from a clean baseline.',
       },
       {
-        src: 'https://github.com/user-attachments/assets/6f7576a1-174e-47f0-a4d3-316da4ffc6c5',
-        caption: 'Tech-foam wall check: outlet box set in the insulated assembly and laid out so the finished vanity and mirror land clean.',
+        src: 'https://lh3.googleusercontent.com/d/1gYfPUl8WzmyvebtzpEnpwOuZ5rQW8kZF',
+        caption: 'During: R-TECH foam set in the wall assembly to help the bathroom stay protected before finishes go back on.',
       },
       {
-        src: 'https://github.com/user-attachments/assets/43a17179-21fa-4ec0-9ea5-8697ac113b95',
-        caption: 'Vanity alcove opened. Tub stays protected while plumbing stubs and drywall repairs get finished in the same trip.',
+        src: 'https://lh3.googleusercontent.com/d/1s7HqrapOAOqJ9rYSMz_qoTHRK6k4i8-9',
+        caption: 'During: the vanity alcove is taking shape so the new layout lands square without calling back three different trades.',
       },
       {
-        src: 'https://github.com/user-attachments/assets/0253e8ac-69d8-44c3-8375-0c791fc83dd1',
-        caption: 'Greenboard patches and valve stubs set. The wall is ready for the cabinet, top, and fixtures.',
+        src: 'https://lh3.googleusercontent.com/d/1YhFQUVv9csjTdJkwWLuQWxDUtkKM-c4q',
+        caption: 'During: GFCI outlet placement gets handled while the wall is open, which keeps the vanity area safer and cleaner.',
       },
       {
-        src: '/gallery/bathroom-pony-wall-vanity-finished.jpg',
-        caption: 'Finished pony-wall double vanity, quartz-look top, and storage. Plumbing, electrical, and drywall closed in one project. Same visit we can bundle the next repair \u2014 Triple Play is 15% off labor.',
+        src: 'https://lh3.googleusercontent.com/d/19sl-8DeW3HqVh9xyU8QwTNHxCs6PDH-k',
+        caption: 'During: framing and board are brought back to square so the vanity install has solid, straight backing.',
+      },
+      {
+        src: 'https://lh3.googleusercontent.com/d/1cwj5ptwl17krEnI6_m_70sD_Rh43tGWc',
+        caption: 'During: mud work and access patching close up the repair after the plumbing and electrical changes are finished.',
+      },
+      {
+        src: 'https://lh3.googleusercontent.com/d/1BrECGoz9k6pblvXUktneRYrsv5p61Zrx',
+        caption: 'During: texture-ready walls mean the wet-area repair is nearly closed up and ready for the final trim-out.',
+      },
+      {
+        src: 'https://lh3.googleusercontent.com/d/1ey_nDScbtzFrE_zOYyWl5cBW7ybxSXPX',
+        caption: 'After: finished vanity in place with the drywall, electrical, and plumbing handled in one project. Triple Play is 15% off labor when all three trades are booked together.',
       },
     ],
   },
@@ -59,13 +70,16 @@ export const portfolioProjects: PortfolioProject[] = [
     trades: ['drywall'],
     bundle: 'single',
     type: 'sequence',
-    description: 'Demo through finish on a closet conversion. Framing and drywall built the new opening; barn doors closed it up. Storage work like this pairs cleanly with an outlet or LED if you want a Power Pair in the same visit.',
+    description:
+      'This closet story stays centered on the drywall scope: demolition, framing support, board, finish, and final door-ready opening. It shows how a small layout change gets finished cleanly without turning the gallery into a generic carpentry pitch.',
     photos: [
-      { src: '/gallery/closet-01-demolition.jpg', caption: 'Before: original closet opened up \u2014 clean slate for a layout that actually holds what you own.' },
-      { src: '/gallery/closet-02-framing.jpg', caption: 'New framing and opening built to the door size, square and ready for board.' },
-      { src: '/gallery/closet-03-progress.jpg', caption: 'Drywall hung and taped. The opening is locked in before paint and hardware.' },
-      { src: '/gallery/closet-04-near-finished.jpg', caption: 'Finish work underway \u2014 edges clean, opening ready for the barn-door track.' },
-      { src: '/gallery/closet-05-barn-doors-final.jpg', caption: 'Completed barn-door closet. If you also want an outlet or a lighting run inside, that is a Power Pair \u2014 10% off labor.' },
+      { src: '/gallery/closet-01-demolition.jpg', caption: 'Before: original closet opened up — clean slate for a layout that actually holds what you own.' },
+      { src: '/gallery/closet-02-framing.jpg', caption: 'During: framing support and wall build-out set the opening before drywall goes back on.' },
+      { src: '/gallery/closet-03-progress.jpg', caption: 'During: drywall progress locks in the new opening so the finished lines stay straight.' },
+      { src: 'https://lh3.googleusercontent.com/d/1ghRaxirml0DRqZdjsl5MijDlCYOvo9Ze', caption: 'During: build-out at the wall opening shows the mid-stage cleanup before final finish work.' },
+      { src: '/gallery/closet-04-near-finished.jpg', caption: 'During: near-finished drywall and trim prep get the closet ready for the last hardware step.' },
+      { src: 'https://lh3.googleusercontent.com/d/1M2nFdvqDSvse3lf4b952WMtLjvtiEGzy', caption: 'After: doors are on the track and the new opening is working the way it should.' },
+      { src: 'https://lh3.googleusercontent.com/d/10NrJsC_RBY4TFNucrnzhssgWDiJlZq-i', caption: 'After: doors hung open to show the finished access. If you also want closet lighting or an outlet, that can be a Power Pair at 10% off labor.' },
     ],
   },
   {
@@ -74,14 +88,15 @@ export const portfolioProjects: PortfolioProject[] = [
     trades: ['electrical'],
     bundle: 'single',
     type: 'before-after',
-    description: 'Rangehood swap with matching recessed lights. Power came off a GFCI-protected circuit and stayed on a receptacle in the soffit so the manufacturer warranty stays intact \u2014 hardwiring would have voided it.',
+    description:
+      'Rangehood swap with matching recessed lights. Power came off a GFCI-protected circuit and stayed on a receptacle in the soffit so the manufacturer warranty stays intact — hardwiring would have voided it.',
     photos: [
       { src: '/gallery/rangehood-01-rough-opening.jpg', caption: 'Before: ceiling opened and the rough opening cut for the new hood.' },
-      { src: '/gallery/rangehood-02-finished.jpg', caption: 'After: Ancona rangehood and matching recessed lights \u2014 clean lines, quiet power.' },
+      { src: '/gallery/rangehood-02-finished.jpg', caption: 'After: Ancona rangehood and matching recessed lights — clean lines, quiet power.' },
     ],
     supportPhotos: [
-      { src: '/gallery/electrical-romex-wall.jpg', caption: '12-gauge Romex from a 20A GFCI \u2014 protected power, run to code.' },
-      { src: '/gallery/rangehood-soffit-wire.jpg', caption: 'Receptacle left accessible through the LED cut-out so the hood stays plugged in. Hardwiring voids the warranty.' },
+      { src: '/gallery/electrical-romex-wall.jpg', caption: 'During: 12-gauge Romex from a 20A GFCI keeps the new hood on protected power, run to code.' },
+      { src: '/gallery/rangehood-soffit-wire.jpg', caption: 'During: the receptacle stays accessible through the LED cut-out so the hood remains plugged in and under warranty.' },
     ],
   },
   {
@@ -90,14 +105,15 @@ export const portfolioProjects: PortfolioProject[] = [
     trades: ['plumbing'],
     bundle: 'single',
     type: 'before-after',
-    description: 'Corroded outdoor hose bib replaced with new brass. Related indoor staining got an access opening so the leak could be found and stopped. The drywall close-up is a natural add-on \u2014 book both and the service call is waived.',
+    description:
+      'Corroded outdoor hose bib replaced with new brass. Related indoor staining got an access opening so the leak could be found and stopped. The drywall close-up is a natural add-on — book both and the service call is waived.',
     photos: [
       { src: '/gallery/hosebib-01-before.jpg', caption: 'Before: outdoor hose bib eaten up by corrosion and ready to fail.' },
       { src: '/gallery/hosebib-02-after.jpg', caption: 'After: new brass hose bib, tight and ready for another decade of use.' },
     ],
     supportPhotos: [
-      { src: '/gallery/plumbing-ceiling-stain.jpg', caption: 'Ceiling stain above the toilet \u2014 the indoor clue that the outdoor bib was not the whole story.' },
-      { src: '/gallery/plumbing-access-hole.jpg', caption: 'Access cut to find and stop the leak. While we are there, the drywall patch can close in the same visit.' },
+      { src: '/gallery/plumbing-ceiling-stain.jpg', caption: 'Before: ceiling stain above the toilet was the indoor clue that the leak story was bigger than the hose bib outside.' },
+      { src: '/gallery/plumbing-access-hole.jpg', caption: 'During: access cut to find and stop the leak. While we are there, the drywall patch can close in the same visit.' },
     ],
   },
   {
@@ -106,9 +122,55 @@ export const portfolioProjects: PortfolioProject[] = [
     trades: ['electrical'],
     bundle: 'single',
     type: 'single',
-    description: 'Low-voltage LED strip under the cabinets for even task light. A small electrical upgrade that changes how the kitchen works at night. Add a missing outlet in the same stop and it becomes a Power Pair.',
+    description:
+      'Low-voltage LED strip under the cabinets for even task light. A small electrical upgrade that changes how the kitchen works at night. Add a missing outlet in the same stop and it becomes a Power Pair.',
     photos: [
-      { src: '/gallery/led-under-cabinet-lighting.jpg', caption: 'Custom low-voltage LED under-cabinet lighting \u2014 even light on the counter, no extra cans in the ceiling.' },
+      { src: '/gallery/led-under-cabinet-lighting.jpg', caption: 'After: custom low-voltage LED under-cabinet lighting puts even light on the counter without adding extra cans in the ceiling.' },
+    ],
+  },
+  {
+    title: 'Water Heater Heating Element Replacement',
+    tag: 'Electrical',
+    trades: ['electrical'],
+    bundle: 'single',
+    type: 'sequence',
+    quoteHint: 'Water heater repair',
+    description:
+      'A failed water-heater element can look simple until you open it up. This sequence shows the old element out, the failure confirmed, and the new element installed so hot water is restored without swapping the whole heater.',
+    photos: [
+      { src: 'https://lh3.googleusercontent.com/d/1WKZrcTa9Nu6loVudX6HBba7beAgLC-OI', caption: 'During: the heating element is removed so the failed part can be checked instead of guessing.' },
+      { src: 'https://lh3.googleusercontent.com/d/1kkU3uqYr2XPCBXqtAk1c-l5Qgy-RZfee', caption: 'During: failed element out of the tank, confirming why the heater was not keeping up.' },
+      { src: 'https://lh3.googleusercontent.com/d/1UTqmoJHe0LOLs6b-wIJj_oC-O9t0MYqz', caption: 'After: new heating element installed and the repair ready to bring hot water back.' },
+    ],
+  },
+  {
+    title: 'Kitchen Lighting Rewire and New Outlet',
+    tag: 'Drywall + Electrical',
+    trades: ['drywall', 'electrical'],
+    bundle: 'power-pair',
+    type: 'sequence',
+    quoteHint: 'Kitchen lighting + outlet',
+    description:
+      'This kitchen update needed both electrical work and drywall cleanup: switch-box changes, patching around the bullnose, new recessed and pendant lighting, and a new receptacle. One visit handled the rewire and the wall repair so the finish looked intentional, not patched together.',
+    photos: [
+      { src: 'https://lh3.googleusercontent.com/d/1ystlTeGwAvyBmNtttuRMU4WX3SfwNjgk', caption: 'During: bullnose drywall patching and a new switch box get the wall ready for the lighting rework.' },
+      { src: 'https://lh3.googleusercontent.com/d/1xGsLMqyL0Es7EB53xtxgGGghj5U846zg', caption: 'After: recessed lights and pendants land on separate switches so the kitchen works better day to day.' },
+      { src: 'https://lh3.googleusercontent.com/d/1ncSDRQJyoM6ROtbuJOKFrBDHPIylJl9T', caption: 'After: new receptacle cut into the 2x6 wall with a Romex feed. Drywall plus electrical in one stop is a Power Pair at 10% off labor.' },
+    ],
+  },
+  {
+    title: 'Drywall Remediation',
+    tag: 'Drywall',
+    trades: ['drywall'],
+    bundle: 'single',
+    type: 'sequence',
+    quoteHint: 'Drywall remediation',
+    description:
+      'A remediation job has to look honest in the middle, not just at the end. These frames show the damaged area being worked through and then closed back up cleanly so the repair disappears into the room again.',
+    photos: [
+      { src: 'https://lh3.googleusercontent.com/d/1-s17Oqnwb5-AVoeMutDDhZUs2nncHzFd', caption: 'During: remediation starts with the damaged drywall opened up so the problem area can be corrected properly.' },
+      { src: 'https://lh3.googleusercontent.com/d/1itrQ_ThctFshyAIEcg1UqQTMYg-j2W8D', caption: 'During: the second remediation pass brings the wall back into shape before the final finish.' },
+      { src: 'https://lh3.googleusercontent.com/d/1VPfwnAtLVBt-CA5tTHzhRTHaN2GAEkK0', caption: 'After: finished remediation leaves the wall clean again without advertising where the repair was.' },
     ],
   },
 ];
