@@ -328,18 +328,7 @@ export default function Home() {
             {menuCategories.map((cat) => (
               <div
                 key={cat.key}
-                onClick={() => {
-                  handleServiceCardClick(cat.key);
-                }}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    handleServiceCardClick(cat.key);
-                  }
-                }}
-                role="button"
-                tabIndex={0}
-                className={`text-left ${cat.cardBg} p-6 sm:p-8 rounded-2xl border ${cat.borderClass} hover:shadow-md transition h-full w-full flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#FFAB00]`}
+                className={`text-left ${cat.cardBg} p-6 sm:p-8 rounded-2xl border ${cat.borderClass} hover:shadow-md transition h-full w-full flex flex-col`}
               >
                 <div className="flex items-baseline gap-2 mb-5">
                   <span className="text-3xl sm:text-4xl font-black" style={{ color: cat.letterColor }}>{cat.letter}</span>
