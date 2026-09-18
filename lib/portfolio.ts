@@ -26,11 +26,18 @@ export const tradeCardProjects: Record<
   drywall: {
     type: 'sequence',
     photos: [
-      { src: '/gallery/closet-01-demolition.jpg', caption: 'Before — Closet: demo opened the original layout so the new storage plan could start clean.' },
-      { src: '/gallery/closet-02-framing.jpg', caption: 'During — Closet: framing sets the new opening before drywall closes it in.' },
-      { src: '/gallery/closet-03-progress.jpg', caption: 'During — Closet: drywall and layout work are in, with the finish taking shape.' },
-      { src: '/gallery/closet-05-barn-doors-final.jpg', caption: 'After — Closet: barn doors finish the conversion and give the room better storage without wasted space.' },
-      { src: '/gallery/bathroom-pony-wall-vanity-finished.jpg', caption: 'After — Pony-wall vanity: the bathroom finish ties drywall work into a full one-visit remodel story.' },
+      {
+        src: 'https://lh3.googleusercontent.com/pw/AP1GczOgMo6G8i-JAmd5ws-aGvSQtf8EJtEKT5C4hhueuSfXMgIqElPP-YC4uAs1EjYLh4hPWx9cpPPIP5CwyZC475LgXC1flY-z9rMkvDZ-XOqkDBv1qQI=w1600',
+        caption: 'Before — Tub wall: the corner had opened up at the fixture line and needed a proper drywall close-in, not a smear of caulk.',
+      },
+      {
+        src: 'https://lh3.googleusercontent.com/pw/AP1GczPYyPOd_7Q485A503lHD_6uFaofGtJYXV0VgmnZQkzg6nZ4JzWqyGxmQKFkK3Th65O7_c6CHljEzSXNK8NkXEwvl6iLi0X3VFV5mQJO3ig_KakAx_o=w1600',
+        caption: 'During — Tub wall: the joint gets rebuilt and taped so the corner stays tight against the wet area.',
+      },
+      {
+        src: 'https://lh3.googleusercontent.com/pw/AP1GczPy83SjIIoNikRtiIBkEtvQU86QsyRLeq4Slx_dmifysjA4XrFvGBHoAeTcCSJxeORj89tOVxArYeD1WTMrB8uBKy01_t7qGnLKpBzlKrAHwHs2vB8=w1600',
+        caption: 'After — Tub wall: texture is back on and the repair disappears into the rest of the bath. Texture is included on drywall repairs.',
+      },
     ],
   },
   electrical: {
