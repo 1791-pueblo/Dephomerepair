@@ -8,6 +8,19 @@ FEATURE ORDER
 4. Bathroom Vanity
 
 ----------------------------------------
+TRADE CARDS (SERVICES SECTION)
+----------------------------------------
+/gallery/closet-01-demolition.jpg
+/gallery/closet-02-framing.jpg
+/gallery/closet-05-barn-doors-final.jpg
+/gallery/rangehood-01-rough-opening.jpg
+/gallery/electrical-romex-wall.jpg
+/gallery/rangehood-02-finished.jpg
+/gallery/hosebib-01-before.jpg
+/gallery/plumbing-access-hole.jpg
+/gallery/hosebib-02-after.jpg
+
+----------------------------------------
 1. CLOSET CONVERSION
 ----------------------------------------
 closet-01-demolition.jpg
