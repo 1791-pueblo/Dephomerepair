@@ -19,7 +19,6 @@ export type PortfolioProject = {
   supportPhotos?: ProjectPhoto[];
 };
 
-/** Bathroom order locked to Jason's numbering. Slots 2-5 stay put. Slot 1 is the current start frame until a preconstruction photo is added. */
 export const portfolioProjects: PortfolioProject[] = [
   {
     title: 'Bathroom Renovation \u2014 Pony Wall Vanity',
@@ -32,24 +31,36 @@ export const portfolioProjects: PortfolioProject[] = [
       'One visit covered the wet-wall rebuild and the vanity: R-TECH foam and Henry waterproofing, plumbing and electrical rough-in, moisture-resistant drywall, then a pony-wall double vanity. That is a Triple Play \u2014 15% off labor when all three trades are booked together.',
     photos: [
       {
-        src: 'https://github.com/user-attachments/assets/450a22cd-9193-4af4-a8a5-e056e4459848',
-        caption: 'Rough-in underway: pony-wall framed, R-TECH foam in the wet wall, and supply lines stubbed for the new double vanity.',
+        src: 'https://lh3.googleusercontent.com/d/1HxZMIpEU5uW9epRSZk4Fz1NJVKDfK8w1',
+        caption: 'Before: Exposed supply lines and block wall — the plumbing the pony wall will hide.',
       },
       {
-        src: 'https://github.com/user-attachments/assets/6f7576a1-174e-47f0-a4d3-316da4ffc6c5',
-        caption: 'Tech-foam wall check: outlet box set in the insulated assembly and laid out so the finished vanity and mirror land clean.',
+        src: 'https://lh3.googleusercontent.com/d/1gYfPUl8WzmyvebtzpEnpwOuZ5rQW8kZF',
+        caption: 'During: R-TECH foam and Henry membrane on the wet wall.',
       },
       {
-        src: 'https://github.com/user-attachments/assets/43a17179-21fa-4ec0-9ea5-8697ac113b95',
-        caption: 'Vanity alcove opened. Tub stays protected while plumbing stubs and drywall repairs get finished in the same trip.',
+        src: 'https://lh3.googleusercontent.com/d/1s7HqrapOAOqJ9rYSMz_qoTHRK6k4i8-9',
+        caption: 'During: Vanity alcove framed and insulated.',
       },
       {
-        src: 'https://github.com/user-attachments/assets/0253e8ac-69d8-44c3-8375-0c791fc83dd1',
-        caption: 'Greenboard patches and valve stubs set. The wall is ready for the cabinet, top, and fixtures.',
+        src: 'https://lh3.googleusercontent.com/d/1YhFQUVv9csjTdJkwWLuQWxDUtkKM-c4q',
+        caption: 'During: New outlet on the pony wall, GFCI-protected from the opposite wall.',
       },
       {
-        src: '/gallery/bathroom-pony-wall-vanity-finished.jpg',
-        caption: 'Finished pony-wall double vanity, quartz-look top, and storage. Plumbing, electrical, and drywall closed in one project. Same visit we can bundle the next repair \u2014 Triple Play is 15% off labor.',
+        src: 'https://lh3.googleusercontent.com/d/19sl-8DeW3HqVh9xyU8QwTNHxCs6PDH-k',
+        caption: 'During: Checking the pony-wall cap for square.',
+      },
+      {
+        src: 'https://lh3.googleusercontent.com/d/1cwj5ptwl17krEnI6_m_70sD_Rh43tGWc',
+        caption: 'During: Board, mud, and the plumbing access opening.',
+      },
+      {
+        src: 'https://lh3.googleusercontent.com/d/1BrECGoz9k6pblvXUktneRYrsv5p61Zrx',
+        caption: 'During: Texture matched — stubs ready for the double vanity.',
+      },
+      {
+        src: 'https://lh3.googleusercontent.com/d/1ey_nDScbtzFrE_zOYyWl5cBW7ybxSXPX',
+        caption: 'After: Double vanity, pony wall, and access panel. Triple Play — drywall, electrical, and plumbing together.',
       },
     ],
   },
@@ -61,11 +72,13 @@ export const portfolioProjects: PortfolioProject[] = [
     type: 'sequence',
     description: 'Demo through finish on a closet conversion. Framing and drywall built the new opening; barn doors closed it up. Storage work like this pairs cleanly with an outlet or LED if you want a Power Pair in the same visit.',
     photos: [
-      { src: '/gallery/closet-01-demolition.jpg', caption: 'Before: original closet opened up \u2014 clean slate for a layout that actually holds what you own.' },
-      { src: '/gallery/closet-02-framing.jpg', caption: 'New framing and opening built to the door size, square and ready for board.' },
-      { src: '/gallery/closet-03-progress.jpg', caption: 'Drywall hung and taped. The opening is locked in before paint and hardware.' },
-      { src: '/gallery/closet-04-near-finished.jpg', caption: 'Finish work underway \u2014 edges clean, opening ready for the barn-door track.' },
-      { src: '/gallery/closet-05-barn-doors-final.jpg', caption: 'Completed barn-door closet. If you also want an outlet or a lighting run inside, that is a Power Pair \u2014 10% off labor.' },
+      { src: '/gallery/closet-01-demolition.jpg', caption: 'Before: Original closet opened up.' },
+      { src: '/gallery/closet-02-framing.jpg', caption: 'During: Framing and wall build-out.' },
+      { src: '/gallery/closet-03-progress.jpg', caption: 'During: Drywall going up.' },
+      { src: 'https://lh3.googleusercontent.com/d/1ghRaxirml0DRqZdjsl5MijDlCYOvo9Ze', caption: 'During: Built-out wall and corner shelves that narrowed the entry.' },
+      { src: '/gallery/closet-04-near-finished.jpg', caption: 'During: Finish work underway.' },
+      { src: 'https://lh3.googleusercontent.com/d/1M2nFdvqDSvse3lf4b952WMtLjvtiEGzy', caption: 'After: Barn doors on the track, wall patched and painted.' },
+      { src: 'https://lh3.googleusercontent.com/d/10NrJsC_RBY4TFNucrnzhssgWDiJlZq-i', caption: 'After: Doors hung and open — rod, shelf, clean opening.' },
     ],
   },
   {

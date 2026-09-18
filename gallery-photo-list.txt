@@ -11,19 +11,25 @@ FEATURE ORDER
 1. CLOSET CONVERSION
 ----------------------------------------
 closet-01-demolition.jpg
-Caption: Before: Original closet demolition
+Caption: Before: Original closet opened up.
 
 closet-02-framing.jpg
-Caption: Framing and wall build-out in progress
+Caption: During: Framing and wall build-out.
 
 closet-03-progress.jpg
-Caption: Drywall and rough-in complete
+Caption: During: Drywall going up.
+
+Drive: 1ghRaxirml0DRqZdjsl5MijDlCYOvo9Ze
+Caption: During: Built-out wall and corner shelves that narrowed the entry.
 
 closet-04-near-finished.jpg
-Caption: Finishing touches underway
+Caption: During: Finish work underway.
 
-closet-05-barn-doors-final.jpg
-Caption: Completed: Custom barn-door closet conversion
+Drive: 1M2nFdvqDSvse3lf4b952WMtLjvtiEGzy
+Caption: After: Barn doors on the track, wall patched and painted.
+
+Drive: 10NrJsC_RBY4TFNucrnzhssgWDiJlZq-i
+Caption: After: Doors hung and open — rod, shelf, clean opening.
 
 ----------------------------------------
 2. RANGEHOOD INSTALL
@@ -43,8 +49,29 @@ Caption: Custom low-voltage LED under-cabinet lighting
 ----------------------------------------
 4. BATHROOM VANITY
 ----------------------------------------
-bathroom-pony-wall-vanity-finished.jpg
-Caption: Custom double vanity with pony wall, quartz-look top, and integrated storage
+Drive: 1HxZMIpEU5uW9epRSZk4Fz1NJVKDfK8w1
+Caption: Before: Exposed supply lines and block wall — the plumbing the pony wall will hide.
+
+Drive: 1gYfPUl8WzmyvebtzpEnpwOuZ5rQW8kZF
+Caption: During: R-TECH foam and Henry membrane on the wet wall.
+
+Drive: 1s7HqrapOAOqJ9rYSMz_qoTHRK6k4i8-9
+Caption: During: Vanity alcove framed and insulated.
+
+Drive: 1YhFQUVv9csjTdJkwWLuQWxDUtkKM-c4q
+Caption: During: New outlet on the pony wall, GFCI-protected from the opposite wall.
+
+Drive: 19sl-8DeW3HqVh9xyU8QwTNHxCs6PDH-k
+Caption: During: Checking the pony-wall cap for square.
+
+Drive: 1cwj5ptwl17krEnI6_m_70sD_Rh43tGWc
+Caption: During: Board, mud, and the plumbing access opening.
+
+Drive: 1BrECGoz9k6pblvXUktneRYrsv5p61Zrx
+Caption: During: Texture matched — stubs ready for the double vanity.
+
+Drive: 1ey_nDScbtzFrE_zOYyWl5cBW7ybxSXPX
+Caption: After: Double vanity, pony wall, and access panel. Triple Play — drywall, electrical, and plumbing together.
 
 ----------------------------------------
 NOTES
