@@ -129,6 +129,42 @@ export const drywall: ServicePrice[] = [
   { id: 'd-seam', name: 'Seam / tape separation', kind: 'range', low: 250, high: 450, estimate: 350, category: 'drywall', subcategory: 'Repairs', notes: 'Texture included' },
   { id: 'd-water-cutout', name: 'Water-damage cut-out + patch', kind: 'range', low: 400, high: 900, estimate: 650, category: 'drywall', subcategory: 'Repairs', notes: 'Texture included' },
   { id: 'd-water-remediation', name: 'Full water remediation', kind: 'range', low: 650, high: 3000, estimate: 1200, category: 'drywall', subcategory: 'Repairs', notes: 'Call for scope; starts at $650' },
+  {
+    id: 'd-texture-t1',
+    name: 'Texture Tier 1 — Patch & match (spot repair)',
+    kind: 'range',
+    low: 250,
+    high: 450,
+    estimate: 350,
+    category: 'drywall',
+    subcategory: 'Texture packages',
+    notes:
+      'Up to 2×2 ft per area. Backing, hang, tape, 3-coat mud, hand-blended match (skip trowel, knockdown, or orange peel). Mask 3–4 ft around the work. Flat rate per patch.',
+  },
+  {
+    id: 'd-texture-t2',
+    name: 'Texture Tier 2 — Wall / accent retexture',
+    kind: 'range',
+    low: 550,
+    high: 950,
+    estimate: 750,
+    category: 'drywall',
+    subcategory: 'Texture packages',
+    notes:
+      'Single wall or small room up to 150–200 sq ft. Skim or retexture, minor leveling, seam stabilize, uniform hand finish. Full containment, floor protection, dust control. Sq-ft range or project flat.',
+  },
+  {
+    id: 'd-texture-t3',
+    name: 'Texture Tier 3 — Whole-space transformation',
+    kind: 'range',
+    low: 900,
+    high: 2800,
+    estimate: 900,
+    category: 'drywall',
+    subcategory: 'Texture packages',
+    notes:
+      'Starts at $900. Multi-wall or full-room restore, skim over heavy texture or popcorn-removal surface, hand-troweled walls and ceilings. Full protection and isolation. Final price from sq ft, ceiling height, and surface condition.',
+  },
 ];
 
 export const allServices: ServicePrice[] = [...electrical, ...plumbing, ...drywall];
