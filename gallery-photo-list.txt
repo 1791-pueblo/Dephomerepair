@@ -4,6 +4,7 @@ Organized: September 18, 2026
 JOB SLIDER RULE
 - Any job with sequenced photo count >= 3 gets a Portfolio slider.
 - Jobs with fewer than 3 sequenced frames stay single or before/after.
+- Drive filename rule: job number first, then sequence number.
 
 FEATURE ORDER
 1. Bathroom Renovation — Pony Wall Vanity
