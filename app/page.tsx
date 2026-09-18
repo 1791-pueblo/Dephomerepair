@@ -429,7 +429,7 @@ export default function Home() {
                   {tradeCardPhotos[cat.key].photos.map((photo) => (
                     <div key={photo.src}>
                       <div className="relative aspect-square overflow-hidden rounded-lg">
-                        <Image src={photo.src} alt={`${photo.label}: ${tradeCardPhotos[cat.key].summary}`} fill sizes="(min-width: 1024px) 180px, 33vw" className="object-cover" />
+                        <Image src={photo.src} alt={photo.label} fill sizes="(min-width: 1024px) 180px, 33vw" className="object-cover" />
                       </div>
                       <div className="mt-1 text-[10px] sm:text-xs font-semibold text-[#424242] text-center">{photo.label}</div>
                     </div>
