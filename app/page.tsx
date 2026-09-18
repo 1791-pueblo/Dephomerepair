@@ -28,29 +28,29 @@ const CATEGORY_META = [
   { key: 'plumbing' as const, label: 'P — Plumbing', short: 'Plumbing', letter: 'P', letterColor: '#0077B6', cardBg: 'bg-[#E6F4FA]', borderClass: 'border-[#0077B6]/20 hover:border-[#0077B6]/50' },
 ];
 
-const tradeCardPhotos: Record<'drywall' | 'electrical' | 'plumbing', { summary: string; photos: { src: string; label: 'Before' | 'During' | 'After'; alt: string }[] }> = {
+const tradeCardPhotos: Record<'drywall' | 'electrical' | 'plumbing', { summary: string; photos: { src: string; label: 'Before' | 'During' | 'After' }[] }> = {
   drywall: {
     summary: 'Closet build — demo to finish drywall.',
     photos: [
-      { src: '/gallery/closet-01-demolition.jpg', label: 'Before', alt: 'Before: Closet opened up and ready for a clean drywall rebuild.' },
-      { src: '/gallery/closet-02-framing.jpg', label: 'During', alt: 'During: Framing and board install moving the closet toward finished walls.' },
-      { src: '/gallery/closet-05-barn-doors-final.jpg', label: 'After', alt: 'After: Finished closet with clean drywall lines and a polished final look.' },
+      { src: '/gallery/closet-01-demolition.jpg', label: 'Before' },
+      { src: '/gallery/closet-02-framing.jpg', label: 'During' },
+      { src: '/gallery/closet-05-barn-doors-final.jpg', label: 'After' },
     ],
   },
   electrical: {
     summary: 'Rangehood circuit run the right way.',
     photos: [
-      { src: '/gallery/rangehood-01-rough-opening.jpg', label: 'Before', alt: 'Before: Rangehood opening marked and prepped for proper power and venting.' },
-      { src: '/gallery/electrical-romex-wall.jpg', label: 'During', alt: 'During: Protected cable routing in-wall for a safe, code-minded setup.' },
-      { src: '/gallery/rangehood-02-finished.jpg', label: 'After', alt: 'After: Finished rangehood install with power handled cleanly in one visit.' },
+      { src: '/gallery/rangehood-01-rough-opening.jpg', label: 'Before' },
+      { src: '/gallery/electrical-romex-wall.jpg', label: 'During' },
+      { src: '/gallery/rangehood-02-finished.jpg', label: 'After' },
     ],
   },
   plumbing: {
-    summary: 'Hose bib replaced and the leak opened up.',
+    summary: 'Hose bib replaced and the leak fixed.',
     photos: [
-      { src: '/gallery/hosebib-01-before.jpg', label: 'Before', alt: 'Before: Worn exterior hose bib showing the source of the leak risk.' },
-      { src: '/gallery/plumbing-access-hole.jpg', label: 'During', alt: 'During: Wall opened carefully so the plumbing repair could be done right.' },
-      { src: '/gallery/hosebib-02-after.jpg', label: 'After', alt: 'After: New hose bib installed and the leak issue fully addressed.' },
+      { src: '/gallery/hosebib-01-before.jpg', label: 'Before' },
+      { src: '/gallery/plumbing-access-hole.jpg', label: 'During' },
+      { src: '/gallery/hosebib-02-after.jpg', label: 'After' },
     ],
   },
 };
@@ -429,7 +429,7 @@ export default function Home() {
                   {tradeCardPhotos[cat.key].photos.map((photo) => (
                     <div key={photo.src}>
                       <div className="relative aspect-square overflow-hidden rounded-lg">
-                        <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 1024px) 180px, 33vw" className="object-cover" />
+                        <Image src={photo.src} alt={`${photo.label}: ${tradeCardPhotos[cat.key].summary}`} fill sizes="(min-width: 1024px) 180px, 33vw" className="object-cover" />
                       </div>
                       <div className="mt-1 text-[10px] sm:text-xs font-semibold text-[#424242] text-center">{photo.label}</div>
                     </div>
