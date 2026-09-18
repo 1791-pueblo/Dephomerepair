@@ -341,30 +341,33 @@ export default function Home() {
                     onOpen={setLightbox}
                   />
                 </div>
-                <ul className="space-y-4 text-[#424242] text-sm">
-                  {cat.groups.map(([sub, items]) => (
-                    <li key={sub}>
-                      <div className="font-semibold text-[#1A1A1A] mb-1">{sub}</div>
-                      <ul className="space-y-1 pl-1">
-                        {items.slice(0, 4).map((item) => (
-                          <li key={item.id} className="flex gap-2"><span style={{ color: cat.letterColor }}>✓</span><span>{item.name}</span></li>
-                        ))}
-                        {items.length > 4 && <li className="text-xs text-gray-500 pl-5">+ {items.length - 4} more in quote tool</li>}
-                      </ul>
-                    </li>
-                  ))}
-                </ul>
-                <button
-                  type="button"
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    handleServiceCardClick(cat.key);
+                <div
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => handleServiceCardClick(cat.key)}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      event.preventDefault();
+                      handleServiceCardClick(cat.key);
+                    }
                   }}
-                  className="mt-auto pt-5 text-sm font-semibold text-left"
-                  style={{ color: cat.letterColor }}
+                  className="mt-auto rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FFAB00]"
                 >
-                  Get pricing →
-                </button>
+                  <ul className="space-y-4 text-[#424242] text-sm">
+                    {cat.groups.map(([sub, items]) => (
+                      <li key={sub}>
+                        <div className="font-semibold text-[#1A1A1A] mb-1">{sub}</div>
+                        <ul className="space-y-1 pl-1">
+                          {items.slice(0, 4).map((item) => (
+                            <li key={item.id} className="flex gap-2"><span style={{ color: cat.letterColor }}>✓</span><span>{item.name}</span></li>
+                          ))}
+                          {items.length > 4 && <li className="text-xs text-gray-500 pl-5">+ {items.length - 4} more in quote tool</li>}
+                        </ul>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="pt-5 text-sm font-semibold" style={{ color: cat.letterColor }}>Get pricing →</div>
+                </div>
               </div>
             ))}
           </div>
