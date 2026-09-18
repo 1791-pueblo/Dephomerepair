@@ -341,26 +341,29 @@ export default function Home() {
                     onOpen={setLightbox}
                   />
                 </div>
-                <button
-                  type="button"
-                  onClick={() => handleServiceCardClick(cat.key)}
-                  className="mt-auto rounded-xl text-left focus:outline-none focus:ring-2 focus:ring-[#FFAB00]"
-                >
-                  <span className="block space-y-4 text-[#424242] text-sm">
+                <div className="mt-auto">
+                  <ul className="space-y-4 text-[#424242] text-sm">
                     {cat.groups.map(([sub, items]) => (
-                      <span key={sub} className="mb-4 block last:mb-0">
-                        <span className="mb-1 block font-semibold text-[#1A1A1A]">{sub}</span>
-                        <span className="block space-y-1 pl-1">
+                      <li key={sub}>
+                        <div className="mb-1 font-semibold text-[#1A1A1A]">{sub}</div>
+                        <ul className="space-y-1 pl-1">
                           {items.slice(0, 4).map((item) => (
-                            <span key={item.id} className="flex gap-2"><span style={{ color: cat.letterColor }}>✓</span><span>{item.name}</span></span>
+                            <li key={item.id} className="flex gap-2"><span style={{ color: cat.letterColor }}>✓</span><span>{item.name}</span></li>
                           ))}
-                          {items.length > 4 && <span className="block text-xs text-gray-500 pl-5">+ {items.length - 4} more in quote tool</span>}
-                        </span>
-                      </span>
+                          {items.length > 4 && <li className="text-xs text-gray-500 pl-5">+ {items.length - 4} more in quote tool</li>}
+                        </ul>
+                      </li>
                     ))}
-                  </span>
-                  <span className="block pt-5 text-sm font-semibold" style={{ color: cat.letterColor }}>Get pricing →</span>
-                </button>
+                  </ul>
+                  <button
+                    type="button"
+                    onClick={() => handleServiceCardClick(cat.key)}
+                    className="pt-5 text-left text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#FFAB00]"
+                    style={{ color: cat.letterColor }}
+                  >
+                    Get pricing →
+                  </button>
+                </div>
               </div>
             ))}
           </div>
