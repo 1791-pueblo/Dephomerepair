@@ -139,7 +139,7 @@ export const drywall: ServicePrice[] = [
     category: 'drywall',
     subcategory: 'Texture packages',
     notes:
-      'Up to 2×2 ft per area. Backing, hang, tape, 3-coat mud, hand-blended match (skip trowel, knockdown, or orange peel). Mask 3–4 ft around the work. Flat rate per patch.',
+      'Up to 2x2 ft per area. Backing, hang, tape, 3-coat mud, hand-blended match (skip trowel, knockdown, or orange peel). Mask 3–4 ft around the work. Flat rate per patch.',
   },
   {
     id: 'd-texture-t2',
@@ -163,7 +163,7 @@ export const drywall: ServicePrice[] = [
     category: 'drywall',
     subcategory: 'Texture packages',
     notes:
-      'Starts at $900. Multi-wall or full-room restore, skim over heavy texture or popcorn-removal surface, hand-troweled walls and ceilings. Full protection and isolation. Final price from sq ft, ceiling height, and surface condition.',
+      'Starts at $900. Multi-wall or full-room restore, skim over heavy texture or popcorn-removal surface, hand-troweled walls and ceilings. Full protection. Final price from sq ft, ceiling height, and surface condition.',
   },
 ];
 
