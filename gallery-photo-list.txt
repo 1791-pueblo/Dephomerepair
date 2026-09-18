@@ -16,6 +16,43 @@ FEATURE ORDER
 8. Drywall Remediation
 
 ----------------------------------------
+TRADE CARDS
+----------------------------------------
+DRYWALL slider
+- closet-01-demolition.jpg
+  Caption: Before — Closet: demo opened the original layout so the new storage plan could start clean.
+- closet-02-framing.jpg
+  Caption: During — Closet: framing sets the new opening before drywall closes it in.
+- closet-03-progress.jpg
+  Caption: During — Closet: drywall and layout work are in, with the finish taking shape.
+- closet-05-barn-doors-final.jpg
+  Caption: After — Closet: barn doors finish the conversion and give the room better storage without wasted space.
+- bathroom-pony-wall-vanity-finished.jpg
+  Caption: After — Pony-wall vanity: the bathroom finish ties drywall work into a full one-visit remodel story.
+
+ELECTRICAL slider
+- rangehood-01-rough-opening.jpg
+  Caption: Before — Rangehood: the ceiling and opening were prepped for the new hood and lighting.
+- electrical-romex-wall.jpg
+  Caption: During — Rangehood: protected power was run in the wall so the install stays safe and up to code.
+- rangehood-soffit-wire.jpg
+  Caption: During — Rangehood: wiring was routed into the soffit and kept accessible for the hood warranty.
+- rangehood-02-finished.jpg
+  Caption: After — Rangehood: the finished hood and recessed lights clean up the whole cooking wall.
+- led-under-cabinet-lighting.jpg
+  Caption: After — LED lighting: under-cabinet lights add clean task lighting in the same electrical category.
+
+PLUMBING slider
+- hosebib-01-before.jpg
+  Caption: Before — Hose bib: corrosion had this outdoor connection on borrowed time.
+- plumbing-access-hole.jpg
+  Caption: During — Leak repair: the access opening let the leak get found and fixed instead of guessed at.
+- plumbing-ceiling-stain.jpg
+  Caption: During — Ceiling stain: water marks inside showed why the repair needed to be traced all the way through.
+- hosebib-02-after.jpg
+  Caption: After — Hose bib: a new brass bib closes out the repair with a clean, reliable finish.
+
+----------------------------------------
 1. BATHROOM RENOVATION — PONY WALL VANITY
 ----------------------------------------
 JOB 01 slider (8 sequenced frames)

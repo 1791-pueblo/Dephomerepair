@@ -19,6 +19,42 @@ export type PortfolioProject = {
   supportPhotos?: ProjectPhoto[];
 };
 
+export const tradeCardProjects: Record<
+  Trade,
+  { type: ProjectType; photos: ProjectPhoto[] }
+> = {
+  drywall: {
+    type: 'sequence',
+    photos: [
+      { src: '/gallery/closet-01-demolition.jpg', caption: 'Before — Closet: demo opened the original layout so the new storage plan could start clean.' },
+      { src: '/gallery/closet-02-framing.jpg', caption: 'During — Closet: framing sets the new opening before drywall closes it in.' },
+      { src: '/gallery/closet-03-progress.jpg', caption: 'During — Closet: drywall and layout work are in, with the finish taking shape.' },
+      { src: '/gallery/closet-05-barn-doors-final.jpg', caption: 'After — Closet: barn doors finish the conversion and give the room better storage without wasted space.' },
+      { src: '/gallery/bathroom-pony-wall-vanity-finished.jpg', caption: 'After — Pony-wall vanity: the bathroom finish ties drywall work into a full one-visit remodel story.' },
+    ],
+  },
+  electrical: {
+    type: 'sequence',
+    photos: [
+      { src: '/gallery/rangehood-01-rough-opening.jpg', caption: 'Before — Rangehood: the ceiling and opening were prepped for the new hood and lighting.' },
+      { src: '/gallery/electrical-romex-wall.jpg', caption: 'During — Rangehood: protected power was run in the wall so the install stays safe and up to code.' },
+      { src: '/gallery/rangehood-soffit-wire.jpg', caption: 'During — Rangehood: wiring was routed into the soffit and kept accessible for the hood warranty.' },
+      { src: '/gallery/rangehood-02-finished.jpg', caption: 'After — Rangehood: the finished hood and recessed lights clean up the whole cooking wall.' },
+      { src: '/gallery/led-under-cabinet-lighting.jpg', caption: 'After — LED lighting: under-cabinet lights add clean task lighting in the same electrical category.' },
+    ],
+  },
+  plumbing: {
+    type: 'sequence',
+    photos: [
+      { src: '/gallery/hosebib-01-before.jpg', caption: 'Before — Hose bib: corrosion had this outdoor connection on borrowed time.' },
+      { src: '/gallery/plumbing-access-hole.jpg', caption: 'During — Leak repair: the access opening let the leak get found and fixed instead of guessed at.' },
+      { src: '/gallery/plumbing-ceiling-stain.jpg', caption: 'During — Ceiling stain: water marks inside showed why the repair needed to be traced all the way through.' },
+      { src: '/gallery/hosebib-02-after.jpg', caption: 'After — Hose bib: a new brass bib closes out the repair with a clean, reliable finish.' },
+    ],
+  },
+};
+
+/** Bathroom order locked to Jason's numbering. Slots 2-5 stay put. Slot 1 is the current start frame until a preconstruction photo is added. */
 export const portfolioProjects: PortfolioProject[] = [
   {
     title: 'Bathroom Renovation — Pony Wall Vanity',

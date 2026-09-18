@@ -36,7 +36,10 @@ export function ProjectPhotoSlider({
     return (
       <button
         type="button"
-        onClick={() => onOpen({ ...photo, src })}
+        onClick={(e) => {
+          e.stopPropagation();
+          onOpen({ ...photo, src });
+        }}
         className="group relative aspect-[4/3] max-w-md overflow-hidden rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition focus:outline-none focus:ring-2 focus:ring-[#FFAB00]"
         aria-label={`View photo: ${photo.caption}`}
       >
@@ -51,11 +54,13 @@ export function ProjectPhotoSlider({
   const src = resolveSrc(photo.src);
 
   const onTouchStart = (e: React.TouchEvent) => {
+    e.stopPropagation();
     startX.current = e.touches[0].clientX;
     swiped.current = false;
   };
 
   const onTouchEnd = (e: React.TouchEvent) => {
+    e.stopPropagation();
     if (startX.current == null) return;
     const delta = e.changedTouches[0].clientX - startX.current;
     startX.current = null;
@@ -73,7 +78,8 @@ export function ProjectPhotoSlider({
       >
         <button
           type="button"
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             if (swiped.current) return;
             onOpen({ ...photo, src });
           }}
@@ -105,7 +111,10 @@ export function ProjectPhotoSlider({
 
         <button
           type="button"
-          onClick={() => go(-1)}
+          onClick={(e) => {
+            e.stopPropagation();
+            go(-1);
+          }}
           className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 hover:bg-white shadow flex items-center justify-center text-[#1A1A1A] transition text-xl"
           aria-label="Previous photo"
         >
@@ -113,7 +122,10 @@ export function ProjectPhotoSlider({
         </button>
         <button
           type="button"
-          onClick={() => go(1)}
+          onClick={(e) => {
+            e.stopPropagation();
+            go(1);
+          }}
           className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 hover:bg-white shadow flex items-center justify-center text-[#1A1A1A] transition text-xl"
           aria-label="Next photo"
         >
@@ -129,7 +141,10 @@ export function ProjectPhotoSlider({
           <button
             key={i}
             type="button"
-            onClick={() => setIndex(i)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setIndex(i);
+            }}
             className={`w-2.5 h-2.5 rounded-full transition ${i === index ? 'bg-[#005683]' : 'bg-slate-300 hover:bg-slate-400'}`}
             aria-label={`Go to photo ${i + 1}`}
           />
