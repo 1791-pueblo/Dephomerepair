@@ -129,6 +129,9 @@ export const drywall: ServicePrice[] = [
   { id: 'd-seam', name: 'Seam / tape separation', kind: 'range', low: 250, high: 450, estimate: 350, category: 'drywall', subcategory: 'Repairs', notes: 'Texture included' },
   { id: 'd-water-cutout', name: 'Water-damage cut-out + patch', kind: 'range', low: 400, high: 900, estimate: 650, category: 'drywall', subcategory: 'Repairs', notes: 'Texture included' },
   { id: 'd-water-remediation', name: 'Full water remediation', kind: 'range', low: 650, high: 3000, estimate: 1200, category: 'drywall', subcategory: 'Repairs', notes: 'Call for scope; starts at $650' },
+  { id: 'd-texture-t1', name: 'Texture Tier 1 — Targeted patch & match', kind: 'range', low: 250, high: 450, estimate: 350, category: 'drywall', subcategory: 'Texture packages', notes: 'Up to 20 sq ft. Water damage, stress cracks, door-knob holes. Prep, texture match (orange peel, knockdown, light skip trowel), basic blend. $250–$450 flat.' },
+  { id: 'd-texture-t2', name: 'Texture Tier 2 — Single room accent & refresh', kind: 'range', low: 550, high: 950, estimate: 750, category: 'drywall', subcategory: 'Texture packages', notes: 'Accent wall or small room. Custom hand skip trowel. Full prep, float minor imperfections, prime, hand apply. $1.80–$2.75/sq ft or $550–$950 per room.' },
+  { id: 'd-texture-t3', name: 'Texture Tier 3 — Whole-space hand-applied texture', kind: 'range', low: 900, high: 2800, estimate: 1600, category: 'drywall', subcategory: 'Texture packages', notes: 'Skim existing heavy texture or popcorn-removal surface. Decorative hand skip trowel across multiple rooms / open living. Protection, full skim, hand trowel, light sand after cure. $2.25–$3.50/sq ft. Final price from measured sq ft.' },
 ];
 
 export const allServices: ServicePrice[] = [...electrical, ...plumbing, ...drywall];
