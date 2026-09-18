@@ -1,54 +1,129 @@
 DEP Home Repair – Website Gallery Photo Set
-Organized: August 12, 2026
+Organized: September 18, 2026
+
+JOB SLIDER RULE
+- Any job with sequenced photo count >= 3 gets a Portfolio slider.
+- Jobs with fewer than 3 sequenced frames stay single or before/after.
 
 FEATURE ORDER
-1. Closet Conversion (full process)
-2. Rangehood Install (before/after)
-3. Low-Voltage LED Lighting
-4. Bathroom Vanity
+1. Bathroom Renovation — Pony Wall Vanity
+2. Closet Conversion with Barn Doors
+3. Rangehood Install + Protected Power
+4. Hose Bib Replacement & Leak Repair
+5. Under-Cabinet LED Lighting
+6. Water Heater Heating Element Replacement
+7. Kitchen Lighting Rewire and New Outlet
+8. Drywall Remediation
 
 ----------------------------------------
-1. CLOSET CONVERSION
+1. BATHROOM RENOVATION — PONY WALL VANITY
 ----------------------------------------
-closet-01-demolition.jpg
-Caption: Before: Original closet demolition
+JOB 01 slider (8 sequenced frames)
+1. https://lh3.googleusercontent.com/d/1HxZMIpEU5uW9epRSZk4Fz1NJVKDfK8w1
+Caption: Before: preconstruction layout at the vanity wall so the plumbing, electrical, and drywall plan starts from a clean baseline.
 
-closet-02-framing.jpg
-Caption: Framing and wall build-out in progress
+2. https://lh3.googleusercontent.com/d/1gYfPUl8WzmyvebtzpEnpwOuZ5rQW8kZF
+Caption: During: R-TECH foam set in the wall assembly to help the bathroom stay protected before finishes go back on.
 
-closet-03-progress.jpg
-Caption: Drywall and rough-in complete
+3. https://lh3.googleusercontent.com/d/1s7HqrapOAOqJ9rYSMz_qoTHRK6k4i8-9
+Caption: During: the vanity alcove is taking shape so the new layout lands square without calling back three different trades.
 
-closet-04-near-finished.jpg
-Caption: Finishing touches underway
+4. https://lh3.googleusercontent.com/d/1YhFQUVv9csjTdJkwWLuQWxDUtkKM-c4q
+Caption: During: GFCI outlet placement gets handled while the wall is open, which keeps the vanity area safer and cleaner.
 
-closet-05-barn-doors-final.jpg
-Caption: Completed: Custom barn-door closet conversion
+5. https://lh3.googleusercontent.com/d/19sl-8DeW3HqVh9xyU8QwTNHxCs6PDH-k
+Caption: During: framing and board are brought back to square so the vanity install has solid, straight backing.
 
-----------------------------------------
-2. RANGEHOOD INSTALL
-----------------------------------------
-rangehood-01-rough-opening.jpg
-Caption: Before: Ceiling cut and rough opening for new rangehood
+6. https://lh3.googleusercontent.com/d/1cwj5ptwl17krEnI6_m_70sD_Rh43tGWc
+Caption: During: mud work and access patching close up the repair after the plumbing and electrical changes are finished.
 
-rangehood-02-finished.jpg
-Caption: After: Professional rangehood and recessed lighting install
+7. https://lh3.googleusercontent.com/d/1BrECGoz9k6pblvXUktneRYrsv5p61Zrx
+Caption: During: texture-ready walls mean the wet-area repair is nearly closed up and ready for the final trim-out.
 
-----------------------------------------
-3. LOW-VOLTAGE LED LIGHTING
-----------------------------------------
-led-under-cabinet-lighting.jpg
-Caption: Custom low-voltage LED under-cabinet lighting
+8. https://lh3.googleusercontent.com/d/1ey_nDScbtzFrE_zOYyWl5cBW7ybxSXPX
+Caption: After: finished vanity in place with the drywall, electrical, and plumbing handled in one project. Triple Play is 15% off labor when all three trades are booked together.
 
 ----------------------------------------
-4. BATHROOM VANITY
+2. CLOSET CONVERSION WITH BARN DOORS
 ----------------------------------------
-bathroom-pony-wall-vanity-finished.jpg
-Caption: Custom double vanity with pony wall, quartz-look top, and integrated storage
+JOB 02 slider (7 sequenced frames)
+1. /gallery/closet-01-demolition.jpg
+Caption: Before: original closet opened up — clean slate for a layout that actually holds what you own.
+
+2. /gallery/closet-02-framing.jpg
+Caption: During: framing support and wall build-out set the opening before drywall goes back on.
+
+3. /gallery/closet-03-progress.jpg
+Caption: During: drywall progress locks in the new opening so the finished lines stay straight.
+
+4. https://lh3.googleusercontent.com/d/1ghRaxirml0DRqZdjsl5MijDlCYOvo9Ze
+Caption: During: build-out at the wall opening shows the mid-stage cleanup before final finish work.
+
+5. /gallery/closet-04-near-finished.jpg
+Caption: During: near-finished drywall and trim prep get the closet ready for the last hardware step.
+
+6. https://lh3.googleusercontent.com/d/1M2nFdvqDSvse3lf4b952WMtLjvtiEGzy
+Caption: After: doors are on the track and the new opening is working the way it should.
+
+7. https://lh3.googleusercontent.com/d/10NrJsC_RBY4TFNucrnzhssgWDiJlZq-i
+Caption: After: doors hung open to show the finished access. If you also want closet lighting or an outlet, that can be a Power Pair at 10% off labor.
+
+----------------------------------------
+3. RANGEHOOD INSTALL + PROTECTED POWER
+----------------------------------------
+Existing before/after stays in place.
+
+----------------------------------------
+4. HOSE BIB REPLACEMENT & LEAK REPAIR
+----------------------------------------
+Existing before/after stays in place.
+
+----------------------------------------
+5. UNDER-CABINET LED LIGHTING
+----------------------------------------
+Existing single photo stays in place.
+
+----------------------------------------
+6. WATER HEATER HEATING ELEMENT REPLACEMENT
+----------------------------------------
+JOB 07 slider (3 sequenced frames)
+1. https://lh3.googleusercontent.com/d/1WKZrcTa9Nu6loVudX6HBba7beAgLC-OI
+Caption: During: the heating element is removed so the failed part can be checked instead of guessing.
+
+2. https://lh3.googleusercontent.com/d/1kkU3uqYr2XPCBXqtAk1c-l5Qgy-RZfee
+Caption: During: failed element out of the tank, confirming why the heater was not keeping up.
+
+3. https://lh3.googleusercontent.com/d/1UTqmoJHe0LOLs6b-wIJj_oC-O9t0MYqz
+Caption: After: new heating element installed and the repair ready to bring hot water back.
+
+----------------------------------------
+7. KITCHEN LIGHTING REWIRE AND NEW OUTLET
+----------------------------------------
+JOB 08 slider (3 sequenced frames)
+1. https://lh3.googleusercontent.com/d/1ystlTeGwAvyBmNtttuRMU4WX3SfwNjgk
+Caption: During: bullnose drywall patching and a new switch box get the wall ready for the lighting rework.
+
+2. https://lh3.googleusercontent.com/d/1xGsLMqyL0Es7EB53xtxgGGghj5U846zg
+Caption: After: recessed lights and pendants land on separate switches so the kitchen works better day to day.
+
+3. https://lh3.googleusercontent.com/d/1ncSDRQJyoM6ROtbuJOKFrBDHPIylJl9T
+Caption: After: new receptacle cut into the 2x6 wall with a Romex feed. Drywall plus electrical in one stop is a Power Pair at 10% off labor.
+
+----------------------------------------
+8. DRYWALL REMEDIATION
+----------------------------------------
+JOB 10 slider (3 sequenced frames)
+1. https://lh3.googleusercontent.com/d/1-s17Oqnwb5-AVoeMutDDhZUs2nncHzFd
+Caption: During: remediation starts with the damaged drywall opened up so the problem area can be corrected properly.
+
+2. https://lh3.googleusercontent.com/d/1itrQ_ThctFshyAIEcg1UqQTMYg-j2W8D
+Caption: During: the second remediation pass brings the wall back into shape before the final finish.
+
+3. https://lh3.googleusercontent.com/d/1VPfwnAtLVBt-CA5tTHzhRTHaN2GAEkK0
+Caption: After: finished remediation leaves the wall clean again without advertising where the repair was.
 
 ----------------------------------------
 NOTES
-- Lead with the Closet sequence (best process story)
-- Follow with Rangehood before/after pair
-- LED lighting as supporting electrical project
-- Vanity can be added now or held for a wider bathroom shot later
+- Do not add new sliders for jobs with fewer than 3 sequenced frames.
+- Use Drive stills through https://lh3.googleusercontent.com/d/FILE_ID.
+- Captions for portfolio photos should include Before, During, or After.
