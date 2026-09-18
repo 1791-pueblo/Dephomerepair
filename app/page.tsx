@@ -363,7 +363,7 @@ export default function Home() {
       <section id="services" className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">DEP Service Menu</h2>
-          <p className="text-center text-[#424242] mb-10 sm:mb-12">Prices unlock in Instant Quote after you select • Texture included on drywall repairs</p>
+          <p className="text-center text-[#424242] mb-10 sm:mb-12">Prices unlock in Instant Quote after you select • Texture included on drywall repairs • Texture packages in Instant Quote</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 sm:mb-10">
             {startingAnchors.map((svc) => (
               <button
@@ -422,7 +422,7 @@ export default function Home() {
               <div>🎉 <strong>Triple Play</strong> — All three categories → 15% off labor</div>
               <div>⚡ <strong>Power Pair</strong> — Any two categories → 10% off labor</div>
               <div>✓ <strong>Service call waived</strong> when any repair or install is booked</div>
-              <div>🔥 <strong>While We're There</strong> — One small 5-minute task FREE with any booked service</div>
+              <div>🔥 <strong>While We&apos;re There</strong> — One small 5-minute task FREE with any booked service</div>
             </div>
           </div>
         </div>
