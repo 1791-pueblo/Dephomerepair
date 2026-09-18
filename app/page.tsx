@@ -328,41 +328,49 @@ export default function Home() {
             {menuCategories.map((cat) => (
               <div
                 key={cat.key}
-                className={`text-left ${cat.cardBg} p-6 sm:p-8 rounded-2xl border ${cat.borderClass} hover:shadow-md transition h-full w-full flex flex-col`}
+                className={`relative text-left ${cat.cardBg} p-6 sm:p-8 rounded-2xl border ${cat.borderClass} hover:shadow-md transition h-full w-full`}
               >
-                <div className="flex items-baseline gap-2 mb-5">
-                  <span className="text-3xl sm:text-4xl font-black" style={{ color: cat.letterColor }}>{cat.letter}</span>
-                  <span className="text-xl sm:text-2xl font-bold text-[#1A1A1A]">{cat.short}</span>
-                </div>
-                <div className="mb-5">
-                  <ProjectPhotoSlider
-                    photos={tradeCardProjects[cat.key].photos}
-                    projectType={tradeCardProjects[cat.key].type}
-                    onOpen={setLightbox}
-                  />
-                </div>
-                <div className="mt-auto">
-                  <ul className="space-y-4 text-[#424242] text-sm">
-                    {cat.groups.map(([sub, items]) => (
-                      <li key={sub}>
-                        <div className="mb-1 font-semibold text-[#1A1A1A]">{sub}</div>
-                        <ul className="space-y-1 pl-1">
-                          {items.slice(0, 4).map((item) => (
-                            <li key={item.id} className="flex gap-2"><span style={{ color: cat.letterColor }}>✓</span><span>{item.name}</span></li>
-                          ))}
-                          {items.length > 4 && <li className="text-xs text-gray-500 pl-5">+ {items.length - 4} more in quote tool</li>}
-                        </ul>
-                      </li>
-                    ))}
-                  </ul>
-                  <button
-                    type="button"
-                    onClick={() => handleServiceCardClick(cat.key)}
-                    className="pt-5 text-left text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#FFAB00]"
-                    style={{ color: cat.letterColor }}
-                  >
-                    Get pricing →
-                  </button>
+                <button
+                  type="button"
+                  onClick={() => handleServiceCardClick(cat.key)}
+                  className="absolute inset-0 rounded-2xl focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#FFAB00]"
+                  aria-label={`Get pricing for ${cat.short} services`}
+                />
+                <div className="relative z-10 flex h-full flex-col pointer-events-none">
+                  <div className="flex items-baseline gap-2 mb-5">
+                    <span className="text-3xl sm:text-4xl font-black" style={{ color: cat.letterColor }}>{cat.letter}</span>
+                    <span className="text-xl sm:text-2xl font-bold text-[#1A1A1A]">{cat.short}</span>
+                  </div>
+                  <div className="mb-5 pointer-events-auto">
+                    <ProjectPhotoSlider
+                      photos={tradeCardProjects[cat.key].photos}
+                      projectType={tradeCardProjects[cat.key].type}
+                      onOpen={setLightbox}
+                    />
+                  </div>
+                  <div className="mt-auto">
+                    <ul className="space-y-4 text-[#424242] text-sm">
+                      {cat.groups.map(([sub, items]) => (
+                        <li key={sub}>
+                          <div className="mb-1 font-semibold text-[#1A1A1A]">{sub}</div>
+                          <ul className="space-y-1 pl-1">
+                            {items.slice(0, 4).map((item) => (
+                              <li key={item.id} className="flex gap-2"><span style={{ color: cat.letterColor }}>✓</span><span>{item.name}</span></li>
+                            ))}
+                            {items.length > 4 && <li className="text-xs text-gray-500 pl-5">+ {items.length - 4} more in quote tool</li>}
+                          </ul>
+                        </li>
+                      ))}
+                    </ul>
+                    <button
+                      type="button"
+                      onClick={() => handleServiceCardClick(cat.key)}
+                      className="pointer-events-auto pt-5 text-left text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#FFAB00]"
+                      style={{ color: cat.letterColor }}
+                    >
+                      Get pricing →
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
