@@ -422,7 +422,7 @@ export default function Home() {
               <div>🎉 <strong>Triple Play</strong> — All three categories → 15% off labor</div>
               <div>⚡ <strong>Power Pair</strong> — Any two categories → 10% off labor</div>
               <div>✓ <strong>Service call waived</strong> when any repair or install is booked</div>
-              <div>🔥 <strong>While We're There</strong> — One small 5-minute task FREE with any booked service</div>
+              <div>🔥 <strong>While We&apos;re There</strong> — One small 5-minute task FREE with any booked service</div>
             </div>
           </div>
         </div>
