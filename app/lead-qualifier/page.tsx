@@ -287,19 +287,19 @@ export default function LeadQualifier() {
             <Image src="/logo.png" alt="DEP Home Repair" width={140} height={56} className="h-12 sm:h-14 w-auto" priority />
           </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-[#1A1A1A]">
-            <Link href="/#services" className="hover:text-[#005683] transition">Services</Link>
-            <Link href="/#quote" className="hover:text-[#005683] transition">Instant Quote</Link>
-            <Link href="/#contact" className="hover:text-[#005683] transition">Contact</Link>
-            <Link href="/" className="bg-[#005683] hover:bg-blue-900 text-white px-5 py-2.5 rounded-full font-semibold text-sm transition shadow-sm">
+            <Link href="/#services" className="hover:text-[#0056B3] transition">Services</Link>
+            <Link href="/#quote" className="hover:text-[#0056B3] transition">Instant Quote</Link>
+            <Link href="/#contact" className="hover:text-[#0056B3] transition">Contact</Link>
+            <Link href="/" className="bg-[#0056B3] hover:bg-blue-900 text-white px-5 py-2.5 rounded-full font-semibold text-sm transition shadow-sm">
               ← Back to Site
             </Link>
           </nav>
-          <Link href="/" className="md:hidden text-sm font-semibold text-[#005683]">← Back</Link>
+          <Link href="/" className="md:hidden text-sm font-semibold text-[#0056B3]">← Back</Link>
         </div>
       </header>
 
       {/* Page Hero */}
-      <section className="bg-gradient-to-br from-[#005683] via-[#004a70] to-[#1A1A1A] text-white py-12 sm:py-16">
+      <section className="bg-gradient-to-br from-[#0056B3] via-[#00448F] to-[#1A1A1A] text-white py-12 sm:py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
           <div className="inline-block bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-medium mb-4">
             🎯 Internal Tool — DEP Home Repair
@@ -425,7 +425,7 @@ export default function LeadQualifier() {
 
             <button
               onClick={handleScore}
-              className="mt-8 w-full bg-[#005683] hover:bg-blue-900 text-white py-4 rounded-2xl font-bold text-lg transition shadow-md"
+              className="mt-8 w-full bg-[#0056B3] hover:bg-blue-900 text-white py-4 rounded-2xl font-bold text-lg transition shadow-md"
             >
               Score This Lead →
             </button>
@@ -470,7 +470,7 @@ export default function LeadQualifier() {
                 <ul className="space-y-2">
                   {result.reasons.map((r, i) => (
                     <li key={i} className="flex items-start gap-2 text-sm text-[#424242]">
-                      <span className="mt-0.5 text-[#005683]">•</span>
+                      <span className="mt-0.5 text-[#0056B3]">•</span>
                       <span>{r}</span>
                     </li>
                   ))}
@@ -489,7 +489,7 @@ export default function LeadQualifier() {
                   <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">
                     Next Step
                   </div>
-                  <div className="text-sm font-semibold text-[#005683]">{result.nextStep}</div>
+                  <div className="text-sm font-semibold text-[#0056B3]">{result.nextStep}</div>
                 </div>
               </div>
 
@@ -501,7 +501,7 @@ export default function LeadQualifier() {
                   </h3>
                   <button
                     onClick={handleCopy}
-                    className="text-xs text-[#005683] hover:text-blue-900 font-medium border border-[#005683]/30 hover:border-[#005683] px-3 py-1 rounded-full transition"
+                    className="text-xs text-[#0056B3] hover:text-blue-900 font-medium border border-[#0056B3]/30 hover:border-[#0056B3] px-3 py-1 rounded-full transition"
                   >
                     {copied ? '✓ Copied!' : 'Copy'}
                   </button>

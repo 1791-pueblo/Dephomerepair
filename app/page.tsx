@@ -520,7 +520,7 @@ export default function Home() {
                   <div className="mt-5 space-y-2 text-sm text-[#424242]">{liveQuote.breakdown.map((line, i) => <div key={i}>{line}</div>)}</div>
                   <div className="mt-5 bg-white rounded-xl border border-slate-200 p-4">
                     <div className="text-xs uppercase tracking-wide text-gray-500 mb-1">Why homeowners choose DEP</div>
-                    <div className="text-sm text-[#1A1A1A] font-medium">Licensed • Bonded • Insured</div>
+                    <div className="text-sm text-[#1A1A1A] font-medium">Licensed • Bonded • Insured • ROC 277978</div>
                     <div className="text-xs text-gray-600 mt-1">Solo tradesman — you talk directly to the person who does the work. Clear communication, fair pricing, and clean results with no pressure.</div>
                   </div>
                   <div className="mt-4 bg-[#FFF8E7] border border-[#FFAB00]/40 rounded-xl p-4 text-sm text-[#1A1A1A]">“Showed up on time, clean work, fair price.” — Sarah M., Chandler</div>
@@ -634,6 +634,7 @@ export default function Home() {
               <a href="tel:6025981988" className="inline-block bg-[#0056B3] hover:bg-[#00448F] text-white px-6 py-3 rounded-full font-semibold transition">Call 602-598-1988</a>
               <a href="mailto:info@dephomerepair.com" className="inline-block border border-[#0056B3]/30 hover:border-[#0056B3] text-[#0056B3] px-6 py-3 rounded-full font-semibold transition">Email info@dephomerepair.com</a>
             </div>
+            <div className="text-sm text-[#1A1A1A] font-medium">Licensed • Bonded • Insured • ROC 277978</div>
           </div>
         </div>
       </section>
@@ -676,7 +677,7 @@ export default function Home() {
               <div className="space-y-2 text-sm opacity-90">
                 <div><a href="tel:6025981988" className="hover:text-[#FFAB00] transition">📞 602-598-1988</a></div>
                 <div><a href="mailto:info@dephomerepair.com" className="hover:text-[#FFAB00] transition">✉️ info@dephomerepair.com</a></div>
-                <div className="pt-2">Chandler, AZ & East Valley<br />Licensed • Bonded • Insured</div>
+                <div className="pt-2">Chandler, AZ & East Valley<br />Licensed • Bonded • Insured • ROC 277978</div>
               </div>
             </div>
             <div>
