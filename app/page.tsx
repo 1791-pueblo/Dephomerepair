@@ -257,7 +257,7 @@ export default function Home() {
             <a href="#contact" className="hover:text-[#0056B3] transition">Contact</a>
             <a href="#quote" onClick={() => trackEvent('hero_nav_quote_clicked')} className="bg-[#FFAB00] hover:bg-amber-500 text-black px-5 py-2.5 rounded-full font-semibold text-sm transition shadow-sm">Get Quote</a>
           </nav>
-          <button className="md:hidden p-2 text-[#1A1A1A]" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle menu">
+          <button className="md:hidden p-2 text-[#1A1A1A]" onClick={() => setMobileMenuOpen((prev) => !prev)} aria-label="Toggle menu">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileMenuOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
