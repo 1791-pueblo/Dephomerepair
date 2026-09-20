@@ -630,6 +630,10 @@ export default function Home() {
             <p>We&apos;re more than handymen. We&apos;re problem-solvers dedicated to durable, efficient, and intelligent solutions that make your living space work better.</p>
             <p className="font-semibold text-[#1A1A1A]">DEP Home Repair: Where quality craftsmanship meets Home-Smart Solutions.</p>
             <p>Call <a href="tel:6025981988" className="font-semibold text-[#0056B3] hover:underline">602-598-1988</a> and email <a href="mailto:info@dephomerepair.com" className="font-semibold text-[#0056B3] hover:underline">info@dephomerepair.com</a></p>
+            <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
+              <a href="tel:6025981988" className="inline-block bg-[#0056B3] hover:bg-[#00448F] text-white px-6 py-3 rounded-full font-semibold transition">Call 602-598-1988</a>
+              <a href="mailto:info@dephomerepair.com" className="inline-block border border-[#0056B3]/30 hover:border-[#0056B3] text-[#0056B3] px-6 py-3 rounded-full font-semibold transition">Email info@dephomerepair.com</a>
+            </div>
           </div>
         </div>
       </section>
