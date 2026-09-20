@@ -349,7 +349,7 @@ export default function Home() {
                       onOpen={setLightbox}
                     />
                   </div>
-                  <div className="pointer-events-auto flex flex-1 flex-col">
+                  <div className="flex flex-1 flex-col">
                     <ul className="space-y-4 text-[#424242] text-sm">
                       {cat.groups.map(([sub, items]) => (
                         <li key={sub}>
@@ -366,7 +366,7 @@ export default function Home() {
                     <button
                       type="button"
                       onClick={() => handleServiceCardClick(cat.key)}
-                      className="mt-auto pt-5 text-left text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#FFAB00]"
+                      className="pointer-events-auto mt-auto pt-5 text-left text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#FFAB00]"
                       style={{ color: cat.letterColor }}
                     >
                       Get pricing →
