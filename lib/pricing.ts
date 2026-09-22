@@ -2,11 +2,14 @@
  * DEP Home Repair — master pricing (labor)
  * Locked Aug 2026. Single source of truth for Instant Quote + service menu.
  * Texture is included in drywall repair prices.
- * Service call waived when any repair/install is booked same visit.
+ * Service call waived only when labor meets $250 on the same visit.
  * Bundles: discount applies only to labor above the first $200.
  */
 
 export const SERVICE_CALL = 95;
+
+/** Labor minimum before the $95 service call is waived. Devices do not count. */
+export const CALL_WAIVER_MIN = 250;
 
 /** Default markup when DEP supplies the device (smart home, etc.) */
 export const DEVICE_MARKUP = 0.25;
@@ -181,8 +184,12 @@ export function lineTotal(service: ServicePrice, qty = 1): number {
   return service.estimate;
 }
 
-export function serviceCallAmount(hasBookedWork: boolean): number {
-  return hasBookedWork ? 0 : SERVICE_CALL;
+export function serviceCallAmount(laborSubtotal: number): number {
+  return laborSubtotal >= CALL_WAIVER_MIN ? 0 : SERVICE_CALL;
+}
+
+export function amountToWaiveCall(laborSubtotal: number): number {
+  return Math.max(0, CALL_WAIVER_MIN - laborSubtotal);
 }
 
 export function applyBundleDiscount(
