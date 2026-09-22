@@ -24,7 +24,6 @@ export interface FlatPrice {
   category: 'drywall' | 'electrical' | 'plumbing' | 'other';
   subcategory: string;
   notes?: string;
-  /** Typical device cost to DEP (before markup). When set, UI can offer supply option. */
   deviceCost?: number;
 }
 
@@ -46,7 +45,6 @@ export interface RangePrice {
   kind: 'range';
   low: number;
   high: number;
-  /** Midpoint used for Instant Quote estimates */
   estimate: number;
   category: 'drywall' | 'electrical' | 'plumbing' | 'other';
   subcategory: string;
@@ -61,7 +59,6 @@ export function deviceSellPrice(deviceCost: number): number {
 }
 
 export const electrical: ServicePrice[] = [
-  // Troubleshooting
   { id: 'e-dead-outlet', name: 'Dead outlet diagnosis', kind: 'flat', price: 190, category: 'electrical', subcategory: 'Troubleshooting' },
   { id: 'e-breaker', name: 'Tripped breaker troubleshooting', kind: 'flat', price: 225, category: 'electrical', subcategory: 'Troubleshooting' },
   { id: 'e-nonworking-light', name: 'Non-working light diagnosis', kind: 'flat', price: 200, category: 'electrical', subcategory: 'Troubleshooting' },
@@ -69,16 +66,12 @@ export const electrical: ServicePrice[] = [
   { id: 'e-gfci-diag', name: 'GFCI reset / failure diagnosis', kind: 'flat', price: 190, category: 'electrical', subcategory: 'Troubleshooting' },
   { id: 'e-switch-circuit', name: 'Switch circuit troubleshooting', kind: 'flat', price: 215, category: 'electrical', subcategory: 'Troubleshooting' },
   { id: 'e-intermittent', name: 'Loose connection / intermittent power', kind: 'flat', price: 275, category: 'electrical', subcategory: 'Troubleshooting' },
-
-  // Basic swaps (volume)
   { id: 'e-outlet', name: 'Standard outlet', kind: 'volume', first: 150, additional: 70, category: 'electrical', subcategory: 'Outlets & Switches' },
   { id: 'e-switch', name: 'Standard switch', kind: 'volume', first: 150, additional: 70, category: 'electrical', subcategory: 'Outlets & Switches' },
   { id: 'e-gfci', name: 'GFCI outlet', kind: 'volume', first: 150, additional: 80, category: 'electrical', subcategory: 'Outlets & Switches' },
   { id: 'e-dimmer', name: 'Dimmer switch', kind: 'volume', first: 175, additional: 90, category: 'electrical', subcategory: 'Outlets & Switches' },
   { id: 'e-usb-outlet', name: 'USB / USB-C outlet', kind: 'volume', first: 150, additional: 80, category: 'electrical', subcategory: 'Outlets & Switches', deviceCost: 25 },
   { id: 'e-smoke-co', name: 'Smoke / CO detector', kind: 'flat', price: 150, category: 'electrical', subcategory: 'Outlets & Switches', deviceCost: 40 },
-
-  // Fixtures & lighting
   { id: 'e-fan', name: 'Ceiling fan (existing fan-rated box)', kind: 'flat', price: 200, category: 'electrical', subcategory: 'Fixtures & Lighting' },
   { id: 'e-fan-box', name: 'Ceiling fan + box upgrade', kind: 'flat', price: 275, category: 'electrical', subcategory: 'Fixtures & Lighting' },
   { id: 'e-fixture', name: 'Light fixture replacement', kind: 'flat', price: 175, category: 'electrical', subcategory: 'Fixtures & Lighting' },
@@ -86,8 +79,6 @@ export const electrical: ServicePrice[] = [
   { id: 'e-recessed-attic', name: 'Recessed LED new (attic access)', kind: 'volume', first: 175, additional: 110, category: 'electrical', subcategory: 'Fixtures & Lighting' },
   { id: 'e-recessed-fish', name: 'Recessed LED new (no attic / fish)', kind: 'volume', first: 250, additional: 150, category: 'electrical', subcategory: 'Fixtures & Lighting' },
   { id: 'e-undercabinet', name: 'Under-cabinet lighting', kind: 'flat', price: 225, category: 'electrical', subcategory: 'Fixtures & Lighting', notes: 'Base; scale by run length' },
-
-  // Smart home
   { id: 'e-thermostat', name: 'Smart thermostat (existing C-wire)', kind: 'flat', price: 175, category: 'electrical', subcategory: 'Smart Home', deviceCost: 230 },
   { id: 'e-thermostat-c', name: 'Smart thermostat + C-wire / PEK', kind: 'flat', price: 225, category: 'electrical', subcategory: 'Smart Home', deviceCost: 230 },
   { id: 'e-doorbell', name: 'Video doorbell (existing wiring)', kind: 'flat', price: 150, category: 'electrical', subcategory: 'Smart Home', deviceCost: 100 },
@@ -95,8 +86,6 @@ export const electrical: ServicePrice[] = [
   { id: 'e-smart-switch', name: 'Smart switch', kind: 'volume', first: 175, additional: 90, category: 'electrical', subcategory: 'Smart Home', deviceCost: 35 },
   { id: 'e-smart-dimmer', name: 'Smart dimmer', kind: 'volume', first: 185, additional: 95, category: 'electrical', subcategory: 'Smart Home', deviceCost: 40 },
   { id: 'e-smart-plug', name: 'Smart plug / module setup', kind: 'volume', first: 75, additional: 40, category: 'electrical', subcategory: 'Smart Home', deviceCost: 20 },
-
-  // TV
   { id: 'e-tv-std', name: 'TV mount (standard, up to ~65–70")', kind: 'flat', price: 175, category: 'electrical', subcategory: 'TV Mounting' },
   { id: 'e-tv-large', name: 'TV mount (large / full-motion)', kind: 'flat', price: 225, category: 'electrical', subcategory: 'TV Mounting' },
   { id: 'e-tv-conceal', name: 'In-wall cable concealment', kind: 'flat', price: 95, category: 'electrical', subcategory: 'TV Mounting' },
@@ -132,42 +121,9 @@ export const drywall: ServicePrice[] = [
   { id: 'd-seam', name: 'Seam / tape separation', kind: 'range', low: 250, high: 450, estimate: 350, category: 'drywall', subcategory: 'Repairs', notes: 'Texture included' },
   { id: 'd-water-cutout', name: 'Water-damage cut-out + patch', kind: 'range', low: 400, high: 900, estimate: 650, category: 'drywall', subcategory: 'Repairs', notes: 'Texture included' },
   { id: 'd-water-remediation', name: 'Full water remediation', kind: 'range', low: 650, high: 3000, estimate: 1200, category: 'drywall', subcategory: 'Repairs', notes: 'Call for scope; starts at $650' },
-  {
-    id: 'd-texture-t1',
-    name: 'Texture Tier 1 — Patch & match (spot repair)',
-    kind: 'range',
-    low: 250,
-    high: 450,
-    estimate: 350,
-    category: 'drywall',
-    subcategory: 'Texture packages',
-    notes:
-      'Up to 2x2 ft per area. Backing, hang, tape, 3-coat mud, hand-blended match (skip trowel, knockdown, or orange peel). Mask 3–4 ft around the work. Flat rate per patch.',
-  },
-  {
-    id: 'd-texture-t2',
-    name: 'Texture Tier 2 — Wall / accent retexture',
-    kind: 'range',
-    low: 550,
-    high: 950,
-    estimate: 750,
-    category: 'drywall',
-    subcategory: 'Texture packages',
-    notes:
-      'Single wall or small room up to 150–200 sq ft. Skim or retexture, minor leveling, seam stabilize, uniform hand finish. Full containment, floor protection, dust control. Sq-ft range or project flat.',
-  },
-  {
-    id: 'd-texture-t3',
-    name: 'Texture Tier 3 — Whole-space transformation',
-    kind: 'range',
-    low: 900,
-    high: 2800,
-    estimate: 900,
-    category: 'drywall',
-    subcategory: 'Texture packages',
-    notes:
-      'Starts at $900. Multi-wall or full-room restore, skim over heavy texture or popcorn-removal surface, hand-troweled walls and ceilings. Full protection. Final price from sq ft, ceiling height, and surface condition.',
-  },
+  { id: 'd-texture-t1', name: 'Texture Tier 1 — Patch & match (spot repair)', kind: 'range', low: 250, high: 450, estimate: 350, category: 'drywall', subcategory: 'Texture packages', notes: 'Up to 2x2 ft per area. Backing, hang, tape, 3-coat mud, hand-blended match (skip trowel, knockdown, or orange peel). Mask 3–4 ft around the work. Flat rate per patch.' },
+  { id: 'd-texture-t2', name: 'Texture Tier 2 — Wall / accent retexture', kind: 'range', low: 550, high: 950, estimate: 750, category: 'drywall', subcategory: 'Texture packages', notes: 'Single wall or small room up to 150–200 sq ft. Skim or retexture, minor leveling, seam stabilize, uniform hand finish. Full containment, floor protection, dust control. Sq-ft range or project flat.' },
+  { id: 'd-texture-t3', name: 'Texture Tier 3 — Whole-space transformation', kind: 'range', low: 900, high: 2800, estimate: 900, category: 'drywall', subcategory: 'Texture packages', notes: 'Starts at $900. Multi-wall or full-room restore, skim over heavy texture or popcorn-removal surface, hand-troweled walls and ceilings. Full protection. Final price from sq ft, ceiling height, and surface condition.' },
 ];
 
 export const allServices: ServicePrice[] = [...electrical, ...plumbing, ...drywall];
@@ -184,8 +140,9 @@ export function lineTotal(service: ServicePrice, qty = 1): number {
   return service.estimate;
 }
 
-export function serviceCallAmount(laborSubtotal: number): number {
-  return laborSubtotal >= CALL_WAIVER_MIN ? 0 : SERVICE_CALL;
+export function serviceCallAmount(laborSubtotal: number | boolean): number {
+  const labor = typeof laborSubtotal === 'boolean' ? 0 : laborSubtotal;
+  return labor >= CALL_WAIVER_MIN ? 0 : SERVICE_CALL;
 }
 
 export function amountToWaiveCall(laborSubtotal: number): number {
@@ -201,20 +158,12 @@ export function applyBundleDiscount(
   if (n >= 3) {
     const excess = Math.max(0, laborSubtotal - threshold);
     const discount = Math.round(excess * 0.15);
-    return {
-      total: laborSubtotal - discount,
-      label: 'Triple Play — 15% off labor over $200',
-      discount,
-    };
+    return { total: laborSubtotal - discount, label: 'Triple Play — 15% off labor over $200', discount };
   }
   if (n === 2) {
     const excess = Math.max(0, laborSubtotal - threshold);
     const discount = Math.round(excess * 0.1);
-    return {
-      total: laborSubtotal - discount,
-      label: 'Power Pair — 10% off labor over $200',
-      discount,
-    };
+    return { total: laborSubtotal - discount, label: 'Power Pair — 10% off labor over $200', discount };
   }
   return { total: laborSubtotal, label: null, discount: 0 };
 }
