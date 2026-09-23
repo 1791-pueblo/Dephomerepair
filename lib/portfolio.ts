@@ -8,6 +8,7 @@ export type ProjectPhoto = {
 };
 
 export type PortfolioProject = {
+  id: string;
   title: string;
   tag: string;
   trades: Trade[];
@@ -64,6 +65,7 @@ export const tradeCardProjects: Record<
 /** Bathroom order locked to Jason's numbering. Slots 2-5 stay put. Slot 1 is the current start frame until a preconstruction photo is added. */
 export const portfolioProjects: PortfolioProject[] = [
   {
+    id: 'bathroom-pony-wall-vanity',
     title: 'Bathroom Renovation — Pony Wall Vanity',
     tag: 'Drywall + Electrical + Plumbing',
     trades: ['drywall', 'electrical', 'plumbing'],
@@ -108,6 +110,7 @@ export const portfolioProjects: PortfolioProject[] = [
     ],
   },
   {
+    id: 'closet-conversion-barn-doors',
     title: 'Closet Conversion with Barn Doors',
     tag: 'Drywall',
     trades: ['drywall'],
@@ -126,6 +129,7 @@ export const portfolioProjects: PortfolioProject[] = [
     ],
   },
   {
+    id: 'rangehood-protected-power',
     title: 'Rangehood Install + Protected Power',
     tag: 'Electrical',
     trades: ['electrical'],
@@ -143,6 +147,7 @@ export const portfolioProjects: PortfolioProject[] = [
     ],
   },
   {
+    id: 'hose-bib-leak-repair',
     title: 'Hose Bib Replacement & Leak Repair',
     tag: 'Plumbing',
     trades: ['plumbing'],
@@ -160,6 +165,7 @@ export const portfolioProjects: PortfolioProject[] = [
     ],
   },
   {
+    id: 'under-cabinet-led-lighting',
     title: 'Under-Cabinet LED Lighting',
     tag: 'Electrical',
     trades: ['electrical'],
@@ -172,6 +178,7 @@ export const portfolioProjects: PortfolioProject[] = [
     ],
   },
   {
+    id: 'water-heater-element-replacement',
     title: 'Water Heater Heating Element Replacement',
     tag: 'Electrical',
     trades: ['electrical'],
@@ -187,6 +194,7 @@ export const portfolioProjects: PortfolioProject[] = [
     ],
   },
   {
+    id: 'kitchen-lighting-rewire-outlet',
     title: 'Kitchen Lighting Rewire and New Outlet',
     tag: 'Drywall + Electrical',
     trades: ['drywall', 'electrical'],
@@ -202,6 +210,7 @@ export const portfolioProjects: PortfolioProject[] = [
     ],
   },
   {
+    id: 'drywall-remediation',
     title: 'Drywall Remediation',
     tag: 'Drywall',
     trades: ['drywall'],

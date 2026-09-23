@@ -335,18 +335,12 @@ export default function Home() {
                 key={cat.key}
                 className={`relative text-left ${cat.cardBg} p-6 sm:p-8 rounded-2xl border ${cat.borderClass} hover:shadow-md transition h-full w-full`}
               >
-                <button
-                  type="button"
-                  onClick={() => handleServiceCardClick(cat.key)}
-                  className="absolute inset-0 rounded-2xl focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#FFAB00]"
-                  aria-label={`Get pricing for ${cat.short} services`}
-                />
-                <div className="relative z-10 flex h-full flex-col pointer-events-none">
+                <div className="flex h-full flex-col">
                   <div className="flex items-baseline gap-2 mb-5">
                     <span className="text-3xl sm:text-4xl font-black" style={{ color: cat.letterColor }}>{cat.letter}</span>
                     <span className="text-xl sm:text-2xl font-bold text-[#1A1A1A]">{cat.short}</span>
                   </div>
-                  <div className="mb-5 pointer-events-auto">
+                  <div className="mb-5">
                     <ProjectPhotoSlider
                       photos={tradeCardProjects[cat.key].photos}
                       projectType={tradeCardProjects[cat.key].type}
@@ -370,7 +364,7 @@ export default function Home() {
                     <button
                       type="button"
                       onClick={() => handleServiceCardClick(cat.key)}
-                      className="pointer-events-auto mt-auto pt-5 text-left text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#FFAB00]"
+                      className="mt-auto pt-5 text-left text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#FFAB00]"
                       style={{ color: cat.letterColor }}
                     >
                       Get pricing →
@@ -562,7 +556,7 @@ export default function Home() {
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">Our Work</h2>
           <p className="text-center text-[#424242] mb-10 sm:mb-12">Real projects from local homes — before, during & after. This is the kind of careful, clean work you can expect.</p>
           {portfolioProjects.map((project) => (
-            <div key={`${project.title}-${project.photos[0]?.src ?? 'project'}`} className="mb-14 last:mb-0">
+            <div key={project.id} className="mb-14 last:mb-0">
               <div className="flex flex-wrap items-center gap-3 mb-5">
                 <h3 className="text-xl sm:text-2xl font-bold text-[#1A1A1A]">{project.title}</h3>
                 <span className="text-xs font-semibold bg-[#0056B3]/10 text-[#0056B3] px-3 py-1 rounded-full">{project.tag}</span>
