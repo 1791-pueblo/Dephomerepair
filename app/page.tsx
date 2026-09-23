@@ -309,7 +309,7 @@ export default function Home() {
       <section id="services" className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">DEP Service Menu</h2>
-          <p className="text-center text-[#424242] mb-10 sm:mb-12">Service call is $95 and waives at $250 labor on the same visit • Texture included on drywall repairs • Texture packages in Instant Quote</p>
+          <p className="text-center text-[#424242] mb-10 sm:mb-12">{`Service call is $${SERVICE_CALL} and waives at $${CALL_WAIVER_MIN} labor on the same visit • Texture included on drywall repairs • Texture packages in Instant Quote`}</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 sm:mb-10">
             {startingAnchors.map((svc) => (
               <button
@@ -561,8 +561,8 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">Our Work</h2>
           <p className="text-center text-[#424242] mb-10 sm:mb-12">Real projects from local homes — before, during & after. This is the kind of careful, clean work you can expect.</p>
-          {portfolioProjects.map((project, pi) => (
-            <div key={pi} className="mb-14 last:mb-0">
+          {portfolioProjects.map((project) => (
+            <div key={project.title} className="mb-14 last:mb-0">
               <div className="flex flex-wrap items-center gap-3 mb-5">
                 <h3 className="text-xl sm:text-2xl font-bold text-[#1A1A1A]">{project.title}</h3>
                 <span className="text-xs font-semibold bg-[#0056B3]/10 text-[#0056B3] px-3 py-1 rounded-full">{project.tag}</span>
@@ -577,8 +577,8 @@ export default function Home() {
                 <div className="mt-4">
                   <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Supporting details</p>
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                    {project.supportPhotos.map((photo, idx) => (
-                      <button key={idx} onClick={() => setLightbox(photo)} className="group relative aspect-square overflow-hidden rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition" aria-label={`View photo: ${photo.caption}`}>
+                    {project.supportPhotos.map((photo) => (
+                      <button key={photo.src} onClick={() => setLightbox(photo)} className="group relative aspect-square overflow-hidden rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition" aria-label={`View photo: ${photo.caption}`}>
                         <Image src={photo.src} alt={photo.caption} fill sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
                       </button>
                     ))}
@@ -649,8 +649,8 @@ export default function Home() {
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">What Clients Say</h2>
           <p className="text-center text-[#424242] mb-10 sm:mb-12">Real feedback from Chandler & East Valley homeowners who worked directly with Jason.</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            {testimonials.map((t, i) => (
-              <div key={i} className="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-100 h-full">
+            {testimonials.map((t) => (
+              <div key={`${t.name}-${t.location}`} className="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-100 h-full">
                 <div className="flex gap-1 mb-4 text-[#FFAB00]">{Array.from({ length: t.rating }).map((_, j) => <span key={j}>★</span>)}</div>
                 <p className="text-[#424242] mb-5 leading-relaxed">&ldquo;{t.text}&rdquo;</p>
                 <div className="font-semibold text-[#1A1A1A]">{t.name}</div>
