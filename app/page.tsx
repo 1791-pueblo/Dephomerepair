@@ -236,6 +236,15 @@ export default function Home() {
     return () => window.removeEventListener('keydown', onEscape);
   }, [bookingModalOpen]);
 
+  useEffect(() => {
+    if (!lightbox) return;
+    const onEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setLightbox(null);
+    };
+    window.addEventListener('keydown', onEscape);
+    return () => window.removeEventListener('keydown', onEscape);
+  }, [lightbox]);
+
   const activeList = servicesForCategory(activeCategory);
   const activeGroups = groupBySubcategory(activeList);
 
@@ -582,15 +591,15 @@ export default function Home() {
             </div>
           ))}
           <div className="mt-10 text-center">
-            <a href="#quote" className="inline-block bg-[#FFAB00] hover:bg-amber-500 text-black px-8 py-3.5 rounded-full font-semibold transition shadow-sm">Start Your Project →</a>
+            <a href="#quote" className="inline-block bg-[#FFAB00] hover:bg-amber-500 text-black px-8 py-3.5 rounded-full font-semibold transition shadow-sm">Start a bundled quote →</a>
           </div>
         </div>
       </section>
 
       {lightbox && (
         <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" onClick={() => setLightbox(null)}>
-          <div className="relative max-w-3xl w-full" onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setLightbox(null)} className="absolute -top-10 right-0 text-white text-3xl font-bold hover:text-[#FFAB00] transition" aria-label="Close">×</button>
+          <div role="dialog" aria-modal="true" aria-label="Project photo lightbox" className="relative max-w-3xl w-full" onClick={(e) => e.stopPropagation()}>
+            <button type="button" onClick={() => setLightbox(null)} className="absolute -top-10 right-0 text-white text-3xl font-bold hover:text-[#FFAB00] transition" aria-label="Close">×</button>
             <div className="relative w-full aspect-[4/3]">
               <Image src={lightbox.src} alt={lightbox.caption} fill sizes="(max-width: 768px) 100vw, 48rem" className="object-contain rounded-2xl" priority />
             </div>
@@ -608,8 +617,8 @@ export default function Home() {
             about us
           </h2>
           <div className="max-w-4xl mx-auto text-center text-[#424242] space-y-4">
-            <p>Welcome to DEP Home Repair — your trusted partner for Home-Smart Solutions.</p>
-            <p>At DEP, we believe your home deserves the highest standard of care, from foundational repairs to modern living upgrades. Our name stands for excellence across three core pillars: Drywall, Electrical, and Plumbing.</p>
+            <p>DEP Home Repair handles drywall, electrical, and plumbing with one licensed tradesperson on the job.</p>
+            <p>You deal directly with the person doing the work, so the schedule stays clear, the communication stays simple, and bundled repairs get finished in one visit instead of three callbacks.</p>
           </div>
           <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white border border-[#0056B3]/20 rounded-2xl p-6">
@@ -626,8 +635,8 @@ export default function Home() {
             </div>
           </div>
           <div className="max-w-4xl mx-auto text-center text-[#424242] mt-8 space-y-4">
-            <p>We&apos;re more than handymen. We&apos;re problem-solvers dedicated to durable, efficient, and intelligent solutions that make your living space work better.</p>
-            <p className="font-semibold text-[#1A1A1A]">DEP Home Repair: Where quality craftsmanship meets Home-Smart Solutions.</p>
+            <p>When a job needs more than one trade, DEP can handle the leak, the outlet, and the drywall patch in the same stop. That is what Power Pair and Triple Play are built for.</p>
+            <p className="font-semibold text-[#1A1A1A]">Fair pricing. Clean work. Done right the first time.</p>
             <p>Call <a href="tel:6025981988" className="font-semibold text-[#0056B3] hover:underline">602-598-1988</a> and email <a href="mailto:info@dephomerepair.com" className="font-semibold text-[#0056B3] hover:underline">info@dephomerepair.com</a></p>
             <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
               <a href="tel:6025981988" className="inline-block bg-[#0056B3] hover:bg-[#00448F] text-white px-6 py-3 rounded-full font-semibold transition">Call 602-598-1988</a>
