@@ -7,6 +7,8 @@ import { portfolioProjects, tradeCardProjects } from '../lib/portfolio';
 import {
   allServices,
   applyBundleDiscount,
+  amountToWaiveCall,
+  CALL_WAIVER_MIN,
   deviceSellPrice,
   drywall,
   electrical,
@@ -112,14 +114,16 @@ export default function Home() {
     });
 
     const hasWork = cart.length > 0;
-    const call = serviceCallAmount(hasWork);
-    if (call > 0) breakdown.unshift(`Service call / diagnostic: $${SERVICE_CALL}`);
-    else if (hasWork) breakdown.unshift('Service call: waived (work booked)');
+    const call = serviceCallAmount(labor);
+    const toWaive = amountToWaiveCall(labor);
+    if (call === 0 && labor >= CALL_WAIVER_MIN) breakdown.unshift(`Service call: waived ($${CALL_WAIVER_MIN} labor minimum met)`);
+    else if (hasWork) breakdown.unshift(`Service call / diagnostic: $${SERVICE_CALL} — add $${toWaive} labor to waive`);
+    else breakdown.unshift(`Service call / diagnostic: $${SERVICE_CALL}`);
 
     const bundled = applyBundleDiscount(labor, categories);
     if (bundled.label) breakdown.push(`${bundled.label}: −$${bundled.discount}`);
 
-    return { total: bundled.total + devices + call, labor: bundled.total, devices, call, breakdown, categories, hasWork };
+    return { total: bundled.total + devices + call, labor: bundled.total, devices, call, toWaive, breakdown, categories, hasWork };
   }, [cart]);
 
   const countsByCategory = useMemo(() => {
@@ -305,7 +309,7 @@ export default function Home() {
       <section id="services" className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">DEP Service Menu</h2>
-          <p className="text-center text-[#424242] mb-10 sm:mb-12">Prices unlock in Instant Quote after you select • Texture included on drywall repairs • Texture packages in Instant Quote</p>
+          <p className="text-center text-[#424242] mb-10 sm:mb-12">Service call is $95 and waives at $250 labor on the same visit • Texture included on drywall repairs • Texture packages in Instant Quote</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 sm:mb-10">
             {startingAnchors.map((svc) => (
               <button
@@ -382,7 +386,7 @@ export default function Home() {
             <div className="max-w-md mx-auto space-y-3 text-left text-sm sm:text-base">
               <div>🎉 <strong>Triple Play</strong> — All three categories → 15% off labor</div>
               <div>⚡ <strong>Power Pair</strong> — Any two categories → 10% off labor</div>
-              <div>✓ <strong>Service call waived</strong> when any repair or install is booked</div>
+              <div>✓ <strong>Service call waived</strong> once the same-visit labor reaches {`$${CALL_WAIVER_MIN}`}</div>
               <div>🔥 <strong>While We&apos;re There</strong> — One small 5-minute task FREE with any booked service</div>
             </div>
           </div>
@@ -503,7 +507,8 @@ export default function Home() {
                     ${liveQuote.total}
                     {cart.length === 0 && <span className="text-sm font-normal text-gray-500 ml-2">(service call only until you select work)</span>}
                   </div>
-                  {liveQuote.hasWork && liveQuote.call === 0 && <div className="text-xs text-green-700 mt-0.5">Service call waived</div>}
+                  {liveQuote.hasWork && liveQuote.call === 0 && <div className="text-xs text-green-700 mt-0.5">{`Service call waived — $${CALL_WAIVER_MIN} labor minimum met`}</div>}
+                  {liveQuote.hasWork && liveQuote.call > 0 && <div className="text-xs text-amber-800 mt-0.5">{`$${SERVICE_CALL} service call applies · add $${liveQuote.toWaive} labor to waive`}</div>}
                 </div>
                 <div className="text-xs text-gray-500 text-right">
                   {cart.length} selected
