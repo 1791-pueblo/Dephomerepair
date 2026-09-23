@@ -289,7 +289,7 @@ export default function Home() {
           </div>
         )}
       </header>
-
+      <main className="pb-16 md:pb-0">
       <section className="bg-gradient-to-br from-[#0056B3] via-[#00448F] to-[#1A1A1A] text-white py-16 sm:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <div className="mb-6 sm:mb-8 flex justify-center">
@@ -671,7 +671,6 @@ export default function Home() {
           <a href="#quote" onClick={() => trackEvent('mobile_sticky_quote_clicked')} className="text-center bg-[#FFAB00] text-black rounded-xl py-2.5 text-xs font-semibold">Get Quote</a>
         </div>
       </div>
-      <div className="h-16 md:hidden" />
 
       <footer id="contact" className="bg-[#1A1A1A] text-white py-12 sm:py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -703,6 +702,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      </main>
     </>
   );
 }
