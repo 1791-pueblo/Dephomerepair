@@ -24,9 +24,9 @@ const QUICK_SERVICE_OPTIONS = ['Drywall', 'Electrical', 'Plumbing', 'Multiple Se
 const QUICK_URGENCY_OPTIONS = ['Today', 'This week', '1–2 weeks', 'Flexible'];
 
 const CATEGORY_META = [
-  { key: 'drywall' as const, label: 'D — Drywall Repair & Finishing', short: 'Drywall Repair & Finishing', tab: 'Drywall', letter: 'D', letterColor: '#0056B3', cardBg: 'bg-[#E8F1FB]', borderClass: 'border-[#0056B3]/20 hover:border-[#0056B3]/50' },
-  { key: 'electrical' as const, label: 'E — Electrical & Smart Home', short: 'Electrical & Smart Home', tab: 'Electrical', letter: 'E', letterColor: '#FFAB00', cardBg: 'bg-[#FFF8E7]', borderClass: 'border-[#FFAB00]/25 hover:border-[#FFAB00]/60' },
-  { key: 'plumbing' as const, label: 'P — Plumbing & Fixtures', short: 'Plumbing & Fixtures', tab: 'Plumbing', letter: 'P', letterColor: '#424242', cardBg: 'bg-[#F3F3F3]', borderClass: 'border-[#424242]/20 hover:border-[#424242]/50' },
+  { key: 'drywall' as const, short: 'Drywall Repair & Finishing', tab: 'Drywall' },
+  { key: 'electrical' as const, short: 'Electrical & Smart Home', tab: 'Electrical' },
+  { key: 'plumbing' as const, short: 'Plumbing & Fixtures', tab: 'Plumbing' },
 ];
 
 function groupBySubcategory(list: ServicePrice[]) {
@@ -70,6 +70,7 @@ export default function Home() {
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [bookingEmbedUrl, setBookingEmbedUrl] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [lightbox, setLightbox] = useState<{ src: string; caption: string } | null>(null);
 
   const cartMap = useMemo(() => {
     const m = new Map<string, CartItem>();
@@ -85,22 +86,32 @@ export default function Home() {
     cart.forEach(({ id, qty, supplyDevice }) => {
       const svc = allServices.find((s) => s.id === id);
       if (!svc) return;
-      if (svc.category === 'drywall' || svc.category === 'electrical' || svc.category === 'plumbing') categories.add(svc.category);
+      if (svc.category === 'drywall' || svc.category === 'electrical' || svc.category === 'plumbing') {
+        categories.add(svc.category);
+      }
       const laborLine = itemLabor(svc, qty);
       const deviceLine = itemDevice(svc, qty, supplyDevice);
       labor += laborLine;
       devices += deviceLine;
-      if (svc.kind === 'volume' && qty > 1) breakdown.push(`${svc.name} × ${qty}: $${laborLine} (1st $${svc.first} + ${qty - 1} × $${svc.additional})`);
-      else if (svc.kind === 'range') breakdown.push(`${svc.name}: ~$${laborLine} (est. $${svc.low}–$${svc.high})`);
-      else breakdown.push(`${svc.name}${qty > 1 ? ` × ${qty}` : ''}: $${laborLine}`);
+      if (svc.kind === 'volume' && qty > 1) {
+        breakdown.push(`${svc.name} × ${qty}: $${laborLine} (1st $${svc.first} + ${qty - 1} × $${svc.additional})`);
+      } else if (svc.kind === 'range') {
+        breakdown.push(`${svc.name}: ~$${laborLine} (est. $${svc.low}–$${svc.high})`);
+      } else {
+        breakdown.push(`${svc.name}${qty > 1 ? ` × ${qty}` : ''}: $${laborLine}`);
+      }
       if (deviceLine > 0) breakdown.push(`  + Device (DEP supply, ~25% markup): $${deviceLine}`);
     });
     const hasWork = cart.length > 0;
     const call = serviceCallAmount(labor);
     const toWaive = amountToWaiveCall(labor);
-    if (call === 0 && labor >= CALL_WAIVER_MIN) breakdown.unshift(`Service call: waived ($${CALL_WAIVER_MIN} labor minimum met`);
-    else if (hasWork) breakdown.unshift(`Service call / diagnostic: $${SERVICE_CALL} — add $${toWaive} labor to waive`);
-    else breakdown.unshift(`Service call / diagnostic: $${SERVICE_CALL}`);
+    if (call === 0 && labor >= CALL_WAIVER_MIN) {
+      breakdown.unshift(`Service call: waived ($${CALL_WAIVER_MIN} labor minimum met)`);
+    } else if (hasWork) {
+      breakdown.unshift(`Service call / diagnostic: $${SERVICE_CALL} — add $${toWaive} labor to waive`);
+    } else {
+      breakdown.unshift(`Service call / diagnostic: $${SERVICE_CALL}`);
+    }
     const bundled = applyBundleDiscount(labor, categories);
     if (bundled.label) breakdown.push(`${bundled.label}: −$${bundled.discount}`);
     return { total: bundled.total + devices + call, call, toWaive, breakdown, categories, hasWork };
@@ -110,7 +121,9 @@ export default function Home() {
     const c = { drywall: 0, electrical: 0, plumbing: 0 };
     cart.forEach(({ id }) => {
       const svc = allServices.find((s) => s.id === id);
-      if (svc && (svc.category === 'drywall' || svc.category === 'electrical' || svc.category === 'plumbing')) c[svc.category] += 1;
+      if (svc && (svc.category === 'drywall' || svc.category === 'electrical' || svc.category === 'plumbing')) {
+        c[svc.category] += 1;
+      }
     });
     return c;
   }, [cart]);
@@ -152,8 +165,14 @@ export default function Home() {
 
   const handleQuoteStart = () => {
     setQuoteStarted(true);
-    trackEvent('quote_started', { service: quickIntake.service || 'unspecified', city: quickIntake.city || 'unspecified', urgency: quickIntake.urgency || 'unspecified' });
-    setTimeout(() => document.getElementById('quote-builder')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+    trackEvent('quote_started', {
+      service: quickIntake.service || 'unspecified',
+      city: quickIntake.city || 'unspecified',
+      urgency: quickIntake.urgency || 'unspecified',
+    });
+    setTimeout(() => {
+      document.getElementById('quote-builder')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
   };
 
   const handleOpenBooking = () => {
@@ -196,6 +215,8 @@ export default function Home() {
       bookingEmbedUrl={bookingEmbedUrl}
       mobileMenuOpen={mobileMenuOpen}
       setMobileMenuOpen={setMobileMenuOpen}
+      lightbox={lightbox}
+      setLightbox={setLightbox}
       cartMap={cartMap}
       liveQuote={liveQuote}
       countsByCategory={countsByCategory}

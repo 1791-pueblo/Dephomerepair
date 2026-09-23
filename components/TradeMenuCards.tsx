@@ -2,6 +2,8 @@
 
 import { SERVICE_MENU_TITLE, TRADE_CARDS } from '../lib/tradeCardCopy';
 import { CALL_WAIVER_MIN, SERVICE_CALL } from '../lib/pricing';
+import { tradeCardProjects } from '../lib/portfolio';
+import { ProjectPhotoSlider } from './ProjectPhotoSlider';
 
 const CARD_STYLE = {
   drywall: { color: '#0056B3', bg: 'bg-[#E8F1FB]', border: 'border-[#0056B3]/20 hover:border-[#0056B3]/50' },
@@ -11,25 +13,32 @@ const CARD_STYLE = {
 
 type TradeKey = 'drywall' | 'electrical' | 'plumbing';
 
-export function TradeMenuCards({ onSelect }: { onSelect: (key: TradeKey) => void }) {
+export function TradeMenuCards({
+  onSelect,
+  onOpenPhoto,
+}: {
+  onSelect: (key: TradeKey) => void;
+  onOpenPhoto: (photo: { src: string; caption: string }) => void;
+}) {
   return (
     <section id="services" className="py-16 sm:py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">{SERVICE_MENU_TITLE}</h2>
-        <p className="text-center text-[#424242] mb-10">{`$${SERVICE_CALL} service call waived at $${CALL_WAIVER_MIN}+ labor • Texture included on drywall repairs`}</p>
+        <p className="text-center text-[#424242] mb-10">
+          {`$${SERVICE_CALL} service call waived at $${CALL_WAIVER_MIN}+ labor • Texture included on drywall repairs`}
+        </p>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
           {TRADE_CARDS.map((card) => {
             const style = CARD_STYLE[card.key];
+            const project = tradeCardProjects[card.key];
             return (
-              <button
-                key={card.key}
-                type="button"
-                onClick={() => onSelect(card.key)}
-                className={`text-left ${style.bg} p-6 sm:p-8 rounded-2xl border ${style.border} h-full hover:shadow-md transition focus:outline-none focus:ring-2 focus:ring-[#FFAB00]`}
-              >
+              <div key={card.key} className={`text-left ${style.bg} p-6 sm:p-8 rounded-2xl border ${style.border} h-full hover:shadow-md transition`}>
                 <div className="flex items-baseline gap-2 mb-5">
                   <span className="text-3xl font-black" style={{ color: style.color }}>{card.letter}</span>
                   <span className="text-xl font-bold text-[#1A1A1A]">{card.title}</span>
+                </div>
+                <div className="mb-5">
+                  <ProjectPhotoSlider photos={project.photos} projectType={project.type} onOpen={onOpenPhoto} />
                 </div>
                 <ul className="space-y-3 text-[#424242] text-sm">
                   {card.items.map((item) => (
@@ -41,10 +50,15 @@ export function TradeMenuCards({ onSelect }: { onSelect: (key: TradeKey) => void
                     </li>
                   ))}
                 </ul>
-                <div className="mt-5 text-sm font-semibold" style={{ color: style.color }}>
+                <button
+                  type="button"
+                  onClick={() => onSelect(card.key)}
+                  className="mt-5 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#FFAB00] rounded"
+                  style={{ color: style.color }}
+                >
                   Get pricing →
-                </div>
-              </button>
+                </button>
+              </div>
             );
           })}
         </div>
