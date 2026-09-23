@@ -562,7 +562,7 @@ export default function Home() {
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">Our Work</h2>
           <p className="text-center text-[#424242] mb-10 sm:mb-12">Real projects from local homes — before, during & after. This is the kind of careful, clean work you can expect.</p>
           {portfolioProjects.map((project) => (
-            <div key={project.title} className="mb-14 last:mb-0">
+            <div key={`${project.title}-${project.photos[0]?.src ?? 'project'}`} className="mb-14 last:mb-0">
               <div className="flex flex-wrap items-center gap-3 mb-5">
                 <h3 className="text-xl sm:text-2xl font-bold text-[#1A1A1A]">{project.title}</h3>
                 <span className="text-xs font-semibold bg-[#0056B3]/10 text-[#0056B3] px-3 py-1 rounded-full">{project.tag}</span>
