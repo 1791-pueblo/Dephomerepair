@@ -75,13 +75,14 @@ export function PortfolioAbout({
             about us
           </h2>
           <div className="max-w-4xl mx-auto text-center text-[#424242] space-y-4">
-            <p>DEP Home Repair handles drywall, electrical, and plumbing with one licensed tradesperson on the job.</p>
+            <p>Home-smart repairs for Chandler and the East Valley: drywall, electrical, and plumbing handled by one licensed tradesperson.</p>
+            <p>The goal is simple. The patch matches. The outlet is safe. The leak is gone. You should not see the repair when it is done.</p>
             <p>You deal directly with the person doing the work, so the schedule stays clear, the communication stays simple, and bundled repairs get finished in one visit instead of three callbacks.</p>
           </div>
           <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white border border-[#0056B3]/20 rounded-2xl p-6">
               <h3 className="text-xl font-bold mb-2 text-[#1A1A1A]"><span className="text-[#0056B3]">D</span>rywall</h3>
-              <p className="text-sm text-[#424242]">Seamless repairs to expert installations — a finish that matches your home&apos;s interior.</p>
+              <p className="text-sm text-[#424242]">Seamless repairs to expert installations — a finish that matches your home's interior.</p>
             </div>
             <div className="bg-white border border-[#FFAB00]/25 rounded-2xl p-6">
               <h3 className="text-xl font-bold mb-2 text-[#1A1A1A]"><span className="text-[#FFAB00]">E</span>lectrical</h3>
@@ -89,7 +90,7 @@ export function PortfolioAbout({
             </div>
             <div className="bg-white border border-[#424242]/20 rounded-2xl p-6">
               <h3 className="text-xl font-bold mb-2 text-[#1A1A1A]"><span className="text-[#424242]">P</span>lumbing</h3>
-              <p className="text-sm text-[#424242]">Reliable water flow for your home&apos;s vital systems — from minor leaks to fixture installations.</p>
+              <p className="text-sm text-[#424242]">Reliable water flow for your home's vital systems — from minor leaks to fixture installations.</p>
             </div>
           </div>
           <div className="max-w-4xl mx-auto text-center text-[#424242] mt-8 space-y-4">
@@ -100,7 +101,7 @@ export function PortfolioAbout({
               <a href="tel:6025981988" className="inline-block bg-[#0056B3] hover:bg-[#00448F] text-white px-6 py-3 rounded-full font-semibold transition">Call 602-598-1988</a>
               <a href="mailto:info@dephomerepair.com" className="inline-block border border-[#0056B3]/30 hover:border-[#0056B3] text-[#0056B3] px-6 py-3 rounded-full font-semibold transition">Email info@dephomerepair.com</a>
             </div>
-            <div className="text-sm text-[#1A1A1A] font-medium">Licensed • Bonded • Insured • ROC 277978</div>
+            <div className="text-sm text-[#1A1A1A] font-medium">Licensed • Bonded • Insured</div>
           </div>
         </div>
       </section>
