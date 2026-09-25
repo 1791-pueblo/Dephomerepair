@@ -196,6 +196,19 @@ export default function Home() {
     return () => window.removeEventListener('keydown', onEscape);
   }, [bookingModalOpen]);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const trade = params.get('trade');
+    if (trade !== 'drywall' && trade !== 'electrical' && trade !== 'plumbing') return;
+    const label = trade.charAt(0).toUpperCase() + trade.slice(1);
+    setActiveCategory(trade);
+    setQuickIntake((prev) => ({ ...prev, service: prev.service || label }));
+    setQuoteStarted(true);
+    setTimeout(() => {
+      document.getElementById('quote-builder')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 200);
+  }, []);
+
   const activeGroups = groupBySubcategory(servicesForCategory(activeCategory));
 
   return (
