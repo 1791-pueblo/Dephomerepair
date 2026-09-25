@@ -3,8 +3,7 @@
 import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
 import { TradeMenuCards } from './TradeMenuCards';
-import { ProjectPhotoSlider } from './ProjectPhotoSlider';
-import { portfolioProjects } from '../lib/portfolio';
+import { PortfolioAbout } from './PortfolioAbout';
 import { CALL_WAIVER_MIN, SERVICE_CALL, deviceSellPrice, type ServicePrice } from '../lib/pricing';
 
 type TradeKey = 'drywall' | 'electrical' | 'plumbing';
@@ -19,12 +18,6 @@ type LiveQuote = {
   categories: Set<TradeKey>;
   hasWork: boolean;
 };
-
-const TESTIMONIALS = [
-  { name: 'Sarah M.', location: 'Chandler', text: 'Jason fixed a large drywall patch in my living room and matched the texture perfectly. Showed up on time, clean work, fair price. Highly recommend.', rating: 5 },
-  { name: 'Mike R.', location: 'Gilbert', text: 'Needed several electrical updates and a new ceiling fan. Professional, knowledgeable, and explained everything clearly. Will use again.', rating: 5 },
-  { name: 'Lisa T.', location: 'Mesa', text: 'Quick response on a plumbing issue. Honest pricing and quality work. Exactly what you want from a local tradesperson.', rating: 5 },
-];
 
 export type HomeViewProps = {
   description: string;
@@ -266,78 +259,7 @@ export function HomeView(p: HomeViewProps) {
         </div>
       )}
 
-      <section id="portfolio" className="py-16 sm:py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">Our Work</h2>
-          <p className="text-center text-[#424242] mb-10">Real projects from local homes — before, during & after.</p>
-          {portfolioProjects.map((project) => (
-            <div key={project.id} className="mb-14 last:mb-0">
-              <h3 className="text-xl font-bold text-[#1A1A1A] mb-2">{project.title}</h3>
-              <p className="text-[#424242] text-sm mb-6 max-w-2xl">{project.description}</p>
-              <ProjectPhotoSlider photos={project.photos} projectType={project.type} onOpen={setLightbox} />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {lightbox && (
-        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" onClick={() => setLightbox(null)}>
-          <div className="relative max-w-3xl w-full" onClick={(e) => e.stopPropagation()}>
-            <button type="button" onClick={() => setLightbox(null)} className="absolute -top-10 right-0 text-white text-3xl font-bold">x</button>
-            <div className="relative w-full aspect-[4/3]">
-              <Image src={lightbox.src} alt={lightbox.caption} fill sizes="(max-width: 768px) 100vw, 48rem" className="object-contain rounded-2xl" priority />
-            </div>
-            <p className="mt-3 text-center text-white text-sm opacity-80">{lightbox.caption}</p>
-          </div>
-        </div>
-      )}
-
-      <section id="about" className="py-16 sm:py-20 bg-[#F8FAFC]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-6 text-[#1A1A1A]">
-            <span className="text-[#0056B3]">D</span>
-            <span className="text-[#FFAB00]">E</span>
-            <span className="text-[#424242]">P</span>{' '}
-            about us
-          </h2>
-          <div className="max-w-4xl mx-auto text-center text-[#424242] space-y-4">
-            <p>DEP Home Repair handles drywall, electrical, and plumbing with one licensed tradesperson on the job.</p>
-            <p>You deal directly with the person doing the work, so the schedule stays clear and bundled repairs get finished in one visit.</p>
-          </div>
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white border border-[#0056B3]/20 rounded-2xl p-6">
-              <h3 className="text-xl font-bold mb-2"><span className="text-[#0056B3]">D</span>rywall</h3>
-              <p className="text-sm text-[#424242]">Seamless repairs and a finish that matches your home's interior.</p>
-            </div>
-            <div className="bg-white border border-[#FFAB00]/25 rounded-2xl p-6">
-              <h3 className="text-xl font-bold mb-2"><span className="text-[#FFAB00]">E</span>lectrical</h3>
-              <p className="text-sm text-[#424242]">Lighting upgrades, smart-home work, wiring, and troubleshooting.</p>
-            </div>
-            <div className="bg-white border border-[#424242]/20 rounded-2xl p-6">
-              <h3 className="text-xl font-bold mb-2"><span className="text-[#424242]">P</span>lumbing</h3>
-              <p className="text-sm text-[#424242]">From minor leaks to fixture installs — reliable water flow.</p>
-            </div>
-          </div>
-          <p className="mt-8 text-center font-semibold text-[#1A1A1A]">Licensed • Bonded • Insured • ROC 277978</p>
-        </div>
-      </section>
-
-      <section id="testimonials" className="py-16 sm:py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">What Clients Say</h2>
-          <p className="text-center text-[#424242] mb-10">Real feedback from Chandler & East Valley homeowners.</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TESTIMONIALS.map((t) => (
-              <div key={`${t.name}-${t.location}`} className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                <div className="flex gap-1 mb-4 text-[#FFAB00]">{Array.from({ length: t.rating }).map((_, j) => <span key={j}>★</span>)}</div>
-                <p className="text-[#424242] mb-5 leading-relaxed">&ldquo;{t.text}&rdquo;</p>
-                <div className="font-semibold text-[#1A1A1A]">{t.name}</div>
-                <div className="text-sm text-gray-500">{t.location}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <PortfolioAbout lightbox={lightbox} setLightbox={setLightbox} />
 
       <div className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-slate-200 shadow-[0_-4px_18px_rgba(0,0,0,0.08)]">
         <div className="grid grid-cols-3 gap-2 p-2">
