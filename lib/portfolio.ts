@@ -26,39 +26,15 @@ export const tradeCardProjects: Record<
 > = {
   drywall: {
     type: 'sequence',
-    photos: [
-      {
-        src: 'https://lh3.googleusercontent.com/pw/AP1GczOgMo6G8i-JAmd5ws-aGvSQtf8EJtEKT5C4hhueuSfXMgIqElPP-YC4uAs1EjYLh4hPWx9cpPPIP5CwyZC475LgXC1flY-z9rMkvDZ-XOqkDBv1qQI=w1600',
-        caption: 'Before — Tub wall: the corner had opened up at the fixture line and needed a proper drywall close-in, not a smear of caulk.',
-      },
-      {
-        src: 'https://lh3.googleusercontent.com/pw/AP1GczPYyPOd_7Q485A503lHD_6uFaofGtJYXV0VgmnZQkzg6nZ4JzWqyGxmQKFkK3Th65O7_c6CHljEzSXNK8NkXEwvl6iLi0X3VFV5mQJO3ig_KakAx_o=w1600',
-        caption: 'During — Tub wall: the joint gets rebuilt and taped so the corner stays tight against the wet area.',
-      },
-      {
-        src: 'https://lh3.googleusercontent.com/pw/AP1GczPy83SjIIoNikRtiIBkEtvQU86QsyRLeq4Slx_dmifysjA4XrFvGBHoAeTcCSJxeORj89tOVxArYeD1WTMrB8uBKy01_t7qGnLKpBzlKrAHwHs2vB8=w1600',
-        caption: 'After — Tub wall: texture is back on and the repair disappears into the rest of the bath. Texture is included on drywall repairs.',
-      },
-    ],
+    photos: [],
   },
   electrical: {
     type: 'sequence',
-    photos: [
-      { src: '/gallery/rangehood-01-rough-opening.jpg', caption: 'Before — Rangehood: the ceiling and opening were prepped for the new hood and lighting.' },
-      { src: '/gallery/electrical-romex-wall.jpg', caption: 'During — Rangehood: protected power was run in the wall so the install stays safe and up to code.' },
-      { src: '/gallery/rangehood-soffit-wire.jpg', caption: 'During — Rangehood: wiring was routed into the soffit and kept accessible for the hood warranty.' },
-      { src: '/gallery/rangehood-02-finished.jpg', caption: 'After — Rangehood: the finished hood and recessed lights clean up the whole cooking wall.' },
-      { src: '/gallery/led-under-cabinet-lighting.jpg', caption: 'After — LED lighting: under-cabinet lights add clean task lighting in the same electrical category.' },
-    ],
+    photos: [],
   },
   plumbing: {
     type: 'sequence',
-    photos: [
-      { src: '/gallery/hosebib-01-before.jpg', caption: 'Before — Hose bib: corrosion had this outdoor connection on borrowed time.' },
-      { src: '/gallery/plumbing-access-hole.jpg', caption: 'During — Leak repair: the access opening let the leak get found and fixed instead of guessed at.' },
-      { src: '/gallery/plumbing-ceiling-stain.jpg', caption: 'During — Ceiling stain: water marks inside showed why the repair needed to be traced all the way through.' },
-      { src: '/gallery/hosebib-02-after.jpg', caption: 'After — Hose bib: a new brass bib closes out the repair with a clean, reliable finish.' },
-    ],
+    photos: [],
   },
 };
 
@@ -81,7 +57,7 @@ export const portfolioProjects: PortfolioProject[] = [
       },
       {
         src: 'https://lh3.googleusercontent.com/d/1gYfPUl8WzmyvebtzpEnpwOuZ5rQW8kZF',
-        caption: 'During: R-TECH foam set in the wall assembly to help the bathroom stay protected before finishes go back on.',
+        caption: 'During: R-TECH foam set in the wall assembly to help the bathroom stays protected before finishes go back on.',
       },
       {
         src: 'https://lh3.googleusercontent.com/d/1s7HqrapOAOqJ9rYSMz_qoTHRK6k4i8-9',
@@ -129,6 +105,31 @@ export const portfolioProjects: PortfolioProject[] = [
     ],
   },
   {
+    id: 'tub-wall-corner-close-in',
+    title: 'Tub Wall Corner Close-In',
+    tag: 'Drywall',
+    trades: ['drywall'],
+    bundle: 'single',
+    type: 'sequence',
+    quoteHint: 'Tub wall drywall repair',
+    description:
+      'The corner at the tub fixture line had opened up and needed a real drywall close-in, not a smear of caulk. The joint was rebuilt, taped, and textured so the repair disappears into the rest of the bath. Texture is included on drywall repairs.',
+    photos: [
+      {
+        src: 'https://lh3.googleusercontent.com/pw/AP1GczOgMo6G8i-JAmd5ws-aGvSQtf8EJtEKT5C4hhueuSfXMgIqElPP-YC4uAs1EjYLh4hPWx9cpPPIP5CwyZC475LgXC1flY-z9rMkvDZ-XOqkDBv1qQI=w1600',
+        caption: 'Before: the corner had opened up at the fixture line and needed a proper drywall close-in, not a smear of caulk.',
+      },
+      {
+        src: 'https://lh3.googleusercontent.com/pw/AP1GczPYyPOd_7Q485A503lHD_6uFaofGtJYXV0VgmnZQkzg6nZ4JzWqyGxmQKFkK3Th65O7_c6CHljEzSXNK8NkXEwvl6iLi0X3VFV5mQJO3ig_KakAx_o=w1600',
+        caption: 'During: the joint gets rebuilt and taped so the corner stays tight against the wet area.',
+      },
+      {
+        src: 'https://lh3.googleusercontent.com/pw/AP1GczPy83SjIIoNikRtiIBkEtvQU86QsyRLeq4Slx_dmifysjA4XrFvGBHoAeTcCSJxeORj89tOVxArYeD1WTMrB8uBKy01_t7qGnLKpBzlKrAHwHs2vB8=w1600',
+        caption: 'After: texture is back on and the repair disappears into the rest of the bath. Texture is included on drywall repairs.',
+      },
+    ],
+  },
+  {
     id: 'rangehood-protected-power',
     title: 'Rangehood Install + Protected Power',
     tag: 'Electrical',
@@ -172,7 +173,7 @@ export const portfolioProjects: PortfolioProject[] = [
     bundle: 'single',
     type: 'single',
     description:
-      'Low-voltage LED strip under the cabinets for even task light. A small electrical upgrade that changes how the kitchen works at night. Add a missing outlet in the same stop and it becomes a Power Pair.',
+      'Kitchen task lighting from the same electrical work as fixture upgrades. Low-voltage LED strip under the cabinets for even light on the counter. Add a missing outlet in the same stop and it becomes a Power Pair.',
     photos: [
       { src: '/gallery/led-under-cabinet-lighting.jpg', caption: 'After: custom low-voltage LED under-cabinet lighting puts even light on the counter without adding extra cans in the ceiling.' },
     ],
