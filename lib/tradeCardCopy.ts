@@ -1,9 +1,9 @@
-export const SERVICE_MENU_TITLE = 'DEP Home Repair: Service & Bundle Menu';
+export const SERVICE_MENU_TITLE = 'DEP Service Menu';
 
 export const TRADE_CARDS = [
   {
     key: 'drywall' as const,
-    title: 'Drywall Repair & Finishing',
+    title: 'Drywall',
     letter: 'D',
     items: [
       { title: 'Patching', detail: 'Seamless repair for holes, cracks, and water damage.' },
@@ -14,7 +14,7 @@ export const TRADE_CARDS = [
   },
   {
     key: 'electrical' as const,
-    title: 'Electrical & Smart Home',
+    title: 'Electrical',
     letter: 'E',
     items: [
       { title: 'Modern Fixture Install', detail: 'Ceiling fans, chandeliers, and recessed lighting.' },
@@ -25,7 +25,7 @@ export const TRADE_CARDS = [
   },
   {
     key: 'plumbing' as const,
-    title: 'Plumbing & Fixtures',
+    title: 'Plumbing',
     letter: 'P',
     items: [
       { title: 'Kitchen & Bath Updates', detail: 'Faucet, showerhead, and vanity hardware installs.' },
