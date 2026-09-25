@@ -2,8 +2,6 @@
 
 import { CALL_WAIVER_MIN, SERVICE_CALL, allServices, type ServicePrice } from '../lib/pricing';
 import { SERVICE_MENU_TITLE, TRADE_CARDS } from '../lib/tradeCardCopy';
-import { tradeCardProjects } from '../lib/portfolio';
-import { ProjectPhotoSlider } from './ProjectPhotoSlider';
 
 type TradeKey = 'drywall' | 'electrical' | 'plumbing';
 
@@ -24,11 +22,10 @@ const STARTING_IDS = ['d-small-hole', 'e-outlet', 'p-shower-head'];
 export function TradeMenuCards({
   onSelect,
   onStartQuote,
-  onOpenPhoto,
 }: {
   onSelect: (key: TradeKey) => void;
   onStartQuote: (key: TradeKey) => void;
-  onOpenPhoto: (photo: { src: string; caption: string }) => void;
+  onOpenPhoto?: (photo: { src: string; caption: string }) => void;
 }) {
   const startingAnchors = STARTING_IDS
     .map((id) => allServices.find((s) => s.id === id))
@@ -66,38 +63,33 @@ export function TradeMenuCards({
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
           {TRADE_CARDS.map((card) => {
-            const project = tradeCardProjects[card.key];
             const style = CARD_STYLE[card.key];
             return (
-              <div key={card.key} className={`text-left ${style.bg} p-6 sm:p-8 rounded-2xl border ${style.border} h-full hover:shadow-md transition`}>
-                <button
-                  type="button"
-                  onClick={() => openQuote(card.key)}
-                  className="flex items-baseline gap-2 mb-5 text-left focus:outline-none focus:ring-2 focus:ring-[#FFAB00] rounded"
-                >
+              <button
+                key={card.key}
+                type="button"
+                onClick={() => openQuote(card.key)}
+                className={`text-left ${style.bg} p-6 sm:p-8 rounded-2xl border ${style.border} h-full hover:shadow-md transition focus:outline-none focus:ring-2 focus:ring-[#FFAB00]`}
+              >
+                <div className="flex items-baseline gap-2 mb-5">
                   <span className="text-3xl sm:text-4xl font-black" style={{ color: style.color }}>{card.letter}</span>
                   <span className="text-xl sm:text-2xl font-bold text-[#1A1A1A]">{card.title}</span>
-                </button>
-                <div className="mb-5">
-                  <ProjectPhotoSlider photos={project.photos} projectType={project.type} onOpen={onOpenPhoto} />
                 </div>
                 <ul className="space-y-3 text-[#424242] text-sm">
                   {card.items.map((item) => (
-                    <li key={item.title}>
-                      <div className="font-semibold text-[#1A1A1A]">{item.title}</div>
-                      <div className="pl-0 mt-0.5">{item.detail}</div>
+                    <li key={item.title} className="flex gap-2">
+                      <span style={{ color: style.color }}>●</span>
+                      <span>
+                        <span className="font-semibold text-[#1A1A1A]">{item.title}</span>
+                        <span className="block mt-0.5">{item.detail}</span>
+                      </span>
                     </li>
                   ))}
                 </ul>
-                <button
-                  type="button"
-                  onClick={() => openQuote(card.key)}
-                  className="mt-5 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#FFAB00] rounded"
-                  style={{ color: style.color }}
-                >
+                <div className="mt-5 text-sm font-semibold" style={{ color: style.color }}>
                   Get pricing →
-                </button>
-              </div>
+                </div>
+              </button>
             );
           })}
         </div>
