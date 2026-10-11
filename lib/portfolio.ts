@@ -171,10 +171,12 @@ export const portfolioProjects: PortfolioProject[] = [
     tag: 'Electrical',
     trades: ['electrical'],
     bundle: 'single',
-    type: 'single',
+    type: 'sequence',
     description:
       'Kitchen task lighting from the same electrical work as fixture upgrades. Low-voltage LED strip under the cabinets for even light on the counter. Add a missing outlet in the same stop and it becomes a Power Pair.',
     photos: [
+      { src: 'https://lh3.googleusercontent.com/d/1lNkLzndirReZtVZ8ye0UwBjuKSM6ilAe', caption: 'Night view: low-voltage LED strip under the cabinets illuminates the wall and counter area with even cool-white light.' },
+      { src: 'https://lh3.googleusercontent.com/d/11m1L-moDA0k7tWeatLmUIlQ-UCTo_eoo', caption: 'Daytime view: under-cabinet LED lighting installed along the cabinet underside, ready to provide task light on the counter without extra ceiling cans.' },
       { src: '/gallery/led-under-cabinet-lighting.jpg', caption: 'After: custom low-voltage LED under-cabinet lighting puts even light on the counter without adding extra cans in the ceiling.' },
     ],
   },
