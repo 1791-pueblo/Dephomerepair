@@ -6,10 +6,15 @@ import { ProjectPhotoSlider } from './ProjectPhotoSlider';
 import { portfolioProjects } from '../lib/portfolio';
 
 const TESTIMONIALS = [
-  { name: 'Sarah M.', location: 'Chandler', text: 'Jason fixed a large drywall patch in my living room and matched the texture perfectly. Showed up on time, clean work, fair price. Highly recommend.', rating: 5 },
-  { name: 'Mike R.', location: 'Gilbert', text: 'Needed several electrical updates and a new ceiling fan. Professional, knowledgeable, and explained everything clearly. Will use again.', rating: 5 },
-  { name: 'Lisa T.', location: 'Mesa', text: 'Quick response on a plumbing issue. Honest pricing and quality work. Exactly what you want from a local tradesperson.', rating: 5 },
+  { name: "Megan T.", task: "Wall Repair", date: "May 2025", text: "Jason was able to complete our drywall/stair landing replacement job very last minute. He communicated well and got the job done as asked, even picking up materials that didn’t fit in our vehicle. Would recommend.", rating: 5 },
+  { name: "Donna M.", task: "Wall Repair", date: "Apr 2025", text: "Jason did a superb repair on the drywall and it looks terrific! He was on time and professional. I would definitely welcome his expertise again and again.", rating: 5 },
+  { name: "Tara S.", task: "Plumbing help", date: "Mar 2025", text: "Jason came to replace my garbage disposal which required the dishwasher to be pulled out. He got right to work and was finished in an hour. Did great work! Would hire again.", rating: 5 },
+  { name: "Shelley W.", task: "Plumbing help", date: "Mar 2025", text: "Jason was great. I needed to replace my eroded bathtub drain. He purchased the drain for me and was in constant communication. Will definitely use him again.", rating: 5 },
+  { name: "Casey H.", task: "Door, Cabinet, & Furniture Repair", date: "Mar 2025", text: "Jason went above and beyond and I would recommend to others. He is very knowledgeable and was able to fix my door with ease. Great communication from start to finish.", rating: 5 },
+  { name: "Teresa O.", task: "Window & Blinds Repair", date: "Apr 2025", text: "Jason was timely and communicated throughout the process. He worked smart and hard. I also appreciated that he cleaned up my old materials and disguarded them for me. I will definitely be working with Jason again.", rating: 5 },
 ];
+
+const TASKRABBIT_PROFILE_URL = 'https://www.taskrabbit.com/profile/jason-p--132';
 
 type Photo = { src: string; caption: string };
 
@@ -109,14 +114,19 @@ export function PortfolioAbout({
       <section id="testimonials" className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">What Clients Say</h2>
-          <p className="text-center text-[#424242] mb-10 sm:mb-12">Real feedback from Chandler & East Valley homeowners who worked directly with Jason.</p>
+          <p className="text-center text-[#424242] mb-2">Reviews from my TaskRabbit customers.</p>
+          <p className="text-center mb-10 sm:mb-12">
+            <a href={TASKRABBIT_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#005683] underline underline-offset-2 hover:text-[#00448F]">
+              4.6★ from 21 reviews on TaskRabbit
+            </a>
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {TESTIMONIALS.map((t) => (
-              <div key={`${t.name}-${t.location}`} className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                <div className="flex gap-1 mb-4 text-[#FFAB00]">{Array.from({ length: t.rating }).map((_, j) => <span key={j}>★</span>)}</div>
+              <div key={`${t.name}-${t.date}`} className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                <div className="flex gap-1 mb-4 text-[#FFAB00]" role="img" aria-label={`${t.rating} out of 5 stars`}>{Array.from({ length: t.rating }).map((_, j) => <span key={j} aria-hidden="true">★</span>)}</div>
                 <p className="text-[#424242] mb-5 leading-relaxed">&ldquo;{t.text}&rdquo;</p>
-                <div className="font-semibold text-[#1A1A1A]">{t.name}</div>
-                <div className="text-sm text-gray-500">{t.location}</div>
+                <div className="font-semibold text-[#1A1A1A]">{t.name} · via TaskRabbit</div>
+                <div className="text-sm text-gray-600">{t.task} · {t.date}</div>
               </div>
             ))}
           </div>
