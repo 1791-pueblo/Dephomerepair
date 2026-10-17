@@ -24,7 +24,7 @@ export const MORE_HOME_FIXES: { group: string; jobs: string[] }[] = [
     jobs: [
       'Appliance hookups (existing connections)',
       'Over-the-range microwave install',
-      'Range hood swap',
+      'Range hood swap (flat rate, existing power & duct; new power or venting quoted separately)',
       'Washer hose replacement & dryer vent cleaning',
       'Wi-Fi & smart-device setup',
     ],
@@ -36,7 +36,7 @@ export const NOT_OFFERED = 'Painting (beyond drywall patch touch-up), irrigation
 export const SEASONAL_PACKAGES: { name: string; items: string[] }[] = [
   {
     name: 'Spring Curb Appeal',
-    items: ['Power wash', 'Gutter clean', 'Outdoor light check', 'Gate / fence tune-up'],
+    items: ['Power wash (single-story)', 'Gutter clean', 'Outdoor light check', 'Gate / fence tune-up'],
   },
   {
     name: 'Pre-Monsoon Prep',
