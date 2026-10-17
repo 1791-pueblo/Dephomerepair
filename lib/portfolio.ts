@@ -49,7 +49,7 @@ export const portfolioProjects: PortfolioProject[] = [
     type: 'sequence',
     quoteHint: 'Bathroom remodel / vanity — Triple Play',
     description:
-      'Before, during, and after on a bathroom rebuild where drywall, electrical, and plumbing all had to line up cleanly. One licensed tradesperson handled the wet-wall rebuild, outlet work, access patching, and vanity finish in sequence, which is exactly what Triple Play is for.',
+      'Before, during, and after on a bathroom rebuild where drywall, electrical, and plumbing all had to line up cleanly. One tradesperson handled the wet-wall rebuild, outlet work, access patching, and vanity finish in sequence, which is exactly what Triple Play is for.',
     photos: [
       {
         src: 'https://lh3.googleusercontent.com/d/1HxZMIpEU5uW9epRSZk4Fz1NJVKDfK8w1',

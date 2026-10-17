@@ -25,7 +25,7 @@ const jsonLd = {
   email: 'info@dephomerepair.com',
   areaServed: ['Chandler AZ', 'Gilbert AZ', 'Mesa AZ', 'East Valley'],
   description:
-    'Drywall, electrical, and plumbing repairs in Chandler and the East Valley. One licensed tradesperson on the job.',
+    'Drywall, electrical, and plumbing repairs in Chandler and the East Valley. One tradesperson on the job.',
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'DEP Service Menu',
