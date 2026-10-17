@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
 import { TradeMenuCards } from './TradeMenuCards';
 import { PortfolioAbout } from './PortfolioAbout';
+import { MoreHomeFixes } from './MoreHomeFixes';
 import { CALL_WAIVER_MIN, SERVICE_CALL, deviceSellPrice, type ServicePrice } from '../lib/pricing';
 
 type TradeKey = 'drywall' | 'electrical' | 'plumbing';
@@ -127,6 +128,8 @@ export function HomeView(p: HomeViewProps) {
         }}
         onOpenPhoto={setLightbox}
       />
+
+      <MoreHomeFixes />
 
       <section id="quote" className="py-16 sm:py-20 bg-[#F8FAFC]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
@@ -267,7 +270,7 @@ export function HomeView(p: HomeViewProps) {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-3 gap-8 text-center md:text-left">
           <div>
             <p className="font-bold text-lg mb-2">DEP Home Repair</p>
-            <p className="text-sm opacity-80">Drywall • Electrical • Plumbing<br />Chandler, AZ & East Valley<br />Licensed • Bonded • Insured</p>
+            <p className="text-sm opacity-80">Drywall • Electrical • Plumbing<br />Chandler, AZ & East Valley<br />Not a licensed contractor.</p>
           </div>
           <div className="text-sm space-y-2">
             <div><a href="/drywall" className="hover:text-[#FFAB00]">Drywall</a></div>

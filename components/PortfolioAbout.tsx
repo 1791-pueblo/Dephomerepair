@@ -75,7 +75,7 @@ export function PortfolioAbout({
             about us
           </h2>
           <div className="max-w-4xl mx-auto text-center text-[#424242] space-y-4">
-            <p>Home-smart repairs for Chandler and the East Valley: drywall, electrical, and plumbing handled by one licensed tradesperson.</p>
+            <p>Home-smart repairs for Chandler and the East Valley: drywall, electrical, and plumbing handled by one tradesperson.</p>
             <p>The goal is simple. The patch matches. The outlet is safe. The leak is gone. You should not see the repair when it is done.</p>
             <p>You deal directly with the person doing the work, so the schedule stays clear, the communication stays simple, and bundled repairs get finished in one visit instead of three callbacks.</p>
           </div>
@@ -101,7 +101,7 @@ export function PortfolioAbout({
               <a href="tel:6025981988" className="inline-block bg-[#0056B3] hover:bg-[#00448F] text-white px-6 py-3 rounded-full font-semibold transition">Call 602-598-1988</a>
               <a href="mailto:info@dephomerepair.com" className="inline-block border border-[#0056B3]/30 hover:border-[#0056B3] text-[#0056B3] px-6 py-3 rounded-full font-semibold transition">Email info@dephomerepair.com</a>
             </div>
-            <div className="text-sm text-[#1A1A1A] font-medium">Licensed • Bonded • Insured</div>
+            <div className="text-sm text-[#1A1A1A] font-medium">Not a licensed contractor.</div>
           </div>
         </div>
       </section>

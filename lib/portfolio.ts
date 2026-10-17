@@ -49,7 +49,7 @@ export const portfolioProjects: PortfolioProject[] = [
     type: 'sequence',
     quoteHint: 'Bathroom remodel / vanity — Triple Play',
     description:
-      'Before, during, and after on a bathroom rebuild where drywall, electrical, and plumbing all had to line up cleanly. One licensed tradesperson handled the wet-wall rebuild, outlet work, access patching, and vanity finish in sequence, which is exactly what Triple Play is for.',
+      'Before, during, and after on a bathroom rebuild where drywall, electrical, and plumbing all had to line up cleanly. One tradesperson handled the wet-wall rebuild, outlet work, access patching, and vanity finish in sequence, which is exactly what Triple Play is for.',
     photos: [
       {
         src: 'https://lh3.googleusercontent.com/d/1HxZMIpEU5uW9epRSZk4Fz1NJVKDfK8w1',
@@ -177,7 +177,6 @@ export const portfolioProjects: PortfolioProject[] = [
     photos: [
       { src: 'https://lh3.googleusercontent.com/d/1lNkLzndirReZtVZ8ye0UwBjuKSM6ilAe', caption: 'Night view: low-voltage LED strip under the cabinets illuminates the wall and counter area with even cool-white light.' },
       { src: 'https://lh3.googleusercontent.com/d/11m1L-moDA0k7tWeatLmUIlQ-UCTo_eoo', caption: 'Daytime view: under-cabinet LED lighting installed along the cabinet underside, ready to provide task light on the counter without extra ceiling cans.' },
-      { src: '/gallery/led-under-cabinet-lighting.jpg', caption: 'After: custom low-voltage LED under-cabinet lighting puts even light on the counter without adding extra cans in the ceiling.' },
     ],
   },
   {

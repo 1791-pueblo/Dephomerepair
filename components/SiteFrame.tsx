@@ -31,7 +31,7 @@ export function SiteFrame({ children }: { children: React.ReactNode }) {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-3 gap-8 text-center md:text-left">
           <div>
             <p className="font-bold text-lg mb-2">DEP Home Repair</p>
-            <p className="text-sm opacity-80">Drywall • Electrical • Plumbing<br />Chandler, AZ & East Valley<br />Licensed • Bonded • Insured</p>
+            <p className="text-sm opacity-80">Drywall • Electrical • Plumbing<br />Chandler, AZ & East Valley<br />Not a licensed contractor.</p>
           </div>
           <div className="text-sm space-y-2">
             <div><Link href="/drywall" className="hover:text-[#FFAB00]">Drywall</Link></div>
