@@ -17,8 +17,6 @@ export const MORE_HOME_FIXES: { group: string; jobs: string[] }[] = [
       'Gate & small fence repair',
       'Outdoor & motion light swaps',
       'Plug-in patio lighting',
-      'Power washing',
-      'Gutter cleaning',
     ],
   },
   {
