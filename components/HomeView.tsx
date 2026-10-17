@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
 import { TradeMenuCards } from './TradeMenuCards';
 import { PortfolioAbout } from './PortfolioAbout';
+import { MoreHomeFixes } from './MoreHomeFixes';
 import { CALL_WAIVER_MIN, SERVICE_CALL, deviceSellPrice, type ServicePrice } from '../lib/pricing';
 
 type TradeKey = 'drywall' | 'electrical' | 'plumbing';
@@ -127,6 +128,8 @@ export function HomeView(p: HomeViewProps) {
         }}
         onOpenPhoto={setLightbox}
       />
+
+      <MoreHomeFixes />
 
       <section id="quote" className="py-16 sm:py-20 bg-[#F8FAFC]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">

@@ -7,5 +7,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/drywall`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${base}/electrical`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${base}/plumbing`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${base}/more-home-fixes`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
   ];
 }
