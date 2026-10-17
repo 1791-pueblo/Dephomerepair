@@ -13,10 +13,14 @@ export function SiteFrame({ children }: { children: React.ReactNode }) {
             <Link href="/drywall" className="hover:text-[#0056B3] transition">Drywall</Link>
             <Link href="/electrical" className="hover:text-[#0056B3] transition">Electrical</Link>
             <Link href="/plumbing" className="hover:text-[#0056B3] transition">Plumbing</Link>
+            <Link href="/#about" className="hover:text-[#0056B3] transition">About</Link>
             <Link href="/#quote" className="hover:text-[#0056B3] transition">Instant Quote</Link>
             <Link href="/#quote" className="bg-[#FFAB00] hover:bg-amber-500 text-black px-5 py-2.5 rounded-full font-semibold text-sm transition shadow-sm">Get Quote</Link>
           </nav>
-          <Link href="/#quote" className="md:hidden text-sm font-semibold text-[#0056B3]">Quote</Link>
+          <div className="md:hidden flex items-center gap-4 text-sm font-semibold text-[#0056B3]">
+            <Link href="/#about">About</Link>
+            <Link href="/#quote">Quote</Link>
+          </div>
         </div>
       </header>
       <main className="pb-16 md:pb-0">{children}</main>

@@ -75,6 +75,7 @@ export function HomeView(p: HomeViewProps) {
             <a href="/drywall" className="hover:text-[#0056B3] transition">Drywall</a>
             <a href="/electrical" className="hover:text-[#0056B3] transition">Electrical</a>
             <a href="/plumbing" className="hover:text-[#0056B3] transition">Plumbing</a>
+            <a href="#about" className="hover:text-[#0056B3] transition">About</a>
             <a href="#quote" className="hover:text-[#0056B3] transition">Instant Quote</a>
             <a href="#quote" className="bg-[#FFAB00] hover:bg-amber-500 text-black px-5 py-2.5 rounded-full font-semibold text-sm transition shadow-sm">Get Quote</a>
           </nav>
@@ -90,7 +91,7 @@ export function HomeView(p: HomeViewProps) {
         </div>
         {mobileMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-3">
-            {[['/#services','Services'],['/drywall','Drywall'],['/electrical','Electrical'],['/plumbing','Plumbing'],['/#quote','Quote']].map(([href, label]) => (
+            {[['/#services','Services'],['/drywall','Drywall'],['/electrical','Electrical'],['/plumbing','Plumbing'],['/#about','About'],['/#quote','Quote']].map(([href, label]) => (
               <a key={href} href={href} className="block py-2 font-medium" onClick={() => setMobileMenuOpen(false)}>{label}</a>
             ))}
           </div>
