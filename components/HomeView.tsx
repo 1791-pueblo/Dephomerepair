@@ -214,7 +214,6 @@ export function HomeView(p: HomeViewProps) {
                 <div className="text-2xl font-bold text-[#1A1A1A]">${liveQuote.total}</div>
                 {liveQuote.hasWork && liveQuote.call === 0 && <div className="text-xs text-green-700 mt-0.5">Service call waived — ${CALL_WAIVER_MIN} labor minimum met</div>}
                 {liveQuote.hasWork && liveQuote.call > 0 && <div className="text-xs text-amber-800 mt-0.5">${SERVICE_CALL} service call applies · add ${liveQuote.toWaive} labor to waive</div>}
-                {liveQuote.total >= 1000 && <div role="alert" className="mt-2 text-sm font-semibold text-red-800 bg-red-50 border border-red-200 rounded-xl px-3 py-2">Projects of $1,000 or more require a licensed contractor; we&apos;ll help refer you.</div>}
               </div>
               <button onClick={() => setShowQuote(true)} className="mt-6 w-full bg-[#0056B3] hover:bg-blue-900 text-white py-4 rounded-2xl font-bold text-lg">Review Full Quote →</button>
               {showQuote && (
