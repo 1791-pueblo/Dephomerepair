@@ -117,6 +117,25 @@ export function HomeView(p: HomeViewProps) {
         </div>
       </section>
 
+      <section id="how-it-works" className="py-14 sm:py-16 bg-[#F8FAFC] border-b border-gray-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-10 text-[#1A1A1A]">How It Works</h2>
+          <ol className="grid gap-5 sm:grid-cols-3">
+            {[
+              { title: 'See the price up front.', body: 'Most jobs have a flat price posted right here. No hourly meter, no surprises on the bill.' },
+              { title: 'One text confirms it.', body: "Your arrival window is set by text, and you get a heads-up when I'm on the way." },
+              { title: 'Fixed and finished in one visit.', body: 'The repair, the drywall patch, the texture match, and the cleanup all happen the same day. No second contractor.' },
+            ].map((step, i) => (
+              <li key={step.title} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                <div className="w-10 h-10 rounded-full bg-[#FFAB00] text-[#1A1A1A] font-bold flex items-center justify-center mb-4">{i + 1}</div>
+                <h3 className="text-lg font-bold text-[#1A1A1A] mb-2">{step.title}</h3>
+                <p className="text-slate-600 leading-relaxed">{step.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       <TradeMenuCards
         onSelect={(key) => {
           setActiveCategory(key);
