@@ -107,7 +107,7 @@ export function HomeView(p: HomeViewProps) {
             </div>
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-5 leading-tight">Seamless, Smart<br />Repairs & Upgrades</h1>
-          <p className="text-lg sm:text-xl mb-6 sm:mb-8 opacity-95 max-w-2xl mx-auto">Solo Chandler expert in drywall, electrical & plumbing.<br className="hidden sm:block" /> Fair pricing • Clean work • Done right the first time.</p>
+          <p className="text-lg sm:text-xl mb-6 sm:mb-8 opacity-95 max-w-2xl mx-auto">Fix it and finish it in one call.<br className="hidden sm:block" /> When the leak gets fixed, the wall gets patched too.</p>
           <p className="text-sm sm:text-base opacity-80 max-w-xl mx-auto mb-8">You deal directly with the person who does the work — clear communication, reliable scheduling, and no runaround.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a href="#quote" className="inline-block bg-[#FFAB00] hover:bg-amber-500 text-[#1A1A1A] px-8 sm:px-10 py-4 rounded-full text-lg sm:text-xl font-bold transition shadow-lg">Get a Clear Quote →</a>
