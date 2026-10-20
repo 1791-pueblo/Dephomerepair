@@ -54,7 +54,14 @@ export function MoreHomeFixes({ variant = 'section' }: Props) {
                 <ul className="space-y-1 text-sm text-[#424242] list-disc pl-5 flex-1">
                   {pkg.items.map((item) => <li key={item}>{item}</li>)}
                 </ul>
-                <div className="mt-4 text-sm font-semibold text-[#005683]">Ask for package price</div>
+                {pkg.price ? (
+                  <div className="mt-4">
+                    <div className="text-lg font-bold text-[#005683]">{pkg.price}</div>
+                    {pkg.priceNote && <div className="text-xs text-slate-500 mt-1">{pkg.priceNote}</div>}
+                  </div>
+                ) : (
+                  <div className="mt-4 text-sm font-semibold text-[#005683]">Ask for package price</div>
+                )}
               </div>
             ))}
           </div>

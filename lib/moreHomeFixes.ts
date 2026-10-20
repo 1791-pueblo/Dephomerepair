@@ -33,7 +33,7 @@ export const MORE_HOME_FIXES: { group: string; jobs: string[] }[] = [
 
 export const NOT_OFFERED = 'Painting (beyond drywall patch touch-up), irrigation, carpet installation';
 
-export const SEASONAL_PACKAGES: { name: string; items: string[] }[] = [
+export const SEASONAL_PACKAGES: { name: string; items: string[]; price?: string; priceNote?: string }[] = [
   {
     name: 'Spring Curb Appeal',
     items: ['Power wash (single-story)', 'Gutter clean', 'Outdoor light check', 'Gate / fence tune-up'],
@@ -45,5 +45,7 @@ export const SEASONAL_PACKAGES: { name: string; items: string[] }[] = [
   {
     name: 'Fall / Holiday Ready',
     items: ['Under-cabinet / patio lighting', 'Door adjustments', 'Smart-device setup', 'Dryer vent cleaning'],
+    price: '$449',
+    priceNote: 'Labor only; parts and lights extra. Longer lighting runs quoted on site.',
   },
 ];
