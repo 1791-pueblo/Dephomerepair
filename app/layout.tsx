@@ -1,19 +1,25 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { DEFAULT_SHARE_IMAGE, SITE_NAME, SITE_URL } from '../lib/seo';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'DEP Home Repair | Chandler AZ Drywall, Electrical & Plumbing',
     template: '%s',
   },
   description:
     'Expert drywall, electrical & plumbing repairs in Chandler and the East Valley. Instant online quotes. Fair pricing. Call Jason at 602-598-1988.',
+  // Pages set their own canonical URL and share preview via pageMetadata() in lib/seo.ts.
   openGraph: {
+    type: 'website',
+    siteName: SITE_NAME,
+    locale: 'en_US',
     title: 'DEP Home Repair | Chandler AZ',
-    description:
-      'Solo tradesperson specializing in drywall, electrical & plumbing. Instant quotes and reliable service.',
-    images: [{ url: '/logo.png' }],
+    description: 'Drywall, door, and home repairs in Chandler and the East Valley. Fix it and finish it in one call.',
+    images: [DEFAULT_SHARE_IMAGE],
   },
+  twitter: { card: 'summary_large_image', images: [DEFAULT_SHARE_IMAGE.url] },
 };
 
 const jsonLd = {

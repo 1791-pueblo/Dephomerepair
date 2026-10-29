@@ -532,7 +532,7 @@ export default function LeadQualifier() {
       </main>
 
       <footer className="bg-[#1A1A1A] text-white py-6 text-center text-xs opacity-60">
-        © {new Date().getFullYear()} DEP Home Repair · Internal Tools
+        © {new Date().getFullYear()} DEP Home Repair · Internal Tools · Not a licensed contractor.
       </footer>
     </>
   );
