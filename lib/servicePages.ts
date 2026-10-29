@@ -1,4 +1,5 @@
 import { portfolioProjects } from './portfolio';
+import { shareImage } from './seo';
 
 export type ServiceKey = 'drywall' | 'electrical' | 'plumbing';
 
@@ -9,6 +10,8 @@ export const SERVICE_PAGES: Record<
     title: string;
     metaTitle: string;
     metaDescription: string;
+    shareTitle: string;
+    shareImage: ReturnType<typeof shareImage>;
     h1: string;
     letter: string;
     letterColor: string;
@@ -24,8 +27,10 @@ export const SERVICE_PAGES: Record<
     title: 'Drywall',
     metaTitle: 'Drywall Repair in Chandler AZ | Texture Match & Patch | DEP',
     metaDescription:
-      'Drywall repair in Chandler, Gilbert, and Mesa. Patching, texture match, corner bead, and full surface refresh. Texture included. Instant quote from DEP Home Repair.',
-    h1: 'Drywall Repair in Chandler',
+      'Drywall repair in Chandler, Gilbert, southwest Mesa, and south Scottsdale. Patching, texture match, corner bead, and full surface refresh. Texture included. Instant quote from DEP Home Repair.',
+    shareTitle: 'Drywall Repair & Texture Match | DEP Home Repair',
+    shareImage: shareImage('drywall', 'Drywall repair in Chandler and the East Valley by DEP Home Repair'),
+    h1: 'Drywall Repair in Chandler & the East Valley',
     letter: 'D',
     letterColor: '#0056B3',
     startingPrice: '$200',
@@ -45,8 +50,10 @@ export const SERVICE_PAGES: Record<
     title: 'Electrical',
     metaTitle: 'Electrical Repair in Chandler AZ | Outlets, Lighting, Smart Home | DEP',
     metaDescription:
-      'Electrical repair in Chandler, Gilbert, and Mesa. Fixture installs, smart-home upgrades, device refresh, and safety work. Instant quote from DEP Home Repair.',
-    h1: 'Electrical Repair in Chandler',
+      'Minor electrical repairs in Chandler, Gilbert, southwest Mesa, and south Scottsdale. Fixture installs, smart-home upgrades, device refresh, and safety work on existing wiring. Instant quote from DEP Home Repair.',
+    shareTitle: 'Fixtures, Outlets & Smart Home | DEP Home Repair',
+    shareImage: shareImage('electrical', 'Light fixture and outlet work in Chandler and the East Valley by DEP Home Repair'),
+    h1: 'Electrical Repair in Chandler & the East Valley',
     letter: 'E',
     letterColor: '#FFAB00',
     startingPrice: '$150',
@@ -57,7 +64,7 @@ export const SERVICE_PAGES: Record<
       { title: 'Modern Fixture Install', detail: 'Ceiling fans, chandeliers, and recessed lighting.' },
       { title: 'Smart Home Upgrades', detail: 'Ring/Nest doorbells, smart thermostats, and USB outlets.' },
       { title: 'Device Refresh', detail: 'Swapping outdated almond switches for clean, modern white.' },
-      { title: 'Safety Upgrades', detail: 'GFCI installation and smoke/CO detector testing.' },
+      { title: 'Safety Upgrades', detail: 'GFCI installation and battery or standalone smoke/CO detectors. No hardwired alarms.' },
     ],
     projectIds: ['rangehood-protected-power', 'under-cabinet-led-lighting', 'kitchen-lighting-rewire-outlet'],
   },
@@ -66,8 +73,10 @@ export const SERVICE_PAGES: Record<
     title: 'Plumbing',
     metaTitle: 'Plumbing Repair in Chandler AZ | Toilets, Faucets, Leaks | DEP',
     metaDescription:
-      'Plumbing repair in Chandler, Gilbert, and Mesa. Kitchen and bath updates, toilets, appliance hookups, and leak care. Instant quote from DEP Home Repair.',
-    h1: 'Plumbing Repair in Chandler',
+      'Minor plumbing repairs in Chandler, Gilbert, southwest Mesa, and south Scottsdale. Faucets, toilets, appliance hookups, and leak care. Instant quote from DEP Home Repair.',
+    shareTitle: 'Faucets, Toilets & Leaks | DEP Home Repair',
+    shareImage: shareImage('plumbing', 'Faucet, toilet, and leak repair in Chandler and the East Valley by DEP Home Repair'),
+    h1: 'Plumbing Repair in Chandler & the East Valley',
     letter: 'P',
     letterColor: '#424242',
     startingPrice: '$95',

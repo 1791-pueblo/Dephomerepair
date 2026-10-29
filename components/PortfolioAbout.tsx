@@ -80,7 +80,7 @@ export function PortfolioAbout({
             about us
           </h2>
           <div className="max-w-4xl mx-auto text-center text-[#424242] space-y-4">
-            <p>Home-smart repairs for Chandler and the East Valley: drywall, electrical, and plumbing handled by one tradesperson.</p>
+            <p>Home-smart repairs for Chandler, Gilbert, southwest Mesa, south Scottsdale and nearby East Valley: drywall, electrical, and plumbing handled by one tradesperson.</p>
             <p>The goal is simple. The patch matches. The outlet is safe. The leak is gone. You should not see the repair when it is done.</p>
             <p>You deal directly with the person doing the work, so the schedule stays clear, the communication stays simple, and bundled repairs get finished in one visit instead of three callbacks.</p>
           </div>

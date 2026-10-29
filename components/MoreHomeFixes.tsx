@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { MORE_HOME_FIXES, MORE_HOME_FIXES_INTRO, NOT_OFFERED, SEASONAL_PACKAGES } from '../lib/moreHomeFixes';
+import { MORE_HOME_FIXES, MORE_HOME_FIXES_INTRO, NOT_OFFERED, SEASONAL_PACKAGES, SEASONAL_PACKAGES_NOTE } from '../lib/moreHomeFixes';
 
 type Props = {
   /** Compact homepage teaser vs. full /more-home-fixes page content */
@@ -33,10 +33,24 @@ export function MoreHomeFixes({ variant = 'section' }: Props) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {MORE_HOME_FIXES.map((g) => (
             <div key={g.group} className="bg-white border border-slate-200 rounded-2xl p-5">
-              <SubTag className="text-sm font-semibold uppercase tracking-wide text-[#005683] mb-3">{g.group}</SubTag>
+              <SubTag className={`text-sm font-semibold uppercase tracking-wide text-[#005683] ${g.note ? 'mb-1' : 'mb-3'}`}>{g.group}</SubTag>
+              {g.note && <p className="text-xs font-semibold text-[#1A1A1A] mb-3">{g.note}</p>}
               <ul className="space-y-1.5 text-sm text-[#424242] list-disc pl-5">
-                {g.jobs.map((job) => <li key={job}>{job}</li>)}
+                {g.jobs.map((job) =>
+                  typeof job === 'string' ? (
+                    <li key={job}>{job}</li>
+                  ) : (
+                    <li key={job.label}>
+                      {job.label} <span className="font-semibold text-[#005683] whitespace-nowrap">{job.price}</span>
+                    </li>
+                  )
+                )}
               </ul>
+              {g.link && (
+                <Link href={g.link.href} className="mt-3 inline-block text-sm font-semibold text-[#005683] underline underline-offset-2 hover:text-[#00448F]">
+                  {g.link.label} →
+                </Link>
+              )}
             </div>
           ))}
         </div>
@@ -62,9 +76,15 @@ export function MoreHomeFixes({ variant = 'section' }: Props) {
                 ) : (
                   <div className="mt-4 text-sm font-semibold text-[#005683]">Ask for package price</div>
                 )}
+                {pkg.href && (
+                  <Link href={pkg.href} className="mt-3 text-sm font-semibold text-[#005683] underline underline-offset-2 hover:text-[#00448F]">
+                    What&apos;s in {pkg.name} →
+                  </Link>
+                )}
               </div>
             ))}
           </div>
+          <p className="mt-4 text-xs text-center text-slate-500">{SEASONAL_PACKAGES_NOTE}</p>
         </div>
 
         <div className="mt-10 text-center">

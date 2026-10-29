@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { TradeMenuCards } from './TradeMenuCards';
 import { PortfolioAbout } from './PortfolioAbout';
 import { MoreHomeFixes } from './MoreHomeFixes';
+import { SiteFooter } from './SiteFooter';
 import { CALL_WAIVER_MIN, SERVICE_CALL, deviceSellPrice, type ServicePrice } from '../lib/pricing';
 
 type TradeKey = 'drywall' | 'electrical' | 'plumbing';
@@ -106,14 +107,15 @@ export function HomeView(p: HomeViewProps) {
               <Image src="/logo.png" alt="DEP Home Repair" width={200} height={112} className="h-20 sm:h-28 w-auto" priority />
             </div>
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-5 leading-tight">Seamless, Smart<br />Repairs & Upgrades</h1>
+          <p className="text-sm sm:text-base uppercase tracking-wide font-semibold text-[#FFAB00] mb-3">Seamless, smart repairs &amp; upgrades</p>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-5 leading-tight">Drywall, Door &amp; Home Repairs in Chandler<span className="block text-3xl sm:text-4xl md:text-5xl mt-2 opacity-95">and the East Valley</span></h1>
           <p className="text-lg sm:text-xl mb-6 sm:mb-8 opacity-95 max-w-2xl mx-auto">Fix it and finish it in one call.<br className="hidden sm:block" /> When the leak gets fixed, the wall gets patched too.</p>
           <p className="text-sm sm:text-base opacity-80 max-w-xl mx-auto mb-8">You deal directly with the person who does the work — clear communication, reliable scheduling, and no runaround.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a href="#quote" className="inline-block bg-[#FFAB00] hover:bg-amber-500 text-[#1A1A1A] px-8 sm:px-10 py-4 rounded-full text-lg sm:text-xl font-bold transition shadow-lg">Get a Clear Quote →</a>
             <a href="tel:6025981988" className="inline-block border-2 border-white/40 hover:border-white text-white px-8 py-3.5 rounded-full font-semibold transition">Call 602-598-1988</a>
           </div>
-          <div className="mt-6 text-sm opacity-70">Serving Chandler, Gilbert, Mesa & East Valley</div>
+          <div className="mt-6 text-sm opacity-80">Serving <a href="/service-area" className="underline underline-offset-2 hover:text-white">Chandler, Gilbert, southwest Mesa, south Scottsdale &amp; nearby East Valley</a></div>
         </div>
       </section>
 
@@ -168,7 +170,7 @@ export function HomeView(p: HomeViewProps) {
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">City</label>
-                  <input value={quickIntake.city} onChange={(e) => setQuickIntake((prev) => ({ ...prev, city: e.target.value }))} placeholder="Chandler, Mesa…" className="w-full border border-gray-300 rounded-xl p-3 text-sm" />
+                  <input value={quickIntake.city} onChange={(e) => setQuickIntake((prev) => ({ ...prev, city: e.target.value }))} placeholder="Chandler, Gilbert…" className="w-full border border-gray-300 rounded-xl p-3 text-sm" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Timing</label>
@@ -286,24 +288,7 @@ export function HomeView(p: HomeViewProps) {
         </div>
       </div>
 
-      <footer id="contact" className="bg-[#1A1A1A] text-white py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-3 gap-8 text-center md:text-left">
-          <div>
-            <p className="font-bold text-lg mb-2">DEP Home Repair</p>
-            <p className="text-sm opacity-80">Drywall • Electrical • Plumbing<br />Chandler, AZ & East Valley<br />Not a licensed contractor.</p>
-          </div>
-          <div className="text-sm space-y-2">
-            <div><a href="/drywall" className="hover:text-[#FFAB00]">Drywall</a></div>
-            <div><a href="/electrical" className="hover:text-[#FFAB00]">Electrical</a></div>
-            <div><a href="/plumbing" className="hover:text-[#FFAB00]">Plumbing</a></div>
-            <div><a href="#quote" className="hover:text-[#FFAB00]">Instant Quote</a></div>
-          </div>
-          <div className="text-sm space-y-2">
-            <div><a href="tel:6025981988" className="hover:text-[#FFAB00]">602-598-1988</a></div>
-            <div><a href="mailto:info@dephomerepair.com" className="hover:text-[#FFAB00]">info@dephomerepair.com</a></div>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
       </main>
     </>
   );

@@ -71,7 +71,7 @@ export const electrical: ServicePrice[] = [
   { id: 'e-gfci', name: 'GFCI outlet', kind: 'volume', first: 150, additional: 80, category: 'electrical', subcategory: 'Outlets & Switches' },
   { id: 'e-dimmer', name: 'Dimmer switch', kind: 'volume', first: 175, additional: 90, category: 'electrical', subcategory: 'Outlets & Switches' },
   { id: 'e-usb-outlet', name: 'USB / USB-C outlet', kind: 'volume', first: 150, additional: 80, category: 'electrical', subcategory: 'Outlets & Switches', deviceCost: 25 },
-  { id: 'e-smoke-co', name: 'Smoke / CO detector', kind: 'flat', price: 150, category: 'electrical', subcategory: 'Outlets & Switches', deviceCost: 40 },
+  { id: 'e-smoke-co', name: 'Smoke / CO detector (battery or standalone only)', kind: 'flat', price: 150, category: 'electrical', subcategory: 'Outlets & Switches', deviceCost: 40 },
   { id: 'e-fan', name: 'Ceiling fan (existing fan-rated box)', kind: 'flat', price: 200, category: 'electrical', subcategory: 'Fixtures & Lighting' },
   { id: 'e-fan-box', name: 'Ceiling fan + box upgrade', kind: 'flat', price: 275, category: 'electrical', subcategory: 'Fixtures & Lighting' },
   { id: 'e-fixture', name: 'Light fixture replacement', kind: 'flat', price: 175, category: 'electrical', subcategory: 'Fixtures & Lighting' },
@@ -120,10 +120,10 @@ export const drywall: ServicePrice[] = [
   { id: 'd-water-stain', name: 'Water-stained ceiling patch', kind: 'range', low: 350, high: 650, estimate: 500, category: 'drywall', subcategory: 'Repairs', notes: 'Texture included' },
   { id: 'd-seam', name: 'Seam / tape separation', kind: 'range', low: 250, high: 450, estimate: 350, category: 'drywall', subcategory: 'Repairs', notes: 'Texture included' },
   { id: 'd-water-cutout', name: 'Water-damage cut-out + patch', kind: 'range', low: 400, high: 900, estimate: 650, category: 'drywall', subcategory: 'Repairs', notes: 'Texture included' },
-  { id: 'd-water-remediation', name: 'Full water remediation', kind: 'range', low: 650, high: 950, estimate: 950, category: 'drywall', subcategory: 'Repairs', notes: 'Call for scope; starts at $650. Larger projects referred to licensed partners.' },
+  { id: 'd-water-remediation', name: 'Full water remediation', kind: 'range', low: 650, high: 950, estimate: 950, category: 'drywall', subcategory: 'Repairs', notes: 'Call for scope; starts at $650. Larger projects are referred out.' },
   { id: 'd-texture-t1', name: 'Texture Tier 1 — Patch & match (spot repair)', kind: 'range', low: 250, high: 450, estimate: 350, category: 'drywall', subcategory: 'Texture packages', notes: 'Up to 2x2 ft per area. Backing, hang, tape, 3-coat mud, hand-blended match (skip trowel, knockdown, or orange peel). Mask 3–4 ft around the work. Flat rate per patch.' },
   { id: 'd-texture-t2', name: 'Texture Tier 2 — Wall / accent retexture', kind: 'range', low: 550, high: 950, estimate: 750, category: 'drywall', subcategory: 'Texture packages', notes: 'Single wall or small room up to 150–200 sq ft. Skim or retexture, minor leveling, seam stabilize, uniform hand finish. Full containment, floor protection, dust control. Sq-ft range or project flat.' },
-  { id: 'd-texture-t3', name: 'Texture Tier 3 — Whole-space transformation', kind: 'range', low: 900, high: 950, estimate: 900, category: 'drywall', subcategory: 'Texture packages', notes: 'Starts at $900. Multi-wall or full-room restore, skim over heavy texture or popcorn-removal surface, hand-troweled walls and ceilings. Full protection. Final price from sq ft, ceiling height, and surface condition. Larger projects referred to licensed partners.' },
+  { id: 'd-texture-t3', name: 'Texture Tier 3 — Whole-space transformation', kind: 'range', low: 900, high: 950, estimate: 900, category: 'drywall', subcategory: 'Texture packages', notes: 'Starts at $900. Multi-wall or full-room restore, skim over heavy texture or popcorn-removal surface, hand-troweled walls and ceilings. Full protection. Final price from sq ft, ceiling height, and surface condition. Larger projects are referred out.' },
 ];
 
 export const allServices: ServicePrice[] = [...electrical, ...plumbing, ...drywall];
