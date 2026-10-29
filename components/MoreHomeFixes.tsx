@@ -33,7 +33,8 @@ export function MoreHomeFixes({ variant = 'section' }: Props) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {MORE_HOME_FIXES.map((g) => (
             <div key={g.group} className="bg-white border border-slate-200 rounded-2xl p-5">
-              <SubTag className="text-sm font-semibold uppercase tracking-wide text-[#005683] mb-3">{g.group}</SubTag>
+              <SubTag className={`text-sm font-semibold uppercase tracking-wide text-[#005683] ${g.note ? 'mb-1' : 'mb-3'}`}>{g.group}</SubTag>
+              {g.note && <p className="text-xs font-semibold text-[#1A1A1A] mb-3">{g.note}</p>}
               <ul className="space-y-1.5 text-sm text-[#424242] list-disc pl-5">
                 {g.jobs.map((job) =>
                   typeof job === 'string' ? (

@@ -4,20 +4,25 @@ export const MORE_HOME_FIXES_INTRO =
 /** A job line. Priced lines show a flat range; unpriced lines are quote-only. */
 export type HomeFixJob = string | { label: string; price: string };
 
-export const MORE_HOME_FIXES: { group: string; jobs: HomeFixJob[] }[] = [
+/** Shown under door groups: flat prices include the trip, so no separate service call. */
+export const DOOR_FLAT_PRICE_NOTE = 'Flat price, visit included. No separate service call.';
+
+export const MORE_HOME_FIXES: { group: string; note?: string; jobs: HomeFixJob[] }[] = [
   {
     group: 'Doors & hardware',
+    note: DOOR_FLAT_PRICE_NOTE,
     jobs: [
       'Interior door replacement, adjustment, rehanging & repair',
-      { label: 'Hinge adjustments & sag fixes', price: '$95–$150 per door' },
-      { label: 'Hardware replacement (knobs, levers, locks, hinges)', price: '$75–$125 per door, hardware extra' },
-      { label: 'Closet door adjustments (bypass or bifold)', price: '$95–$175 per opening' },
-      { label: 'Get your interior doors rolled on right', price: '$125–$225 per door' },
+      { label: 'Hinge adjustments & sag fixes', price: '$150–$195 per door' },
+      { label: 'Hardware replacement (knobs, levers, locks, hinges)', price: '$150 per door, hardware extra' },
+      { label: 'Closet door adjustments (bypass or bifold)', price: '$150–$225 per opening' },
+      { label: 'Get your interior doors rolled on right', price: '$175–$225 per door' },
       'Weatherstripping & door sweeps',
     ],
   },
   {
     group: 'Security doors',
+    note: DOOR_FLAT_PRICE_NOTE,
     jobs: [
       { label: 'Security door repair (hinges, closer, latch, lock, alignment)', price: '$150–$300' },
       { label: 'Security door replacement, standard size', price: '$275 install, door extra' },
