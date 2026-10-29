@@ -55,7 +55,7 @@ export function SiteFooter() {
         </div>
       </div>
       <p className="max-w-6xl mx-auto px-4 sm:px-6 mt-8 text-xs opacity-60 text-center md:text-left">
-        Jobs are kept under $1,000 total, labor and materials, with no permits. Not a licensed contractor.
+        Jobs are kept under $1,000 total, labor and materials, with no permits.
       </p>
     </footer>
   );

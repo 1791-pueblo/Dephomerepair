@@ -7,25 +7,37 @@ export type HomeFixJob = string | { label: string; price: string };
 /** Shown under door groups: flat prices include the trip, so no separate service call. */
 export const DOOR_FLAT_PRICE_NOTE = 'Flat price, visit included. No separate service call.';
 
-export const MORE_HOME_FIXES: { group: string; note?: string; jobs: HomeFixJob[] }[] = [
+/** Flat door prices (visit included). Single source for the menu and the door / security-door pages. */
+export const DOOR_PRICES = {
+  hingeSag: '$150–$195 per door',
+  hardware: '$150 per door, hardware extra',
+  closet: '$150–$225 per opening',
+  interiorSliding: '$175–$225 per door',
+  securityRepair: '$150–$300',
+  securityReplace: '$275 install, door extra',
+} as const;
+
+export const MORE_HOME_FIXES: { group: string; note?: string; jobs: HomeFixJob[]; link?: { href: string; label: string } }[] = [
   {
     group: 'Doors & hardware',
     note: DOOR_FLAT_PRICE_NOTE,
+    link: { href: '/door-adjustment-repair', label: 'Door adjustment & repair details' },
     jobs: [
       'Interior door replacement, adjustment, rehanging & repair',
-      { label: 'Hinge adjustments & sag fixes', price: '$150–$195 per door' },
-      { label: 'Hardware replacement (knobs, levers, locks, hinges)', price: '$150 per door, hardware extra' },
-      { label: 'Closet door adjustments (bypass or bifold)', price: '$150–$225 per opening' },
-      { label: 'Get your interior doors rolled on right', price: '$175–$225 per door' },
+      { label: 'Hinge adjustments & sag fixes', price: DOOR_PRICES.hingeSag },
+      { label: 'Hardware replacement (knobs, levers, locks, hinges)', price: DOOR_PRICES.hardware },
+      { label: 'Closet door adjustments (bypass or bifold)', price: DOOR_PRICES.closet },
+      { label: 'Get your interior doors rolled on right', price: DOOR_PRICES.interiorSliding },
       'Weatherstripping & door sweeps',
     ],
   },
   {
     group: 'Security doors',
     note: DOOR_FLAT_PRICE_NOTE,
+    link: { href: '/security-door-repair', label: 'Security door details' },
     jobs: [
-      { label: 'Security door repair (hinges, closer, latch, lock, alignment)', price: '$150–$300' },
-      { label: 'Security door replacement, standard size', price: '$275 install, door extra' },
+      { label: 'Security door repair (hinges, closer, latch, lock, alignment)', price: DOOR_PRICES.securityRepair },
+      { label: 'Security door replacement, standard size', price: DOOR_PRICES.securityReplace },
       'Custom-size doors quoted separately',
     ],
   },
@@ -35,6 +47,7 @@ export const MORE_HOME_FIXES: { group: string; note?: string; jobs: HomeFixJob[]
   },
   {
     group: 'Outdoor',
+    link: { href: '/stucco-crack-repair', label: 'Stucco crack sealing details' },
     jobs: [
       'Small stucco patches',
       'Gate & small fence repair',
@@ -56,7 +69,7 @@ export const MORE_HOME_FIXES: { group: string; note?: string; jobs: HomeFixJob[]
 
 export const NOT_OFFERED = 'Painting (beyond drywall patch touch-up), irrigation, carpet installation';
 
-export const SEASONAL_PACKAGES: { name: string; items: string[]; price?: string; priceNote?: string }[] = [
+export const SEASONAL_PACKAGES: { name: string; items: string[]; price?: string; priceNote?: string; href?: string }[] = [
   {
     name: 'Spring Curb Appeal',
     items: [
@@ -70,6 +83,7 @@ export const SEASONAL_PACKAGES: { name: string; items: string[]; price?: string;
   },
   {
     name: 'Pre-Monsoon Prep',
+    href: '/pre-monsoon-prep',
     items: [
       'Gutter clean (single-story)',
       'Weatherstripping & door sweeps (up to 2 exterior doors)',

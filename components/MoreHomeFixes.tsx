@@ -46,6 +46,11 @@ export function MoreHomeFixes({ variant = 'section' }: Props) {
                   )
                 )}
               </ul>
+              {g.link && (
+                <Link href={g.link.href} className="mt-3 inline-block text-sm font-semibold text-[#005683] underline underline-offset-2 hover:text-[#00448F]">
+                  {g.link.label} →
+                </Link>
+              )}
             </div>
           ))}
         </div>
@@ -70,6 +75,11 @@ export function MoreHomeFixes({ variant = 'section' }: Props) {
                   </div>
                 ) : (
                   <div className="mt-4 text-sm font-semibold text-[#005683]">Ask for package price</div>
+                )}
+                {pkg.href && (
+                  <Link href={pkg.href} className="mt-3 text-sm font-semibold text-[#005683] underline underline-offset-2 hover:text-[#00448F]">
+                    What&apos;s in {pkg.name} →
+                  </Link>
                 )}
               </div>
             ))}

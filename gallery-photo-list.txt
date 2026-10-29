@@ -165,3 +165,12 @@ NOTES
 - Do not add new sliders for jobs with fewer than 3 sequenced frames.
 - Use Drive stills through https://lh3.googleusercontent.com/d/FILE_ID.
 - Captions for portfolio photos should include Before, During, or After.
+
+## Entry door + security door (private home; used on /security-door-repair and /door-adjustment-repair)
+Cropped (mailbox and clutter removed), EXIF stripped, Jason confirmed he did this work (Oct 2026).
+- entrydoor-01-rotted-jamb.jpg
+  Caption: Before: rot and pests had eaten the entry door jamb down to the block wall.
+- entrydoor-02-new-frame.jpg
+  Caption: After: new frame set square, door rehung with a new knob and deadbolt.
+- entrydoor-03-security-door.jpg
+  Caption: Finished: security door hung over the new entry door, latching clean.
