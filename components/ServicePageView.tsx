@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { ProjectPhotoSlider } from './ProjectPhotoSlider';
 import { SiteFrame } from './SiteFrame';
 import { SERVICE_PAGES, projectsForService, type ServiceKey } from '../lib/servicePages';
+import { SERVICE_AREA_SHORT } from '../lib/seo';
 
 export function ServicePageView({ serviceKey }: { serviceKey: ServiceKey }) {
   const page = SERVICE_PAGES[serviceKey];
@@ -17,7 +18,7 @@ export function ServicePageView({ serviceKey }: { serviceKey: ServiceKey }) {
     <SiteFrame>
       <section className="bg-gradient-to-br from-[#0056B3] via-[#00448F] to-[#1A1A1A] text-white py-14 sm:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-sm uppercase tracking-wide opacity-80 mb-3">DEP Home Repair • Chandler & East Valley</p>
+          <p className="text-sm uppercase tracking-wide opacity-80 mb-3">DEP Home Repair • {SERVICE_AREA_SHORT}</p>
           <h1 className="text-4xl sm:text-5xl font-bold mb-5 leading-tight">{page.h1}</h1>
           <p className="text-lg opacity-95 max-w-2xl mx-auto mb-8">{page.intro}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

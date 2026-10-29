@@ -6,7 +6,7 @@ Owner: Jason Palmer · Chandler / East Valley, AZ · 602-598-1988 · info@dephom
 
 ## Mission
 
-Sell the convenience of one licensed tradesperson who can finish drywall, electrical, and plumbing in a single visit. Photos should prove process and quality. Captions should tell a short job story in DEP voice and naturally point to bundling (Power Pair 10% / Triple Play 15% labor off, service call waived when work is booked, one 5-minute "While We're There" task free).
+Sell the convenience of one tradesperson who can finish drywall, electrical, and plumbing in a single visit. Photos should prove process and quality. Captions should tell a short job story in DEP voice and naturally point to bundling (Power Pair 10% / Triple Play 15% labor off, service call waived when work is booked, one 5-minute "While We're There" task free).
 
 Do not turn the site into a generic handyman gallery. Every project card should answer: what was wrong, what DEP did, which trades were combined, why that is easier than hiring three people.
 
@@ -24,7 +24,7 @@ Use:
 Avoid:
 - Hype ("best in the valley", "unbeatable", "luxury transformation").
 - Scare tactics or shame.
-- Jargon without a payoff ("12/2 NM-B" is fine only when the next clause explains why it matters: code, warranty, or durability).
+- Jargon without a payoff ("12/2 NM-B" is fine only when the next clause explains why it matters: safety, warranty, or durability). Never write "licensed", "ROC", "to code", or "insured" in site copy; every page keeps "Not a licensed contractor.".
 - Selling carpentry, painting, or general contracting as core categories. Those can appear as supporting work on a DEP job, not as a fourth trade.
 
 ## More Home Fixes (supporting section)

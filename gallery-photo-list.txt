@@ -35,7 +35,7 @@ ELECTRICAL slider
 - rangehood-01-rough-opening.jpg
   Caption: Before — Rangehood: the ceiling and opening were prepped for the new hood and lighting.
 - electrical-romex-wall.jpg
-  Caption: During — Rangehood: protected power was run in the wall so the install stays safe and up to code.
+  Caption: During: 12-gauge Romex from a 20A GFCI puts the new hood on protected power, run neatly through the wall before it closes.
 - rangehood-soffit-wire.jpg
   Caption: During — Rangehood: wiring was routed into the soffit and kept accessible for the hood warranty.
 - rangehood-02-finished.jpg
