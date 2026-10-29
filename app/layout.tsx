@@ -23,7 +23,7 @@ const jsonLd = {
   url: 'https://www.dephomerepair.com',
   telephone: '602-598-1988',
   email: 'info@dephomerepair.com',
-  areaServed: ['Chandler AZ', 'Gilbert AZ', 'Mesa AZ', 'East Valley'],
+  areaServed: ['Chandler AZ', 'Gilbert AZ', 'Southwest Mesa AZ', 'East Valley'],
   description:
     'Drywall, electrical, and plumbing repairs in Chandler and the East Valley. One tradesperson on the job.',
   hasOfferCatalog: {

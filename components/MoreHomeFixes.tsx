@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { MORE_HOME_FIXES, MORE_HOME_FIXES_INTRO, NOT_OFFERED, SEASONAL_PACKAGES } from '../lib/moreHomeFixes';
+import { MORE_HOME_FIXES, MORE_HOME_FIXES_INTRO, NOT_OFFERED, SEASONAL_PACKAGES, SEASONAL_PACKAGES_NOTE } from '../lib/moreHomeFixes';
 
 type Props = {
   /** Compact homepage teaser vs. full /more-home-fixes page content */
@@ -35,7 +35,15 @@ export function MoreHomeFixes({ variant = 'section' }: Props) {
             <div key={g.group} className="bg-white border border-slate-200 rounded-2xl p-5">
               <SubTag className="text-sm font-semibold uppercase tracking-wide text-[#005683] mb-3">{g.group}</SubTag>
               <ul className="space-y-1.5 text-sm text-[#424242] list-disc pl-5">
-                {g.jobs.map((job) => <li key={job}>{job}</li>)}
+                {g.jobs.map((job) =>
+                  typeof job === 'string' ? (
+                    <li key={job}>{job}</li>
+                  ) : (
+                    <li key={job.label}>
+                      {job.label} <span className="font-semibold text-[#005683] whitespace-nowrap">{job.price}</span>
+                    </li>
+                  )
+                )}
               </ul>
             </div>
           ))}
@@ -65,6 +73,7 @@ export function MoreHomeFixes({ variant = 'section' }: Props) {
               </div>
             ))}
           </div>
+          <p className="mt-4 text-xs text-center text-slate-500">{SEASONAL_PACKAGES_NOTE}</p>
         </div>
 
         <div className="mt-10 text-center">

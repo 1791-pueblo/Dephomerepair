@@ -113,7 +113,7 @@ export function HomeView(p: HomeViewProps) {
             <a href="#quote" className="inline-block bg-[#FFAB00] hover:bg-amber-500 text-[#1A1A1A] px-8 sm:px-10 py-4 rounded-full text-lg sm:text-xl font-bold transition shadow-lg">Get a Clear Quote →</a>
             <a href="tel:6025981988" className="inline-block border-2 border-white/40 hover:border-white text-white px-8 py-3.5 rounded-full font-semibold transition">Call 602-598-1988</a>
           </div>
-          <div className="mt-6 text-sm opacity-70">Serving Chandler, Gilbert, Mesa & East Valley</div>
+          <div className="mt-6 text-sm opacity-70">Serving Chandler, Gilbert, southwest Mesa & East Valley</div>
         </div>
       </section>
 
@@ -168,7 +168,7 @@ export function HomeView(p: HomeViewProps) {
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">City</label>
-                  <input value={quickIntake.city} onChange={(e) => setQuickIntake((prev) => ({ ...prev, city: e.target.value }))} placeholder="Chandler, Mesa…" className="w-full border border-gray-300 rounded-xl p-3 text-sm" />
+                  <input value={quickIntake.city} onChange={(e) => setQuickIntake((prev) => ({ ...prev, city: e.target.value }))} placeholder="Chandler, Gilbert…" className="w-full border border-gray-300 rounded-xl p-3 text-sm" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Timing</label>

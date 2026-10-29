@@ -32,7 +32,8 @@ Avoid:
 Approved by Jason (Oct 2026): a supporting "More Home Fixes" section on the homepage (below the trade cards) and a `/more-home-fixes` page list everyday jobs beyond the three trades, plus draft Seasonal Packages. Content lives in `lib/moreHomeFixes.ts`; UI in `components/MoreHomeFixes.tsx`.
 
 - Keep it visually secondary to Drywall / Electrical / Plumbing. It is not a fourth pillar, not a nav category, and not a tab in Instant Quote.
-- No prices until Jason sets them. CTA is text / call / Get Quote. Packages show "Ask for package price".
+- Only show prices Jason has set (Oct 2026: door and security-door ranges, all three Seasonal Packages). Everything else stays quote-only. CTA is text / call / Get Quote. An unpriced package shows "Ask for package price".
+- Door work is limited to hinge/sag fixes, hardware replacement, closet (bypass/bifold) and interior sliding-door adjustments, and security door repair and replacement. No patio-slider rollers, screen doors, or grab bars. Do not use the words "barn door" in new site copy.
 - Every job must fit the AZ handyman exemption: under $1,000 total per project, no permit, no gas connections.
 - Not offered: painting (beyond drywall patch touch-up), irrigation, carpet installation. Do not add roofing, water heater replacement, new circuits, or panel work.
 - Fake urgency.

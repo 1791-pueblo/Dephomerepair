@@ -71,7 +71,7 @@ export const electrical: ServicePrice[] = [
   { id: 'e-gfci', name: 'GFCI outlet', kind: 'volume', first: 150, additional: 80, category: 'electrical', subcategory: 'Outlets & Switches' },
   { id: 'e-dimmer', name: 'Dimmer switch', kind: 'volume', first: 175, additional: 90, category: 'electrical', subcategory: 'Outlets & Switches' },
   { id: 'e-usb-outlet', name: 'USB / USB-C outlet', kind: 'volume', first: 150, additional: 80, category: 'electrical', subcategory: 'Outlets & Switches', deviceCost: 25 },
-  { id: 'e-smoke-co', name: 'Smoke / CO detector', kind: 'flat', price: 150, category: 'electrical', subcategory: 'Outlets & Switches', deviceCost: 40 },
+  { id: 'e-smoke-co', name: 'Smoke / CO detector (battery or standalone only)', kind: 'flat', price: 150, category: 'electrical', subcategory: 'Outlets & Switches', deviceCost: 40 },
   { id: 'e-fan', name: 'Ceiling fan (existing fan-rated box)', kind: 'flat', price: 200, category: 'electrical', subcategory: 'Fixtures & Lighting' },
   { id: 'e-fan-box', name: 'Ceiling fan + box upgrade', kind: 'flat', price: 275, category: 'electrical', subcategory: 'Fixtures & Lighting' },
   { id: 'e-fixture', name: 'Light fixture replacement', kind: 'flat', price: 175, category: 'electrical', subcategory: 'Fixtures & Lighting' },
