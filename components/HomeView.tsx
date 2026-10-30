@@ -108,7 +108,8 @@ export function HomeView(p: HomeViewProps) {
             </div>
           </div>
           <p className="text-sm sm:text-base uppercase tracking-wide font-semibold text-[#FFAB00] mb-3">Seamless, smart repairs &amp; upgrades</p>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-5 leading-tight">Drywall, Door &amp; Home Repairs in Chandler<span className="block text-3xl sm:text-4xl md:text-5xl mt-2 opacity-95">and the East Valley</span></h1>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-5 leading-tight">Drywall, Electrical &amp; Plumbing Repairs in Chandler<span className="block text-3xl sm:text-4xl md:text-5xl mt-2 opacity-95">and the East Valley</span></h1>
+          <p className="text-lg sm:text-xl font-semibold mb-4 max-w-2xl mx-auto">Keeping your home&apos;s lifelines flowing: the walls, wiring and water lines behind it all.</p>
           <p className="text-lg sm:text-xl mb-6 sm:mb-8 opacity-95 max-w-2xl mx-auto">Fix it and finish it in one call.<br className="hidden sm:block" /> When the leak gets fixed, the wall gets patched too.</p>
           <p className="text-sm sm:text-base opacity-80 max-w-xl mx-auto mb-8">You deal directly with the person who does the work — clear communication, reliable scheduling, and no runaround.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

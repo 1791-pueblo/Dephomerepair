@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     locale: 'en_US',
     title: 'DEP Home Repair | Chandler AZ',
-    description: 'Drywall, door, and home repairs in Chandler and the East Valley. Fix it and finish it in one call.',
+    description: 'Drywall, electrical and plumbing repairs in Chandler and the East Valley. Fix it and finish it in one call.',
     images: [DEFAULT_SHARE_IMAGE],
   },
   twitter: { card: 'summary_large_image', images: [DEFAULT_SHARE_IMAGE.url] },
