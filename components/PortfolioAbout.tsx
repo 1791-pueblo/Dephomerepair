@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
 import { ProjectPhotoSlider } from './ProjectPhotoSlider';
 import { portfolioProjects } from '../lib/portfolio';
+import { DrywallTextures } from './DrywallTextures';
 
 const TESTIMONIALS = [
   { name: "Megan T.", task: "Wall Repair", date: "May 2025", text: "Jason was able to complete our drywall/stair landing replacement job very last minute. He communicated well and got the job done as asked, even picking up materials that didn’t fit in our vehicle. Would recommend.", rating: 5 },
@@ -58,6 +59,8 @@ export function PortfolioAbout({
           </div>
         </div>
       </section>
+
+      <DrywallTextures />
 
       {lightbox && (
         <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" onClick={() => setLightbox(null)}>

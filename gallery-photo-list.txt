@@ -174,3 +174,14 @@ Cropped (mailbox and clutter removed), EXIF stripped, Jason confirmed he did thi
   Caption: After: new frame set square, door rehung with a new knob and deadbolt.
 - entrydoor-03-security-door.jpg
   Caption: Finished: security door hung over the new entry door, latching clean.
+
+----------------------------------------
+DRYWALL TEXTURES (section #drywall-textures)
+----------------------------------------
+Distinct gallery section for texture examples applied by DEP. Video-first; more named samples can be added in lib/textures.ts.
+
+1. Santa Fe
+- /gallery/textures/santa-fe-texture.mp4 (web encode, 1280x576, muted, ~814KB)
+- /gallery/textures/santa-fe-poster.jpg (poster from 12s still)
+Caption: Santa Fe texture with roughly 70% flattened surface and 30% skipped pockets. Applied by DEP Home Repair.
+Note: Reviewed as Santa Fe (not Santa Barbara). Jason described it as 70/30 Santa Fe.
