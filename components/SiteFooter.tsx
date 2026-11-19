@@ -52,6 +52,7 @@ export function SiteFooter() {
           <div><a href="sms:6025981988" className="hover:text-[#FFAB00]">Text Jason</a></div>
           <div><a href="mailto:info@dephomerepair.com" className="hover:text-[#FFAB00]">info@dephomerepair.com</a></div>
           <div><Link href="/#quote" className="hover:text-[#FFAB00]">Instant Quote</Link></div>
+          <div><Link href="/quote" className="hover:text-[#FFAB00]">Request an estimate</Link></div>
         </div>
       </div>
       <p className="max-w-6xl mx-auto px-4 sm:px-6 mt-8 text-xs opacity-60 text-center md:text-left">

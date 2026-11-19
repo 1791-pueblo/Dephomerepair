@@ -17,6 +17,7 @@ function Ctas() {
     <div className="flex flex-col sm:flex-row gap-3 justify-center">
       <a href="sms:6025981988" className="inline-block bg-[#FFAB00] hover:bg-amber-500 text-[#1A1A1A] px-7 py-3.5 rounded-full font-bold transition text-center shadow-lg">Text for a quote</a>
       <a href="tel:6025981988" className="inline-block border-2 border-white/40 hover:border-white text-white px-7 py-3 rounded-full font-semibold transition text-center">Call 602-598-1988</a>
+      <Link href="/quote" className="inline-block border-2 border-white/40 hover:border-white text-white px-7 py-3 rounded-full font-semibold transition text-center">Request an estimate</Link>
     </div>
   );
 }

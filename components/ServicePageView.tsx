@@ -25,6 +25,7 @@ export function ServicePageView({ serviceKey }: { serviceKey: ServiceKey }) {
             <Link href={`/?trade=${page.slug}#quote`} className="inline-block bg-[#FFAB00] hover:bg-amber-500 text-[#1A1A1A] px-8 py-4 rounded-full text-lg font-bold transition shadow-lg">Get pricing →</Link>
             <a href="tel:6025981988" className="inline-block border-2 border-white/40 hover:border-white text-white px-8 py-3.5 rounded-full font-semibold transition">Call 602-598-1988</a>
           </div>
+          <div className="mt-5"><Link href={`/quote?service=${page.slug}`} className="font-semibold text-white underline underline-offset-4 decoration-[#FFAB00] hover:text-[#FFAB00]">Or send photos and request an estimate →</Link></div>
         </div>
       </section>
 

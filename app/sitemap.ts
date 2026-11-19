@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry('/plumbing', 0.9),
     ...Object.values(SERVICE_LANDING_PAGES).map((p) => entry(p.path, 0.8)),
     entry('/more-home-fixes', 0.7),
+    entry('/quote', 0.6),
     entry('/service-area', 0.7),
     ...CITY_ORDER.map((c) => entry(CITY_PAGES[c].path, 0.7)),
   ];

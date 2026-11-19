@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { Dispatch, SetStateAction } from 'react';
 import { TradeMenuCards } from './TradeMenuCards';
 import { PortfolioAbout } from './PortfolioAbout';
@@ -116,6 +117,7 @@ export function HomeView(p: HomeViewProps) {
             <a href="#quote" className="inline-block bg-[#FFAB00] hover:bg-amber-500 text-[#1A1A1A] px-8 sm:px-10 py-4 rounded-full text-lg sm:text-xl font-bold transition shadow-lg">Get a Clear Quote →</a>
             <a href="tel:6025981988" className="inline-block border-2 border-white/40 hover:border-white text-white px-8 py-3.5 rounded-full font-semibold transition">Call 602-598-1988</a>
           </div>
+          <div className="mt-5"><Link href="/quote" className="font-semibold text-white underline underline-offset-4 decoration-[#FFAB00] hover:text-[#FFAB00]">Or send photos and request an estimate →</Link></div>
           <div className="mt-6 text-sm opacity-80">Serving <a href="/service-area" className="underline underline-offset-2 hover:text-white">Chandler, Gilbert, southwest Mesa, south Scottsdale &amp; nearby East Valley</a></div>
         </div>
       </section>
@@ -157,7 +159,8 @@ export function HomeView(p: HomeViewProps) {
       <section id="quote" className="py-16 sm:py-20 bg-[#F8FAFC]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">Get a Clear Quote</h2>
-          <p className="text-center text-[#424242] mb-8">Step 1: a few quick details • Step 2: exact services and fair pricing.</p>
+          <p className="text-center text-[#424242] mb-2">Step 1: a few quick details • Step 2: exact services and fair pricing.</p>
+          <p className="text-center text-sm text-[#424242] mb-8">Rather just describe the job? <Link href="/quote" className="font-semibold text-[#0056B3] hover:underline">Request an estimate with photos →</Link></p>
           {!quoteStarted && (
             <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-10 border border-gray-100">
               <div className="text-sm font-semibold text-[#0056B3] mb-4">Step 1 of 2 · Quick details</div>
