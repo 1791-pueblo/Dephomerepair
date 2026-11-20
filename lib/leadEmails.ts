@@ -107,7 +107,7 @@ export function customerAutoReply(lead: QuoteRequest, result: LeadResult, bookin
     '',
     'DEP Home Repair',
     'Chandler, Gilbert, southwest Mesa & south Scottsdale',
-    'Not a licensed contractor. We handle repairs and upgrades that don't require a permit.',
+    "Not a licensed contractor. We handle repairs and upgrades that don't require a permit.",
   ].join('\n');
   const html = `<div style="font-family:Arial,sans-serif;font-size:15px;color:#1A1A1A;max-width:560px;white-space:pre-wrap">${esc(text).replace(
     esc(bookingUrl || '\u0000'),
