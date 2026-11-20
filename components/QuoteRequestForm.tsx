@@ -278,7 +278,7 @@ export function QuoteRequestForm() {
         {sending ? 'Sending…' : 'Send My Request →'}
       </button>
       <p className="text-xs text-gray-500 text-center leading-relaxed">
-        We only use your info to reply about this job. Not a licensed contractor. We take on small repair jobs only, with no permit work.
+        We only use your info to reply about this job. Not a licensed contractor. We handle repairs and upgrades that don't require a permit.
       </p>
     </form>
     </div>
