@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
 import { ProjectPhotoSlider } from './ProjectPhotoSlider';
 import { portfolioProjects } from '../lib/portfolio';
+import { DrywallTextures } from './DrywallTextures';
 
 const TESTIMONIALS = [
   { name: "Megan T.", task: "Wall Repair", date: "May 2025", text: "Jason was able to complete our drywall/stair landing replacement job very last minute. He communicated well and got the job done as asked, even picking up materials that didn’t fit in our vehicle. Would recommend.", rating: 5 },
@@ -59,6 +60,8 @@ export function PortfolioAbout({
         </div>
       </section>
 
+      <DrywallTextures />
+
       {lightbox && (
         <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" onClick={() => setLightbox(null)}>
           <div className="relative max-w-3xl w-full" onClick={(e) => e.stopPropagation()}>
@@ -80,7 +83,7 @@ export function PortfolioAbout({
             about us
           </h2>
           <div className="max-w-4xl mx-auto text-center text-[#424242] space-y-4">
-            <p>Home-smart repairs for Chandler and the East Valley: drywall, electrical, and plumbing handled by one tradesperson.</p>
+            <p>Home-smart repairs for Chandler, Gilbert, southwest Mesa, south Scottsdale and nearby East Valley: drywall, electrical, and plumbing handled by one tradesperson.</p>
             <p>The goal is simple. The patch matches. The outlet is safe. The leak is gone. You should not see the repair when it is done.</p>
             <p>You deal directly with the person doing the work, so the schedule stays clear, the communication stays simple, and bundled repairs get finished in one visit instead of three callbacks.</p>
           </div>

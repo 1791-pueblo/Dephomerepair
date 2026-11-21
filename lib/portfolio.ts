@@ -143,7 +143,7 @@ export const portfolioProjects: PortfolioProject[] = [
       { src: '/gallery/rangehood-02-finished.jpg', caption: 'After: Ancona rangehood and matching recessed lights — clean lines, quiet power.' },
     ],
     supportPhotos: [
-      { src: '/gallery/electrical-romex-wall.jpg', caption: 'During: 12-gauge Romex from a 20A GFCI keeps the new hood on protected power, run to code.' },
+      { src: '/gallery/electrical-romex-wall.jpg', caption: 'During: 12-gauge Romex from a 20A GFCI puts the new hood on protected power, run neatly through the wall before it closes.' },
       { src: '/gallery/rangehood-soffit-wire.jpg', caption: 'During: the receptacle stays accessible through the LED cut-out so the hood remains plugged in and under warranty.' },
     ],
   },

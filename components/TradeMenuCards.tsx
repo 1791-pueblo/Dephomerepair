@@ -41,7 +41,7 @@ export function TradeMenuCards({
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 text-[#1A1A1A]">{SERVICE_MENU_TITLE}</h2>
         <p className="text-center text-[#424242] mb-10 sm:mb-12">
-          {`Service call is $${SERVICE_CALL} and waives at $${CALL_WAIVER_MIN} labor on the same visit • Texture included on drywall repairs • Texture packages in Instant Quote`}
+          {`Drywall, electrical & plumbing: Service call is $${SERVICE_CALL} and waives at $${CALL_WAIVER_MIN} labor on the same visit • Texture included on drywall repairs • Texture packages in Instant Quote`}
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 sm:mb-10">
           {startingAnchors.map((svc) => (
@@ -98,7 +98,7 @@ export function TradeMenuCards({
           <div className="max-w-md mx-auto space-y-3 text-left text-sm sm:text-base">
             <div>🎉 <strong>Triple Play</strong> — All three categories → 15% off labor</div>
             <div>⚡ <strong>Power Pair</strong> — Any two categories → 10% off labor</div>
-            <div>✓ <strong>Service call waived</strong> once the same-visit labor reaches ${CALL_WAIVER_MIN}</div>
+            <div>✓ <strong>Service call waived</strong> (drywall, electrical &amp; plumbing) once the same-visit labor reaches ${CALL_WAIVER_MIN}</div>
             <div>🔥 <strong>While We're There</strong> — One small 5-minute task FREE with any booked service</div>
           </div>
         </div>

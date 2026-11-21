@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { ProjectPhotoSlider } from './ProjectPhotoSlider';
 import { SiteFrame } from './SiteFrame';
 import { SERVICE_PAGES, projectsForService, type ServiceKey } from '../lib/servicePages';
+import { SERVICE_AREA_SHORT } from '../lib/seo';
 
 export function ServicePageView({ serviceKey }: { serviceKey: ServiceKey }) {
   const page = SERVICE_PAGES[serviceKey];
@@ -17,13 +18,14 @@ export function ServicePageView({ serviceKey }: { serviceKey: ServiceKey }) {
     <SiteFrame>
       <section className="bg-gradient-to-br from-[#0056B3] via-[#00448F] to-[#1A1A1A] text-white py-14 sm:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-sm uppercase tracking-wide opacity-80 mb-3">DEP Home Repair • Chandler & East Valley</p>
+          <p className="text-sm uppercase tracking-wide opacity-80 mb-3">DEP Home Repair • {SERVICE_AREA_SHORT}</p>
           <h1 className="text-4xl sm:text-5xl font-bold mb-5 leading-tight">{page.h1}</h1>
           <p className="text-lg opacity-95 max-w-2xl mx-auto mb-8">{page.intro}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href={`/?trade=${page.slug}#quote`} className="inline-block bg-[#FFAB00] hover:bg-amber-500 text-[#1A1A1A] px-8 py-4 rounded-full text-lg font-bold transition shadow-lg">Get pricing →</Link>
             <a href="tel:6025981988" className="inline-block border-2 border-white/40 hover:border-white text-white px-8 py-3.5 rounded-full font-semibold transition">Call 602-598-1988</a>
           </div>
+          <div className="mt-5"><Link href={`/quote?service=${page.slug}`} className="font-semibold text-white underline underline-offset-4 decoration-[#FFAB00] hover:text-[#FFAB00]">Or send photos and request an estimate →</Link></div>
         </div>
       </section>
 

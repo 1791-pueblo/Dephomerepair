@@ -20,7 +20,7 @@ export const TRADE_CARDS = [
       { title: 'Modern Fixture Install', detail: 'Ceiling fans, chandeliers, and recessed lighting.' },
       { title: 'Smart Home Upgrades', detail: 'Ring/Nest doorbells, smart thermostats, and USB outlets.' },
       { title: 'Device Refresh', detail: 'Swapping outdated almond switches for clean, modern white.' },
-      { title: 'Safety Upgrades', detail: 'GFCI installation and smoke/CO detector testing.' },
+      { title: 'Safety Upgrades', detail: 'GFCI installation and battery or standalone smoke/CO detectors. No hardwired alarms.' },
     ],
   },
   {

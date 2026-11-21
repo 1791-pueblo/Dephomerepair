@@ -35,7 +35,7 @@ ELECTRICAL slider
 - rangehood-01-rough-opening.jpg
   Caption: Before — Rangehood: the ceiling and opening were prepped for the new hood and lighting.
 - electrical-romex-wall.jpg
-  Caption: During — Rangehood: protected power was run in the wall so the install stays safe and up to code.
+  Caption: During: 12-gauge Romex from a 20A GFCI puts the new hood on protected power, run neatly through the wall before it closes.
 - rangehood-soffit-wire.jpg
   Caption: During — Rangehood: wiring was routed into the soffit and kept accessible for the hood warranty.
 - rangehood-02-finished.jpg
@@ -165,3 +165,23 @@ NOTES
 - Do not add new sliders for jobs with fewer than 3 sequenced frames.
 - Use Drive stills through https://lh3.googleusercontent.com/d/FILE_ID.
 - Captions for portfolio photos should include Before, During, or After.
+
+## Entry door + security door (private home; used on /security-door-repair and /door-adjustment-repair)
+Cropped (mailbox and clutter removed), EXIF stripped, Jason confirmed he did this work (Oct 2026).
+- entrydoor-01-rotted-jamb.jpg
+  Caption: Before: rot and pests had eaten the entry door jamb down to the block wall.
+- entrydoor-02-new-frame.jpg
+  Caption: After: new frame set square, door rehung with a new knob and deadbolt.
+- entrydoor-03-security-door.jpg
+  Caption: Finished: security door hung over the new entry door, latching clean.
+
+----------------------------------------
+DRYWALL TEXTURES (section #drywall-textures)
+----------------------------------------
+Distinct gallery section for texture examples applied by DEP. Video-first; more named samples can be added in lib/textures.ts.
+
+1. Santa Fe
+- /gallery/textures/santa-fe-texture.mp4 (web encode, 1280x576, muted, ~814KB)
+- /gallery/textures/santa-fe-poster.jpg (poster from 12s still)
+Caption: Santa Fe texture with roughly 70% flattened surface and 30% skipped pockets. Applied by DEP Home Repair.
+Note: Reviewed as Santa Fe (not Santa Barbara). Jason described it as 70/30 Santa Fe.

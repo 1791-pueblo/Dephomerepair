@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { SiteFooter } from './SiteFooter';
 
 export function SiteFrame({ children }: { children: React.ReactNode }) {
   return (
@@ -31,24 +32,7 @@ export function SiteFrame({ children }: { children: React.ReactNode }) {
           <Link href="/#quote" className="text-center bg-[#FFAB00] text-black rounded-xl py-2.5 text-xs font-semibold">Get Quote</Link>
         </div>
       </div>
-      <footer id="contact" className="bg-[#1A1A1A] text-white py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-3 gap-8 text-center md:text-left">
-          <div>
-            <p className="font-bold text-lg mb-2">DEP Home Repair</p>
-            <p className="text-sm opacity-80">Drywall • Electrical • Plumbing<br />Chandler, AZ & East Valley<br />Not a licensed contractor.</p>
-          </div>
-          <div className="text-sm space-y-2">
-            <div><Link href="/drywall" className="hover:text-[#FFAB00]">Drywall</Link></div>
-            <div><Link href="/electrical" className="hover:text-[#FFAB00]">Electrical</Link></div>
-            <div><Link href="/plumbing" className="hover:text-[#FFAB00]">Plumbing</Link></div>
-            <div><Link href="/#quote" className="hover:text-[#FFAB00]">Instant Quote</Link></div>
-          </div>
-          <div className="text-sm space-y-2">
-            <div><a href="tel:6025981988" className="hover:text-[#FFAB00]">602-598-1988</a></div>
-            <div><a href="mailto:info@dephomerepair.com" className="hover:text-[#FFAB00]">info@dephomerepair.com</a></div>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   );
 }

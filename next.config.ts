@@ -1,6 +1,15 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  // The internal lead-qualifier tool stays reachable but is kept out of search results.
+  async headers() {
+    return [
+      {
+        source: '/lead-qualifier',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      },
+    ];
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },
